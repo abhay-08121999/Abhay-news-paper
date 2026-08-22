@@ -1,0 +1,327 @@
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { Search, Menu, X, User, ChevronDown, Crown, LogOut, BookOpen } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+
+/* Primary nav — consolidates the old two-row category navigation into one
+   compact black bar, per the premium editorial redesign spec. */
+const primaryNav = [
+  { label: "Markets", path: "/markets" },
+  { label: "Finance", path: "/finance" },
+  { label: "Technology", path: "/technology" },
+  { label: "Cybersecurity", path: "/cybersecurity" },
+  { label: "Energy", path: "/energy" },
+  { label: "World", path: "/world" },
+  { label: "Leadership", path: "/leadership" },
+  { label: "Billionaires", path: "/billionaires" },
+  { label: "Magazine", path: "/magazine" },
+];
+
+const industriesLinks = [
+  { label: "Healthcare", path: "/healthcare" },
+  { label: "Manufacturing", path: "/manufacturing" },
+  { label: "Smart Cities", path: "/smart-cities" },
+  { label: "Supply Chain", path: "/supply-chain" },
+];
+
+const moreLinks = [
+  { label: "Featured", path: "/featured" },
+  { label: "Breaking News", path: "/breaking-news" },
+  { label: "Business News", path: "/business-news" },
+  { label: "CEO Spotlight", path: "/ceospotlight" },
+  { label: "Innovation", path: "/innovation" },
+  { label: "Cover Stories", path: "/cover-stories" },
+  { label: "White House Watch", path: "/white-house-watch" },
+  { label: "World & Geopolitics", path: "/world" },
+  { label: "Education", path: "/#" },
+];
+
+const editions = ["Asia Edition", "Americas Edition", "Europe Edition", "India Edition"];
+
+export function Header() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [industriesOpen, setIndustriesOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [editionOpen, setEditionOpen] = useState(false);
+  const [edition, setEdition] = useState("Asia Edition");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { isSignedIn, user, signOut } = useAuth();
+  const isPremium = user?.tier === "premium";
+
+  useEffect(() => {
+    if (!industriesOpen && !moreOpen && !editionOpen) return;
+    const timer = setTimeout(() => {
+      setIndustriesOpen(false);
+      setMoreOpen(false);
+      setEditionOpen(false);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [industriesOpen, moreOpen, editionOpen]);
+
+  const handleSignOut = () => {
+    signOut();
+    setUserMenuOpen(false);
+    navigate("/");
+  };
+
+  return (
+    <header className="w-full bg-white z-50">
+      {/* ── Black primary navigation ── */}
+      <div className="pt-top-nav">
+        <div className="pt-container h-full flex items-center justify-between">
+          <nav className="hidden lg:flex items-center gap-6 h-full">
+            <Link to="/live-tv" className="pt-focusable flex items-center gap-2">
+              <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+              </span>
+              Live TV
+            </Link>
+
+            {primaryNav.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className={`pt-focusable ${location.pathname === item.path ? "active" : ""}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <div className="relative">
+              <button
+                className="pt-focusable flex items-center gap-0.5"
+                onClick={() => setIndustriesOpen(!industriesOpen)}
+              >
+                Industries <ChevronDown size={11} />
+              </button>
+              {industriesOpen && (
+                <div className="absolute left-0 top-full mt-0 w-48 bg-white border border-gray-200 shadow-lg z-50 py-1">
+                  {industriesLinks.map((link) => (
+                    <Link
+                      key={link.label}
+                      to={link.path}
+                      className="block px-4 py-2 text-xs text-gray-800 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                      onClick={() => setIndustriesOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="relative">
+              <button
+                className="pt-focusable flex items-center gap-0.5"
+                onClick={() => setMoreOpen(!moreOpen)}
+              >
+                More <ChevronDown size={11} />
+              </button>
+              {moreOpen && (
+                <div className="absolute right-0 top-full mt-0 w-56 bg-white border border-gray-200 shadow-lg z-50 py-1">
+                  {moreLinks.map((link) => (
+                    <Link
+                      key={link.label}
+                      to={link.path}
+                      className="block px-4 py-2 text-xs text-gray-800 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                      onClick={() => setMoreOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </nav>
+
+          {/* Utility line on the right of the black bar (desktop) */}
+          <div className="hidden lg:flex items-center gap-4">
+            <Link to="/magazine" className="pt-focusable flex items-center gap-1">
+              <BookOpen size={12} /> Digital Edition
+            </Link>
+            {isSignedIn && (
+              <Link to="/dashboard" className="pt-focusable flex items-center gap-1">
+                {isPremium && <Crown size={10} className="text-yellow-400" />}
+                {user?.name.split(" ")[0]}
+              </Link>
+            )}
+
+            {/* Region / edition selector */}
+            <div className="relative">
+              <button
+                className="pt-edition-btn flex items-center gap-1"
+                onClick={() => setEditionOpen(!editionOpen)}
+                aria-expanded={editionOpen}
+              >
+                {edition} <ChevronDown size={11} />
+              </button>
+              {editionOpen && (
+                <div className="absolute right-0 top-full mt-0 w-44 bg-white border border-gray-200 shadow-lg z-50 py-1">
+                  {editions.map((item) => (
+                    <button
+                      key={item}
+                      onClick={() => {
+                        setEdition(item);
+                        setEditionOpen(false);
+                      }}
+                      className="block w-full text-left px-4 py-2 text-xs text-gray-800 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile: brand mini-label */}
+          <span className="lg:hidden text-[11px] text-gray-300 uppercase tracking-widest">
+            The Global Voice of Business
+          </span>
+        </div>
+      </div>
+
+      {/* ── Brand header ── */}
+      <div className="pt-brand-header">
+        <div className="pt-container h-full flex items-center justify-between gap-3 py-3 min-w-0">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
+            <div className="block min-w-0">
+              <div className="pt-logo text-xl sm:text-[32px] lg:text-[44px] xl:text-[58px] truncate">
+                THE <span className="pt-logo-accent">PRIDE</span> TIMES
+              </div>
+              <div className="pt-tagline hidden sm:block uppercase mt-0.5">
+                The Global Voice of Innovation, Leadership &amp; Success
+              </div>
+            </div>
+          </Link>
+
+          {/* Right controls */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {searchOpen ? (
+              <div className="pt-search-box flex items-center gap-2 px-3 w-[220px] sm:w-[300px] lg:w-[420px]">
+                <Search size={14} className="text-gray-400 flex-shrink-0" />
+                <input
+                  autoFocus
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search for news, topics, companies..."
+                  className="text-sm outline-none w-full bg-transparent"
+                  onKeyDown={(e) => e.key === "Escape" && setSearchOpen(false)}
+                />
+                <button onClick={() => setSearchOpen(false)} aria-label="Close search">
+                  <X size={14} className="text-gray-400 hover:text-black" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Search"
+              >
+                <Search size={18} className="text-gray-700" />
+              </button>
+            )}
+
+            {/* User menu */}
+            {isSignedIn ? (
+              <div className="relative">
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="pt-account-btn hidden sm:flex items-center justify-center transition-colors hover:bg-gray-50"
+                >
+                  <div className={`w-full h-full rounded-full flex items-center justify-center text-white text-xs ${isPremium ? "bg-black" : "bg-gray-500"}`}>
+                    {user?.name[0]}
+                  </div>
+                </button>
+                {userMenuOpen && (
+                  <div className="absolute right-0 top-full mt-1 w-52 bg-white border border-gray-200 rounded shadow-lg z-50">
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <p className="text-sm">{user?.name}</p>
+                      <p className="text-xs text-gray-500">{user?.email}</p>
+                      {isPremium && (
+                        <span className="inline-flex items-center gap-1 text-xs text-yellow-700 bg-yellow-100 px-1.5 py-0.5 rounded mt-1">
+                          <Crown size={10} /> Premium
+                        </span>
+                      )}
+                    </div>
+                    <div className="py-1">
+                      <Link to="/dashboard" className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors" onClick={() => setUserMenuOpen(false)}>
+                        <User size={14} className="text-gray-400" /> My Dashboard
+                      </Link>
+                      <Link to="/magazine" className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors" onClick={() => setUserMenuOpen(false)}>
+                        <BookOpen size={14} className="text-gray-400" /> Magazine
+                      </Link>
+                      <button onClick={handleSignOut} className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors w-full text-left text-red-600">
+                        <LogOut size={14} /> Sign Out
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <Link to="/signin" className="pt-account-btn hidden sm:flex items-center justify-center transition-colors hover:bg-gray-50" aria-label="Sign In">
+                  <User size={18} className="text-gray-700" />
+                </Link>
+                <Link to="/signin" className="pt-subscribe-btn hidden md:inline-flex items-center">
+                  Subscribe
+                </Link>
+              </>
+            )}
+
+            <button className="lg:hidden p-2" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 max-h-[70vh] overflow-y-auto">
+          <nav className="flex flex-col gap-0">
+            <Link to="/" className="py-2.5 text-sm border-b border-gray-100" onClick={() => setMobileOpen(false)}>Home</Link>
+            <Link to="/live-tv" className="py-2.5 text-sm border-b border-gray-100 flex items-center gap-2 text-red-600" onClick={() => setMobileOpen(false)}>
+              <span className="relative flex h-2 w-2 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
+              </span>
+              Live TV
+            </Link>
+            {primaryNav.map((item) => (
+              <Link key={item.label} to={item.path} className="py-2.5 text-sm border-b border-gray-100" onClick={() => setMobileOpen(false)}>
+                {item.label}
+              </Link>
+            ))}
+            {industriesLinks.map((link) => (
+              <Link key={link.label} to={link.path} className="py-2.5 text-sm border-b border-gray-100 text-gray-600" onClick={() => setMobileOpen(false)}>
+                {link.label}
+              </Link>
+            ))}
+            {moreLinks.map((link) => (
+              <Link key={link.label} to={link.path} className="py-2.5 text-sm border-b border-gray-100 text-gray-500" onClick={() => setMobileOpen(false)}>
+                {link.label}
+              </Link>
+            ))}
+            {!isSignedIn ? (
+              <Link to="/signin" className="mt-3 block text-center pt-subscribe-btn" onClick={() => setMobileOpen(false)}>
+                Sign In / Subscribe
+              </Link>
+            ) : (
+              <button onClick={() => { handleSignOut(); setMobileOpen(false); }} className="mt-2 text-red-600 text-sm py-2.5 text-left">
+                Sign Out
+              </button>
+            )}
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}
