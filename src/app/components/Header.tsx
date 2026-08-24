@@ -151,14 +151,10 @@ export function Header() {
 
       {/* ── Brand header ── */}
       <div className="pt-brand-header">
-        <div className="pt-container h-full grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-3 py-7 min-w-0">
-          {/* Left spacer — balances the right controls column so the logo sits
-              truly centered between the black bar above and securities bar below (desktop only) */}
-          <div className="hidden lg:block" aria-hidden="true" />
-
-          {/* Logo — centered on desktop, left-aligned on mobile where space is tighter */}
-          <Link to="/" className="flex items-center justify-self-start lg:justify-self-center gap-2 sm:gap-3 flex-shrink min-w-0">
-            <div className="block min-w-0 text-center">
+        <div className="pt-container h-full flex items-center justify-between gap-3 py-7 min-w-0">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
+            <div className="block min-w-0">
               <div className="pt-logo text-2xl sm:text-[28px] lg:text-[34px] xl:text-[36px] truncate">
                 THE <span className="pt-logo-accent">PRIDE</span> TIMES
               </div>
@@ -169,7 +165,7 @@ export function Header() {
           </Link>
 
           {/* Right controls */}
-          <div className="flex items-center gap-2 flex-shrink-0 justify-self-end">
+          <div className="flex items-center gap-2 flex-shrink-0">
             {searchOpen ? (
               <div className="pt-search-box flex items-center gap-2 px-3 w-[220px] sm:w-[300px] lg:w-[420px]">
                 <Search size={14} className="text-gray-400 flex-shrink-0" />
