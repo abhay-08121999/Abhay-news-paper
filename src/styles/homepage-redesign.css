@@ -173,16 +173,11 @@
 }
 
 .pt-securities-dropdown {
-  width: min(760px, calc(100vw - 32px));
+  width: 260px;
   background: var(--pt-white);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
   overflow: hidden;
-}
-
-.pt-securities-dropdown .pt-securities-categories {
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .pt-securities-dropdown a {
