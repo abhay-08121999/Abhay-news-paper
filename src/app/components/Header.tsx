@@ -14,7 +14,6 @@ const primaryNav = [
   { label: "World", path: "/world" },
   { label: "Leadership", path: "/leadership" },
   { label: "Billionaires", path: "/billionaires" },
-  { label: "Magazine", path: "/magazine" },
 ];
 
 const industriesLinks = [
