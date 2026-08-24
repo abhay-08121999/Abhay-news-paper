@@ -151,14 +151,14 @@ export function Header() {
 
       {/* ── Brand header ── */}
       <div className="pt-brand-header">
-        <div className="pt-container h-full flex items-center justify-between gap-3 py-7 min-w-0">
+        <div className="pt-container h-full flex items-center justify-between gap-3 pt-7 pb-10 min-w-0">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
             <div className="block min-w-0">
               <div className="pt-logo text-3xl sm:text-[38px] lg:text-[46px] xl:text-[52px] truncate">
                 THE <span className="pt-logo-accent">PRIDE</span> TIMES
               </div>
-              <div className="pt-tagline hidden sm:block uppercase mt-1.5">
+              <div className="pt-tagline hidden sm:block uppercase mt-1">
                 The Global Voice of Innovation, Leadership &amp; Success
               </div>
             </div>
