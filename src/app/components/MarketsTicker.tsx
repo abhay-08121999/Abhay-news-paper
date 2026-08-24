@@ -1,276 +1,357 @@
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
-import { TrendingUp, TrendingDown, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { getQuotes } from "../../services/marketApi";
+import { ChevronDown } from "lucide-react";
 
-/* Dropdown categories for the "Top Securities" panel.
-   Linked to the existing /markets route — no new routes are introduced. */
-const securitiesCategories = [
-  "Stocks",
-  "Indices",
-  "Commodities",
-  "Forex",
-  "Crypto",
-  "Mutual Funds",
-  "ETFs",
-  "Government Bonds",
-  "Global Markets",
+/*
+ * Top Securities mega-menu
+ * Only navigation categories are displayed.
+ * No live stock/market values are shown in the dropdown.
+ */
+
+const securitiesColumns = [
+  {
+    title: "MARKETS",
+    items: [
+      "Stocks",
+      "Indices",
+      "Commodities",
+    ],
+  },
+  {
+    title: "INVESTMENTS",
+    items: [
+      "Forex",
+      "Crypto",
+      "Mutual Funds",
+    ],
+  },
+  {
+    title: "GLOBAL",
+    items: [
+      "ETFs",
+      "Government Bonds",
+      "Global Markets",
+    ],
+  },
 ];
 
-interface TickerCard {
-  symbol: string;
-  value: string;
-  change: number;
-}
-
 export function MarketsTicker() {
-  const [cards, setCards] = useState<TickerCard[]>([]);
   const [showSecurities, setShowSecurities] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const dropdownScrollRef = useRef<HTMLDivElement>(null);
-  const isPausedRef = useRef(false);
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const data = await getQuotes();
-
-        // Map real API data into Bloomberg-style cards.
-        // No hardcoded values — everything comes from tickerData.
-        const tickerData: TickerCard[] = [
-          ...data.usIndices.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-          ...data.crypto.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-          ...data.commodities.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-          ...data.indianIndices.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-        ];
-
-        setCards(tickerData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    loadData();
-
-    const interval = setInterval(loadData, 60000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Close the dropdown after a few seconds, matching the rest of the header's dropdown behavior
-  useEffect(() => {
-    if (!showSecurities) return;
-    const timer = setTimeout(() => setShowSecurities(false), 6000);
-    return () => clearTimeout(timer);
-  }, [showSecurities]);
-
-  const scrollByAmount = (direction: "left" | "right", ref: RefObject<HTMLDivElement> = scrollRef) => {
-    const el = ref.current;
-    if (!el) return;
-    const amount = 220 + 16; // card width + gap
-    el.scrollBy({ left: direction === "left" ? -amount * 2 : amount * 2, behavior: "smooth" });
-  };
-
-  // ── Continuous auto-scroll (Bloomberg-style moving ticker) ──
-  // Cards are duplicated in the render below so each strip can loop
-  // seamlessly: once we've scrolled past the first copy, we silently
-  // snap back to 0 and keep going, so it never appears to jump or stop.
-  // Runs for both the always-visible navbar strip and the copy shown
-  // inside the Top Securities dropdown.
-  useEffect(() => {
-    if (cards.length === 0) return;
-
-    const speed = 0.5; // px per frame — slow, readable, Bloomberg-style drift
-
-    const step = () => {
-      if (!isPausedRef.current) {
-        [scrollRef.current, dropdownScrollRef.current].forEach((el) => {
-          if (!el) return;
-          const halfway = el.scrollWidth / 2;
-          if (el.scrollLeft >= halfway) {
-            el.scrollLeft -= halfway;
-          } else {
-            el.scrollLeft += speed;
-          }
-        });
-      }
-      rafRef.current = requestAnimationFrame(step);
-    };
-
-    rafRef.current = requestAnimationFrame(step);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [cards]);
-
-  const pauseAutoScroll = () => {
-    isPausedRef.current = true;
-  };
-  const resumeAutoScroll = () => {
-    isPausedRef.current = false;
-  };
 
   return (
     <div className="pt-securities-bar w-full">
-      <div className="pt-container flex items-stretch">
-        {/* ── Top Securities dropdown trigger ── */}
-        <div className="relative flex-shrink-0">
+      <div className="pt-container">
+
+        {/* =====================================================
+            TOP SECURITIES NAVIGATION
+            ===================================================== */}
+
+        <div className="relative">
+
           <button
-            className="pt-securities-btn flex items-center gap-1.5 h-full"
+            type="button"
+            className="pt-securities-btn flex items-center gap-1.5"
             onClick={() => setShowSecurities(!showSecurities)}
             aria-expanded={showSecurities}
+            aria-haspopup="true"
           >
-            Top Securities
-            <ChevronDown size={14} className={`transition-transform ${showSecurities ? "rotate-180" : ""}`} />
+            <span>Top Securities</span>
+
+            <ChevronDown
+              size={14}
+              className={`transition-transform duration-200 ${
+                showSecurities ? "rotate-180" : ""
+              }`}
+            />
           </button>
+
+
+          {/* =====================================================
+              TOP SECURITIES MEGA MENU
+              ===================================================== */}
 
           {showSecurities && (
-            <div
-              className="pt-securities-dropdown absolute left-0 top-full mt-2 z-50 overflow-hidden"
-              onMouseEnter={pauseAutoScroll}
-              onMouseLeave={resumeAutoScroll}
-            >
-              {/* Category links */}
-              <div className="pt-securities-categories py-2 border-b border-gray-100">
-                {securitiesCategories.map((category) => (
-                  <Link
-                    key={category}
-                    to="/markets"
-                    className="block px-4 py-2 basis-1/3 sm:basis-1/4"
-                    onClick={() => setShowSecurities(false)}
+            <div className="pt-securities-mega-menu">
+
+              <div className="pt-securities-menu-inner">
+
+                {securitiesColumns.map((column) => (
+                  <div
+                    key={column.title}
+                    className="pt-securities-column"
                   >
-                    {category}
-                  </Link>
-                ))}
-              </div>
 
-              {/* Same moving market cards, also shown here inside the dropdown */}
-              <div className="flex items-center gap-2 px-3">
-                <button
-                  className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-                  onClick={() => {
-                    pauseAutoScroll();
-                    scrollByAmount("left", dropdownScrollRef);
-                  }}
-                  aria-label="Scroll left"
-                >
-                  <ChevronLeft size={16} />
-                </button>
+                    {/* Column Heading */}
+                    <h3 className="pt-securities-column-title">
+                      {column.title}
+                    </h3>
 
-                <div
-                  ref={dropdownScrollRef}
-                  className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-3 flex-1"
-                  onTouchStart={pauseAutoScroll}
-                  onTouchEnd={resumeAutoScroll}
-                >
-                  {[...cards, ...cards].map((card, i) => (
-                    <div key={`dd-${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
-                      <span className="text-[11px] text-gray-400 font-medium truncate">{card.symbol}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold">{card.value}</span>
-                        <span
-                          className={`flex items-center gap-0.5 text-xs font-medium ${
-                            card.change >= 0 ? "pt-market-card-positive" : "pt-market-card-negative"
-                          }`}
+                    {/* Navigation Links */}
+                    <div className="pt-securities-links">
+
+                      {column.items.map((item) => (
+                        <Link
+                          key={item}
+                          to="/markets"
+                          className="pt-securities-link"
+                          onClick={() => setShowSecurities(false)}
                         >
-                          {card.change >= 0 ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
-                          {card.change >= 0 ? "+" : ""}
-                          {card.change}%
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                          {item}
+                        </Link>
+                      ))}
 
-                <button
-                  className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-                  onClick={() => {
-                    pauseAutoScroll();
-                    scrollByAmount("right", dropdownScrollRef);
-                  }}
-                  aria-label="Scroll right"
-                >
-                  <ChevronRight size={16} />
-                </button>
+                    </div>
+
+                  </div>
+                ))}
+
               </div>
+
             </div>
           )}
+
         </div>
 
-        {/* ── Continuously auto-scrolling market cards, always visible in the navbar ── */}
-        <div
-          className="relative flex items-center flex-1 min-w-0 pl-3 gap-2"
-          onMouseEnter={pauseAutoScroll}
-          onMouseLeave={resumeAutoScroll}
-        >
-          <button
-            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-            onClick={() => {
-              pauseAutoScroll();
-              scrollByAmount("left", scrollRef);
-            }}
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={16} />
-          </button>
-
-          <div
-            ref={scrollRef}
-            className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2 flex-1"
-            onTouchStart={pauseAutoScroll}
-            onTouchEnd={resumeAutoScroll}
-          >
-            {/* Cards are rendered twice back-to-back so the auto-scroll
-                loop can snap from the end of the first copy to the start
-                of the second without any visible jump. */}
-            {[...cards, ...cards].map((card, i) => (
-              <div key={`${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
-                <span className="text-[11px] text-gray-400 font-medium truncate">{card.symbol}</span>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold">{card.value}</span>
-                  <span
-                    className={`flex items-center gap-0.5 text-xs font-medium ${
-                      card.change >= 0 ? "pt-market-card-positive" : "pt-market-card-negative"
-                    }`}
-                  >
-                    {card.change >= 0 ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
-                    {card.change >= 0 ? "+" : ""}
-                    {card.change}%
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <button
-            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-            onClick={() => {
-              pauseAutoScroll();
-              scrollByAmount("right", scrollRef);
-            }}
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </div>
       </div>
     </div>
   );
+}
+CSS for the New Top Securities Menu
+
+Replace the existing Top Securities-related CSS with:
+
+/* =========================================================
+   TOP SECURITIES BAR
+   ========================================================= */
+
+.pt-securities-bar {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 100;
+}
+
+.pt-securities-bar .pt-container {
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   TOP SECURITIES BUTTON
+   ========================================================= */
+
+.pt-securities-btn {
+  height: 46px;
+  padding: 0 16px;
+
+  background: transparent;
+  border: none;
+
+  color: #1f2937;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.pt-securities-btn:hover {
+  color: #000000;
+  background: #f8f8f8;
+}
+
+
+/* =========================================================
+   MEGA MENU
+   ========================================================= */
+
+.pt-securities-mega-menu {
+  position: absolute;
+
+  top: 100%;
+  left: 0;
+
+  width: 720px;
+
+  background: #000000;
+
+  border-top: 1px solid #222222;
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.22);
+
+  z-index: 9999;
+}
+
+
+/* =========================================================
+   MENU INNER CONTAINER
+   ========================================================= */
+
+.pt-securities-menu-inner {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  column-gap: 55px;
+
+  padding: 28px 30px 30px;
+}
+
+
+/* =========================================================
+   COLUMN
+   ========================================================= */
+
+.pt-securities-column {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   COLUMN TITLE
+   ========================================================= */
+
+.pt-securities-column-title {
+  margin: 0 0 18px;
+
+  color: #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 15px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.pt-securities-links {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+
+.pt-securities-link {
+  display: block;
+
+  color: #8fa8c2;
+
+  text-decoration: none;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.pt-securities-link:hover {
+  color: #ffffff;
+
+  transform: translateX(2px);
+}
+
+
+/* =========================================================
+   DESKTOP CONTAINER
+   ========================================================= */
+
+@media (min-width: 1200px) {
+
+  .pt-securities-bar .pt-container {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+  .pt-securities-mega-menu {
+    width: 600px;
+  }
+
+  .pt-securities-menu-inner {
+    column-gap: 30px;
+
+    padding: 24px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .pt-securities-mega-menu {
+    width: calc(100vw - 24px);
+
+    left: 0;
+  }
+
+  .pt-securities-menu-inner {
+    grid-template-columns: 1fr;
+
+    row-gap: 24px;
+
+    padding: 22px;
+  }
+
+  .pt-securities-column-title {
+    margin-bottom: 10px;
+
+    font-size: 13px;
+  }
+
+  .pt-securities-links {
+    gap: 10px;
+  }
+
+  .pt-securities-link {
+    font-size: 12px;
+  }
+
 }
