@@ -127,7 +127,10 @@ export function MarketsTicker() {
   return (
     <div className="pt-securities-bar w-full">
       <div className="pt-container flex items-stretch">
-        {/* ── Top Securities dropdown trigger ── */}
+        {/* ── Top Securities dropdown trigger ──
+            Default (closed) state shows ONLY the "Top Securities" label —
+            no live prices/cards attached to the navbar itself, per the
+            premium editorial header spec. Prices only appear once opened. */}
         <div className="relative flex-shrink-0">
           <button
             className="pt-securities-btn flex items-center gap-1.5 h-full"
@@ -139,76 +142,79 @@ export function MarketsTicker() {
           </button>
 
           {showSecurities && (
-            <div className="pt-securities-dropdown absolute left-0 top-full mt-2 py-2 z-50">
-              {securitiesCategories.map((category) => (
-                <Link
-                  key={category}
-                  to="/markets"
-                  className="block px-4 py-2.5"
-                  onClick={() => setShowSecurities(false)}
+            <div
+              className="pt-securities-dropdown absolute left-0 top-full mt-2 z-50 overflow-hidden"
+              onMouseEnter={pauseAutoScroll}
+              onMouseLeave={resumeAutoScroll}
+            >
+              {/* Category links */}
+              <div className="pt-securities-categories py-2 border-b border-gray-100">
+                {securitiesCategories.map((category) => (
+                  <Link
+                    key={category}
+                    to="/markets"
+                    className="block px-4 py-2 basis-1/3 sm:basis-1/4"
+                    onClick={() => setShowSecurities(false)}
+                  >
+                    {category}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Live moving market cards — only visible once the dropdown is opened */}
+              <div className="flex items-center gap-2 px-3">
+                <button
+                  className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
+                  onClick={() => {
+                    pauseAutoScroll();
+                    scrollByAmount("left");
+                  }}
+                  aria-label="Scroll left"
                 >
-                  {category}
-                </Link>
-              ))}
+                  <ChevronLeft size={16} />
+                </button>
+
+                <div
+                  ref={scrollRef}
+                  className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-3 flex-1"
+                  onTouchStart={pauseAutoScroll}
+                  onTouchEnd={resumeAutoScroll}
+                >
+                  {/* Cards are rendered twice back-to-back so the auto-scroll
+                      loop can snap from the end of the first copy to the start
+                      of the second without any visible jump. */}
+                  {[...cards, ...cards].map((card, i) => (
+                    <div key={`${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
+                      <span className="text-[11px] text-gray-400 font-medium truncate">{card.symbol}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold">{card.value}</span>
+                        <span
+                          className={`flex items-center gap-0.5 text-xs font-medium ${
+                            card.change >= 0 ? "pt-market-card-positive" : "pt-market-card-negative"
+                          }`}
+                        >
+                          {card.change >= 0 ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
+                          {card.change >= 0 ? "+" : ""}
+                          {card.change}%
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
+                  onClick={() => {
+                    pauseAutoScroll();
+                    scrollByAmount("right");
+                  }}
+                  aria-label="Scroll right"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
             </div>
           )}
-        </div>
-
-        {/* ── Continuously auto-scrolling market cards ── */}
-        <div
-          className="relative flex items-center flex-1 min-w-0 pl-3 gap-2"
-          onMouseEnter={pauseAutoScroll}
-          onMouseLeave={resumeAutoScroll}
-        >
-          <button
-            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-            onClick={() => {
-              pauseAutoScroll();
-              scrollByAmount("left");
-            }}
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={16} />
-          </button>
-
-          <div
-            ref={scrollRef}
-            className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2 flex-1"
-            onTouchStart={pauseAutoScroll}
-            onTouchEnd={resumeAutoScroll}
-          >
-            {/* Cards are rendered twice back-to-back so the auto-scroll
-                loop can snap from the end of the first copy to the start
-                of the second without any visible jump. */}
-            {[...cards, ...cards].map((card, i) => (
-              <div key={`${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
-                <span className="text-[11px] text-gray-400 font-medium truncate">{card.symbol}</span>
-                <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold">{card.value}</span>
-                  <span
-                    className={`flex items-center gap-0.5 text-xs font-medium ${
-                      card.change >= 0 ? "pt-market-card-positive" : "pt-market-card-negative"
-                    }`}
-                  >
-                    {card.change >= 0 ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
-                    {card.change >= 0 ? "+" : ""}
-                    {card.change}%
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <button
-            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-            onClick={() => {
-              pauseAutoScroll();
-              scrollByAmount("right");
-            }}
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={16} />
-          </button>
         </div>
       </div>
     </div>
