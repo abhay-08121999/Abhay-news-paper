@@ -24,18 +24,6 @@ const industriesLinks = [
   { label: "Supply Chain", path: "/supply-chain" },
 ];
 
-const moreLinks = [
-  { label: "Featured", path: "/featured" },
-  { label: "Breaking News", path: "/breaking-news" },
-  { label: "Business News", path: "/business-news" },
-  { label: "CEO Spotlight", path: "/ceospotlight" },
-  { label: "Innovation", path: "/innovation" },
-  { label: "Cover Stories", path: "/cover-stories" },
-  { label: "White House Watch", path: "/white-house-watch" },
-  { label: "World & Geopolitics", path: "/world" },
-  { label: "Education", path: "/#" },
-];
-
 const editions = ["Asia Edition", "Americas Edition", "Europe Edition", "India Edition"];
 
 export function Header() {
@@ -43,7 +31,6 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [industriesOpen, setIndustriesOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [editionOpen, setEditionOpen] = useState(false);
   const [edition, setEdition] = useState("Asia Edition");
@@ -53,14 +40,13 @@ export function Header() {
   const isPremium = user?.tier === "premium";
 
   useEffect(() => {
-    if (!industriesOpen && !moreOpen && !editionOpen) return;
+    if (!industriesOpen && !editionOpen) return;
     const timer = setTimeout(() => {
       setIndustriesOpen(false);
-      setMoreOpen(false);
       setEditionOpen(false);
     }, 5000);
     return () => clearTimeout(timer);
-  }, [industriesOpen, moreOpen, editionOpen]);
+  }, [industriesOpen, editionOpen]);
 
   const handleSignOut = () => {
     signOut();
@@ -107,29 +93,6 @@ export function Header() {
                       to={link.path}
                       className="block px-4 py-2 text-xs text-gray-800 hover:bg-gray-50 hover:text-red-600 transition-colors"
                       onClick={() => setIndustriesOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="relative">
-              <button
-                className="pt-focusable flex items-center gap-0.5"
-                onClick={() => setMoreOpen(!moreOpen)}
-              >
-                More <ChevronDown size={11} />
-              </button>
-              {moreOpen && (
-                <div className="absolute right-0 top-full mt-0 w-56 bg-white border border-gray-200 shadow-lg z-50 py-1">
-                  {moreLinks.map((link) => (
-                    <Link
-                      key={link.label}
-                      to={link.path}
-                      className="block px-4 py-2 text-xs text-gray-800 hover:bg-gray-50 hover:text-red-600 transition-colors"
-                      onClick={() => setMoreOpen(false)}
                     >
                       {link.label}
                     </Link>
@@ -188,11 +151,11 @@ export function Header() {
 
       {/* ── Brand header ── */}
       <div className="pt-brand-header">
-        <div className="pt-container h-full flex items-center justify-between gap-3 py-3 min-w-0">
+        <div className="pt-container h-full flex items-center justify-between gap-3 py-4 min-w-0">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
             <div className="block min-w-0">
-              <div className="pt-logo text-xl sm:text-[32px] lg:text-[44px] xl:text-[58px] truncate">
+              <div className="pt-logo text-2xl sm:text-[28px] lg:text-[34px] xl:text-[36px] truncate">
                 THE <span className="pt-logo-accent">PRIDE</span> TIMES
               </div>
               <div className="pt-tagline hidden sm:block uppercase mt-0.5">
@@ -302,11 +265,6 @@ export function Header() {
             ))}
             {industriesLinks.map((link) => (
               <Link key={link.label} to={link.path} className="py-2.5 text-sm border-b border-gray-100 text-gray-600" onClick={() => setMobileOpen(false)}>
-                {link.label}
-              </Link>
-            ))}
-            {moreLinks.map((link) => (
-              <Link key={link.label} to={link.path} className="py-2.5 text-sm border-b border-gray-100 text-gray-500" onClick={() => setMobileOpen(false)}>
                 {link.label}
               </Link>
             ))}
