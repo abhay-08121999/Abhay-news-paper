@@ -95,7 +95,7 @@
 
 /* ── Brand header ── */
 .pt-brand-header {
-  min-height: 72px;
+  min-height: 96px;
   background: var(--pt-white);
   border-bottom: 1px solid var(--pt-border);
 }
