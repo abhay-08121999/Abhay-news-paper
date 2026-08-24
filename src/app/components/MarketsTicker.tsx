@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { Link } from "react-router";
 import { TrendingUp, TrendingDown, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { getQuotes } from "../../services/marketApi";
@@ -27,6 +27,7 @@ export function MarketsTicker() {
   const [cards, setCards] = useState<TickerCard[]>([]);
   const [showSecurities, setShowSecurities] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const dropdownScrollRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(false);
   const rafRef = useRef<number | null>(null);
 
@@ -80,33 +81,35 @@ export function MarketsTicker() {
     return () => clearTimeout(timer);
   }, [showSecurities]);
 
-  const scrollByAmount = (direction: "left" | "right") => {
-    const el = scrollRef.current;
+  const scrollByAmount = (direction: "left" | "right", ref: RefObject<HTMLDivElement> = scrollRef) => {
+    const el = ref.current;
     if (!el) return;
     const amount = 220 + 16; // card width + gap
     el.scrollBy({ left: direction === "left" ? -amount * 2 : amount * 2, behavior: "smooth" });
   };
 
   // ── Continuous auto-scroll (Bloomberg-style moving ticker) ──
-  // Cards are duplicated in the render below so the strip can loop
+  // Cards are duplicated in the render below so each strip can loop
   // seamlessly: once we've scrolled past the first copy, we silently
   // snap back to 0 and keep going, so it never appears to jump or stop.
+  // Runs for both the always-visible navbar strip and the copy shown
+  // inside the Top Securities dropdown.
   useEffect(() => {
     if (cards.length === 0) return;
-
-    const el = scrollRef.current;
-    if (!el) return;
 
     const speed = 0.5; // px per frame — slow, readable, Bloomberg-style drift
 
     const step = () => {
-      if (el && !isPausedRef.current) {
-        const halfway = el.scrollWidth / 2;
-        if (el.scrollLeft >= halfway) {
-          el.scrollLeft -= halfway;
-        } else {
-          el.scrollLeft += speed;
-        }
+      if (!isPausedRef.current) {
+        [scrollRef.current, dropdownScrollRef.current].forEach((el) => {
+          if (!el) return;
+          const halfway = el.scrollWidth / 2;
+          if (el.scrollLeft >= halfway) {
+            el.scrollLeft -= halfway;
+          } else {
+            el.scrollLeft += speed;
+          }
+        });
       }
       rafRef.current = requestAnimationFrame(step);
     };
@@ -127,10 +130,7 @@ export function MarketsTicker() {
   return (
     <div className="pt-securities-bar w-full">
       <div className="pt-container flex items-stretch">
-        {/* ── Top Securities dropdown trigger ──
-            Default (closed) state shows ONLY the "Top Securities" label —
-            no live prices/cards attached to the navbar itself, per the
-            premium editorial header spec. Prices only appear once opened. */}
+        {/* ── Top Securities dropdown trigger ── */}
         <div className="relative flex-shrink-0">
           <button
             className="pt-securities-btn flex items-center gap-1.5 h-full"
@@ -161,13 +161,13 @@ export function MarketsTicker() {
                 ))}
               </div>
 
-              {/* Live moving market cards — only visible once the dropdown is opened */}
+              {/* Same moving market cards, also shown here inside the dropdown */}
               <div className="flex items-center gap-2 px-3">
                 <button
                   className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
                   onClick={() => {
                     pauseAutoScroll();
-                    scrollByAmount("left");
+                    scrollByAmount("left", dropdownScrollRef);
                   }}
                   aria-label="Scroll left"
                 >
@@ -175,16 +175,13 @@ export function MarketsTicker() {
                 </button>
 
                 <div
-                  ref={scrollRef}
+                  ref={dropdownScrollRef}
                   className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-3 flex-1"
                   onTouchStart={pauseAutoScroll}
                   onTouchEnd={resumeAutoScroll}
                 >
-                  {/* Cards are rendered twice back-to-back so the auto-scroll
-                      loop can snap from the end of the first copy to the start
-                      of the second without any visible jump. */}
                   {[...cards, ...cards].map((card, i) => (
-                    <div key={`${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
+                    <div key={`dd-${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
                       <span className="text-[11px] text-gray-400 font-medium truncate">{card.symbol}</span>
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-semibold">{card.value}</span>
@@ -206,7 +203,7 @@ export function MarketsTicker() {
                   className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
                   onClick={() => {
                     pauseAutoScroll();
-                    scrollByAmount("right");
+                    scrollByAmount("right", dropdownScrollRef);
                   }}
                   aria-label="Scroll right"
                 >
@@ -215,6 +212,63 @@ export function MarketsTicker() {
               </div>
             </div>
           )}
+        </div>
+
+        {/* ── Continuously auto-scrolling market cards, always visible in the navbar ── */}
+        <div
+          className="relative flex items-center flex-1 min-w-0 pl-3 gap-2"
+          onMouseEnter={pauseAutoScroll}
+          onMouseLeave={resumeAutoScroll}
+        >
+          <button
+            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
+            onClick={() => {
+              pauseAutoScroll();
+              scrollByAmount("left", scrollRef);
+            }}
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+          <div
+            ref={scrollRef}
+            className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2 flex-1"
+            onTouchStart={pauseAutoScroll}
+            onTouchEnd={resumeAutoScroll}
+          >
+            {/* Cards are rendered twice back-to-back so the auto-scroll
+                loop can snap from the end of the first copy to the start
+                of the second without any visible jump. */}
+            {[...cards, ...cards].map((card, i) => (
+              <div key={`${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
+                <span className="text-[11px] text-gray-400 font-medium truncate">{card.symbol}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold">{card.value}</span>
+                  <span
+                    className={`flex items-center gap-0.5 text-xs font-medium ${
+                      card.change >= 0 ? "pt-market-card-positive" : "pt-market-card-negative"
+                    }`}
+                  >
+                    {card.change >= 0 ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
+                    {card.change >= 0 ? "+" : ""}
+                    {card.change}%
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button
+            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
+            onClick={() => {
+              pauseAutoScroll();
+              scrollByAmount("right", scrollRef);
+            }}
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={16} />
+          </button>
         </div>
       </div>
     </div>
