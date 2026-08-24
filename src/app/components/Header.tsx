@@ -155,10 +155,10 @@ export function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
             <div className="block min-w-0">
-              <div className="pt-logo text-2xl sm:text-[28px] lg:text-[34px] xl:text-[36px] truncate">
+              <div className="pt-logo text-3xl sm:text-[38px] lg:text-[46px] xl:text-[52px] truncate">
                 THE <span className="pt-logo-accent">PRIDE</span> TIMES
               </div>
-              <div className="pt-tagline hidden sm:block uppercase mt-0.5">
+              <div className="pt-tagline hidden sm:block uppercase mt-1.5">
                 The Global Voice of Innovation, Leadership &amp; Success
               </div>
             </div>
