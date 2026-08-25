@@ -24,6 +24,7 @@
   --pt-danger: #e31b23;
 }
 
+
 /* ========================================
    PAGE CONTAINER
 ======================================== */
@@ -47,6 +48,7 @@
   }
 }
 
+
 /* ========================================
    HEADER-SPECIFIC HORIZONTAL PADDING
 ======================================== */
@@ -69,6 +71,7 @@
     padding: 0 16px;
   }
 }
+
 
 /* ========================================
    TOP BLACK NAVIGATION
@@ -101,6 +104,7 @@
   color: #eeeeee;
 }
 
+
 /* ========================================
    BRAND HEADER
 ======================================== */
@@ -114,6 +118,7 @@
   display: flex;
   align-items: center;
 }
+
 
 /* ========================================
    DEFAULT LOGO
@@ -134,9 +139,9 @@
   color: var(--pt-red);
 }
 
+
 /* ========================================
    MAIN HEADER NEWSPAPER MASTHEAD
-
    THE PRIDE TIMES
 ======================================== */
 
@@ -148,7 +153,6 @@
 
   line-height: 0.95;
 
-  /* Slightly tight newspaper typography */
   letter-spacing: -1.5px;
 
   color: #111111;
@@ -163,6 +167,7 @@
   color: #e31b23;
   font-weight: 700;
 }
+
 
 /* ========================================
    HEADER TAGLINE
@@ -183,11 +188,9 @@
   color: #222222;
 }
 
+
 /* ========================================
    HEADER LOGO WRAPPER
-
-   Useful if logo + tagline are inside
-   the same container
 ======================================== */
 
 .pt-brand-header .pt-branding,
@@ -197,11 +200,73 @@
   justify-content: center;
 }
 
-/* ========================================
-   FOOTER LOGO PROTECTION
 
-   Prevent header masthead styles from
-   affecting the footer.
+/* =========================================================
+   FOOTER — PREMIUM NEWSPAPER LAYOUT
+   Updated for proper horizontal + vertical spacing
+========================================================= */
+
+.pt-footer,
+footer.pt-footer {
+  width: 100%;
+  background: #000000;
+  color: #ffffff;
+
+  border-top: 1px solid #222222;
+
+  margin-top: 0;
+}
+
+
+/* ========================================
+   FOOTER MAIN CONTAINER
+======================================== */
+
+.pt-footer .pt-container,
+footer.pt-footer .pt-container {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 42px 50px 48px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(360px, 1.2fr)
+    repeat(3, minmax(190px, 1fr));
+
+  column-gap: 72px;
+
+  row-gap: 36px;
+
+  align-items: start;
+}
+
+
+/* ========================================
+   FOOTER BRAND / FIRST COLUMN
+======================================== */
+
+.pt-footer .pt-branding,
+.pt-footer .pt-logo-wrapper,
+footer.pt-footer .pt-branding,
+footer.pt-footer .pt-logo-wrapper {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  justify-content: flex-start;
+
+  min-width: 0;
+}
+
+
+/* ========================================
+   FOOTER LOGO
 ======================================== */
 
 .pt-footer .pt-logo,
@@ -212,6 +277,7 @@ footer .pt-logo {
   font-weight: 700;
 
   line-height: 1;
+
   letter-spacing: -1px;
 
   color: #ffffff;
@@ -225,8 +291,10 @@ footer .pt-logo {
 .pt-footer .pt-logo-accent,
 footer .pt-logo-accent {
   color: #e31b23;
+
   font-weight: 700;
 }
+
 
 /* ========================================
    FOOTER MAGAZINE LABEL
@@ -234,15 +302,414 @@ footer .pt-logo-accent {
 
 .pt-footer .pt-logo + span,
 footer .pt-logo + span {
+  display: block;
+
+  margin-top: 2px;
+
   font-family: Arial, Helvetica, sans-serif;
 
   font-size: 11px;
+
   font-weight: 700;
+
+  line-height: 1.2;
 
   letter-spacing: 0.2px;
 
   color: #ffffff;
 }
+
+
+/* ========================================
+   FOOTER DESCRIPTION
+======================================== */
+
+.pt-footer .pt-description,
+.pt-footer .pt-tagline,
+footer .pt-description,
+footer .pt-tagline {
+  max-width: 400px;
+
+  margin-top: 28px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  color: #bcbcbc;
+}
+
+
+/* ========================================
+   FOOTER COLUMNS
+======================================== */
+
+.pt-footer .pt-footer-column,
+.pt-footer .footer-column,
+footer .pt-footer-column,
+footer .footer-column {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  justify-content: flex-start;
+}
+
+
+/* ========================================
+   FOOTER COLUMN HEADINGS
+======================================== */
+
+.pt-footer h3,
+.pt-footer h4,
+.pt-footer .pt-footer-heading,
+.pt-footer .footer-heading,
+footer h3,
+footer h4,
+footer .pt-footer-heading,
+footer .footer-heading {
+  margin: 0 0 24px 0;
+
+  padding: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.03em;
+
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+
+/* ========================================
+   FOOTER LINKS WRAPPER
+======================================== */
+
+.pt-footer ul,
+.pt-footer .pt-footer-links,
+.pt-footer .footer-links,
+footer ul,
+footer .pt-footer-links,
+footer .footer-links {
+  margin: 0;
+
+  padding: 0;
+
+  list-style: none;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+
+/* ========================================
+   FOOTER LIST ITEMS
+======================================== */
+
+.pt-footer li,
+footer li {
+  margin: 0;
+
+  padding: 0;
+}
+
+
+/* ========================================
+   FOOTER LINKS
+======================================== */
+
+.pt-footer a,
+footer a {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 1.4;
+
+  color: #bdbdbd;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    padding-left 0.2s ease;
+}
+
+
+/* ========================================
+   FOOTER LINK HOVER
+======================================== */
+
+.pt-footer a:hover,
+footer a:hover {
+  color: #ffffff;
+
+  padding-left: 3px;
+}
+
+
+/* ========================================
+   FOOTER BOTTOM BORDER / COPYRIGHT
+======================================== */
+
+.pt-footer-bottom,
+footer .pt-footer-bottom,
+footer .footer-bottom {
+  width: 100%;
+
+  border-top: 1px solid #252525;
+
+  padding: 18px 50px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+
+/* ========================================
+   FOOTER COPYRIGHT TEXT
+======================================== */
+
+.pt-footer-bottom p,
+footer .pt-footer-bottom p,
+footer .footer-bottom p {
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  color: #777777;
+}
+
+
+/* ========================================
+   FOOTER SOCIAL LINKS
+======================================== */
+
+.pt-footer-social,
+footer .pt-footer-social {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+.pt-footer-social a,
+footer .pt-footer-social a {
+  font-size: 12px;
+
+  color: #888888;
+}
+
+.pt-footer-social a:hover,
+footer .pt-footer-social a:hover {
+  color: #ffffff;
+
+  padding-left: 0;
+}
+
+
+/* ========================================
+   FOOTER RESPONSIVE — LARGE TABLET
+======================================== */
+
+@media (max-width: 1200px) {
+  .pt-footer .pt-container,
+  footer.pt-footer .pt-container {
+    grid-template-columns:
+      minmax(280px, 1.2fr)
+      repeat(3, minmax(150px, 1fr));
+
+    column-gap: 45px;
+
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+
+/* ========================================
+   FOOTER RESPONSIVE — TABLET
+======================================== */
+
+@media (max-width: 900px) {
+  .pt-footer .pt-container,
+  footer.pt-footer .pt-container {
+    grid-template-columns: repeat(2, 1fr);
+
+    column-gap: 40px;
+
+    row-gap: 42px;
+
+    padding: 40px 30px 44px;
+  }
+
+  .pt-footer .pt-branding,
+  .pt-footer .pt-logo-wrapper,
+  footer.pt-footer .pt-branding,
+  footer.pt-footer .pt-logo-wrapper {
+    grid-column: span 2;
+  }
+
+  .pt-footer .pt-description,
+  .pt-footer .pt-tagline,
+  footer .pt-description,
+  footer .pt-tagline {
+    max-width: 520px;
+
+    margin-top: 20px;
+  }
+
+  .pt-footer-bottom,
+  footer .pt-footer-bottom,
+  footer .footer-bottom {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+
+/* ========================================
+   FOOTER RESPONSIVE — MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+  .pt-footer .pt-container,
+  footer.pt-footer .pt-container {
+    grid-template-columns: 1fr;
+
+    column-gap: 0;
+
+    row-gap: 34px;
+
+    padding: 36px 20px 40px;
+  }
+
+  .pt-footer .pt-branding,
+  .pt-footer .pt-logo-wrapper,
+  footer.pt-footer .pt-branding,
+  footer.pt-footer .pt-logo-wrapper {
+    grid-column: span 1;
+  }
+
+  .pt-footer .pt-logo,
+  footer .pt-logo {
+    font-size: 32px;
+
+    letter-spacing: -0.8px;
+  }
+
+  .pt-footer .pt-description,
+  .pt-footer .pt-tagline,
+  footer .pt-description,
+  footer .pt-tagline {
+    max-width: 100%;
+
+    margin-top: 18px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+  }
+
+  .pt-footer h3,
+  .pt-footer h4,
+  .pt-footer .pt-footer-heading,
+  .pt-footer .footer-heading,
+  footer h3,
+  footer h4,
+  footer .pt-footer-heading,
+  footer .footer-heading {
+    margin-bottom: 18px;
+
+    font-size: 14px;
+  }
+
+  .pt-footer ul,
+  .pt-footer .pt-footer-links,
+  .pt-footer .footer-links,
+  footer ul,
+  footer .pt-footer-links,
+  footer .footer-links {
+    gap: 15px;
+  }
+
+  .pt-footer a,
+  footer a {
+    font-size: 13px;
+  }
+
+  .pt-footer-bottom,
+  footer .pt-footer-bottom,
+  footer .footer-bottom {
+    padding: 16px 20px;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: flex-start;
+  }
+}
+
+
+/* ========================================
+   FOOTER LOGO PROTECTION
+======================================== */
+
+.pt-footer .pt-logo,
+footer .pt-logo {
+  font-family: "Times New Roman", Times, Georgia, serif;
+
+  font-size: 40px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: -1px;
+
+  color: #ffffff;
+
+  margin: 0;
+  padding: 0;
+
+  white-space: nowrap;
+}
+
+.pt-footer .pt-logo-accent,
+footer .pt-logo-accent {
+  color: #e31b23;
+
+  font-weight: 700;
+}
+
 
 /* ========================================
    SEARCH BOX
@@ -252,10 +719,12 @@ footer .pt-logo + span {
   height: 42px;
 
   border: 1px solid #dddddd;
+
   border-radius: 8px;
 
   background: var(--pt-white);
 }
+
 
 /* ========================================
    ACCOUNT BUTTON
@@ -266,10 +735,12 @@ footer .pt-logo + span {
   height: 44px;
 
   border-radius: 50%;
+
   border: 1px solid #dddddd;
 
   background: var(--pt-white);
 }
+
 
 /* ========================================
    SUBSCRIBE BUTTON
@@ -281,12 +752,15 @@ footer .pt-logo + span {
   padding: 0 24px;
 
   border: none;
+
   border-radius: 6px;
 
   background: #e61e24;
+
   color: var(--pt-white);
 
   font-size: 13px;
+
   font-weight: 600;
 
   transition:
@@ -296,8 +770,10 @@ footer .pt-logo + span {
 
 .pt-subscribe-btn:hover {
   background: var(--pt-red-dark);
+
   transform: translateY(-1px);
 }
+
 
 /* ========================================
    TOP SECURITIES BAR
@@ -305,6 +781,7 @@ footer .pt-logo + span {
 
 .pt-securities-bar {
   background: #ffffff;
+
   border-bottom: 1px solid var(--pt-border);
 }
 
@@ -316,6 +793,7 @@ footer .pt-logo + span {
   background: var(--pt-white);
 
   font-weight: 600;
+
   font-size: 13px;
 
   color: var(--pt-black);
@@ -328,6 +806,7 @@ footer .pt-logo + span {
 .pt-securities-btn:hover {
   background: #f7f7f7;
 }
+
 
 /* ========================================
    SECURITIES DROPDOWN
@@ -357,8 +836,10 @@ footer .pt-logo + span {
 
 .pt-securities-dropdown a:hover {
   background: #f7f7f7;
+
   color: var(--pt-red);
 }
+
 
 /* ========================================
    MEGA MENU
@@ -382,6 +863,7 @@ footer .pt-logo + span {
   color: #ffffff;
 
   font-size: 13px;
+
   font-weight: 700;
 
   letter-spacing: 0.03em;
@@ -393,6 +875,7 @@ footer .pt-logo + span {
 
 .pt-mega-menu a {
   font-size: 13.5px;
+
   font-weight: 600;
 
   color: #d5d5d5;
@@ -403,6 +886,7 @@ footer .pt-logo + span {
 .pt-mega-menu a:hover {
   color: var(--pt-red);
 }
+
 
 /* ========================================
    MARKET CARDS
@@ -419,6 +903,7 @@ footer .pt-logo + span {
   border-radius: 8px;
 
   background: #0b0b0b;
+
   color: #ffffff;
 
   flex-shrink: 0;
@@ -431,6 +916,7 @@ footer .pt-logo + span {
 .pt-market-card-negative {
   color: #ff5252;
 }
+
 
 /* ========================================
    SECURITIES SCROLL ARROWS
@@ -445,6 +931,7 @@ footer .pt-logo + span {
   border: 1px solid var(--pt-border);
 
   background: var(--pt-white);
+
   color: #222222;
 
   transition: background-color 0.2s ease;
@@ -455,6 +942,7 @@ footer .pt-logo + span {
 .pt-securities-scroll-arrow:hover {
   background: #f7f7f7;
 }
+
 
 /* ========================================
    LEGACY MARKET TICKER
@@ -480,6 +968,7 @@ footer .pt-logo + span {
   color: var(--pt-red);
 }
 
+
 /* ========================================
    CATEGORY NAVIGATION
 ======================================== */
@@ -494,6 +983,7 @@ footer .pt-logo + span {
 
 .pt-sub-nav a {
   font-size: 13px;
+
   font-weight: 600;
 
   text-transform: uppercase;
@@ -520,6 +1010,7 @@ footer .pt-logo + span {
 
   border-bottom-color: #e61e24;
 }
+
 
 /* ========================================
    MAIN GRID
@@ -570,6 +1061,7 @@ footer .pt-logo + span {
     grid-column: span 1;
   }
 }
+
 
 /* ========================================
    TOP STORY
@@ -634,9 +1126,11 @@ footer .pt-logo + span {
   padding: 5px 9px;
 
   background: var(--pt-red);
+
   color: var(--pt-white);
 
   font-size: 10px;
+
   font-weight: 700;
 
   letter-spacing: 0.1em;
@@ -708,6 +1202,7 @@ footer .pt-logo + span {
   border-radius: 5px;
 
   font-size: 13px;
+
   font-weight: 600;
 
   transition:
@@ -720,6 +1215,7 @@ footer .pt-logo + span {
 
   transform: translateY(-1px);
 }
+
 
 /* ========================================
    MAIN ARTICLE
@@ -749,6 +1245,7 @@ footer .pt-logo + span {
 
 .pt-main-article-title {
   margin-top: 18px;
+
   margin-bottom: 0;
 
   font-family: Arial, Helvetica, sans-serif;
@@ -780,6 +1277,7 @@ footer .pt-logo + span {
   }
 }
 
+
 /* ========================================
    RELATED STORY
 ======================================== */
@@ -791,6 +1289,7 @@ footer .pt-logo + span {
 
   padding-top: 16px;
 }
+
 
 /* ========================================
    VIDEO SECTION
@@ -827,6 +1326,7 @@ footer .pt-logo + span {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 }
 
@@ -849,6 +1349,7 @@ footer .pt-logo + span {
 
   overflow: hidden;
 }
+
 
 /* ========================================
    LATEST NEWS
@@ -903,6 +1404,7 @@ footer .pt-logo + span {
 
   overflow: hidden;
 }
+
 
 /* ========================================
    SECONDARY NEWS GRID
@@ -1013,6 +1515,7 @@ footer .pt-logo + span {
   font-size: 10px;
 }
 
+
 /* ========================================
    STATISTICS BANNER
 ======================================== */
@@ -1047,6 +1550,7 @@ footer .pt-logo + span {
 .pt-stat-item:last-child {
   border-right: none;
 }
+
 
 /* ========================================
    MAGAZINE PROMO CARD
@@ -1094,6 +1598,7 @@ footer .pt-logo + span {
   transform: translateY(-1px);
 }
 
+
 /* ========================================
    LEADERSHIP BANNER
 ======================================== */
@@ -1135,6 +1640,7 @@ footer .pt-logo + span {
 
   color: var(--pt-text-secondary);
 }
+
 
 /* ========================================
    NEWSLETTER
@@ -1186,6 +1692,7 @@ footer .pt-logo + span {
   background: var(--pt-red-dark);
 }
 
+
 /* ========================================
    SECTION RHYTHM
 ======================================== */
@@ -1193,6 +1700,7 @@ footer .pt-logo + span {
 .pt-section {
   margin-bottom: 24px;
 }
+
 
 /* ========================================
    FOCUS VISIBILITY
@@ -1203,6 +1711,7 @@ footer .pt-logo + span {
 
   outline-offset: 2px;
 }
+
 
 /* ========================================
    GLOBAL MARKETS PAGE
@@ -1291,6 +1800,7 @@ footer .pt-logo + span {
       0 0 0 0 rgba(0, 200, 117, 0);
   }
 }
+
 
 /* ========================================
    QUICK OVERVIEW INDEX CARDS
@@ -1384,6 +1894,7 @@ footer .pt-logo + span {
   background: rgba(227, 27, 35, 0.08);
 }
 
+
 /* ========================================
    CHART PANELS
 ======================================== */
@@ -1432,6 +1943,7 @@ footer .pt-logo + span {
   display: inline-block;
 }
 
+
 /* ========================================
    TAB NAVIGATION
 ======================================== */
@@ -1473,6 +1985,7 @@ footer .pt-logo + span {
 
   border-bottom-color: var(--pt-red);
 }
+
 
 /* ========================================
    DATA TABLE PANEL
@@ -1544,6 +2057,7 @@ footer .pt-logo + span {
   letter-spacing: 0.03em;
 }
 
+
 /* ========================================
    STOCK BOX
 ======================================== */
@@ -1568,6 +2082,7 @@ footer .pt-logo + span {
   padding: 12px;
 }
 
+
 /* ========================================
    RESPONSIVE HEADER
 ======================================== */
@@ -1576,11 +2091,13 @@ footer .pt-logo + span {
 
   .pt-brand-header .pt-logo {
     font-size: 38px;
+
     letter-spacing: -1.2px;
   }
 
   .pt-brand-header .pt-tagline {
     font-size: 9px;
+
     letter-spacing: 1px;
   }
 
@@ -1589,6 +2106,7 @@ footer .pt-logo + span {
     font-size: 34px;
   }
 }
+
 
 /* ========================================
    TABLET
@@ -1623,6 +2141,7 @@ footer .pt-logo + span {
     font-size: 30px;
   }
 }
+
 
 /* ========================================
    MOBILE
