@@ -9,8 +9,8 @@ import FIN5Img from "../../../imports/FIN5.png";
 
 function SectionHeader({ title, id }: { title: string; id?: string }) {
   return (
-    <div id={id} className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
-      <h2 className="uppercase tracking-wider">{title}</h2>
+    <div id={id} className="finance-section-header">
+      <h2>{title}</h2>
     </div>
   );
 }
@@ -138,224 +138,807 @@ const economyTopics = [
 function FinanceHeroCard({ story, size = "large" }: { story: any; size?: "large" | "compact" }) {
   if (size === "compact") {
     return (
-      <div className="group cursor-pointer">
-        <div className="overflow-hidden rounded mb-3">
+      <article className="finance-story-card finance-story-card--compact">
+        <div className="finance-story-image-wrap">
           <ImageWithFallback
             src={story.image}
             alt={story.title}
-            className="w-full h-40 md:h-44 object-cover group-hover:scale-105 transition-transform duration-500"
+            className="finance-story-image finance-story-image--compact"
           />
         </div>
-        <span className="text-xs text-red-600 uppercase tracking-wider">{story.category}</span>
-        <h3 className="mt-1 leading-snug group-hover:text-red-600 transition-colors">{story.title}</h3>
-        <p className="text-gray-600 text-xs mt-1.5 leading-relaxed line-clamp-2">{story.excerpt}</p>
-        <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
+        <span className="finance-story-category">{story.category}</span>
+        <h3>{story.title}</h3>
+        <p className="finance-story-excerpt">{story.excerpt}</p>
+        <div className="finance-story-meta">
           <span>By {story.author}</span>
-          <span className="flex items-center gap-1"><Clock size={10} /> {story.time}</span>
+          <span><Clock size={10} /> {story.time}</span>
         </div>
-      </div>
+      </article>
     );
   }
 
   return (
-    <div className="group cursor-pointer">
-      <div className="overflow-hidden rounded mb-4">
+    <article className="finance-story-card finance-story-card--hero">
+      <div className="finance-story-image-wrap finance-story-image-wrap--hero">
         <ImageWithFallback
           src={story.image}
           alt={story.title}
-          className="w-full h-52 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+          className="finance-story-image finance-story-image--hero"
         />
       </div>
-      <span className="text-xs text-red-600 uppercase tracking-wider">{story.category}</span>
-      <h1 className="mt-2 text-xl md:text-3xl leading-tight">{story.title}</h1>
-      <p className="text-gray-600 text-sm md:text-base mt-2 leading-relaxed">{story.excerpt}</p>
-      <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+      <span className="finance-story-category">{story.category}</span>
+      <h1>{story.title}</h1>
+      <p className="finance-story-excerpt finance-story-excerpt--hero">{story.excerpt}</p>
+      <div className="finance-story-meta">
         <span>By {story.author}</span>
-        <span className="flex items-center gap-1"><Clock size={10} /> {story.time}</span>
+        <span><Clock size={10} /> {story.time}</span>
       </div>
-    </div>
+    </article>
   );
 }
 
 export function FinancePage() {
   return (
-    <main className="max-w-screen-xl mx-auto px-3 sm:px-4 py-4 md:py-6">
-      {/* Page title */}
-      <div className="border-b-4 border-black mb-6 pb-2">
-        <span className="text-xs text-gray-500 uppercase tracking-widest">Markets & Business</span>
-        <h1 className="mt-0.5">Finance & Business News</h1>
-      </div>
+    <main className="finance-page">
+      <div className="finance-container">
 
-      {/* Quick market badges */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {[
-          { icon: BarChart2, label: "Markets", color: "bg-blue-50 text-blue-700" },
-          { icon: DollarSign, label: "Economy", color: "bg-green-50 text-green-700" },
-          { icon: Globe, label: "Global Trade", color: "bg-purple-50 text-purple-700" },
-          { icon: Briefcase, label: "Corporate News", color: "bg-orange-50 text-orange-700" },
-        ].map(({ icon: Icon, label, color }) => (
-          <span key={label} className={`inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-full ${color}`}>
-            <Icon size={12} /> {label}
-          </span>
-        ))}
-      </div>
+        {/* Bloomberg-style page masthead */}
+        <header className="finance-page-header">
+          <div>
+            <span className="finance-eyebrow">Markets & Business</span>
+            <h1>Finance &amp; Business News</h1>
+          </div>
+          <span className="finance-header-date">THE PRIDE TIMES • FINANCE</span>
+        </header>
 
-      {/* Hero + S&P chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-2">
-          <FinanceHeroCard story={financeHero} size="large" />
-        </div>
+        {/* Compact market navigation */}
+        <nav className="finance-topic-bar" aria-label="Finance topics">
+          {[
+            { icon: BarChart2, label: "Markets" },
+            { icon: DollarSign, label: "Economy" },
+            { icon: Globe, label: "Global Trade" },
+            { icon: Briefcase, label: "Corporate News" },
+          ].map(({ icon: Icon, label }) => (
+            <span key={label} className="finance-topic">
+              <Icon size={12} /> {label}
+            </span>
+          ))}
+        </nav>
 
-        {/* S&P chart */}
-        <div>
-          <div className="border border-gray-200 rounded p-3 md:p-4">
-            <div className="flex items-center justify-between mb-2">
+        {/* Main editorial grid */}
+        <section className="finance-hero-grid">
+          <div className="finance-hero-main">
+            <FinanceHeroCard story={financeHero} size="large" />
+          </div>
+
+          <aside className="finance-market-panel">
+            <div className="finance-market-heading">
               <div>
-                <p className="text-xs text-gray-500 uppercase tracking-wider">S&P 500</p>
-                <p className="text-xl">5,892.31</p>
+                <span>S&amp;P 500</span>
+                <strong>5,892.31</strong>
               </div>
-              <span className="text-green-600 text-sm flex items-center gap-1">
+              <span className="finance-positive">
                 <TrendingUp size={14} /> +1.14%
               </span>
             </div>
-            <ResponsiveContainer width="100%" height={140}>
-              <LineChart data={spData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                <XAxis dataKey="date" tick={{ fontSize: 9 }} />
-                <YAxis tick={{ fontSize: 9 }} domain={["dataMin - 200", "dataMax + 100"]} />
-                <Tooltip contentStyle={{ fontSize: 11 }} />
-                <Line type="monotone" dataKey="value" stroke="#16a34a" strokeWidth={2} dot={false} />
-              </LineChart>
-            </ResponsiveContainer>
-            <p className="text-xs text-gray-400 mt-2 text-center">12-Month Performance (2025–2026)</p>
-          </div>
-        </div>
-      </div>
 
-      {/* More headlines — compact card grid, Bloomberg-style density */}
-      <div className="mb-8">
-        <SectionHeader title="More Headlines" />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          <FinanceHeroCard story={financeHero1} size="compact" />
-          <FinanceHeroCard story={financeHero2} size="compact" />
-          <FinanceHeroCard story={financeHero3} size="compact" />
-          <FinanceHeroCard story={financeHero4} size="compact" />
-        </div>
-      </div>
-
-      {/* Pull quote */}
-      <div className="mb-8 border border-gray-700 bg-slate-200 flex flex-col md:flex-row">
-        <div className="h-3 md:h-auto md:w-24 border-b md:border-b-0 md:border-r border-gray-700 bg-slate-300" />
-        <div className="p-4 md:p-5">
-          <p className="italic text-sm leading-relaxed text-gray-900">
-            "M&A is reopening, but unevenly. Capital is increasingly flowing across industrials, financial services, energy, and health into businesses positioned at the intersection of innovation, scale, and long-term growth."
-          </p>
-          <p className="mt-2 font-bold text-gray-900">— PwC Global M&A Trends 2026</p>
-        </div>
-      </div>
-
-      {/* Full markets table — compact stock box, sized for a secondary/supporting
-          role on this page (Markets page gets the larger primary version) */}
-      <div className="mb-8" id="markets">
-        <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
-          <h2 className="uppercase tracking-wider">Global Markets Overview</h2>
-          <a href="/markets" className="text-xs text-red-600 uppercase tracking-wider hover:underline flex-shrink-0">
-            View All Markets
-          </a>
-        </div>
-        <div className="pt-stock-box pt-stock-box-compact">
-          <table className="w-full min-w-[560px] text-xs">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider">Index / Asset</th>
-                <th className="text-right py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider">Price</th>
-                <th className="text-right py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider">Change</th>
-                <th className="text-right py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Points</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {fullMarkets.map((m) => (
-                <tr key={m.symbol} className="hover:bg-gray-50 transition-colors">
-                  <td className="py-1.5 text-xs">{m.symbol}</td>
-                  <td className="py-1.5 text-right text-xs">{m.value}</td>
-                  <td className="py-1.5 text-right">
-                    <span className={`flex items-center justify-end gap-1 text-xs ${m.up ? "text-green-600" : "text-red-600"}`}>
-                      {m.up ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
-                      {m.change}
-                    </span>
-                  </td>
-                  <td className={`py-1.5 text-right text-xs hidden sm:table-cell ${m.up ? "text-green-600" : "text-red-600"}`}>
-                    {m.pts}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Business stories */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
-        {businessStories.map((s) => (
-          <div key={s.id} className="group cursor-pointer">
-            <div className="overflow-hidden rounded mb-3">
-              <ImageWithFallback
-                src={s.image}
-                alt={s.title}
-                className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+            <div className="finance-chart">
+              <ResponsiveContainer width="100%" height={170}>
+                <LineChart data={spData}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
+                  <XAxis dataKey="date" tick={{ fontSize: 9 }} />
+                  <YAxis tick={{ fontSize: 9 }} domain={["dataMin - 200", "dataMax + 100"]} />
+                  <Tooltip contentStyle={{ fontSize: 11 }} />
+                  <Line type="monotone" dataKey="value" stroke="#16a34a" strokeWidth={2} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
-            <span className="text-xs text-red-600 uppercase tracking-wider">{s.category}</span>
-            <h3 className="mt-1 group-hover:text-red-600 transition-colors leading-snug">{s.title}</h3>
-            <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} /> {s.time}</span>
-          </div>
-        ))}
-      </div>
+            <p className="finance-chart-caption">12-Month Performance (2025–2026)</p>
 
-      {/* Economy + Leadership two column */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        {/* Economy news */}
-        <div>
-          <SectionHeader title="Economy & Policy" />
-          <div className="divide-y divide-gray-100">
-            {economyTopics.map((item) => (
-              <div key={item.id} className="py-2.5 group cursor-pointer">
-                <p className="text-sm group-hover:text-red-600 transition-colors leading-snug">{item.title}</p>
-                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} /> {item.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Leadership interviews */}
-        <div id="leadership">
-          <SectionHeader title="Leadership Voices" />
-          <div className="flex flex-col gap-4">
-            {leadershipStories.map((l) => (
-              <div key={l.id} className="border border-gray-200 rounded p-4 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm text-gray-600">{l.name[0]}</span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">{l.name}</p>
-                    <p className="text-xs text-gray-500">{l.title}</p>
-                  </div>
+            <div className="finance-market-strip">
+              {fullMarkets.slice(0, 5).map((m) => (
+                <div key={m.symbol} className="finance-mini-market">
+                  <span>{m.symbol}</span>
+                  <strong>{m.value}</strong>
+                  <em className={m.up ? "finance-positive" : "finance-negative"}>{m.change}</em>
                 </div>
-                <blockquote className="border-l-2 border-red-600 pl-3 mt-3 text-sm text-gray-600 italic">
-                  "{l.quote}"
-                </blockquote>
-                <button className="mt-2 text-xs text-red-600 hover:underline">{l.action}</button>
-              </div>
+              ))}
+            </div>
+          </aside>
+        </section>
+
+        {/* More headlines */}
+        <section className="finance-section">
+          <SectionHeader title="More Headlines" />
+          <div className="finance-headline-grid">
+            <FinanceHeroCard story={financeHero1} size="compact" />
+            <FinanceHeroCard story={financeHero2} size="compact" />
+            <FinanceHeroCard story={financeHero3} size="compact" />
+            <FinanceHeroCard story={financeHero4} size="compact" />
+          </div>
+        </section>
+
+        {/* Pull quote */}
+        <section className="finance-quote">
+          <div className="finance-quote-mark" />
+          <div>
+            <p>
+              "M&amp;A is reopening, but unevenly. Capital is increasingly flowing across
+              industrials, financial services, energy, and health into businesses positioned
+              at the intersection of innovation, scale, and long-term growth."
+            </p>
+            <strong>— PwC Global M&amp;A Trends 2026</strong>
+          </div>
+        </section>
+
+        {/* Global markets */}
+        <section className="finance-section" id="markets">
+          <div className="finance-section-header finance-section-header--with-link">
+            <h2>Global Markets Overview</h2>
+            <a href="/markets">View All Markets</a>
+          </div>
+
+          <div className="finance-markets-table-wrap">
+            <table className="finance-markets-table">
+              <thead>
+                <tr>
+                  <th>Index / Asset</th>
+                  <th>Price</th>
+                  <th>Change</th>
+                  <th className="finance-points-col">Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {fullMarkets.map((m) => (
+                  <tr key={m.symbol}>
+                    <td>{m.symbol}</td>
+                    <td>{m.value}</td>
+                    <td>
+                      <span className={m.up ? "finance-positive" : "finance-negative"}>
+                        {m.up ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
+                        {m.change}
+                      </span>
+                    </td>
+                    <td className={`finance-points-col ${m.up ? "finance-positive" : "finance-negative"}`}>
+                      {m.pts}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Business stories */}
+        <section className="finance-section">
+          <SectionHeader title="Business" />
+          <div className="finance-business-grid">
+            {businessStories.map((s) => (
+              <article key={s.id} className="finance-business-card">
+                <div className="finance-business-image-wrap">
+                  <ImageWithFallback
+                    src={s.image}
+                    alt={s.title}
+                    className="finance-business-image"
+                  />
+                </div>
+                <span className="finance-story-category">{s.category}</span>
+                <h3>{s.title}</h3>
+                <span className="finance-story-meta">
+                  <Clock size={10} /> {s.time}
+                </span>
+              </article>
             ))}
           </div>
-        </div>
+        </section>
+
+        {/* Economy + Leadership */}
+        <section className="finance-bottom-grid">
+          <div className="finance-section">
+            <SectionHeader title="Economy & Policy" />
+            <div className="finance-economy-list">
+              {economyTopics.map((item) => (
+                <article key={`${item.id}-${item.time}`} className="finance-economy-item">
+                  <div>
+                    <h3>{item.title}</h3>
+                    <span><Clock size={10} /> {item.time}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="finance-section" id="leadership">
+            <SectionHeader title="Leadership Voices" />
+            <div className="finance-leadership-list">
+              {leadershipStories.map((l) => (
+                <article key={l.id} className="finance-leader-card">
+                  <div className="finance-leader-head">
+                    <div className="finance-leader-avatar">
+                      {l.name[0]}
+                    </div>
+                    <div>
+                      <strong>{l.name}</strong>
+                      <span>{l.title}</span>
+                    </div>
+                  </div>
+                  <blockquote>"{l.quote}"</blockquote>
+                  <button>{l.action}</button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="finance-ad">Advertisement</div>
       </div>
 
-      {/* Ad placeholder */}
-      <div className="border border-dashed border-gray-300 rounded h-20 flex items-center justify-center text-gray-400 text-sm mb-4">
-        Advertisement
-      </div>
+      {/* Page-scoped CSS: data/images remain untouched; only layout and styling change. */}
+      <style>{`
+        .finance-page {
+          width: 100%;
+          background: #fff;
+          color: #111;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .finance-container {
+          width: min(1180px, calc(100% - 40px));
+          margin: 0 auto;
+          padding: 18px 0 42px;
+        }
+
+        .finance-page-header {
+          min-height: 72px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 24px;
+          padding-bottom: 12px;
+          border-bottom: 4px solid #111;
+        }
+
+        .finance-eyebrow {
+          display: block;
+          margin-bottom: 4px;
+          color: #777;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: .13em;
+          text-transform: uppercase;
+        }
+
+        .finance-page-header h1 {
+          margin: 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(30px, 4vw, 48px);
+          line-height: .98;
+          font-weight: 800;
+          letter-spacing: -.035em;
+        }
+
+        .finance-header-date {
+          padding-bottom: 5px;
+          color: #666;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: .08em;
+          white-space: nowrap;
+        }
+
+        .finance-topic-bar {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          overflow-x: auto;
+          padding: 9px 0;
+          border-bottom: 1px solid #d9d9d9;
+        }
+
+        .finance-topic {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 10px;
+          border: 1px solid #d5d5d5;
+          background: #f7f7f7;
+          color: #222;
+          font-size: 10px;
+          font-weight: 700;
+          white-space: nowrap;
+        }
+
+        .finance-hero-grid {
+          display: grid;
+          grid-template-columns: minmax(0, 1.75fr) minmax(280px, .8fr);
+          gap: 22px;
+          padding: 20px 0;
+          border-bottom: 1px solid #111;
+        }
+
+        .finance-story-image-wrap {
+          overflow: hidden;
+          background: #eee;
+        }
+
+        .finance-story-image {
+          display: block;
+          width: 100%;
+          object-fit: cover;
+          transition: transform .35s ease;
+        }
+
+        .finance-story-card:hover .finance-story-image,
+        .finance-business-card:hover .finance-business-image {
+          transform: scale(1.025);
+        }
+
+        .finance-story-image--hero {
+          height: 330px;
+        }
+
+        .finance-story-category {
+          display: block;
+          margin-top: 9px;
+          color: #d71920;
+          font-size: 9px;
+          font-weight: 800;
+          letter-spacing: .1em;
+          text-transform: uppercase;
+        }
+
+        .finance-story-card--hero h1 {
+          max-width: 900px;
+          margin: 5px 0 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(27px, 3.2vw, 42px);
+          line-height: 1.03;
+          font-weight: 800;
+          letter-spacing: -.025em;
+        }
+
+        .finance-story-excerpt {
+          color: #555;
+          font-size: 12px;
+          line-height: 1.45;
+        }
+
+        .finance-story-excerpt--hero {
+          max-width: 850px;
+          margin: 9px 0 0;
+          font-size: 13px;
+        }
+
+        .finance-story-meta {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-top: 8px;
+          color: #888;
+          font-size: 9px;
+        }
+
+        .finance-story-meta span {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .finance-market-panel {
+          padding-left: 18px;
+          border-left: 1px solid #d8d8d8;
+        }
+
+        .finance-market-heading {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          padding-bottom: 9px;
+          border-bottom: 2px solid #111;
+        }
+
+        .finance-market-heading span:first-child {
+          display: block;
+          color: #666;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: .1em;
+        }
+
+        .finance-market-heading strong {
+          display: block;
+          margin-top: 2px;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 25px;
+        }
+
+        .finance-positive {
+          color: #159447 !important;
+        }
+
+        .finance-negative {
+          color: #d71920 !important;
+        }
+
+        .finance-market-heading .finance-positive {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          padding-top: 5px;
+          font-size: 11px;
+          font-weight: 700;
+        }
+
+        .finance-chart {
+          padding: 12px 0 0;
+        }
+
+        .finance-chart-caption {
+          margin: 0;
+          color: #999;
+          text-align: center;
+          font-size: 8px;
+        }
+
+        .finance-market-strip {
+          margin-top: 12px;
+          border-top: 1px solid #ddd;
+        }
+
+        .finance-mini-market {
+          display: grid;
+          grid-template-columns: 1fr auto auto;
+          gap: 8px;
+          align-items: center;
+          padding: 7px 0;
+          border-bottom: 1px solid #eee;
+          font-size: 9px;
+        }
+
+        .finance-mini-market span {
+          color: #555;
+          font-weight: 700;
+        }
+
+        .finance-mini-market strong {
+          font-size: 10px;
+        }
+
+        .finance-mini-market em {
+          font-style: normal;
+          font-weight: 700;
+        }
+
+        .finance-section {
+          padding: 20px 0;
+        }
+
+        .finance-section-header {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          gap: 15px;
+          margin-bottom: 13px;
+          padding-bottom: 7px;
+          border-bottom: 2px solid #111;
+        }
+
+        .finance-section-header h2 {
+          margin: 0;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: .06em;
+          text-transform: uppercase;
+        }
+
+        .finance-section-header--with-link a {
+          color: #d71920;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: .06em;
+          text-transform: uppercase;
+          text-decoration: none;
+        }
+
+        .finance-headline-grid {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 15px;
+        }
+
+        .finance-story-card--compact {
+          min-width: 0;
+        }
+
+        .finance-story-image--compact {
+          height: 115px;
+        }
+
+        .finance-story-card--compact h3 {
+          margin: 4px 0 0;
+          font-size: 14px;
+          line-height: 1.12;
+          font-weight: 800;
+        }
+
+        .finance-story-card--compact .finance-story-excerpt {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          margin: 5px 0 0;
+        }
+
+        .finance-quote {
+          display: grid;
+          grid-template-columns: 7px 1fr;
+          gap: 18px;
+          margin: 3px 0 18px;
+          padding: 17px 20px 17px 0;
+          background: #f2f4f7;
+          border-top: 1px solid #c8c8c8;
+          border-bottom: 1px solid #c8c8c8;
+        }
+
+        .finance-quote-mark {
+          background: #d71920;
+        }
+
+        .finance-quote p {
+          max-width: 850px;
+          margin: 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 15px;
+          line-height: 1.35;
+        }
+
+        .finance-quote strong {
+          display: block;
+          margin-top: 7px;
+          font-size: 9px;
+          letter-spacing: .04em;
+          text-transform: uppercase;
+        }
+
+        .finance-markets-table-wrap {
+          overflow-x: auto;
+          border-top: 1px solid #111;
+          border-bottom: 1px solid #111;
+        }
+
+        .finance-markets-table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 10px;
+        }
+
+        .finance-markets-table th {
+          padding: 8px 7px;
+          color: #666;
+          font-size: 8px;
+          font-weight: 700;
+          letter-spacing: .07em;
+          text-transform: uppercase;
+          text-align: right;
+          border-bottom: 1px solid #bbb;
+        }
+
+        .finance-markets-table th:first-child,
+        .finance-markets-table td:first-child {
+          text-align: left;
+        }
+
+        .finance-markets-table td {
+          padding: 7px;
+          text-align: right;
+          border-bottom: 1px solid #ededed;
+        }
+
+        .finance-markets-table tbody tr:hover {
+          background: #f7f7f7;
+        }
+
+        .finance-markets-table td span {
+          display: inline-flex;
+          align-items: center;
+          gap: 3px;
+          font-weight: 700;
+        }
+
+        .finance-business-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 20px;
+        }
+
+        .finance-business-card {
+          min-width: 0;
+        }
+
+        .finance-business-image-wrap {
+          overflow: hidden;
+        }
+
+        .finance-business-image {
+          display: block;
+          width: 100%;
+          height: 190px;
+          object-fit: cover;
+          transition: transform .35s ease;
+        }
+
+        .finance-business-card h3 {
+          margin: 4px 0 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 19px;
+          line-height: 1.08;
+          font-weight: 800;
+        }
+
+        .finance-bottom-grid {
+          display: grid;
+          grid-template-columns: 1.2fr .8fr;
+          gap: 28px;
+          border-top: 1px solid #111;
+        }
+
+        .finance-economy-item {
+          padding: 9px 0;
+          border-bottom: 1px solid #e5e5e5;
+        }
+
+        .finance-economy-item h3 {
+          margin: 0;
+          font-size: 12px;
+          line-height: 1.25;
+          font-weight: 700;
+        }
+
+        .finance-economy-item span {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          margin-top: 4px;
+          color: #999;
+          font-size: 8px;
+        }
+
+        .finance-leadership-list {
+          display: grid;
+          gap: 10px;
+        }
+
+        .finance-leader-card {
+          padding: 11px;
+          border: 1px solid #d7d7d7;
+          background: #fff;
+        }
+
+        .finance-leader-head {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+        }
+
+        .finance-leader-avatar {
+          width: 32px;
+          height: 32px;
+          display: grid;
+          place-items: center;
+          flex: 0 0 32px;
+          background: #eee;
+          color: #555;
+          font-size: 12px;
+          font-weight: 700;
+        }
+
+        .finance-leader-head strong,
+        .finance-leader-head span {
+          display: block;
+        }
+
+        .finance-leader-head strong {
+          font-size: 11px;
+        }
+
+        .finance-leader-head span {
+          margin-top: 2px;
+          color: #777;
+          font-size: 8px;
+        }
+
+        .finance-leader-card blockquote {
+          margin: 10px 0 7px;
+          padding-left: 9px;
+          border-left: 2px solid #d71920;
+          color: #555;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 11px;
+          line-height: 1.35;
+          font-style: italic;
+        }
+
+        .finance-leader-card button {
+          padding: 0;
+          border: 0;
+          background: none;
+          color: #d71920;
+          font-size: 8px;
+          font-weight: 700;
+          cursor: pointer;
+        }
+
+        .finance-ad {
+          height: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px dashed #ccc;
+          color: #aaa;
+          font-size: 9px;
+          letter-spacing: .05em;
+          text-transform: uppercase;
+        }
+
+        @media (max-width: 900px) {
+          .finance-container {
+            width: min(100% - 28px, 760px);
+          }
+
+          .finance-hero-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .finance-market-panel {
+            padding-left: 0;
+            border-left: 0;
+            border-top: 1px solid #d8d8d8;
+            padding-top: 18px;
+          }
+
+          .finance-headline-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .finance-bottom-grid {
+            grid-template-columns: 1fr;
+            gap: 0;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .finance-container {
+            width: calc(100% - 22px);
+            padding-top: 10px;
+          }
+
+          .finance-page-header {
+            display: block;
+          }
+
+          .finance-header-date {
+            display: block;
+            margin-top: 8px;
+          }
+
+          .finance-story-image--hero {
+            height: 230px;
+          }
+
+          .finance-headline-grid,
+          .finance-business-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .finance-story-image--compact {
+            height: 190px;
+          }
+
+          .finance-points-col {
+            display: none;
+          }
+        }
+      `}</style>
     </main>
   );
 }
