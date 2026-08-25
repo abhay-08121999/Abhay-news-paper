@@ -462,8 +462,9 @@ const loadMarketData = async () => {
               </div>
             </div>
 
-            {/* Market Snapshot — relocated, compact */}
-            <div className="border border-gray-200 rounded-lg p-3">
+            {/* Market Snapshot — compact stock box, same shared styling as
+                the boxes on the Markets and Finance pages */}
+            <div className="pt-stock-box pt-stock-box-compact">
               <div className="flex items-center justify-between mb-2">
                 <h3 className="text-xs font-bold uppercase tracking-tight">Market Snapshot</h3>
                 <div className="flex gap-3">
