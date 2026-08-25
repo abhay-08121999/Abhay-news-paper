@@ -44,8 +44,7 @@
   }
 }
 
-/* Header-specific horizontal padding, per the premium editorial spec —
-   scoped to the header bars only so the rest of the site is untouched. */
+/* ── Header horizontal padding ── */
 .pt-top-nav .pt-container,
 .pt-brand-header .pt-container {
   padding: 0 50px;
@@ -65,7 +64,10 @@
   }
 }
 
-/* ── Top black navigation (Bloomberg-style masthead bar) ── */
+/* ========================================
+   TOP BLACK NAVIGATION
+======================================== */
+
 .pt-top-nav {
   height: 38px;
   background: #000000;
@@ -74,10 +76,10 @@
 
 .pt-top-nav a,
 .pt-top-nav button {
-  font-size: 12.5px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   letter-spacing: 0.01em;
-  color: #d5d5d5;
+  color: #eeeeee;
   transition: color 0.2s ease;
 }
 
@@ -90,34 +92,76 @@
 .pt-top-nav .pt-edition-btn {
   font-size: 13px;
   font-weight: 500;
-  color: #d5d5d5;
+  color: #eeeeee;
 }
 
-/* ── Brand header ── */
+/* ========================================
+   BRAND HEADER — NEWSPAPER MASTHEAD
+======================================== */
+
 .pt-brand-header {
-  min-height: 96px;
+  min-height: 80px;
+  height: 80px;
   background: var(--pt-white);
   border-bottom: 1px solid var(--pt-border);
+
+  /* Keeps the masthead compact like the reference */
+  display: flex;
+  align-items: center;
 }
 
+/* MAIN NEWSPAPER LOGO */
+
 .pt-logo {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-  line-height: 1;
+  font-family: "Times New Roman", Times, Georgia, serif;
+
+  /*
+    Large newspaper masthead.
+    Matches the THE PRIDE TIMES reference image.
+  */
+  font-size: 43px;
+  font-weight: 700;
+
+  line-height: 0.92;
+
   color: var(--pt-black);
+
+  /*
+    Slightly tight newspaper typography.
+  */
+  letter-spacing: -1.2px;
+
+  margin: 0;
+  padding: 0;
+
+  white-space: nowrap;
 }
+
+/* PRIDE portion */
 
 .pt-logo-accent {
   color: var(--pt-red);
+  font-weight: 700;
 }
 
+/* TAGLINE UNDER LOGO */
+
 .pt-tagline {
+  margin-top: 6px;
+
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 1px;
+
+  line-height: 1.1;
+
+  letter-spacing: 1.15px;
+  text-transform: uppercase;
+
   color: #222222;
 }
+
+/* Search */
 
 .pt-search-box {
   height: 42px;
@@ -126,6 +170,8 @@
   background: var(--pt-white);
 }
 
+/* Account */
+
 .pt-account-btn {
   width: 44px;
   height: 44px;
@@ -133,6 +179,8 @@
   border: 1px solid #dddddd;
   background: var(--pt-white);
 }
+
+/* Subscribe */
 
 .pt-subscribe-btn {
   height: 44px;
@@ -151,7 +199,55 @@
   transform: translateY(-1px);
 }
 
-/* ── Top Securities bar (Bloomberg-style market cards) ── */
+/* ── Masthead responsive sizes ── */
+
+@media (max-width: 1024px) {
+  .pt-logo {
+    font-size: 38px;
+    letter-spacing: -1px;
+  }
+
+  .pt-tagline {
+    font-size: 9px;
+    letter-spacing: 0.9px;
+  }
+}
+
+@media (max-width: 767px) {
+  .pt-brand-header {
+    min-height: 72px;
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .pt-logo {
+    font-size: 32px;
+    letter-spacing: -0.8px;
+  }
+
+  .pt-tagline {
+    margin-top: 5px;
+    font-size: 8px;
+    letter-spacing: 0.7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pt-logo {
+    font-size: 27px;
+    letter-spacing: -0.5px;
+  }
+
+  .pt-tagline {
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* ========================================
+   TOP SECURITIES BAR
+======================================== */
+
 .pt-securities-bar {
   background: #ffffff;
   border-bottom: 1px solid var(--pt-border);
@@ -191,7 +287,8 @@
   color: var(--pt-red);
 }
 
-/* Bloomberg-style multi-column mega-menu for "Top Securities" */
+/* ── Mega Menu ── */
+
 .pt-mega-menu {
   width: min(760px, calc(100vw - 32px));
   background: #0b0b0b;
@@ -221,7 +318,8 @@
   color: var(--pt-red);
 }
 
-/* Bloomberg-style black market card */
+/* ── Market Card ── */
+
 .pt-market-card {
   width: 168px;
   min-width: 168px;
@@ -256,7 +354,8 @@
   background: #f7f7f7;
 }
 
-/* Legacy market ticker item (kept for compatibility) */
+/* Legacy ticker */
+
 .pt-market-item {
   height: 30px;
   padding: 0 12px;
@@ -273,7 +372,10 @@
   color: var(--pt-red);
 }
 
-/* ── Category navigation (below market cards) ── */
+/* ========================================
+   CATEGORY NAVIGATION
+======================================== */
+
 .pt-sub-nav {
   height: 44px;
   background: var(--pt-white);
@@ -300,7 +402,10 @@
   border-bottom-color: #e61e24;
 }
 
-/* ── Main grid ── */
+/* ========================================
+   MAIN GRID
+======================================== */
+
 .pt-main-grid {
   display: grid;
   grid-template-columns: 390px minmax(0, 1fr) 380px;
@@ -322,6 +427,7 @@
   .pt-main-grid {
     grid-template-columns: 1fr 1fr;
   }
+
   .pt-main-grid .pt-video-sidebar {
     grid-column: span 2;
   }
@@ -331,12 +437,16 @@
   .pt-main-grid {
     grid-template-columns: 1fr;
   }
+
   .pt-main-grid .pt-video-sidebar {
     grid-column: span 1;
   }
 }
 
-/* ── Top Story ── */
+/* ========================================
+   TOP STORY
+======================================== */
+
 .pt-top-story {
   position: relative;
   height: 485px;
@@ -447,7 +557,10 @@
   transform: translateY(-1px);
 }
 
-/* ── Main Article ── */
+/* ========================================
+   MAIN ARTICLE
+======================================== */
+
 .pt-main-article-image {
   width: 100%;
   height: 300px;
@@ -465,29 +578,56 @@
   transform: scale(1.03);
 }
 
+/*
+  Main article headline:
+  Strong editorial typography matching
+  the reference newspaper design.
+*/
+
 .pt-main-article-title {
-  margin-top: 14px;
-  font-size: 26px;
+  margin-top: 18px;
+  margin-bottom: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 28px;
   line-height: 1.15;
-  font-weight: 700;
+
+  font-weight: 800;
+
   color: var(--pt-text-primary);
-  letter-spacing: -0.5px;
+
+  letter-spacing: -0.7px;
+  word-spacing: 1px;
 }
 
 @media (max-width: 1399px) {
   .pt-main-article-title {
-    font-size: 22px;
+    font-size: 24px;
   }
 }
 
-/* ── Related story ── */
+@media (max-width: 767px) {
+  .pt-main-article-title {
+    font-size: 22px;
+    line-height: 1.18;
+  }
+}
+
+/* ========================================
+   RELATED STORY
+======================================== */
+
 .pt-related-story {
   border-top: 1px solid var(--pt-border);
   margin-top: 20px;
   padding-top: 16px;
 }
 
-/* ── Video section ── */
+/* ========================================
+   VIDEO SECTION
+======================================== */
+
 .pt-video-card {
   border: 1px solid var(--pt-border);
   border-radius: 8px;
@@ -524,7 +664,10 @@
   overflow: hidden;
 }
 
-/* ── Latest news ── */
+/* ========================================
+   LATEST NEWS
+======================================== */
+
 .pt-latest-title {
   color: var(--pt-red);
   font-size: 18px;
@@ -560,7 +703,10 @@
   overflow: hidden;
 }
 
-/* ── Secondary news grid ── */
+/* ========================================
+   SECONDARY NEWS GRID
+======================================== */
+
 .pt-secondary-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -638,7 +784,10 @@
   font-size: 10px;
 }
 
-/* ── Statistics banner ── */
+/* ========================================
+   STATISTICS BANNER
+======================================== */
+
 .pt-stats-banner {
   background: var(--pt-navy);
   min-height: 85px;
@@ -665,7 +814,10 @@
   border-right: none;
 }
 
-/* ── Magazine promo card ── */
+/* ========================================
+   MAGAZINE PROMO
+======================================== */
+
 .pt-magazine-card {
   background: var(--pt-navy);
   border-radius: 8px;
@@ -694,7 +846,10 @@
   transform: translateY(-1px);
 }
 
-/* ── Leadership banner ── */
+/* ========================================
+   LEADERSHIP BANNER
+======================================== */
+
 .pt-leadership-banner {
   min-height: 150px;
   border: 1px solid var(--pt-border);
@@ -722,7 +877,10 @@
   color: var(--pt-text-secondary);
 }
 
-/* ── Newsletter ── */
+/* ========================================
+   NEWSLETTER
+======================================== */
+
 .pt-newsletter {
   border: 1px solid var(--pt-border);
   border-radius: 8px;
@@ -756,16 +914,23 @@
   background: var(--pt-red-dark);
 }
 
-/* ── Section rhythm ── */
+/* ========================================
+   SECTION RHYTHM
+======================================== */
+
 .pt-section {
   margin-bottom: 24px;
 }
 
-/* ── Focus visibility ── */
+/* ========================================
+   FOCUS VISIBILITY
+======================================== */
+
 .pt-focusable:focus-visible {
   outline: 2px solid var(--pt-red);
   outline-offset: 2px;
 }
+
 /* ========================================
    GLOBAL MARKETS PAGE
 ======================================== */
@@ -814,22 +979,32 @@
 }
 
 @keyframes pt-live-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(0, 200, 117, 0.55); }
-  70% { box-shadow: 0 0 0 7px rgba(0, 200, 117, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 200, 117, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 117, 0.55);
+  }
+
+  70% {
+    box-shadow: 0 0 0 7px rgba(0, 200, 117, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 117, 0);
+  }
 }
 
 /* Quick overview index cards */
+
 .pt-index-card {
   background: var(--pt-white);
   border: 1px solid var(--pt-border);
   border-radius: 10px;
   padding: 16px;
-  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* Sized for the horizontal-scroll stock box strip on the Markets page —
-   narrower and denser than the standalone card grid it replaced. */
 .pt-index-card-compact {
   width: 168px;
   min-width: 168px;
@@ -880,7 +1055,10 @@
   background: rgba(227, 27, 35, 0.08);
 }
 
-/* Chart panels */
+/* ========================================
+   CHART PANELS
+======================================== */
+
 .pt-chart-panel {
   background: var(--pt-white);
   border: 1px solid var(--pt-border);
@@ -909,7 +1087,10 @@
   display: inline-block;
 }
 
-/* Tab navigation */
+/* ========================================
+   TAB NAVIGATION
+======================================== */
+
 .pt-markets-tabs {
   border-bottom: 1px solid var(--pt-border);
   margin-bottom: 0;
@@ -936,7 +1117,10 @@
   border-bottom-color: var(--pt-red);
 }
 
-/* Data table panel */
+/* ========================================
+   DATA TABLE
+======================================== */
+
 .pt-markets-table-panel {
   background: var(--pt-white);
   border: 1px solid var(--pt-border);
@@ -984,11 +1168,10 @@
   letter-spacing: 0.03em;
 }
 
-/* ── "Stock box" — shared market-data panel used on both the Markets and
-   Finance pages. Base styling is identical for visual consistency; the
-   -compact modifier shrinks it for pages where market data is secondary
-   to editorial content (e.g. Finance), while the full version is used on
-   the dedicated Markets page where it's the primary content. ── */
+/* ========================================
+   STOCK BOX
+======================================== */
+
 .pt-stock-box {
   background: var(--pt-white);
   border: 1px solid var(--pt-border);
