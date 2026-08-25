@@ -828,6 +828,15 @@
   transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
+/* Sized for the horizontal-scroll stock box strip on the Markets page —
+   narrower and denser than the standalone card grid it replaced. */
+.pt-index-card-compact {
+  width: 168px;
+  min-width: 168px;
+  padding: 12px 14px;
+  border-color: var(--pt-border);
+}
+
 .pt-index-card:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   border-color: var(--pt-border-dark);
@@ -973,4 +982,23 @@
   color: var(--pt-text-muted);
   font-size: 14px;
   letter-spacing: 0.03em;
+}
+
+/* ── "Stock box" — shared market-data panel used on both the Markets and
+   Finance pages. Base styling is identical for visual consistency; the
+   -compact modifier shrinks it for pages where market data is secondary
+   to editorial content (e.g. Finance), while the full version is used on
+   the dedicated Markets page where it's the primary content. ── */
+.pt-stock-box {
+  background: var(--pt-white);
+  border: 1px solid var(--pt-border);
+  border-radius: 10px;
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.pt-stock-box-compact {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 12px;
 }
