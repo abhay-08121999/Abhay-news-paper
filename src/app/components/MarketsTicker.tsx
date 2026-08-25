@@ -173,7 +173,7 @@ export function MarketsTicker() {
             onClick={() => setShowSecurities(!showSecurities)}
             aria-expanded={showSecurities}
           >
-            Top Securities
+            Menu
             <ChevronDown size={14} className={`transition-transform ${showSecurities ? "rotate-180" : ""}`} />
           </button>
 
