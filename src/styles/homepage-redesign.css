@@ -1,145 +1,992 @@
-/* =========================================================
-   THE PRIDE TIMES — FOOTER
-   Reference-style footer
-========================================================= */
+/* ========================================
+   THE PRIDE TIMES — PREMIUM REDESIGN
+   Design system variables + shared component classes
+======================================== */
 
-.pt-footer,
-footer.pt-footer,
-footer {
-  width: 100%;
-  background: #050505;
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid #222222;
-  font-family: Arial, Helvetica, sans-serif;
+:root {
+  --pt-red: #e31b23;
+  --pt-red-dark: #c9151c;
+  --pt-black: #111111;
+  --pt-pure-black: #050505;
+  --pt-navy: #071a2d;
+
+  --pt-white: #ffffff;
+  --pt-light-bg: #f7f7f7;
+
+  --pt-text-primary: #111111;
+  --pt-text-secondary: #555555;
+  --pt-text-muted: #777777;
+
+  --pt-border: #e2e2e2;
+  --pt-border-dark: #d4d4d4;
+
+  --pt-success: #00c875;
+  --pt-danger: #e31b23;
 }
 
-/* =========================================================
-   FOOTER MAIN AREA
-========================================================= */
+/* ========================================
+   PAGE CONTAINER
+======================================== */
 
-.pt-footer-main,
-.footer-main {
+.pt-container {
   width: 100%;
-  max-width: 1350px;
+  max-width: 1450px;
   margin: 0 auto;
-
-  min-height: 225px;
-
-  padding: 40px 40px 36px;
-
-  display: grid;
-
-  grid-template-columns:
-    1.25fr
-    1.25fr
-    1.25fr
-    1fr;
-
-  column-gap: 70px;
-
-  align-items: start;
+  padding: 0 40px;
 }
 
-/* =========================================================
-   FOOTER COLUMNS
-========================================================= */
-
-.pt-footer-column,
-.footer-column {
-  min-width: 0;
+@media (min-width: 1600px) {
+  .pt-container {
+    max-width: 1480px;
+  }
 }
 
-/* =========================================================
-   FOOTER BRAND
-========================================================= */
+@media (max-width: 480px) {
+  .pt-container {
+    padding: 0 16px;
+  }
+}
 
-.pt-footer-brand,
-.footer-brand {
+/* ========================================
+   HEADER-SPECIFIC HORIZONTAL PADDING
+======================================== */
+
+.pt-top-nav .pt-container,
+.pt-brand-header .pt-container {
+  padding: 0 50px;
+}
+
+@media (max-width: 1024px) {
+  .pt-top-nav .pt-container,
+  .pt-brand-header .pt-container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pt-top-nav .pt-container,
+  .pt-brand-header .pt-container {
+    padding: 0 16px;
+  }
+}
+
+/* ========================================
+   TOP BLACK NAVIGATION
+======================================== */
+
+.pt-top-nav {
+  height: 38px;
+  background: #000000;
+  color: #ffffff;
+}
+
+.pt-top-nav a,
+.pt-top-nav button {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #eeeeee;
+  transition: color 0.2s ease;
+}
+
+.pt-top-nav a:hover,
+.pt-top-nav button:hover,
+.pt-top-nav a.active {
+  color: #ffffff;
+}
+
+.pt-top-nav .pt-edition-btn {
+  font-size: 13px;
+  font-weight: 500;
+  color: #eeeeee;
+}
+
+/* ========================================
+   BRAND HEADER
+======================================== */
+
+.pt-brand-header {
+  min-height: 96px;
+  height: 96px;
+  background: var(--pt-white);
+  border-bottom: 1px solid var(--pt-border);
+
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
-/* Footer logo */
+/* ========================================
+   DEFAULT LOGO
+   Keep generic so footer is not affected
+======================================== */
 
-.pt-footer .pt-logo,
-footer .pt-logo,
-.pt-footer-brand .pt-logo,
-.footer-brand .pt-logo {
-  margin: 0;
-
-  padding: 0;
-
-  font-family:
-    "Times New Roman",
-    Times,
-    Georgia,
-    serif;
-
-  font-size: 24px;
-
+.pt-logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  letter-spacing: 0;
   line-height: 1;
+  color: var(--pt-black);
+  margin: 0;
+  padding: 0;
+}
 
+.pt-logo-accent {
+  color: var(--pt-red);
+}
+
+/* ========================================
+   MAIN HEADER NEWSPAPER MASTHEAD
+
+   THE PRIDE TIMES
+======================================== */
+
+.pt-brand-header .pt-logo {
+  font-family: "Times New Roman", Times, Georgia, serif;
+
+  font-size: 43px;
   font-weight: 700;
 
-  letter-spacing: -0.7px;
+  line-height: 0.95;
 
-  color: #ffffff;
+  /* Slightly tight newspaper typography */
+  letter-spacing: -1.5px;
+
+  color: #111111;
+
+  margin: 0;
+  padding: 0;
 
   white-space: nowrap;
 }
 
-/* RED portion of logo */
+.pt-brand-header .pt-logo-accent {
+  color: #e31b23;
+  font-weight: 700;
+}
+
+/* ========================================
+   HEADER TAGLINE
+======================================== */
+
+.pt-brand-header .pt-tagline {
+  margin-top: 7px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+
+  line-height: 1.1;
+
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+
+  color: #222222;
+}
+
+/* ========================================
+   HEADER LOGO WRAPPER
+
+   Useful if logo + tagline are inside
+   the same container
+======================================== */
+
+.pt-brand-header .pt-branding,
+.pt-brand-header .pt-logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ========================================
+   FOOTER LOGO PROTECTION
+
+   Prevent header masthead styles from
+   affecting the footer.
+======================================== */
+
+.pt-footer .pt-logo,
+footer .pt-logo {
+  font-family: "Times New Roman", Times, Georgia, serif;
+
+  font-size: 40px;
+  font-weight: 700;
+
+  line-height: 1;
+  letter-spacing: -1px;
+
+  color: #ffffff;
+
+  margin: 0;
+  padding: 0;
+
+  white-space: nowrap;
+}
 
 .pt-footer .pt-logo-accent,
-footer .pt-logo-accent,
-.pt-footer-brand .pt-logo-accent,
-.footer-brand .pt-logo-accent {
+footer .pt-logo-accent {
   color: #e31b23;
+  font-weight: 700;
+}
+
+/* ========================================
+   FOOTER MAGAZINE LABEL
+======================================== */
+
+.pt-footer .pt-logo + span,
+footer .pt-logo + span {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.2px;
+
+  color: #ffffff;
+}
+
+/* ========================================
+   SEARCH BOX
+======================================== */
+
+.pt-search-box {
+  height: 42px;
+
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+
+  background: var(--pt-white);
+}
+
+/* ========================================
+   ACCOUNT BUTTON
+======================================== */
+
+.pt-account-btn {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: 1px solid #dddddd;
+
+  background: var(--pt-white);
+}
+
+/* ========================================
+   SUBSCRIBE BUTTON
+======================================== */
+
+.pt-subscribe-btn {
+  height: 44px;
+
+  padding: 0 24px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #e61e24;
+  color: var(--pt-white);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pt-subscribe-btn:hover {
+  background: var(--pt-red-dark);
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   TOP SECURITIES BAR
+======================================== */
+
+.pt-securities-bar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--pt-border);
+}
+
+.pt-securities-btn {
+  height: 52px;
+
+  padding: 0 20px;
+
+  background: var(--pt-white);
+
+  font-weight: 600;
+  font-size: 13px;
+
+  color: var(--pt-black);
+
+  border-right: 1px solid var(--pt-border);
+
+  transition: background-color 0.2s ease;
+}
+
+.pt-securities-btn:hover {
+  background: #f7f7f7;
+}
+
+/* ========================================
+   SECURITIES DROPDOWN
+======================================== */
+
+.pt-securities-dropdown {
+  width: 260px;
+
+  background: var(--pt-white);
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+.pt-securities-dropdown a {
+  font-size: 13px;
+
+  color: #222222;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.pt-securities-dropdown a:hover {
+  background: #f7f7f7;
+  color: var(--pt-red);
+}
+
+/* ========================================
+   MEGA MENU
+======================================== */
+
+.pt-mega-menu {
+  width: min(760px, calc(100vw - 32px));
+
+  background: #0b0b0b;
+
+  border: 1px solid #232323;
+
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+
+  border-radius: 8px;
+
+  padding: 24px 28px;
+}
+
+.pt-mega-menu-heading {
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.03em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 14px;
+}
+
+.pt-mega-menu a {
+  font-size: 13.5px;
+  font-weight: 600;
+
+  color: #d5d5d5;
+
+  transition: color 0.2s ease;
+}
+
+.pt-mega-menu a:hover {
+  color: var(--pt-red);
+}
+
+/* ========================================
+   MARKET CARDS
+======================================== */
+
+.pt-market-card {
+  width: 168px;
+  min-width: 168px;
+
+  height: 40px;
+
+  padding: 0 10px;
+
+  border-radius: 8px;
+
+  background: #0b0b0b;
+  color: #ffffff;
+
+  flex-shrink: 0;
+}
+
+.pt-market-card-positive {
+  color: #00c853;
+}
+
+.pt-market-card-negative {
+  color: #ff5252;
+}
+
+/* ========================================
+   SECURITIES SCROLL ARROWS
+======================================== */
+
+.pt-securities-scroll-arrow {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  border: 1px solid var(--pt-border);
+
+  background: var(--pt-white);
+  color: #222222;
+
+  transition: background-color 0.2s ease;
+
+  flex-shrink: 0;
+}
+
+.pt-securities-scroll-arrow:hover {
+  background: #f7f7f7;
+}
+
+/* ========================================
+   LEGACY MARKET TICKER
+======================================== */
+
+.pt-market-item {
+  height: 30px;
+
+  padding: 0 12px;
+
+  border-radius: 5px;
+
+  background: #171717;
+
+  color: var(--pt-white);
+}
+
+.pt-market-positive {
+  color: var(--pt-success);
+}
+
+.pt-market-negative {
+  color: var(--pt-red);
+}
+
+/* ========================================
+   CATEGORY NAVIGATION
+======================================== */
+
+.pt-sub-nav {
+  height: 44px;
+
+  background: var(--pt-white);
+
+  border-bottom: 1px solid var(--pt-border);
+}
+
+.pt-sub-nav a {
+  font-size: 13px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.02em;
+
+  color: var(--pt-text-secondary);
+
+  padding-bottom: 2px;
+
+  border-bottom: 2px solid transparent;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pt-sub-nav a:hover {
+  color: #e61e24;
+}
+
+.pt-sub-nav a.active {
+  color: #e61e24;
+
+  border-bottom-color: #e61e24;
+}
+
+/* ========================================
+   MAIN GRID
+======================================== */
+
+.pt-main-grid {
+  display: grid;
+
+  grid-template-columns:
+    390px
+    minmax(0, 1fr)
+    380px;
+
+  gap: 28px;
+}
+
+.pt-main-grid > * {
+  min-width: 0;
+}
+
+@media (max-width: 1399px) {
+  .pt-main-grid {
+    grid-template-columns:
+      340px
+      minmax(0, 1fr)
+      340px;
+
+    gap: 22px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .pt-main-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pt-main-grid .pt-video-sidebar {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .pt-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pt-main-grid .pt-video-sidebar {
+    grid-column: span 1;
+  }
+}
+
+/* ========================================
+   TOP STORY
+======================================== */
+
+.pt-top-story {
+  position: relative;
+
+  height: 485px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .pt-top-story {
+    height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pt-top-story {
+    height: 430px;
+  }
+}
+
+.pt-top-story-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.pt-top-story:hover .pt-top-story-image {
+  transform: scale(1.03);
+}
+
+.pt-top-story-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+}
+
+.pt-top-story-badge {
+  position: absolute;
+
+  top: 24px;
+  left: 22px;
+
+  padding: 5px 9px;
+
+  background: var(--pt-red);
+  color: var(--pt-white);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  border-radius: 3px;
+
+  z-index: 2;
+}
+
+.pt-top-story-content {
+  position: absolute;
+
+  left: 22px;
+  right: 22px;
+  bottom: 24px;
+
+  z-index: 2;
+}
+
+.pt-top-story-title {
+  font-size: 30px;
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  color: var(--pt-white);
+
+  letter-spacing: -0.5px;
+}
+
+@media (max-width: 767px) {
+  .pt-top-story-title {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pt-top-story-title {
+    font-size: 25px;
+  }
+}
+
+.pt-top-story-description {
+  max-width: 330px;
+
+  margin-top: 10px;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  color: #f2f2f2;
+}
+
+.pt-read-story-btn {
+  margin-top: 16px;
+
+  height: 38px;
+
+  padding: 0 15px;
+
+  background: var(--pt-white);
+
+  color: var(--pt-black);
+
+  border: none;
+
+  border-radius: 5px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pt-read-story-btn:hover {
+  background: #eaeaea;
+
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   MAIN ARTICLE
+======================================== */
+
+.pt-main-article-image {
+  width: 100%;
+
+  height: 300px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+
+  transition: transform 0.4s ease;
+}
+
+.pt-main-article-image-wrap {
+  overflow: hidden;
+
+  border-radius: 8px;
+}
+
+.pt-main-article-image-wrap:hover .pt-main-article-image {
+  transform: scale(1.03);
+}
+
+.pt-main-article-title {
+  margin-top: 18px;
+  margin-bottom: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 28px;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+
+  color: var(--pt-text-primary);
+
+  letter-spacing: -0.7px;
+
+  word-spacing: 1px;
+}
+
+@media (max-width: 1399px) {
+  .pt-main-article-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .pt-main-article-title {
+    font-size: 22px;
+
+    line-height: 1.18;
+  }
+}
+
+/* ========================================
+   RELATED STORY
+======================================== */
+
+.pt-related-story {
+  border-top: 1px solid var(--pt-border);
+
+  margin-top: 20px;
+
+  padding-top: 16px;
+}
+
+/* ========================================
+   VIDEO SECTION
+======================================== */
+
+.pt-video-card {
+  border: 1px solid var(--pt-border);
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  background: var(--pt-white);
+}
+
+.pt-video-thumbnail {
+  width: 100%;
+
+  height: 190px;
+
+  object-fit: cover;
+}
+
+.pt-video-play-btn {
+  width: 46px;
+  height: 46px;
+
+  border: 2px solid var(--pt-white);
+
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.pt-video-title {
+  padding: 12px;
+
+  font-size: 16px;
+
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  color: var(--pt-text-primary);
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+/* ========================================
+   LATEST NEWS
+======================================== */
+
+.pt-latest-title {
+  color: var(--pt-red);
+
+  font-size: 18px;
 
   font-weight: 700;
 }
 
-/* =========================================================
-   FOOTER DESCRIPTION
-========================================================= */
+.pt-latest-item {
+  display: grid;
 
-.pt-footer-description,
-.footer-description,
-.pt-footer-brand p,
-.footer-brand p {
-  max-width: 315px;
+  grid-template-columns: 56px 1fr;
 
-  margin: 14px 0 0;
+  gap: 8px;
 
-  color: #b9b9b9;
+  padding: 10px 0;
 
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 13px;
-
-  line-height: 1.55;
-
-  font-weight: 400;
+  border-bottom: 1px solid var(--pt-border);
 }
 
-/* =========================================================
-   FOOTER COLUMN HEADINGS
-========================================================= */
+.pt-latest-item:last-child {
+  border-bottom: none;
+}
 
-.pt-footer-heading,
-.footer-heading,
-.pt-footer h3,
-footer h3 {
-  margin: 0 0 13px;
+.pt-latest-time {
+  color: var(--pt-red);
 
-  padding: 0;
+  font-size: 10px;
 
-  color: #ffffff;
+  white-space: nowrap;
+}
 
-  font-family: Arial, Helvetica, sans-serif;
+.pt-latest-headline {
+  font-size: 13px;
+
+  line-height: 1.25;
+
+  font-weight: 600;
+
+  color: var(--pt-text-primary);
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 2;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+/* ========================================
+   SECONDARY NEWS GRID
+======================================== */
+
+.pt-secondary-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+}
+
+@media (max-width: 1199px) {
+  .pt-secondary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .pt-secondary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pt-secondary-card {
+  background: var(--pt-white);
+
+  border: 1px solid var(--pt-border);
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.pt-secondary-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.1);
+}
+
+.pt-secondary-card-image-wrap {
+  overflow: hidden;
+
+  height: 92px;
+}
+
+.pt-secondary-card-image {
+  width: 100%;
+
+  height: 92px;
+
+  object-fit: cover;
+
+  transition: transform 0.4s ease;
+}
+
+.pt-secondary-card:hover .pt-secondary-card-image {
+  transform: scale(1.03);
+}
+
+.pt-secondary-card-body {
+  padding: 12px;
+}
+
+.pt-card-category {
+  color: var(--pt-red);
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  text-transform: uppercase;
+}
+
+.pt-card-title {
+  margin-top: 5px;
 
   font-size: 14px;
 
@@ -147,541 +994,656 @@ footer h3 {
 
   font-weight: 700;
 
-  text-transform: uppercase;
+  color: var(--pt-text-primary);
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 3;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
 }
 
-/* =========================================================
-   FOOTER LINKS
-========================================================= */
+.pt-card-time {
+  margin-top: 10px;
 
-.pt-footer a,
-footer a,
-.pt-footer-link,
-.footer-link {
-  display: block;
+  color: var(--pt-text-muted);
 
-  width: fit-content;
-
-  margin: 0 0 8px;
-
-  padding: 0;
-
-  color: #ffffff;
-
-  text-decoration: none;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 13px;
-
-  line-height: 1.35;
-
-  font-weight: 400;
-
-  transition:
-    color 0.2s ease,
-    padding-left 0.2s ease;
+  font-size: 10px;
 }
 
-.pt-footer a:hover,
-footer a:hover,
-.pt-footer-link:hover,
-.footer-link:hover {
-  color: #e31b23;
+/* ========================================
+   STATISTICS BANNER
+======================================== */
 
-  padding-left: 2px;
+.pt-stats-banner {
+  background: var(--pt-navy);
+
+  min-height: 85px;
+
+  border-radius: 8px;
 }
 
-/* =========================================================
-   FOOTER LINKS — PREVENT LOGO FROM GETTING LINK STYLES
-========================================================= */
+.pt-stats-grid {
+  display: grid;
 
-.pt-footer .pt-logo,
-.pt-footer .pt-logo:hover,
-footer .pt-logo,
-footer .pt-logo:hover {
-  color: #ffffff;
-
-  padding-left: 0;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-/* =========================================================
-   FOOTER BOTTOM BAR
-========================================================= */
-
-.pt-footer-bottom,
-.footer-bottom {
-  width: 100%;
-
-  min-height: 49px;
-
-  border-top: 1px solid #242424;
-
-  background: #050505;
+@media (max-width: 767px) {
+  .pt-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* Inner bottom container */
+.pt-stat-item {
+  padding: 20px;
 
-.pt-footer-bottom-inner,
-.footer-bottom-inner {
-  width: 100%;
-  max-width: 1350px;
-
-  min-height: 49px;
-
-  margin: 0 auto;
-
-  padding: 0 40px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 25px;
+  border-right:
+    1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* =========================================================
-   COPYRIGHT
-========================================================= */
-
-.pt-footer-copyright,
-.footer-copyright {
-  color: #ffffff;
-
-  font-size: 11px;
-
-  line-height: 1.4;
-
-  font-weight: 600;
-
-  white-space: nowrap;
+.pt-stat-item:last-child {
+  border-right: none;
 }
 
-/* =========================================================
-   LEGAL LINKS
-========================================================= */
+/* ========================================
+   MAGAZINE PROMO CARD
+======================================== */
 
-.pt-footer-legal,
-.footer-legal {
-  display: flex;
+.pt-magazine-card {
+  background: var(--pt-navy);
 
-  align-items: center;
+  border-radius: 8px;
 
-  justify-content: center;
-
-  gap: 28px;
-
-  flex-wrap: wrap;
+  overflow: hidden;
 }
 
-.pt-footer-legal a,
-.footer-legal a {
-  display: inline-block;
-
-  margin: 0;
-
-  padding: 0;
-
-  color: #ffffff;
-
-  font-size: 11px;
-
-  font-weight: 600;
-
-  line-height: 1.4;
-
-  text-decoration: none;
-
-  white-space: nowrap;
-}
-
-.pt-footer-legal a:hover,
-.footer-legal a:hover {
-  color: #e31b23;
-
-  padding-left: 0;
-}
-
-/* =========================================================
-   SOCIAL ICONS
-========================================================= */
-
-.pt-footer-social,
-.footer-social {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: flex-end;
-
-  gap: 23px;
-
-  flex-shrink: 0;
-}
-
-.pt-footer-social a,
-.footer-social a {
-  width: 20px;
-
-  height: 20px;
-
-  margin: 0;
-
-  padding: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  color: #ffffff;
-
-  text-decoration: none;
+.pt-magazine-title {
+  color: var(--pt-white);
 
   font-size: 16px;
 
   font-weight: 700;
+}
+
+.pt-magazine-button {
+  background: var(--pt-red);
+
+  color: var(--pt-white);
+
+  padding: 9px 16px;
+
+  border: none;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+
+  font-weight: 600;
 
   transition:
-    color 0.2s ease,
+    background-color 0.2s ease,
     transform 0.2s ease;
 }
 
-.pt-footer-social a:hover,
-.footer-social a:hover {
-  color: #e31b23;
-
-  padding-left: 0;
+.pt-magazine-button:hover {
+  background: var(--pt-red-dark);
 
   transform: translateY(-1px);
 }
 
-/* SVG social icons */
+/* ========================================
+   LEADERSHIP BANNER
+======================================== */
 
-.pt-footer-social svg,
-.footer-social svg {
-  width: 17px;
+.pt-leadership-banner {
+  min-height: 150px;
 
-  height: 17px;
+  border: 1px solid var(--pt-border);
 
-  fill: currentColor;
+  border-radius: 10px;
 
-  stroke: currentColor;
+  overflow: hidden;
+
+  background: var(--pt-white);
 }
 
-/* =========================================================
-   IF FOOTER USES ICON COMPONENTS
-========================================================= */
+.pt-leadership-category {
+  color: var(--pt-red);
 
-.pt-footer-social i,
-.footer-social i {
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+}
+
+.pt-leadership-title {
+  font-size: 18px;
+
+  font-weight: 700;
+
+  color: var(--pt-text-primary);
+}
+
+.pt-leadership-description {
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  color: var(--pt-text-secondary);
+}
+
+/* ========================================
+   NEWSLETTER
+======================================== */
+
+.pt-newsletter {
+  border: 1px solid var(--pt-border);
+
+  border-radius: 8px;
+
+  padding: 16px 20px;
+
+  background: var(--pt-white);
+}
+
+.pt-newsletter-title {
   font-size: 17px;
 
-  line-height: 1;
-
-  color: #ffffff;
+  font-weight: 700;
 }
 
-/* =========================================================
-   FOOTER CONTAINER OVERRIDE
-========================================================= */
+.pt-newsletter-input {
+  height: 34px;
 
-.pt-footer .pt-container,
-footer .pt-container {
-  width: 100%;
+  border: 1px solid #dddddd;
 
-  max-width: 1350px;
-
-  margin: 0 auto;
-
-  padding-left: 40px;
-
-  padding-right: 40px;
+  border-radius: 4px;
 }
 
-/* =========================================================
-   REMOVE UNWANTED FOOTER CARD STYLING
-========================================================= */
+.pt-newsletter-button {
+  height: 34px;
 
-.pt-footer .pt-card,
-.pt-footer .pt-section,
-.pt-footer .pt-newsletter,
-footer .pt-card,
-footer .pt-section,
-footer .pt-newsletter {
-  background: transparent;
+  background: var(--pt-red);
+
+  color: var(--pt-white);
 
   border: none;
 
-  border-radius: 0;
+  border-radius: 4px;
 
-  box-shadow: none;
+  font-size: 13px;
+
+  font-weight: 600;
+
+  transition: background-color 0.2s ease;
 }
 
-/* =========================================================
-   FOOTER — LARGE DESKTOP
-========================================================= */
+.pt-newsletter-button:hover {
+  background: var(--pt-red-dark);
+}
 
-@media (min-width: 1440px) {
+/* ========================================
+   SECTION RHYTHM
+======================================== */
 
-  .pt-footer-main,
-  .footer-main {
-    max-width: 1350px;
+.pt-section {
+  margin-bottom: 24px;
+}
 
-    padding-left: 40px;
+/* ========================================
+   FOCUS VISIBILITY
+======================================== */
 
-    padding-right: 40px;
+.pt-focusable:focus-visible {
+  outline: 2px solid var(--pt-red);
 
-    column-gap: 90px;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   GLOBAL MARKETS PAGE
+======================================== */
+
+.pt-markets-header {
+  border-bottom: 3px solid var(--pt-black);
+
+  padding-bottom: 16px;
+
+  margin-bottom: 28px;
+}
+
+.pt-markets-eyebrow {
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color: var(--pt-text-muted);
+}
+
+.pt-markets-title {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  color: var(--pt-black);
+
+  line-height: 1.1;
+}
+
+.pt-live-badge {
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  color: var(--pt-success);
+
+  background: rgba(0, 200, 117, 0.1);
+
+  border: 1px solid rgba(0, 200, 117, 0.25);
+
+  border-radius: 999px;
+
+  padding: 6px 12px;
+}
+
+.pt-live-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 999px;
+
+  background: var(--pt-success);
+
+  box-shadow:
+    0 0 0 0 rgba(0, 200, 117, 0.6);
+
+  animation:
+    pt-live-pulse 1.6s ease-out infinite;
+}
+
+@keyframes pt-live-pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(0, 200, 117, 0.55);
   }
 
-  .pt-footer-bottom-inner,
-  .footer-bottom-inner {
-    max-width: 1350px;
+  70% {
+    box-shadow:
+      0 0 0 7px rgba(0, 200, 117, 0);
+  }
 
-    padding-left: 40px;
-
-    padding-right: 40px;
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(0, 200, 117, 0);
   }
 }
 
-/* =========================================================
-   FOOTER — TABLET
-========================================================= */
+/* ========================================
+   QUICK OVERVIEW INDEX CARDS
+======================================== */
+
+.pt-index-card {
+  background: var(--pt-white);
+
+  border: 1px solid var(--pt-border);
+
+  border-radius: 10px;
+
+  padding: 16px;
+
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pt-index-card-compact {
+  width: 168px;
+
+  min-width: 168px;
+
+  padding: 12px 14px;
+
+  border-color: var(--pt-border);
+}
+
+.pt-index-card:hover {
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08);
+
+  border-color: var(--pt-border-dark);
+
+  transform: translateY(-2px);
+}
+
+.pt-index-card-name {
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+  color: var(--pt-text-muted);
+}
+
+.pt-index-card-value {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  color: var(--pt-black);
+
+  margin-top: 4px;
+}
+
+.pt-index-card-change {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  margin-top: 6px;
+
+  padding: 3px 8px;
+
+  border-radius: 5px;
+}
+
+.pt-index-card-change.up {
+  color: var(--pt-success);
+
+  background: rgba(0, 200, 117, 0.1);
+}
+
+.pt-index-card-change.down {
+  color: var(--pt-danger);
+
+  background: rgba(227, 27, 35, 0.08);
+}
+
+/* ========================================
+   CHART PANELS
+======================================== */
+
+.pt-chart-panel {
+  background: var(--pt-white);
+
+  border: 1px solid var(--pt-border);
+
+  border-radius: 12px;
+
+  padding: 20px;
+}
+
+.pt-chart-panel-title {
+  font-size: 12px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+  color: var(--pt-text-secondary);
+
+  margin-bottom: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.pt-chart-panel-title::before {
+  content: "";
+
+  width: 3px;
+
+  height: 14px;
+
+  background: var(--pt-red);
+
+  border-radius: 2px;
+
+  display: inline-block;
+}
+
+/* ========================================
+   TAB NAVIGATION
+======================================== */
+
+.pt-markets-tabs {
+  border-bottom: 1px solid var(--pt-border);
+
+  margin-bottom: 0;
+}
+
+.pt-markets-tab {
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.03em;
+
+  text-transform: uppercase;
+
+  color: var(--pt-text-muted);
+
+  padding: 10px 4px;
+
+  border-bottom: 2px solid transparent;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+
+  white-space: nowrap;
+}
+
+.pt-markets-tab:hover {
+  color: var(--pt-black);
+}
+
+.pt-markets-tab.active {
+  color: var(--pt-black);
+
+  border-bottom-color: var(--pt-red);
+}
+
+/* ========================================
+   DATA TABLE PANEL
+======================================== */
+
+.pt-markets-table-panel {
+  background: var(--pt-white);
+
+  border: 1px solid var(--pt-border);
+
+  border-radius: 0 0 12px 12px;
+
+  padding: 24px;
+}
+
+.pt-markets-section-title {
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  color: var(--pt-black);
+
+  border-bottom: 2px solid var(--pt-black);
+
+  padding-bottom: 10px;
+
+  margin-bottom: 16px;
+}
+
+.pt-market-table-head {
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+  color: var(--pt-text-muted);
+
+  border-bottom: 1px solid var(--pt-border);
+}
+
+.pt-market-table-row {
+  border-bottom: 1px solid #f0f0f0;
+
+  transition: background-color 0.15s ease;
+}
+
+.pt-market-table-row:hover {
+  background: var(--pt-light-bg);
+}
+
+.pt-market-table-row td {
+  padding: 12px 8px;
+}
+
+.pt-markets-loading {
+  padding: 60px 0;
+
+  text-align: center;
+
+  color: var(--pt-text-muted);
+
+  font-size: 14px;
+
+  letter-spacing: 0.03em;
+}
+
+/* ========================================
+   STOCK BOX
+======================================== */
+
+.pt-stock-box {
+  background: var(--pt-white);
+
+  border: 1px solid var(--pt-border);
+
+  border-radius: 10px;
+
+  overflow-x: auto;
+
+  padding: 16px;
+}
+
+.pt-stock-box-compact {
+  max-height: 320px;
+
+  overflow-y: auto;
+
+  padding: 12px;
+}
+
+/* ========================================
+   RESPONSIVE HEADER
+======================================== */
 
 @media (max-width: 1024px) {
 
-  .pt-footer-main,
-  .footer-main {
-    grid-template-columns:
-      1.2fr
-      1fr
-      1fr;
-
-    column-gap: 40px;
-
-    row-gap: 30px;
-
-    padding: 35px 28px;
+  .pt-brand-header .pt-logo {
+    font-size: 38px;
+    letter-spacing: -1.2px;
   }
 
-  .pt-footer-brand,
-  .footer-brand {
-    grid-column: span 1;
-  }
-
-  .pt-footer-bottom-inner,
-  .footer-bottom-inner {
-    padding: 0 28px;
-
-    gap: 20px;
-  }
-
-  .pt-footer-legal,
-  .footer-legal {
-    gap: 18px;
-  }
-
-  .pt-footer-social,
-  .footer-social {
-    gap: 16px;
-  }
-}
-
-/* =========================================================
-   FOOTER — MOBILE
-========================================================= */
-
-@media (max-width: 767px) {
-
-  .pt-footer-main,
-  .footer-main {
-    grid-template-columns: 1fr 1fr;
-
-    gap: 32px 25px;
-
-    min-height: auto;
-
-    padding: 35px 22px;
-  }
-
-  .pt-footer-brand,
-  .footer-brand {
-    grid-column: span 2;
-  }
-
-  .pt-footer .pt-logo,
-  footer .pt-logo,
-  .pt-footer-brand .pt-logo,
-  .footer-brand .pt-logo {
-    font-size: 25px;
-  }
-
-  .pt-footer-description,
-  .footer-description,
-  .pt-footer-brand p,
-  .footer-brand p {
-    max-width: 100%;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-  }
-
-  .pt-footer-heading,
-  .footer-heading,
-  .pt-footer h3,
-  footer h3 {
-    font-size: 13px;
-
-    margin-bottom: 12px;
-  }
-
-  .pt-footer a,
-  footer a,
-  .pt-footer-link,
-  .footer-link {
-    font-size: 12px;
-
-    margin-bottom: 8px;
-  }
-
-  .pt-footer-bottom-inner,
-  .footer-bottom-inner {
-    min-height: auto;
-
-    padding: 20px 22px;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 18px;
-  }
-
-  .pt-footer-copyright,
-  .footer-copyright {
-    font-size: 10px;
-
-    white-space: normal;
-
-    text-align: center;
-  }
-
-  .pt-footer-legal,
-  .footer-legal {
-    gap: 12px 20px;
-
-    justify-content: center;
-  }
-
-  .pt-footer-legal a,
-  .footer-legal a {
-    font-size: 10px;
-  }
-
-  .pt-footer-social,
-  .footer-social {
-    justify-content: center;
-
-    gap: 22px;
-  }
-}
-
-/* =========================================================
-   FOOTER — SMALL MOBILE
-========================================================= */
-
-@media (max-width: 480px) {
-
-  .pt-footer-main,
-  .footer-main {
-    grid-template-columns: 1fr;
-
-    padding: 30px 18px;
-
-    gap: 27px;
-  }
-
-  .pt-footer-brand,
-  .footer-brand {
-    grid-column: span 1;
+  .pt-brand-header .pt-tagline {
+    font-size: 9px;
+    letter-spacing: 1px;
   }
 
   .pt-footer .pt-logo,
   footer .pt-logo {
-    font-size: 23px;
-  }
-
-  .pt-footer-description,
-  .footer-description,
-  .pt-footer-brand p,
-  .footer-brand p {
-    font-size: 11px;
-  }
-
-  .pt-footer-bottom-inner,
-  .footer-bottom-inner {
-    padding: 18px;
-
-    gap: 16px;
-  }
-
-  .pt-footer-legal,
-  .footer-legal {
-    gap: 10px 16px;
+    font-size: 34px;
   }
 }
 
-/* =========================================================
-   IMPORTANT:
-   PREVENT GLOBAL HEADER LOGO CSS FROM DISTURBING FOOTER
-========================================================= */
+/* ========================================
+   TABLET
+======================================== */
 
-footer .pt-logo {
-  font-family:
-    "Times New Roman",
-    Times,
-    Georgia,
-    serif !important;
+@media (max-width: 767px) {
 
-  font-size: 24px !important;
+  .pt-brand-header {
+    min-height: 78px;
 
-  line-height: 1 !important;
+    height: auto;
 
-  letter-spacing: -0.7px !important;
+    padding: 10px 0;
+  }
 
-  font-weight: 700 !important;
+  .pt-brand-header .pt-logo {
+    font-size: 32px;
 
-  color: #ffffff !important;
+    letter-spacing: -0.8px;
+  }
 
-  margin: 0 !important;
+  .pt-brand-header .pt-tagline {
+    margin-top: 5px;
 
-  padding: 0 !important;
+    font-size: 8px;
+
+    letter-spacing: 0.7px;
+  }
+
+  .pt-footer .pt-logo,
+  footer .pt-logo {
+    font-size: 30px;
+  }
 }
 
-footer .pt-logo-accent {
-  color: #e31b23 !important;
-}
+/* ========================================
+   MOBILE
+======================================== */
 
-/* =========================================================
-   FOOTER HEIGHT / SPACING FIX
-========================================================= */
+@media (max-width: 480px) {
 
-footer {
-  overflow: hidden;
-}
+  .pt-brand-header .pt-logo {
+    font-size: 27px;
 
-footer > * {
-  box-sizing: border-box;
-}
+    letter-spacing: -0.5px;
+  }
 
-.pt-footer *,
-footer * {
-  box-sizing: border-box;
+  .pt-brand-header .pt-tagline {
+    font-size: 7px;
+
+    letter-spacing: 0.5px;
+  }
+
+  .pt-footer .pt-logo,
+  footer .pt-logo {
+    font-size: 27px;
+  }
 }
