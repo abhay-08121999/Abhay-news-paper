@@ -135,6 +135,48 @@ const economyTopics = [
   { id: 6, title: "ASEAN Trade Volume Sets Record at $4.2 Trillion in 2025", time: "10 hrs ago" },
 ];
 
+function FinanceHeroCard({ story, size = "large" }: { story: any; size?: "large" | "compact" }) {
+  if (size === "compact") {
+    return (
+      <div className="group cursor-pointer">
+        <div className="overflow-hidden rounded mb-3">
+          <ImageWithFallback
+            src={story.image}
+            alt={story.title}
+            className="w-full h-40 md:h-44 object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        </div>
+        <span className="text-xs text-red-600 uppercase tracking-wider">{story.category}</span>
+        <h3 className="mt-1 leading-snug group-hover:text-red-600 transition-colors">{story.title}</h3>
+        <p className="text-gray-600 text-xs mt-1.5 leading-relaxed line-clamp-2">{story.excerpt}</p>
+        <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
+          <span>By {story.author}</span>
+          <span className="flex items-center gap-1"><Clock size={10} /> {story.time}</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="group cursor-pointer">
+      <div className="overflow-hidden rounded mb-4">
+        <ImageWithFallback
+          src={story.image}
+          alt={story.title}
+          className="w-full h-52 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      <span className="text-xs text-red-600 uppercase tracking-wider">{story.category}</span>
+      <h1 className="mt-2 text-xl md:text-3xl leading-tight">{story.title}</h1>
+      <p className="text-gray-600 text-sm md:text-base mt-2 leading-relaxed">{story.excerpt}</p>
+      <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+        <span>By {story.author}</span>
+        <span className="flex items-center gap-1"><Clock size={10} /> {story.time}</span>
+      </div>
+    </div>
+  );
+}
+
 export function FinancePage() {
   return (
     <main className="max-w-screen-xl mx-auto px-3 sm:px-4 py-4 md:py-6">
@@ -158,31 +200,11 @@ export function FinancePage() {
         ))}
       </div>
 
-      {/* Hero + market table */}
+      {/* Hero + S&P chart */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <div className="lg:col-span-2">
-          <div className="group cursor-pointer">
-            <div className="overflow-hidden rounded mb-4">
-              <ImageWithFallback
-                src={financeHero.image}
-                alt={financeHero.title}
-                className="w-full h-52 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <span className="text-xs text-red-600 uppercase tracking-wider">{financeHero.category}</span>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-42">
-            <h1 className="mt-2 text-xl md:text-3xl leading-tight">{financeHero.title}</h1>
-            <p className="text-gray-600 text-sm md:text-base mt-2 leading-relaxed">{financeHero.excerpt}</p>
-            <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
-              <span>By {financeHero.author}</span>
-              <span className="flex items-center gap-1"><Clock size={10} /> {financeHero.time}</span>
-            </div>
-          </div>
-          </div>
-          </div>
+          <FinanceHeroCard story={financeHero} size="large" />
         </div>
-        
 
         {/* S&P chart */}
         <div>
@@ -209,151 +231,60 @@ export function FinancePage() {
           </div>
         </div>
       </div>
-     
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-2">
-        <div className="lg:col-span-2">
-          <div className="group cursor-pointer">
-            <div className="overflow-hidden rounded mb-4">
-              <ImageWithFallback
-                src={financeHero1.image}
-                alt={financeHero1.title}
-                className="w-full h-52 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <span className="text-xs text-red-600 uppercase tracking-wider">{financeHero1.category}</span>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-42">
-            <h1 className="mt-2 leading-tight">{financeHero1.title}</h1>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed">{financeHero1.excerpt}</p>
-            <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
-              <span>By {financeHero1.author}</span>
-              <span className="flex items-center gap-1"><Clock size={10} /> {financeHero1.time}</span>
-            </div>
-          </div>
-          </div>
-          </div>
-        </div>
-        </div>
-       
 
+      {/* More headlines — compact card grid, Bloomberg-style density */}
+      <div className="mb-8">
+        <SectionHeader title="More Headlines" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <FinanceHeroCard story={financeHero1} size="compact" />
+          <FinanceHeroCard story={financeHero2} size="compact" />
+          <FinanceHeroCard story={financeHero3} size="compact" />
+          <FinanceHeroCard story={financeHero4} size="compact" />
+        </div>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-2">
-        <div className="lg:col-span-2">
-          <div className="group cursor-pointer">
-            <div className="overflow-hidden rounded mb-4">
-              <ImageWithFallback
-                src={financeHero2.image}
-                alt={financeHero2.title}
-                className="w-full h-52 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <span className="text-xs text-red-600 uppercase tracking-wider">{financeHero2.category}</span>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-42">
-            <h1 className="mt-2 leading-tight">{financeHero2.title}</h1>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed">{financeHero2.excerpt}</p>
-            <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
-              <span>By {financeHero2.author}</span>
-              <span className="flex items-center gap-1"><Clock size={10} /> {financeHero2.time}</span>
-            </div>
-          </div>
-          </div>
-          </div>
+      {/* Pull quote */}
+      <div className="mb-8 border border-gray-700 bg-slate-200 flex flex-col md:flex-row">
+        <div className="h-3 md:h-auto md:w-24 border-b md:border-b-0 md:border-r border-gray-700 bg-slate-300" />
+        <div className="p-4 md:p-5">
+          <p className="italic text-sm leading-relaxed text-gray-900">
+            "M&A is reopening, but unevenly. Capital is increasingly flowing across industrials, financial services, energy, and health into businesses positioned at the intersection of innovation, scale, and long-term growth."
+          </p>
+          <p className="mt-2 font-bold text-gray-900">— PwC Global M&A Trends 2026</p>
         </div>
-        </div>
-    
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-2">
-        <div className="lg:col-span-2">
-          <div className="group cursor-pointer">
-            <div className="overflow-hidden rounded mb-4">
-              <ImageWithFallback
-                src={financeHero3.image}
-                alt={financeHero3.title}
-                className="w-full h-52 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <span className="text-xs text-red-600 uppercase tracking-wider">{financeHero3.category}</span>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-42">
-            <h1 className="mt-2 leading-tight">{financeHero3.title}</h1>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed">{financeHero3.excerpt}</p>
-            <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
-              <span>By {financeHero3.author}</span>
-              <span className="flex items-center gap-1"><Clock size={10} /> {financeHero3.time}</span>
-            </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-2">
-        <div className="lg:col-span-42">
-          <div className="mt-4 border border-gray-700 bg-slate-200 flex flex-col md:flex-row">
-<div className="h-3 md:h-auto md:w-24 border-b md:border-b-0 md:border-r border-gray-700 bg-slate-300"></div>
-
-  <div className="p-2 md:p-3">
-    <p className="italic text-sm leading-relaxed text-gray-900">
-      "M&A is reopening, but unevenly. Capital is increasingly flowing across industrials, financial services, energy, and health into businesses positioned at the intersection of innovation, scale, and long-term growth." 
-    </p>
-
-    <p className="mt-2 font-bold text-gray-900">
-      — PwC Global M&A Trends 2026 
-    </p>
-  </div>
-  </div>
-  </div>
-  </div>
-          </div>
-          </div>
-          </div>
-        </div>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-2">
-        <div className="lg:col-span-2">
-          <div className="group cursor-pointer">
-            <div className="overflow-hidden rounded mb-4">
-              <ImageWithFallback
-                src={financeHero4.image}
-                alt={financeHero4.title}
-                className="w-full h-52 md:h-72 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <span className="text-xs text-red-600 uppercase tracking-wider">{financeHero4.category}</span>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-42">
-            <h1 className="mt-2 leading-tight">{financeHero4.title}</h1>
-            <p className="text-gray-600 text-sm mt-2 leading-relaxed">{financeHero4.excerpt}</p>
-            <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
-              <span>By {financeHero4.author}</span>
-              <span className="flex items-center gap-1"><Clock size={10} /> {financeHero4.time}</span>
-            </div>
-          </div>
-          </div>
-          </div>
-        </div>
-        </div>
-
-      {/* Full markets table */}
+      {/* Full markets table — compact stock box, sized for a secondary/supporting
+          role on this page (Markets page gets the larger primary version) */}
       <div className="mb-8" id="markets">
-        <SectionHeader title="Global Markets Overview" />
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[650px] text-sm">
+        <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
+          <h2 className="uppercase tracking-wider">Global Markets Overview</h2>
+          <a href="/markets" className="text-xs text-red-600 uppercase tracking-wider hover:underline flex-shrink-0">
+            View All Markets
+          </a>
+        </div>
+        <div className="pt-stock-box pt-stock-box-compact">
+          <table className="w-full min-w-[560px] text-xs">
             <thead>
               <tr className="border-b border-gray-200">
-                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Index / Asset</th>
-                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Price</th>
-                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Change</th>
-                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Points</th>
+                <th className="text-left py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider">Index / Asset</th>
+                <th className="text-right py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider">Price</th>
+                <th className="text-right py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider">Change</th>
+                <th className="text-right py-1.5 text-[10px] text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Points</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {fullMarkets.map((m) => (
                 <tr key={m.symbol} className="hover:bg-gray-50 transition-colors">
-                  <td className="py-2.5 text-sm">{m.symbol}</td>
-                  <td className="py-2.5 text-right">{m.value}</td>
-                  <td className="py-2.5 text-right">
-                    <span className={`flex items-center justify-end gap-1 ${m.up ? "text-green-600" : "text-red-600"}`}>
-                      {m.up ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                  <td className="py-1.5 text-xs">{m.symbol}</td>
+                  <td className="py-1.5 text-right text-xs">{m.value}</td>
+                  <td className="py-1.5 text-right">
+                    <span className={`flex items-center justify-end gap-1 text-xs ${m.up ? "text-green-600" : "text-red-600"}`}>
+                      {m.up ? <TrendingUp size={10} /> : <TrendingDown size={10} />}
                       {m.change}
                     </span>
                   </td>
-                  <td className={`py-2.5 text-right hidden sm:table-cell ${m.up ? "text-green-600" : "text-red-600"}`}>
+                  <td className={`py-1.5 text-right text-xs hidden sm:table-cell ${m.up ? "text-green-600" : "text-red-600"}`}>
                     {m.pts}
                   </td>
                 </tr>
