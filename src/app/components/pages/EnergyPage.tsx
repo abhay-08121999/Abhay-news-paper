@@ -1,686 +1,302 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import {
-  Clock,
-  Shield,
-  AlertTriangle,
-  ChevronRight,
-} from "lucide-react";
+import { Clock, Zap, TrendingUp, TrendingDown } from "lucide-react";
 import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
-import CS2Img from "../../../imports/CS2.png";
-import CS3Img from "../../../imports/CS3.png";
+import Ener1Img from "../../../imports/Energy1.png";
+import Ener2Img from "../../../imports/Energy2.png";
+import Ener3Img from "../../../imports/Energy3.png";
 
-function SH({ title, id }: { title: string; id?: string }) {
+function SH({ title }: { title: string }) {
   return (
-    <div
-      id={id}
-      className="border-b border-black mb-3 pb-1.5 flex items-center justify-between"
-    >
-      <h2 className="text-[13px] font-bold uppercase tracking-[0.08em] text-black">
-        {title}
-      </h2>
-
-      <ChevronRight size={13} className="text-gray-500" />
+    <div className="border-b-2 border-black pb-2 mb-4">
+      <h2 className="uppercase tracking-wider">{title}</h2>
     </div>
   );
 }
 
 const hero = {
-  category: "CYBER THREAT INTELLIGENCE",
-  title:
-    "PwC 2026 Global Digital Trust Insights: Enterprises Escalate Defense Spending ",
-  excerpt:
-    "PwC's 2026 Global Digital Trust Insights survey, conducted across 3,887 business and technology executives in 72 countries, reveals that cybersecurity has risen to the top tier of board-level concerns across every major industry. The survey found that financial services (21%), industrial manufacturing (21%), and technology, media and telecom (19%) sectors represent the highest concentration of respondents, underscoring the cross-sector urgency of the digital trust imperative.The findings highlight that AI-driven attack methods are prompting accelerated investment in both preventive and detection-oriented security frameworks. Executives report that the attack surface has expanded dramatically with the proliferation of generative AI tools inside enterprises — as every AI integration creates a new potential entry point for adversarial prompt injection, data exfiltration, and credential harvesting. ",
+  category: "CLEAN ENERGY TRANSITION",
+  title: "Data Centers and AI Workloads Force Energy Policy Reversals Globally ",
+  excerpt: "The insatiable power appetite of AI data centers is generating a policy crisis that is reverberating from Ireland to Indiana. Multiple governments that had committed to rapid renewable energy transitions are finding themselves reversing or delaying coal and gas plant retirements to ensure grid stability in the face of surging demand. In the United States, the Department of Energy has authorized emergency grid reliability protocols in five states where data center construction is outpacing transmission infrastructure deployment.Technology companies — led by Microsoft, Google, Amazon, and a growing cohort of AI infrastructure firms — have publicly committed to 100% clean energy procurement. However, the sheer scale of new compute capacity being built is stretching the practical limits of current renewable energy availability, forcing uncomfortable compromises between decarbonization targets and operational reliability.",
   author: "Sagar Kumar",
-  time: "30 April 2026",
-  image:
-    "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxzbWFydCUyMGNpdHklMjB1cmJhbiUyMGZ1dHVyZSUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  time: "1 June 2026",
+  image: Ener1Img,
 };
-
 const hero1 = {
-  category: "CYBER THREAT INTELLIGENCE",
-  title: "KPMG: AI-Dominated Business Environments Raise Security Stakes  ",
-  excerpt:
-    "KPMG's Global Tech Report 2026, drawing on responses from 2,500 technology executives across 27 countries, identifies cybersecurity as the foundational prerequisite for realizing the full value of AI investment. The report warns that organizations rushing to scale AI deployments are outpacing their security frameworks, creating dangerous gaps between innovation velocity and risk management maturity.Notably, 50% of surveyed executives reported expectations of reaching top technology maturity in 2026, yet a significant share acknowledged that tech debt, cost pressures, and talent shortages remain the principal barriers. Security teams are being asked to simultaneously defend legacy systems while architecting protections for AI-native infrastructure — a dual mandate that is straining capacity across most enterprise IT organizations.  ",
+  category: "CLEAN ENERGY TRANSITION",
+  title: "JP Morgan: Energy Resiliency Now a National Security Imperative  ",
+  excerpt: "A joint assessment by JP Morgan's Climate Advisory and Security and Resiliency teams concludes that energy resiliency and diversified energy mix have become essential components of national security strategy. The report, featuring contributions from Dr. Sarah Kapnick and security lead Michael Johnson, argues that the convergence of AI-driven demand growth with geopolitical supply chain risks has elevated grid security from a utility management issue to a strategic priority for heads of state. The analysis identifies dealmaking in power generation, storage, and transmission as the most active M&A subsector within energy in 2026, as utilities, industrial companies, and sovereign wealth funds compete for assets that provide reliable, resilient power generation capacity. ",
   author: "Sagar Kumar",
-  time: "June 2026",
-  image: CS2Img,
+  time: "May 2026",
+  image: Ener2Img,
 };
-
 const hero2 = {
-  category: "CYBER THREAT INTELLIGENCE",
-  title: "KPMG: AI-Dominated Business Environments Raise Security Stakes  ",
-  excerpt:
-    "KPMG's Global Tech Report 2026, drawing on responses from 2,500 technology executives across 27 countries, identifies cybersecurity as the foundational prerequisite for realizing the full value of AI investment. The report warns that organizations rushing to scale AI deployments are outpacing their security frameworks, creating dangerous gaps between innovation velocity and risk management maturity.Notably, 50% of surveyed executives reported expectations of reaching top technology maturity in 2026, yet a significant share acknowledged that tech debt, cost pressures, and talent shortages remain the principal barriers. Security teams are being asked to simultaneously defend legacy systems while architecting protections for AI-native infrastructure — a dual mandate that is straining capacity across most enterprise IT organizations.  ",
+  category: "CLEAN ENERGY TRANSITION",
+  title: "China's Dominant Position in Clean Tech Supply Chains Creates New Risk Calculus ",
+  excerpt: "China's commanding position across clean technology supply chains — spanning solar panels, battery storage, green hydrogen production equipment, and electric vehicle components — continues to shape global deployment trajectories while generating strategic risk for Western economies. S&P Global's Energy Horizons 2026 report identifies this dynamic as a key variable in the outcome of the US-China AI and clean energy race.Western governments are responding through the combination of tariffs, domestic manufacturing incentives, and allied reshoring initiatives. The U.S. Inflation Reduction Act has catalyzed over $300 billion in clean energy commitments, while the European Union's Net-Zero Industry Act is accelerating its own manufacturing base for critical clean technologies. However, analysts note that China's cost advantages in key components are likely to persist for the remainder of this decade. ",
   author: "Sagar Kumar",
-  time: "June 2026",
-  image: CS3Img,
+  time: "May 2026",
+  image: Ener3Img,
 };
 
-const threatAlerts = [
-  {
-    id: 1,
-    severity: "CRITICAL",
-    title:
-      "CVE-2026-1247: Zero-Day in OpenSSL Affects 400M Servers Worldwide",
-    time: "2 hrs ago",
-  },
-  {
-    id: 2,
-    severity: "HIGH",
-    title:
-      "BlackCat Ransomware Group Targets Healthcare Organizations in 12 Countries",
-    time: "4 hrs ago",
-  },
-  {
-    id: 3,
-    severity: "HIGH",
-    title:
-      "Lazarus Group Steals $340M from Crypto Exchange Using Novel Smart Contract Exploit",
-    time: "6 hrs ago",
-  },
-  {
-    id: 4,
-    severity: "MEDIUM",
-    title:
-      "Phishing Campaign Impersonating IMF Emails Targets G20 Finance Ministries",
-    time: "8 hrs ago",
-  },
-  {
-    id: 5,
-    severity: "MEDIUM",
-    title:
-      "New Android Spyware Found in 230 Apps on Google Play Store",
-    time: "10 hrs ago",
-  },
+const energyPrices = [
+  { commodity: "Crude Oil (WTI)", price: "$78.45/bbl", change: "-1.23%", up: false },
+  { commodity: "Brent Crude", price: "$82.31/bbl", change: "-1.05%", up: false },
+  { commodity: "Natural Gas (Henry Hub)", price: "$2.87/MMBtu", change: "+0.78%", up: true },
+  { commodity: "European TTF Gas", price: "€28.40/MWh", change: "+1.23%", up: true },
+  { commodity: "Coal (Newcastle)", price: "$124.50/t", change: "-2.10%", up: false },
+  { commodity: "EU Carbon Credits", price: "€68.20/t", change: "+3.40%", up: true },
+  { commodity: "Uranium", price: "$92.75/lb", change: "+0.50%", up: true },
 ];
 
-const threatColor: Record<string, string> = {
-  CRITICAL: "bg-red-600 text-white",
-  HIGH: "bg-orange-500 text-white",
-  MEDIUM: "bg-yellow-400 text-black",
-  LOW: "bg-blue-500 text-white",
-};
-
-const stories = [
-  {
-    id: 1,
-    category: "RANSOMWARE",
-    title:
-      "LockBit 4.0 Launches Unprecedented Attack on UK National Health Service Systems",
-    time: "3 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  },
-  {
-    id: 2,
-    category: "AI SECURITY",
-    title:
-      "GPT-7 Used to Generate Undetectable Phishing Emails at Scale — New Research",
-    time: "5 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1767972464040-8bfee42d7bed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  },
-  {
-    id: 3,
-    category: "DATA BREACH",
-    title:
-      "1.4 Billion User Records Exposed in Major Social Media Platform Breach",
-    time: "7 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  },
-  {
-    id: 4,
-    category: "AI SYSTEMS",
-    title:
-      "Hackers exploit AI-powered customer support systems and breach Amazon's One Medical, exposing sensitive healthcare records.",
-    time: "Just now",
-    image:
-      "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  },
+const renewableStories = [
+  { id: 1, title: "India's Adani Green Commissions World's Largest Single Solar Plant at 10 GW", time: "1 hr ago", image: "https://images.unsplash.com/photo-1760433116983-76021bd32307?w=400&h=250&fit=crop" },
+  { id: 2, title: "Offshore Wind Auction in UK Draws $45B in Investment — Record for Any Energy Sector", time: "3 hrs ago", image: "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?w=400&h=250&fit=crop" },
+  { id: 3, title: "China Completes First Commercial Fusion Power Reactor — 50-Year Dream Becomes Reality", time: "6 hrs ago", image: "https://images.unsplash.com/photo-1760553120312-2821bf54e767?w=400&h=250&fit=crop" },
 ];
 
-const defenseNews = [
-  {
-    id: 1,
-    title: "Pentagon's Cyber Command Gets $8.7B Budget Increase for FY2027",
-    time: "2 hrs ago",
-  },
-  {
-    id: 2,
-    title:
-      "EU's Cyber Solidarity Act Creates €1.1B Emergency Cyber Response Fund",
-    time: "4 hrs ago",
-  },
-  {
-    id: 3,
-    title:
-      "India's CERT-In Mandates 6-Hour Breach Notification for All Critical Infrastructure",
-    time: "6 hrs ago",
-  },
-  {
-    id: 4,
-    title:
-      "NATO Activates Article 5 Cyber Defense Clause for First Time in History",
-    time: "8 hrs ago",
-  },
-  {
-    id: 5,
-    title:
-      "Australia Bans All Chinese Technology from Government Networks by 2027",
-    time: "10 hrs ago",
-  },
+const oilGasNews = [
+  { id: 1, title: "Saudi Aramco Cuts Capex by $12B as Peak Oil Demand Moves Closer", time: "2 hrs ago" },
+  { id: 2, title: "Chevron and ExxonMobil Join Forces in $50B Permian Basin Megadeal", time: "4 hrs ago" },
+  { id: 3, title: "Russia's Arctic LNG 2 Project Faces New Equipment Shortfall After Sanctions Tighten", time: "6 hrs ago" },
+  { id: 4, title: "OPEC+ Compliance Rate Falls to 87% as Nigeria and Iraq Exceed Quotas", time: "8 hrs ago" },
 ];
 
-const marketData = [
-  {
-    company: "CrowdStrike",
-    ticker: "CRWD",
-    price: "$342.50",
-    change: "+4.2%",
-    up: true,
-  },
-  {
-    company: "Palo Alto Networks",
-    ticker: "PANW",
-    price: "$287.30",
-    change: "+2.8%",
-    up: true,
-  },
-  {
-    company: "Fortinet",
-    ticker: "FTNT",
-    price: "$76.90",
-    change: "+1.9%",
-    up: true,
-  },
-  {
-    company: "Zscaler",
-    ticker: "ZS",
-    price: "$198.40",
-    change: "+3.5%",
-    up: true,
-  },
-  {
-    company: "SentinelOne",
-    ticker: "S",
-    price: "$29.80",
-    change: "-0.8%",
-    up: false,
-  },
+const nuclearNews = [
+  { id: 1, title: "Three New SMR (Small Modular Reactor) Designs Win NRC Approval in the US", time: "3 hrs ago" },
+  { id: 2, title: "UK Government Approves Wylfa Nuclear Plant Restart With £20B Guarantee", time: "5 hrs ago" },
+  { id: 3, title: "India Signs Agreement with France to Build 6 Pressurized Water Reactors", time: "7 hrs ago" },
 ];
 
-export function CybersecurityPage() {
+const policyNews = [
+  { id: 1, title: "Ohio suspends a major data-center tax incentive after AI infrastructure costs surge, intensifying grid policy tensions.", time: "Just now" },
+  { id: 2, title: "US IRA Clean Energy Tax Credits Spur $850B in New Investment Since 2022", time: "1 hr ago" },
+  { id: 3, title: "EU Carbon Border Tax Takes Full Effect — Imports Now Priced on Emissions", time: "3 hrs ago" },
+  { id: 4, title: "G7 Energy Ministers Agree to Phase Out Coal by 2035 in Landmark Accord", time: "5 hrs ago" },
+  { id: 5, title: "India Sets World Record: 500 GW Renewable Capacity Target 3 Years Ahead of Schedule", time: "7 hrs ago" },
+];
+
+export function EnergyPage() {
   return (
-    <main className="bg-white text-black w-full">
-      <div className="max-w-[1180px] mx-auto px-4 md:px-6 lg:px-8 py-5">
+    <div className="py-6 max-w-7xl mx-auto px-4">
+      {/* Page header */}
+      <div className="border-b-4 border-black mb-8 pb-3 flex items-center gap-3">
+        <Zap size={22} />
+        <div>
+          <span className="text-xs text-gray-500 uppercase tracking-widest">Power & Resources</span>
+          <h1 className="mt-0.5">Energy & Natural Resources</h1>
+        </div>
+      </div>
 
-        {/* =========================================================
-            PAGE HEADER
-        ========================================================= */}
-        <header className="border-b-[3px] border-black pb-2 mb-5">
-          <div className="flex items-center gap-2">
-            <Shield size={21} strokeWidth={2} />
-
-            <div>
-              <span className="block text-[9px] uppercase tracking-[0.18em] text-gray-500">
-                Security Intelligence
-              </span>
-
-              <h1 className="text-[30px] md:text-[38px] lg:text-[42px] font-bold leading-none tracking-[-0.04em]">
-                Cybersecurity
-              </h1>
-            </div>
+      {/* Hero + prices + quote */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        <div className="lg:col-span-2 group cursor-pointer">
+          <div className="overflow-hidden rounded mb-4">
+            <ImageWithFallback
+              src={hero.image}
+              alt={hero.title}
+              className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+            />
           </div>
-        </header>
-
-        {/* =========================================================
-            TOP HERO AREA
-        ========================================================= */}
-        <section className="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(260px,0.9fr)] border-b border-gray-300 pb-6 mb-6">
-
-          {/* MAIN HERO */}
-          <article className="lg:pr-6 lg:border-r border-gray-300 group cursor-pointer">
-
-            <div className="overflow-hidden mb-3">
-              <ImageWithFallback
-                src={hero.image}
-                alt={hero.title}
-                className="w-full h-[270px] md:h-[340px] lg:h-[390px] object-cover group-hover:scale-[1.015] transition-transform duration-500"
-              />
-            </div>
-
-            <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-red-600">
-              {hero.category}
-            </span>
-
-            <h2 className="mt-1.5 text-[25px] md:text-[30px] lg:text-[34px] font-bold leading-[1.05] tracking-[-0.025em] group-hover:text-red-700 transition-colors">
-              {hero.title}
-            </h2>
-
-            <p className="text-[13px] leading-[1.5] text-gray-600 mt-2 max-w-[850px]">
-              {hero.excerpt}
-            </p>
-
-            <div className="flex items-center gap-3 mt-3 text-[10px] text-gray-500">
-              <span>By {hero.author}</span>
-
-              <span className="flex items-center gap-1">
-                <Clock size={10} />
-                {hero.time}
-              </span>
-            </div>
-          </article>
-
-          {/* THREAT ALERT SIDEBAR */}
-          <aside className="lg:pl-5 mt-6 lg:mt-0">
-
-            <div className="border-b-2 border-black pb-1.5 mb-1 flex items-center gap-2">
-              <AlertTriangle
-                size={13}
-                className="text-red-600"
-              />
-
-              <h2 className="text-[12px] font-bold uppercase tracking-[0.08em]">
-                Live Threat Alerts
-              </h2>
-            </div>
-
-            <div>
-              {threatAlerts.map((a) => (
-                <article
-                  key={a.id}
-                  className="py-3 border-b border-gray-200 group cursor-pointer"
-                >
-                  <span
-                    className={`inline-block text-[8px] font-bold px-1.5 py-0.5 ${threatColor[a.severity]}`}
-                  >
-                    {a.severity}
-                  </span>
-
-                  <p className="text-[12px] leading-[1.3] font-semibold mt-1 group-hover:text-red-600 transition-colors">
-                    {a.title}
-                  </p>
-
-                  <span className="text-[9px] text-gray-500 flex items-center gap-1 mt-1">
-                    <Clock size={9} />
-                    {a.time}
-                  </span>
-                </article>
-              ))}
-            </div>
-          </aside>
-        </section>
-
-        {/* =========================================================
-            SECONDARY FEATURE STORIES
-        ========================================================= */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-5 border-b border-gray-300 pb-6 mb-6">
-
-          {/* HERO 1 */}
-          <article className="group cursor-pointer border-b md:border-b-0 md:border-r border-gray-300 md:pr-5">
-
-            <div className="overflow-hidden mb-3">
-              <ImageWithFallback
-                src={hero1.image}
-                alt={hero1.title}
-                className="w-full h-[220px] md:h-[260px] object-cover group-hover:scale-[1.015] transition-transform duration-500"
-              />
-            </div>
-
-            <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-red-600">
-              {hero1.category}
-            </span>
-
-            <h2 className="text-[21px] md:text-[24px] font-bold leading-[1.08] tracking-[-0.02em] mt-1 group-hover:text-red-600 transition-colors">
-              {hero1.title}
-            </h2>
-
-            <p className="text-[12px] text-gray-600 leading-[1.45] mt-2">
-              {hero1.excerpt}
-            </p>
-
-            <div className="flex items-center gap-3 mt-2 text-[9px] text-gray-500">
-              <span>By {hero1.author}</span>
-
-              <span className="flex items-center gap-1">
-                <Clock size={9} />
-                {hero1.time}
-              </span>
-            </div>
-          </article>
-
-          {/* HERO 2 */}
-          <article className="group cursor-pointer">
-
-            <div className="overflow-hidden mb-3">
-              <ImageWithFallback
-                src={hero2.image}
-                alt={hero2.title}
-                className="w-full h-[220px] md:h-[260px] object-cover group-hover:scale-[1.015] transition-transform duration-500"
-              />
-            </div>
-
-            <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-red-600">
-              {hero2.category}
-            </span>
-
-            <h2 className="text-[21px] md:text-[24px] font-bold leading-[1.08] tracking-[-0.02em] mt-1 group-hover:text-red-600 transition-colors">
-              {hero2.title}
-            </h2>
-
-            <p className="text-[12px] text-gray-600 leading-[1.45] mt-2">
-              {hero2.excerpt}
-            </p>
-
-            <div className="flex items-center gap-3 mt-2 text-[9px] text-gray-500">
-              <span>By {hero2.author}</span>
-
-              <span className="flex items-center gap-1">
-                <Clock size={9} />
-                {hero2.time}
-              </span>
-            </div>
-          </article>
-        </section>
-
-        {/* =========================================================
-            CYBERSECURITY RISK MATRIX
-        ========================================================= */}
-        <section className="border-b border-gray-300 pb-6 mb-7">
-
-          <SH title="Cyber Risk Response Matrix" />
-
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-[11px] min-w-[650px]">
-
-              <tbody>
-                <tr className="bg-black text-white">
-                  <td className="p-2.5 font-bold border border-gray-700">
-                    Threat
-                  </td>
-
-                  <td className="p-2.5 font-bold border border-gray-700">
-                    Recommended Defense
-                  </td>
-
-                  <td className="p-2.5 font-bold border border-gray-700">
-                    Business Impact
-                  </td>
-
-                  <td className="p-2.5 font-bold border border-gray-700">
-                    Response
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    AI-Assisted Phishing
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    MFA Enforcement
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    Data Breach / Ransom
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    Immediate
-                  </td>
-                </tr>
-
-                <tr className="bg-gray-50">
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    SaaS Credential Theft
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    Access Privilege Review
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    IP / Client Data Loss
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    24–48 Hours
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    Ransomware-as-a-Service
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    Endpoint Protection + Backup
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    Business Continuity
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    Ongoing
-                  </td>
-                </tr>
-
-                <tr className="bg-gray-50">
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    Vendor/Supply Chain Attack
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    Third-Party Risk Audits
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    Regulatory Exposure
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    Quarterly
-                  </td>
-                </tr>
-
-                <tr>
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    Prompt Injection (AI Models)
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    AI Security Layer / WAF
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300">
-                    Data Manipulation
-                  </td>
-
-                  <td className="p-2.5 border border-gray-300 font-semibold">
-                    Emerging Priority
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <span className="text-xs text-red-600 uppercase tracking-wider">{hero.category}</span>
+          <h3 className="mt-2 leading-tight">{hero.title}</h3>
+          <p className="text-gray-600 text-sm mt-2 leading-relaxed">{hero.excerpt}</p>
+          <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+            <span>By {hero.author}</span>
+            <span className="flex items-center gap-1"><Clock size={10} />{hero.time}</span>
           </div>
-        </section>
+        </div>
 
-        {/* =========================================================
-            LATEST CYBER INCIDENTS
-        ========================================================= */}
-        <section className="mb-8">
-
-          <SH title="Latest Cyber Incidents" />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-            {stories.map((s) => (
-              <article
-                key={s.id}
-                className="group cursor-pointer border-b border-gray-200 pb-4"
-              >
-
-                <div className="overflow-hidden mb-2">
-                  <ImageWithFallback
-                    src={s.image}
-                    alt={s.title}
-                    className="w-full h-[145px] object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                </div>
-
-                <span className="text-[8px] font-bold uppercase tracking-[0.14em] text-red-600">
-                  {s.category}
-                </span>
-
-                <h3 className="text-[14px] font-bold leading-[1.2] mt-1 group-hover:text-red-600 transition-colors">
-                  {s.title}
-                </h3>
-
-                <span className="text-[9px] text-gray-500 flex items-center gap-1 mt-2">
-                  <Clock size={9} />
-                  {s.time}
-                </span>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* =========================================================
-            SPONSORED ARTICLE
-        ========================================================= */}
-        <section className="border-t border-b border-gray-300 py-5 mb-7">
-          <SponsoredArticleCard
-            headline="Palo Alto Networks: The Architecture of Zero-Trust Security in 2026"
-            excerpt="How the industry's leading NGFW platform is protecting 85,000 enterprises against next-generation threats using AI-powered threat intelligence and automated response."
-            advertiser="Palo Alto Networks"
-            category="SPONSORED · CYBERSECURITY"
-            readTime={6}
-            image="https://images.unsplash.com/photo-1768839721176-2fa91fdce725?w=800&h=400&fit=crop"
-            link="#"
-            disclosureText="Paid content by Palo Alto Networks. Does not reflect editorial opinion of The Pride Times."
-          />
-        </section>
-
-        {/* =========================================================
-            POLICY + STOCKS
-        ========================================================= */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-
-          {/* POLICY */}
+        <div className="flex flex-col gap-6">
+          {/* Energy prices */}
           <div>
-            <SH title="Policy & Defense" />
-
-            <div>
-              {defenseNews.map((n) => (
-                <article
-                  key={n.id}
-                  className="py-2.5 border-b border-gray-200 group cursor-pointer"
-                >
-                  <p className="text-[13px] font-semibold leading-[1.25] group-hover:text-red-600 transition-colors">
-                    {n.title}
-                  </p>
-
-                  <span className="text-[9px] text-gray-500 flex items-center gap-1 mt-1">
-                    <Clock size={9} />
-                    {n.time}
-                  </span>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {/* CYBER STOCKS */}
-          <div>
-            <SH title="Cyber Stocks" />
-
-            <div className="border-t border-gray-300">
-
-              {marketData.map((m) => (
-                <div
-                  key={m.ticker}
-                  className="grid grid-cols-[1fr_auto_auto] gap-5 items-center py-2.5 border-b border-gray-200"
-                >
-
-                  <div>
-                    <p className="text-[12px] font-semibold">
-                      {m.company}
-                    </p>
-
-                    <p className="text-[9px] text-gray-500 uppercase">
-                      {m.ticker}
+            <SH title="Energy Prices Live" />
+            <div className="divide-y divide-gray-100">
+              {energyPrices.map((e) => (
+                <div key={e.commodity} className="py-1.5 flex items-center justify-between">
+                  <span className="text-xs text-gray-700">{e.commodity}</span>
+                  <div className="text-right">
+                    <p className="text-xs">{e.price}</p>
+                    <p className={`text-xs flex items-center justify-end gap-1 ${e.up ? "text-green-600" : "text-red-600"}`}>
+                      {e.up ? <TrendingUp size={10} /> : <TrendingDown size={10} />}{e.change}
                     </p>
                   </div>
-
-                  <p className="text-[12px] font-semibold">
-                    {m.price}
-                  </p>
-
-                  <p
-                    className={`text-[11px] font-bold ${
-                      m.up ? "text-green-600" : "text-red-600"
-                    }`}
-                  >
-                    {m.change}
-                  </p>
                 </div>
               ))}
             </div>
           </div>
-        </section>
 
-        {/* =========================================================
-            BOTTOM EDITORIAL GRID
-        ========================================================= */}
-        <section className="border-t-[3px] border-black pt-3">
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-
-            <div>
-              <span className="text-[8px] uppercase tracking-[0.15em] text-gray-500">
-                Security
-              </span>
-
-              <p className="text-[11px] font-bold mt-1">
-                Cyber Threat Intelligence
+          {/* Quote block */}
+          <div className="border border-gray-700 bg-slate-200 flex">
+            <div className="w-2 border-r border-gray-700 bg-slate-300 shrink-0" />
+            <div className="p-4">
+              <p className="italic text-sm leading-relaxed text-gray-900">
+                "AI-driven load growth, grid bottlenecks, cleantech market fragmentation, and geopolitics are redefining the terms of progress in 2026's energy landscape."
+              </p>
+              <p className="mt-2 font-bold text-gray-900 text-sm">
+                — S&P Global Energy Horizons Top Trends 2026
               </p>
             </div>
-
-            <div>
-              <span className="text-[8px] uppercase tracking-[0.15em] text-gray-500">
-                Technology
-              </span>
-
-              <p className="text-[11px] font-bold mt-1">
-                AI Security
-              </p>
-            </div>
-
-            <div>
-              <span className="text-[8px] uppercase tracking-[0.15em] text-gray-500">
-                Markets
-              </span>
-
-              <p className="text-[11px] font-bold mt-1">
-                Cybersecurity Stocks
-              </p>
-            </div>
-
-            <div>
-              <span className="text-[8px] uppercase tracking-[0.15em] text-gray-500">
-                Policy
-              </span>
-
-              <p className="text-[11px] font-bold mt-1">
-                Global Cyber Defense
-              </p>
-            </div>
-
           </div>
-        </section>
-
+        </div>
       </div>
-    </main>
+
+      {/* Secondary hero 1 */}
+      <div className="mb-10 group cursor-pointer">
+        <div className="relative overflow-hidden rounded mb-4">
+          <ImageWithFallback
+            src={hero1.image}
+            alt={hero1.title}
+            className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+        </div>
+        <span className="text-xs text-red-600 uppercase tracking-wider">{hero1.category}</span>
+        <h3 className="mt-2 leading-tight">{hero1.title}</h3>
+        <p className="text-gray-600 text-sm mt-2 leading-relaxed">{hero1.excerpt}</p>
+        <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+          <span>By {hero1.author}</span>
+          <span className="flex items-center gap-1"><Clock size={10} /> {hero1.time}</span>
+        </div>
+      </div>
+
+      {/* Secondary hero 2 + industry table */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10 items-start">
+        <div className="group cursor-pointer">
+          <div className="relative overflow-hidden rounded mb-3">
+            <ImageWithFallback
+              src={hero2.image}
+              alt={hero2.title}
+              className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          </div>
+          <span className="text-xs text-red-600 uppercase tracking-wider">{hero2.category}</span>
+          <h3 className="mt-2 leading-tight">{hero2.title}</h3>
+          <p className="text-gray-600 text-sm mt-2 leading-relaxed">{hero2.excerpt}</p>
+          <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+            <span>By {hero2.author}</span>
+            <span className="flex items-center gap-1"><Clock size={10} /> {hero2.time}</span>
+          </div>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-300 text-sm">
+            <tbody>
+              <tr>
+                <td className="w-1/3 bg-slate-200 font-bold p-3 border border-gray-300">
+                  Cleantech Investment Needed (5 Yrs)
+                </td>
+                <td className="p-3 border border-gray-300">
+                  USD 5–8 Trillion (AI infrastructure + enabling systems)
+                </td>
+              </tr>
+              <tr>
+                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
+                  US IRA Clean Energy Commitments
+                </td>
+                <td className="p-3 border border-gray-300">
+                  Over USD 300 Billion catalyzed since 2022
+                </td>
+              </tr>
+              <tr>
+                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
+                  EU Net-Zero Industry Act
+                </td>
+                <td className="p-3 border border-gray-300">
+                  Accelerating European clean tech manufacturing
+                </td>
+              </tr>
+              <tr>
+                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
+                  Power Demand Driver
+                </td>
+                <td className="p-3 border border-gray-300">
+                  AI data centers forcing grid policy reversals globally
+                </td>
+              </tr>
+              <tr>
+                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
+                  Top Energy Deal Type (2026)
+                </td>
+                <td className="p-3 border border-gray-300">
+                  Power generation, storage, and transmission assets
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Renewables */}
+      <div className="mb-10">
+        <SH title="Renewable Energy" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {renewableStories.map((s) => (
+            <div key={s.id} className="group cursor-pointer">
+              <div className="overflow-hidden rounded mb-3">
+                <ImageWithFallback
+                  src={s.image}
+                  alt={s.title}
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="leading-snug group-hover:text-red-600 transition-colors">{s.title}</h3>
+              <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{s.time}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Sponsored */}
+      <div className="mb-10">
+        <SponsoredArticleCard
+          headline="BP's Net Zero 2030 Strategy: How the Oil Major is Reinventing Itself for the Energy Transition"
+          excerpt="BP has committed $60B to clean energy through 2030 while maintaining profitable hydrocarbons. How the company is navigating the world's most consequential transition."
+          advertiser="BP plc"
+          category="SPONSORED · ENERGY"
+          readTime={8}
+          image="https://images.unsplash.com/photo-1760433116983-76021bd32307?w=800&h=400&fit=crop"
+          link="#"
+          disclosureText="Paid content by BP. Does not reflect editorial opinion of The Pride Times."
+        />
+      </div>
+
+      {/* Oil/Gas + Nuclear + Policy */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <SH title="Oil & Gas" />
+          <div className="divide-y divide-gray-100">
+            {oilGasNews.map((n) => (
+              <div key={n.id} className="py-2.5 group cursor-pointer">
+                <p className="text-sm group-hover:text-red-600 transition-colors">{n.title}</p>
+                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <SH title="Nuclear Power" />
+          <div className="divide-y divide-gray-100">
+            {nuclearNews.map((n) => (
+              <div key={n.id} className="py-2.5 group cursor-pointer">
+                <p className="text-sm group-hover:text-red-600 transition-colors">{n.title}</p>
+                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div>
+          <SH title="Policy & Regulation" />
+          <div className="divide-y divide-gray-100">
+            {policyNews.map((n) => (
+              <div key={n.id} className="py-2.5 group cursor-pointer">
+                <p className="text-sm group-hover:text-red-600 transition-colors">{n.title}</p>
+                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
