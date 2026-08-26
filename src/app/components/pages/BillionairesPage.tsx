@@ -1,558 +1,258 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import {
-  Clock,
-  ChevronRight,
-  ArrowUpRight,
-  TrendingUp,
-  Building2,
-  Globe2,
-  DollarSign,
-} from "lucide-react";
+import { TrendingUp, TrendingDown, Flag, Star } from "lucide-react";
 
-function SectionHeader({
-  title,
-  link,
-}: {
-  title: string;
-  link?: string;
-}) {
+function SectionHeader({ title, id, subtitle }: { title: string; id?: string; subtitle?: string }) {
   return (
-    <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
-      <h2 className="text-sm font-bold uppercase tracking-widest">
-        {title}
-      </h2>
-
-      {link && (
-        <a
-          href={link}
-          className="text-xs text-red-600 hover:underline flex items-center gap-1"
-        >
-          See All <ChevronRight size={12} />
-        </a>
-      )}
+    <div id={id} className="border-b-2 border-black pb-2 mb-4">
+      <h2 className="uppercase tracking-wider text-2xl">{title}</h2>
+      {subtitle && <p className="text-sm text-gray-500 mt-0.5">{subtitle}</p>}
     </div>
   );
 }
 
-const hero = {
-  category: "BILLIONAIRES",
-  title:
-    "The World's Richest People Are Reshaping Technology, Finance and Global Industry",
-  excerpt:
-    "The world's wealthiest entrepreneurs and investors continue to expand their influence across technology, finance, energy, manufacturing and emerging industries. Their companies are driving some of the largest transformations in the global economy.",
-  author: "Sagar Kumar",
-  time: "June 2026",
-  image:
-    "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80",
-};
-
-const heroStories = [
-  {
-    id: 1,
-    category: "TECHNOLOGY",
-    title:
-      "Technology Billionaires Increase Investments in Artificial Intelligence and Advanced Computing",
-    excerpt:
-      "The technology sector remains a major source of new billionaire wealth as artificial intelligence and computing infrastructure attract unprecedented investment.",
-    time: "2 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    id: 2,
-    category: "FINANCE",
-    title:
-      "Global Investors Expand Their Fortunes as Markets Enter a New Era",
-    excerpt:
-      "Large investment firms and private capital networks continue to shape global markets and corporate strategy.",
-    time: "4 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=1000&q=80",
-  },
+const worldBillionaires = [
+  { rank: 1, name: "Elon Musk", wealth: "$312.4B", company: "Tesla, SpaceX, xAI", country: "USA", change: "+2.1%", up: true, industry: "Technology / Aerospace" },
+  { rank: 2, name: "Jeff Bezos", wealth: "$218.7B", company: "Amazon, Blue Origin", country: "USA", change: "+0.8%", up: true, industry: "E-Commerce / Space" },
+  { rank: 3, name: "Jensen Huang", wealth: "$187.2B", company: "NVIDIA", country: "USA", change: "+5.3%", up: true, industry: "Semiconductors / AI" },
+  { rank: 4, name: "Mark Zuckerberg", wealth: "$176.5B", company: "Meta Platforms", country: "USA", change: "+1.2%", up: true, industry: "Social Media / AI" },
+  { rank: 5, name: "Larry Ellison", wealth: "$165.8B", company: "Oracle", country: "USA", change: "+3.7%", up: true, industry: "Enterprise Software" },
+  { rank: 6, name: "Bill Gates", wealth: "$143.2B", company: "Microsoft / BG Foundation", country: "USA", change: "+0.4%", up: true, industry: "Technology" },
+  { rank: 7, name: "Warren Buffett", wealth: "$138.9B", company: "Berkshire Hathaway", country: "USA", change: "+0.2%", up: true, industry: "Diversified" },
+  { rank: 8, name: "Larry Page", wealth: "$131.4B", company: "Alphabet / Google", country: "USA", change: "-0.3%", up: false, industry: "Technology" },
+  { rank: 9, name: "Sergey Brin", wealth: "$128.7B", company: "Alphabet / Google", country: "USA", change: "-0.3%", up: false, industry: "Technology" },
+  { rank: 10, name: "Steve Ballmer", wealth: "$122.3B", company: "Microsoft / LA Clippers", country: "USA", change: "+1.8%", up: true, industry: "Technology" },
+  { rank: 11, name: "Mukesh Ambani", wealth: "$112.1B", company: "Reliance Industries", country: "India", change: "+0.5%", up: true, industry: "Diversified / Telecom" },
+  { rank: 12, name: "Gautam Adani", wealth: "$98.7B", company: "Adani Group", country: "India", change: "+1.3%", up: true, industry: "Infrastructure / Energy" },
+  { rank: 13, name: "Carlos Slim", wealth: "$94.2B", company: "América Móvil", country: "Mexico", change: "-0.7%", up: false, industry: "Telecom" },
+  { rank: 14, name: "François Bettencourt Meyers", wealth: "$89.6B", company: "L'Oréal", country: "France", change: "+0.9%", up: true, industry: "Consumer Goods" },
+  { rank: 15, name: "Bernard Arnault", wealth: "$87.3B", company: "LVMH", country: "France", change: "-1.2%", up: false, industry: "Luxury Goods" },
 ];
 
-const billionaireStories = [
-  {
-    id: 1,
-    title:
-      "AI Infrastructure Becomes the New Battleground for the World's Wealthiest Entrepreneurs",
-    time: "1 hr ago",
-    image:
-      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    id: 2,
-    title:
-      "Private Capital Continues to Flow Into Data Centers, Semiconductors and Energy",
-    time: "3 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    id: 3,
-    title:
-      "Luxury Brands and Consumer Companies Become Major Wealth-Creation Engines",
-    time: "5 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80",
-  },
+const pt30List = [
+  { rank: 1, name: "Jensen Huang ", title: "Nvidia ", category: "Defining the AI infrastructure era at COMPUTEX 2026 " },
+  { rank: 2, name: "Satya Nadella ", title: "Microsoft ", category: "Leading ethical AI adoption and enterprise digital transformation " },
+  { rank: 3, name: "Sundar Pichai ",  title: "Alphabet / Google ", category: "Driving AI integration across search, cloud, and automotive tech " },
+  { rank: 4, name: "Elon Musk ", title: "Tesla / SpaceX / X ", category: "Disrupting energy, space, and AI; SpaceX IPO on the horizon " },
+  { rank: 5, name: "Sam Altman ", title: "OpenAI", category: "Shaping the frontier of large language models and AGI research " },
+  { rank: 6, name: "Andy Jassy ", title: "Amazon ", category: "Scaling AWS as AI's preferred cloud infrastructure partner " },
+  { rank: 7, name: "Lisa Su ",  title: "AMD", category: "Challenging Nvidia's AI chip dominance with competitive GPU roadmap " },
+  { rank: 8, name: "CC Wei ",  title: "TSMC", category: "Controlling the world's most advanced semiconductor manufacturing " },
+  { rank: 9, name: "Alex Karp ", title: "Palantir ", category: "Surging 6 places in IMD rankings on AI and defense demand " },
+  { rank: 10, name: "Mary Barra ", title: "General Motors" , category: "Navigating EV transition amid battery supply chain pressures "},
 ];
 
-const wealthNews = [
-  {
-    id: 1,
-    title:
-      "Technology founders remain among the fastest-growing sources of new billionaire wealth",
-    time: "2 hrs ago",
-  },
-  {
-    id: 2,
-    title:
-      "Family offices increase allocations toward artificial intelligence and private markets",
-    time: "4 hrs ago",
-  },
-  {
-    id: 3,
-    title:
-      "Global investors turn toward infrastructure as AI demand increases electricity consumption",
-    time: "6 hrs ago",
-  },
-  {
-    id: 4,
-    title:
-      "Private equity firms accelerate investments in healthcare and industrial technology",
-    time: "8 hrs ago",
-  },
-  {
-    id: 5,
-    title:
-      "New generation of entrepreneurs creates fortunes through software and AI companies",
-    time: "10 hrs ago",
-  },
+const indiaRichest = [
+  { rank: 1, name: "Mukesh Ambani", wealth: "₹9,35,000 Cr", company: "Reliance Industries", sector: "Energy / Telecom", change: "+0.5%" },
+  { rank: 2, name: "Gautam Adani", wealth: "₹8,23,000 Cr", company: "Adani Group", sector: "Infrastructure", change: "+1.3%" },
+  { rank: 3, name: "Shiv Nadar", wealth: "₹3,45,000 Cr", company: "HCL Technologies", sector: "IT Services", change: "+2.1%" },
+  { rank: 4, name: "Cyrus Poonawalla", wealth: "₹2,89,000 Cr", company: "Serum Institute", sector: "Pharma / Biotech", change: "+4.7%" },
+  { rank: 5, name: "Savitri Jindal", wealth: "₹2,67,000 Cr", company: "JSW Steel", sector: "Steel / Infrastructure", change: "-0.8%" },
+  { rank: 6, name: "Kumar Mangalam Birla", wealth: "₹2,34,000 Cr", company: "Aditya Birla Group", sector: "Diversified", change: "+0.3%" },
+  { rank: 7, name: "Dilip Shanghvi", wealth: "₹2,12,000 Cr", company: "Sun Pharma", sector: "Pharmaceuticals", change: "+1.9%" },
+  { rank: 8, name: "Radha Kishan Damani", wealth: "₹1,98,000 Cr", company: "DMart / Avenue Supermarts", sector: "Retail", change: "+0.6%" },
+  { rank: 9, name: "Sunil Mittal", wealth: "₹1,76,000 Cr", company: "Bharti Airtel", sector: "Telecom", change: "+2.3%" },
+  { rank: 10, name: "Azim Premji", wealth: "₹1,54,000 Cr", company: "Wipro", sector: "IT Services", change: "+1.1%" },
 ];
 
-const wealthStats = [
-  {
-    label: "Technology Wealth",
-    value: "$8.2T",
-    change: "+12.4%",
-  },
-  {
-    label: "Private Markets",
-    value: "$4.7T",
-    change: "+8.6%",
-  },
-  {
-    label: "Global Billionaires",
-    value: "3,100+",
-    change: "+6.1%",
-  },
-  {
-    label: "AI Investments",
-    value: "$620B",
-    change: "+21.8%",
-  },
+const billionaireNews = [
+  { id: 1, title: "Elon Musk Adds $15B to Net Worth in Single Day After Tesla Earnings Beat", time: "2 hrs ago" },
+  { id: 2, title: "Gautam Adani's Green Energy Division Secures $7.5B International Funding", time: "4 hrs ago" },
+  { id: 3, title: "Jeff Bezos Commits $5B to Ocean Conservation Through Bezos Earth Fund", time: "6 hrs ago" },
+  { id: 4, title: "Mark Zuckerberg Becomes Third Person to Hold $175B+ Net Worth", time: "8 hrs ago" },
+  { id: 5, title: "Warren Buffett's Berkshire Hathaway Reveals $45B Mystery Investment", time: "10 hrs ago" },
 ];
 
-const industries = [
-  {
-    icon: TrendingUp,
-    title: "Technology",
-    text: "Artificial intelligence, cloud computing, semiconductors and software.",
-  },
-  {
-    icon: DollarSign,
-    title: "Finance",
-    text: "Private equity, asset management, venture capital and global markets.",
-  },
-  {
-    icon: Building2,
-    title: "Real Estate",
-    text: "Commercial property, infrastructure and large-scale development.",
-  },
-  {
-    icon: Globe2,
-    title: "Global Industry",
-    text: "Energy, manufacturing, transportation and international commerce.",
-  },
+const risingBillionaires = [
+  { name: "Jensen Huang", company: "NVIDIA", wealth: "$187B", growth: "+$89B YTD", story: "AI chip demand drives historic wealth creation" },
+  { name: "Sam Altman", company: "OpenAI", wealth: "$28B", growth: "+$22B YTD", story: "ChatGPT revenue surpasses $10B annually" },
+  { name: "Cyrus Poonawalla", company: "Serum Institute", wealth: "$21B", growth: "+$8B YTD", story: "Global vaccine demand powers pharma empire" },
 ];
 
-function SmallStoryList({
-  stories,
-}: {
-  stories: Array<{ id: number; title: string; time: string }>;
-}) {
-  return (
-    <div className="divide-y divide-gray-200">
-      {stories.map((story) => (
-        <div
-          key={story.id}
-          className="py-3 group cursor-pointer"
-        >
-          <p className="text-sm leading-snug group-hover:text-red-600 transition-colors">
-            {story.title}
-          </p>
-
-          <span className="text-xs text-gray-400 flex items-center gap-1 mt-1.5">
-            <Clock size={10} />
-            {story.time}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
+const statsBar = [
+  { label: "World's Billionaires", value: "2,781", sub: "as of May 2026" },
+  { label: "Combined Wealth", value: "$14.2T", sub: "all billionaires" },
+  { label: "New Billionaires (2026)", value: "+187", sub: "year to date" },
+  { label: "Biggest Gainer YTD", value: "Jensen Huang", sub: "+$89B in 2026" },
+];
 
 export function BillionairesPage() {
   return (
-    <main className="max-w-screen-xl mx-auto px-4 md:px-6 py-6 bg-white">
-
-      {/* PAGE HEADER */}
-      <div className="border-b-4 border-black pb-3 mb-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="text-[11px] text-gray-500 uppercase tracking-[0.2em]">
-              Wealth & Influence
-            </span>
-
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mt-1">
-              Billionaires
-            </h1>
-          </div>
-
-          <div className="hidden md:block text-right">
-            <p className="text-[10px] uppercase tracking-widest text-gray-400">
-              Global Wealth
-            </p>
-            <p className="text-sm font-semibold">
-              Markets · Technology · Power
-            </p>
-          </div>
-        </div>
+    <main className="max-w-screen-xl mx-auto px-4 py-6">
+      {/* Page title */}
+      <div className="border-b-4 border-black mb-6 pb-2">
+        <span className="text-xs text-gray-500 uppercase tracking-widest">Exclusive Rankings</span>
+        <h1 className="mt-0.5">Billionaires & Wealth Intelligence</h1>
       </div>
 
-      {/* TOP MARKET / WEALTH BAR */}
-      <div className="grid grid-cols-2 md:grid-cols-4 border-y border-black mb-7">
-        {wealthStats.map((stat, index) => (
-          <div
-            key={stat.label}
-            className={`p-3 md:p-4 ${
-              index !== wealthStats.length - 1
-                ? "border-r border-gray-300"
-                : ""
-            }`}
-          >
-            <p className="text-[10px] uppercase tracking-widest text-gray-500">
-              {stat.label}
-            </p>
-
-            <div className="flex items-end justify-between mt-1">
-              <p className="text-lg md:text-xl font-bold">
-                {stat.value}
-              </p>
-
-              <span className="text-xs text-green-600 font-medium">
-                {stat.change}
-              </span>
-            </div>
+      {/* Stats bar */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {statsBar.map((stat) => (
+          <div key={stat.label} className="border border-gray-200 rounded p-4 text-center">
+            <p className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</p>
+            <p className="text-xl mt-1">{stat.value}</p>
+            <p className="text-xs text-gray-400 mt-0.5">{stat.sub}</p>
           </div>
         ))}
       </div>
 
-      {/* HERO SECTION */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-
-        {/* MAIN STORY */}
-        <article className="lg:col-span-2 group cursor-pointer">
-
-          <div className="relative overflow-hidden mb-4">
-            <ImageWithFallback
-              src={hero.image}
-              alt={hero.title}
-              className="w-full h-[300px] md:h-[430px] object-cover group-hover:scale-[1.02] transition-transform duration-500"
-            />
-
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent" />
-          </div>
-
-          <span className="text-[11px] text-red-600 uppercase tracking-[0.15em] font-semibold">
-            {hero.category}
-          </span>
-
-          <h2 className="text-3xl md:text-4xl font-bold leading-tight mt-2 group-hover:text-red-700 transition-colors">
-            {hero.title}
-          </h2>
-
-          <p className="text-gray-600 text-sm md:text-base leading-relaxed mt-3 max-w-4xl">
-            {hero.excerpt}
-          </p>
-
-          <div className="flex items-center gap-4 mt-4 text-xs text-gray-400">
-            <span>By {hero.author}</span>
-
-            <span className="flex items-center gap-1">
-              <Clock size={11} />
-              {hero.time}
-            </span>
-          </div>
-        </article>
-
-        {/* SIDE STORIES */}
-        <aside className="border-l-0 lg:border-l border-gray-300 lg:pl-5">
-
-          <SectionHeader title="Wealth Briefing" />
-
-          <div className="space-y-5">
-            {heroStories.map((story) => (
-              <article
-                key={story.id}
-                className="group cursor-pointer border-b border-gray-200 pb-5"
-              >
-                <div className="overflow-hidden mb-3">
-                  <ImageWithFallback
-                    src={story.image}
-                    alt={story.title}
-                    className="w-full h-36 object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                  />
-                </div>
-
-                <span className="text-[10px] text-red-600 uppercase tracking-widest font-semibold">
-                  {story.category}
-                </span>
-
-                <h3 className="text-lg font-bold leading-snug mt-1 group-hover:text-red-600 transition-colors">
-                  {story.title}
-                </h3>
-
-                <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                  {story.excerpt}
-                </p>
-
-                <span className="text-[11px] text-gray-400 flex items-center gap-1 mt-2">
-                  <Clock size={10} />
-                  {story.time}
-                </span>
-              </article>
-            ))}
-          </div>
-        </aside>
-      </div>
-
-      {/* DIVIDER */}
-      <div className="border-t-4 border-black mb-8" />
-
-      {/* FEATURE STORIES */}
-      <section className="mb-9">
+      {/* World's Billionaires list */}
+      <div className="mb-8" id="world">
         <SectionHeader
-          title="Billionaire Economy"
-          link="#billionaire-economy"
+          title="World's Billionaires"
+          subtitle="Real-time net worth estimates. Updated daily. All figures in USD."
         />
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {billionaireStories.map((story) => (
-            <article
-              key={story.id}
-              className="group cursor-pointer"
-            >
-              <div className="overflow-hidden mb-3">
-                <ImageWithFallback
-                  src={story.image}
-                  alt={story.title}
-                  className="w-full h-44 object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                />
-              </div>
-
-              <h3 className="text-lg font-bold leading-snug group-hover:text-red-600 transition-colors">
-                {story.title}
-              </h3>
-
-              <span className="text-xs text-gray-400 flex items-center gap-1 mt-2">
-                <Clock size={10} />
-                {story.time}
-              </span>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* WEALTH NEWS + INDUSTRIES */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-9">
-
-        {/* WEALTH NEWS */}
-        <section>
-          <SectionHeader title="Latest Wealth News" />
-
-          <SmallStoryList stories={wealthNews} />
-        </section>
-
-        {/* INDUSTRIES */}
-        <section>
-          <SectionHeader title="Where Billionaire Wealth Is Moving" />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-l border-gray-300">
-            {industries.map((industry) => {
-              const Icon = industry.icon;
-
-              return (
-                <div
-                  key={industry.title}
-                  className="p-4 border-r border-b border-gray-300 group hover:bg-gray-50 transition-colors"
-                >
-                  <Icon
-                    size={20}
-                    className="mb-3 text-gray-700"
-                  />
-
-                  <h3 className="font-bold text-base">
-                    {industry.title}
-                  </h3>
-
-                  <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                    {industry.text}
-                  </p>
-
-                  <div className="flex items-center gap-1 text-xs text-red-600 mt-3">
-                    Explore
-                    <ArrowUpRight size={12} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      </div>
-
-      {/* GLOBAL WEALTH TABLE */}
-      <section className="mb-9">
-        <SectionHeader title="Global Wealth Snapshot" />
-
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
+          <table className="w-full text-sm border-collapse">
             <thead>
-              <tr className="border-y-2 border-black text-left">
-                <th className="p-3 font-bold uppercase text-[11px] tracking-wider">
-                  Sector
-                </th>
-
-                <th className="p-3 font-bold uppercase text-[11px] tracking-wider">
-                  Wealth Concentration
-                </th>
-
-                <th className="p-3 font-bold uppercase text-[11px] tracking-wider">
-                  Growth
-                </th>
-
-                <th className="p-3 font-bold uppercase text-[11px] tracking-wider">
-                  Outlook
-                </th>
+              <tr className="border-b-2 border-gray-200">
+                <th className="text-left py-2 px-1 text-xs text-gray-500 font-normal uppercase tracking-wider w-8">#</th>
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Name</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Net Worth</th>
+                <th className="text-left py-2 pl-4 text-xs text-gray-500 font-normal uppercase tracking-wider hidden md:table-cell">Company</th>
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden lg:table-cell">Country</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Today</th>
               </tr>
             </thead>
+            <tbody className="divide-y divide-gray-100">
+              {worldBillionaires.map((b) => (
+                <tr key={b.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
+                  <td className="py-3 px-1 text-gray-400 text-xs">{b.rank}</td>
+                  <td className="py-3">
+                    <p className="group-hover:text-red-600 transition-colors">{b.name}</p>
+                    <p className="text-xs text-gray-400 hidden sm:block">{b.industry}</p>
+                  </td>
+                  <td className="py-3 text-right font-medium">{b.wealth}</td>
+                  <td className="py-3 pl-4 text-gray-600 hidden md:table-cell text-sm">{b.company}</td>
+                  <td className="py-3 text-gray-600 hidden lg:table-cell text-sm">{b.country}</td>
+                  <td className="py-3 text-right">
+                    <span className={`flex items-center justify-end gap-0.5 text-xs ${b.up ? "text-green-600" : "text-red-600"}`}>
+                      {b.up ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                      {b.change}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-xs text-gray-400 mt-2">Showing top 15 of 2,781 billionaires. Updated: May 21, 2026 05:00 UTC</p>
+        </div>
+      </div>
 
-            <tbody>
-              <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">
-                  Technology
-                </td>
-                <td className="p-3">
-                  AI, Cloud & Semiconductors
-                </td>
-                <td className="p-3 text-green-600">
-                  +12.4%
-                </td>
-                <td className="p-3">
-                  Strong
-                </td>
-              </tr>
+      {/* PT30 + Rising Stars side by side */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        {/* PT30 */}
+        <div className="lg:col-span-2" id="pt30">
+          <SectionHeader
+            title="🏆  PRIDE TIMES 30 — LEADERS TO WATCH IN 2026 "
+            subtitle="The Pride Times 30 recognizes thirty global leaders across business, technology, and innovation who are defining the direction of the global economy this year. This edition highlights ten names at the forefront: "
+          />
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider w-8">#</th>
+                  <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Name</th>
+                  <th className="text-left px-4 py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Organization</th>
+                  <th className="text-left px-4 py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Why They Matter</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {pt30List.map((p) => (
+                  <tr key={p.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
+                    <td className="py-2.5 text-gray-900 text-xs align-top">{p.rank}</td>
+                    <td className="py-2.5 align-top">
+                      <p className="group-hover:text-red-600 transition-colors">{p.name}</p>
 
-              <tr className="border-b border-gray-300 bg-gray-50">
-                <td className="p-3 font-semibold">
-                  Finance
-                </td>
-                <td className="p-3">
-                  Investment & Private Capital
-                </td>
-                <td className="p-3 text-green-600">
-                  +8.6%
-                </td>
-                <td className="p-3">
-                  Positive
-                </td>
-              </tr>
+                      {/* Mobile view: org + why-they-matter collapse under name */}
+                      <div className="sm:hidden mt-1">
+                        <p className="text-xs text-gray-600">{p.title}</p>
+                        <p className="text-xs text-gray-400 mt-1">{p.category}</p>
+                      </div>
+                    </td>
+                    <td className="px-4 py-2.5 text-left hidden sm:table-cell text-sm align-top">{p.title}</td>
+                    <td className="px-4 py-2.5 text-left hidden sm:table-cell text-sm align-top">{p.category}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-              <tr className="border-b border-gray-300">
-                <td className="p-3 font-semibold">
-                  Energy
-                </td>
-                <td className="p-3">
-                  Power & Infrastructure
-                </td>
-                <td className="p-3 text-green-600">
-                  +10.2%
-                </td>
-                <td className="p-3">
-                  Expanding
-                </td>
-              </tr>
+        {/* Rising Billionaires */}
+        <div>
+          <SectionHeader title="Fastest Growing" subtitle="Biggest wealth gains in 2026" />
+          <div className="flex flex-col gap-4">
+            {risingBillionaires.map((r) => (
+              <div key={r.name} className="border border-gray-200 rounded p-4 hover:shadow-md transition-shadow cursor-pointer">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
+                    <Star size={14} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">{r.name}</p>
+                    <p className="text-xs text-gray-500">{r.company}</p>
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-sm">{r.wealth}</span>
+                  <span className="text-green-600 text-xs font-medium">{r.growth}</span>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">{r.story}</p>
+              </div>
+            ))}
 
-              <tr className="border-b border-gray-300 bg-gray-50">
-                <td className="p-3 font-semibold">
-                  Healthcare
-                </td>
-                <td className="p-3">
-                  Biotechnology & Pharmaceuticals
-                </td>
-                <td className="p-3 text-green-600">
-                  +7.8%
-                </td>
-                <td className="p-3">
-                  Growing
-                </td>
+            {/* Billionaire news */}
+            <div className="border-t-2 border-black pt-4 mt-2">
+              <h3 className="text-sm uppercase tracking-wider mb-3">Wealth News</h3>
+              <div className="divide-y divide-gray-100">
+                {billionaireNews.slice(0, 4).map((item) => (
+                  <div key={item.id} className="py-2 group cursor-pointer">
+                    <p className="text-xs leading-snug group-hover:text-red-600 transition-colors">{item.title}</p>
+                    <span className="text-xs text-gray-400">{item.time}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* India's Richest */}
+      <div className="mb-8" id="india">
+        <div className="flex items-center gap-2 border-b-2 border-black pb-2 mb-4">
+          <Flag size={16} className="text-orange-600" />
+          <h2 className="uppercase tracking-wider">India's Richest</h2>
+          <span className="text-xs text-gray-500 ml-2">Top 10 as of May 2026</span>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b border-gray-200">
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider w-8">#</th>
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Name</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Net Worth (INR)</th>
+                <th className="text-left py-2 pl-4 text-xs text-gray-500 font-normal uppercase tracking-wider hidden md:table-cell">Company</th>
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden lg:table-cell">Sector</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Change</th>
               </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {indiaRichest.map((b) => (
+                <tr key={b.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
+                  <td className="py-2.5 text-gray-400 text-xs">{b.rank}</td>
+                  <td className="py-2.5 group-hover:text-red-600 transition-colors">{b.name}</td>
+                  <td className="py-2.5 text-right font-medium">{b.wealth}</td>
+                  <td className="py-2.5 pl-4 text-gray-600 hidden md:table-cell text-sm">{b.company}</td>
+                  <td className="py-2.5 text-gray-600 hidden lg:table-cell text-sm">{b.sector}</td>
+                  <td className={`py-2.5 text-right text-xs ${b.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}>
+                    {b.change}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
-      </section>
-
-      {/* BOTTOM FEATURE */}
-      <section className="border-t-4 border-black pt-5 pb-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-          <div className="md:col-span-2">
-            <span className="text-[10px] uppercase tracking-[0.18em] text-red-600 font-bold">
-              The Big Picture
-            </span>
-
-            <h2 className="text-2xl md:text-3xl font-bold leading-tight mt-2">
-              Wealth Is Increasingly Connected to Technology, Infrastructure and Global Capital
-            </h2>
-
-            <p className="text-sm text-gray-600 leading-relaxed mt-3 max-w-3xl">
-              The concentration of wealth among technology founders,
-              investors and industrial leaders reflects the growing
-              importance of digital infrastructure, artificial intelligence,
-              energy and global capital markets.
-            </p>
-          </div>
-
-          <div className="border-l-0 md:border-l border-gray-300 md:pl-5">
-            <p className="text-[10px] uppercase tracking-widest text-gray-400">
-              Market Focus
-            </p>
-
-            <p className="text-xl font-bold mt-1">
-              Technology & AI
-            </p>
-
-            <p className="text-xs text-gray-500 mt-2">
-              The largest new sources of wealth continue to emerge from
-              companies building the infrastructure for the next generation
-              of computing.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
+      </div>
     </main>
   );
 }
