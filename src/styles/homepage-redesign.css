@@ -893,19 +893,13 @@ footer .pt-logo-accent {
 ======================================== */
 
 .pt-market-card {
-  width: 168px;
-  min-width: 168px;
-
-  height: 40px;
-
-  padding: 0 10px;
-
-  border-radius: 8px;
-
+  width: 200px;
+  min-width: 200px;
+  height: 56px;
+  padding: 0 18px;
+  border-radius: 12px;
   background: #0b0b0b;
-
   color: #ffffff;
-
   flex-shrink: 0;
 }
 
