@@ -1,11 +1,12 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { TrendingUp, TrendingDown, Flag, Star } from "lucide-react";
 
+/* Shared section header — matches the Leadership page's editorial rule + eyebrow treatment */
 function SectionHeader({ title, id, subtitle }: { title: string; id?: string; subtitle?: string }) {
   return (
-    <div id={id} className="border-b-2 border-black pb-2 mb-4">
-      <h2 className="uppercase tracking-wider text-2xl">{title}</h2>
-      {subtitle && <p className="text-sm text-gray-500 mt-0.5">{subtitle}</p>}
+    <div id={id} className="border-b-2 border-black pb-2 mb-5">
+      <h2 className="font-serif text-2xl leading-snug">{title}</h2>
+      {subtitle && <p className="text-sm text-gray-500 mt-1 leading-relaxed max-w-3xl">{subtitle}</p>}
     </div>
   );
 }
@@ -75,106 +76,129 @@ const statsBar = [
   { label: "Biggest Gainer YTD", value: "Jensen Huang", sub: "+$89B in 2026" },
 ];
 
+/* Shared rank-badge table shell — hairline rule header, uppercase eyebrow columns */
+function TableShell({
+  columns,
+  children,
+}: {
+  columns: { label: string; align?: "left" | "right"; className?: string }[];
+  children: React.ReactNode;
+}) {
+  return (
+    <table className="w-full text-sm border-collapse">
+      <thead>
+        <tr className="border-b-2 border-black">
+          {columns.map((col) => (
+            <th
+              key={col.label}
+              className={`py-2.5 text-[11px] text-gray-500 font-normal uppercase tracking-wider ${
+                col.align === "right" ? "text-right" : "text-left"
+              } ${col.className ?? ""}`}
+            >
+              {col.label}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-gray-100">{children}</tbody>
+    </table>
+  );
+}
+
 export function BillionairesPage() {
   return (
-    <main className="max-w-screen-xl mx-auto px-4 py-6">
+    <main className="max-w-6xl mx-auto px-4 md:px-6 py-8">
       {/* Page title */}
-      <div className="border-b-4 border-black mb-6 pb-2">
-        <span className="text-xs text-gray-500 uppercase tracking-widest">Exclusive Rankings</span>
-        <h1 className="mt-0.5">Billionaires & Wealth Intelligence</h1>
+      <div className="border-b-4 border-black mb-8 pb-3">
+        <span className="text-xs text-gray-500 uppercase tracking-[0.25em]">Exclusive Rankings</span>
+        <h1 className="font-serif text-3xl md:text-4xl mt-0.5">Billionaires &amp; Wealth Intelligence</h1>
       </div>
 
       {/* Stats bar */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 border border-gray-200 mb-10">
         {statsBar.map((stat) => (
-          <div key={stat.label} className="border border-gray-200 rounded p-4 text-center">
-            <p className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</p>
-            <p className="text-xl mt-1">{stat.value}</p>
-            <p className="text-xs text-gray-400 mt-0.5">{stat.sub}</p>
+          <div key={stat.label} className="bg-white p-5 text-center hover:bg-gray-50 transition-colors">
+            <p className="text-[11px] text-gray-500 uppercase tracking-wider">{stat.label}</p>
+            <p className="font-serif text-2xl mt-2">{stat.value}</p>
+            <p className="text-xs text-gray-400 mt-1">{stat.sub}</p>
           </div>
         ))}
       </div>
 
       {/* World's Billionaires list */}
-      <div className="mb-8" id="world">
+      <div className="mb-12" id="world">
         <SectionHeader
           title="World's Billionaires"
           subtitle="Real-time net worth estimates. Updated daily. All figures in USD."
         />
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="border-b-2 border-gray-200">
-                <th className="text-left py-2 px-1 text-xs text-gray-500 font-normal uppercase tracking-wider w-8">#</th>
-                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Name</th>
-                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Net Worth</th>
-                <th className="text-left py-2 pl-4 text-xs text-gray-500 font-normal uppercase tracking-wider hidden md:table-cell">Company</th>
-                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden lg:table-cell">Country</th>
-                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Today</th>
+          <TableShell
+            columns={[
+              { label: "#", className: "w-8" },
+              { label: "Name" },
+              { label: "Net Worth", align: "right" },
+              { label: "Company", className: "hidden md:table-cell pl-4" },
+              { label: "Country", className: "hidden lg:table-cell" },
+              { label: "Today", align: "right" },
+            ]}
+          >
+            {worldBillionaires.map((b) => (
+              <tr key={b.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
+                <td className="py-3 text-gray-400 text-xs font-serif">{b.rank}</td>
+                <td className="py-3">
+                  <p className="group-hover:text-red-600 transition-colors">{b.name}</p>
+                  <p className="text-xs text-gray-400 hidden sm:block">{b.industry}</p>
+                </td>
+                <td className="py-3 text-right font-medium">{b.wealth}</td>
+                <td className="py-3 pl-4 text-gray-600 hidden md:table-cell text-sm">{b.company}</td>
+                <td className="py-3 text-gray-600 hidden lg:table-cell text-sm">{b.country}</td>
+                <td className="py-3 text-right">
+                  <span className={`inline-flex items-center justify-end gap-0.5 text-xs ${b.up ? "text-green-600" : "text-red-600"}`}>
+                    {b.up ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+                    {b.change}
+                  </span>
+                </td>
               </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {worldBillionaires.map((b) => (
-                <tr key={b.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
-                  <td className="py-3 px-1 text-gray-400 text-xs">{b.rank}</td>
-                  <td className="py-3">
-                    <p className="group-hover:text-red-600 transition-colors">{b.name}</p>
-                    <p className="text-xs text-gray-400 hidden sm:block">{b.industry}</p>
-                  </td>
-                  <td className="py-3 text-right font-medium">{b.wealth}</td>
-                  <td className="py-3 pl-4 text-gray-600 hidden md:table-cell text-sm">{b.company}</td>
-                  <td className="py-3 text-gray-600 hidden lg:table-cell text-sm">{b.country}</td>
-                  <td className="py-3 text-right">
-                    <span className={`flex items-center justify-end gap-0.5 text-xs ${b.up ? "text-green-600" : "text-red-600"}`}>
-                      {b.up ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
-                      {b.change}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="text-xs text-gray-400 mt-2">Showing top 15 of 2,781 billionaires. Updated: May 21, 2026 05:00 UTC</p>
+            ))}
+          </TableShell>
+          <p className="text-xs text-gray-400 mt-3">Showing top 15 of 2,781 billionaires. Updated: May 21, 2026 05:00 UTC</p>
         </div>
       </div>
 
       {/* PT30 + Rising Stars side by side */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
         {/* PT30 */}
         <div className="lg:col-span-2" id="pt30">
           <SectionHeader
-            title="🏆  PRIDE TIMES 30 — LEADERS TO WATCH IN 2026 "
-            subtitle="The Pride Times 30 recognizes thirty global leaders across business, technology, and innovation who are defining the direction of the global economy this year. This edition highlights ten names at the forefront: "
+            title="🏆  Pride Times 30 — Leaders to Watch in 2026"
+            subtitle="The Pride Times 30 recognizes thirty global leaders across business, technology, and innovation who are defining the direction of the global economy this year. This edition highlights ten names at the forefront:"
           />
           <div className="overflow-x-auto">
-            <table className="w-full text-sm border-collapse">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider w-8">#</th>
-                  <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Name</th>
-                  <th className="text-left px-4 py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Organization</th>
-                  <th className="text-left px-4 py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Why They Matter</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {pt30List.map((p) => (
-                  <tr key={p.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
-                    <td className="py-2.5 text-gray-900 text-xs align-top">{p.rank}</td>
-                    <td className="py-2.5 align-top">
-                      <p className="group-hover:text-red-600 transition-colors">{p.name}</p>
+            <TableShell
+              columns={[
+                { label: "#", className: "w-8" },
+                { label: "Name" },
+                { label: "Organization", className: "hidden sm:table-cell px-4" },
+                { label: "Why They Matter", className: "hidden sm:table-cell px-4" },
+              ]}
+            >
+              {pt30List.map((p) => (
+                <tr key={p.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
+                  <td className="py-3 text-gray-400 text-xs font-serif align-top">{p.rank}</td>
+                  <td className="py-3 align-top">
+                    <p className="group-hover:text-red-600 transition-colors">{p.name}</p>
 
-                      {/* Mobile view: org + why-they-matter collapse under name */}
-                      <div className="sm:hidden mt-1">
-                        <p className="text-xs text-gray-600">{p.title}</p>
-                        <p className="text-xs text-gray-400 mt-1">{p.category}</p>
-                      </div>
-                    </td>
-                    <td className="px-4 py-2.5 text-left hidden sm:table-cell text-sm align-top">{p.title}</td>
-                    <td className="px-4 py-2.5 text-left hidden sm:table-cell text-sm align-top">{p.category}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    {/* Mobile view: org + why-they-matter collapse under name */}
+                    <div className="sm:hidden mt-1">
+                      <p className="text-xs text-gray-600">{p.title}</p>
+                      <p className="text-xs text-gray-400 mt-1">{p.category}</p>
+                    </div>
+                  </td>
+                  <td className="px-4 py-3 text-left hidden sm:table-cell text-sm align-top text-gray-700">{p.title}</td>
+                  <td className="px-4 py-3 text-left hidden sm:table-cell text-sm align-top text-gray-500">{p.category}</td>
+                </tr>
+              ))}
+            </TableShell>
           </div>
         </div>
 
@@ -183,7 +207,10 @@ export function BillionairesPage() {
           <SectionHeader title="Fastest Growing" subtitle="Biggest wealth gains in 2026" />
           <div className="flex flex-col gap-4">
             {risingBillionaires.map((r) => (
-              <div key={r.name} className="border border-gray-200 rounded p-4 hover:shadow-md transition-shadow cursor-pointer">
+              <div
+                key={r.name}
+                className="border border-gray-200 hover:border-black p-4 transition-colors duration-300 cursor-pointer"
+              >
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
                     <Star size={14} className="text-white" />
@@ -193,11 +220,11 @@ export function BillionairesPage() {
                     <p className="text-xs text-gray-500">{r.company}</p>
                   </div>
                 </div>
-                <div className="mt-3 flex items-center justify-between">
-                  <span className="text-sm">{r.wealth}</span>
+                <div className="mt-3 flex items-center justify-between pt-3 border-t border-gray-100">
+                  <span className="font-serif text-lg">{r.wealth}</span>
                   <span className="text-green-600 text-xs font-medium">{r.growth}</span>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">{r.story}</p>
+                <p className="text-xs text-gray-500 mt-2 leading-relaxed">{r.story}</p>
               </div>
             ))}
 
@@ -206,7 +233,7 @@ export function BillionairesPage() {
               <h3 className="text-sm uppercase tracking-wider mb-3">Wealth News</h3>
               <div className="divide-y divide-gray-100">
                 {billionaireNews.slice(0, 4).map((item) => (
-                  <div key={item.id} className="py-2 group cursor-pointer">
+                  <div key={item.id} className="py-2.5 group cursor-pointer">
                     <p className="text-xs leading-snug group-hover:text-red-600 transition-colors">{item.title}</p>
                     <span className="text-xs text-gray-400">{item.time}</span>
                   </div>
@@ -219,38 +246,35 @@ export function BillionairesPage() {
 
       {/* India's Richest */}
       <div className="mb-8" id="india">
-        <div className="flex items-center gap-2 border-b-2 border-black pb-2 mb-4">
+        <div className="flex items-center gap-2 border-b-2 border-black pb-2 mb-5">
           <Flag size={16} className="text-orange-600" />
-          <h2 className="uppercase tracking-wider">India's Richest</h2>
+          <h2 className="font-serif text-2xl">India's Richest</h2>
           <span className="text-xs text-gray-500 ml-2">Top 10 as of May 2026</span>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider w-8">#</th>
-                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Name</th>
-                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Net Worth (INR)</th>
-                <th className="text-left py-2 pl-4 text-xs text-gray-500 font-normal uppercase tracking-wider hidden md:table-cell">Company</th>
-                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden lg:table-cell">Sector</th>
-                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Change</th>
+          <TableShell
+            columns={[
+              { label: "#", className: "w-8" },
+              { label: "Name" },
+              { label: "Net Worth (INR)", align: "right" },
+              { label: "Company", className: "hidden md:table-cell pl-4" },
+              { label: "Sector", className: "hidden lg:table-cell" },
+              { label: "Change", align: "right" },
+            ]}
+          >
+            {indiaRichest.map((b) => (
+              <tr key={b.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
+                <td className="py-3 text-gray-400 text-xs font-serif">{b.rank}</td>
+                <td className="py-3 group-hover:text-red-600 transition-colors">{b.name}</td>
+                <td className="py-3 text-right font-medium">{b.wealth}</td>
+                <td className="py-3 pl-4 text-gray-600 hidden md:table-cell text-sm">{b.company}</td>
+                <td className="py-3 text-gray-600 hidden lg:table-cell text-sm">{b.sector}</td>
+                <td className={`py-3 text-right text-xs ${b.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}>
+                  {b.change}
+                </td>
               </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {indiaRichest.map((b) => (
-                <tr key={b.rank} className="hover:bg-gray-50 transition-colors group cursor-pointer">
-                  <td className="py-2.5 text-gray-400 text-xs">{b.rank}</td>
-                  <td className="py-2.5 group-hover:text-red-600 transition-colors">{b.name}</td>
-                  <td className="py-2.5 text-right font-medium">{b.wealth}</td>
-                  <td className="py-2.5 pl-4 text-gray-600 hidden md:table-cell text-sm">{b.company}</td>
-                  <td className="py-2.5 text-gray-600 hidden lg:table-cell text-sm">{b.sector}</td>
-                  <td className={`py-2.5 text-right text-xs ${b.change.startsWith("+") ? "text-green-600" : "text-red-600"}`}>
-                    {b.change}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            ))}
+          </TableShell>
         </div>
       </div>
     </main>
