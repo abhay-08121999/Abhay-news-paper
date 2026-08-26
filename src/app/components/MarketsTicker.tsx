@@ -227,15 +227,15 @@ export function MarketsTicker() {
                 of the second without any visible jump. */}
             {[...cards, ...cards].map((card, i) => (
               <div key={`${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
-                <span className="text-[10px] text-gray-400 font-medium truncate">{card.symbol}</span>
+                <span className="text-xs text-gray-400 font-medium truncate">{card.symbol}</span>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-semibold">{card.value}</span>
+                  <span className="text-sm font-semibold">{card.value}</span>
                   <span
-                    className={`flex items-center gap-0.5 text-[10px] font-medium ${
+                    className={`flex items-center gap-0.5 text-xs font-medium ${
                       card.change >= 0 ? "pt-market-card-positive" : "pt-market-card-negative"
                     }`}
                   >
-                    {card.change >= 0 ? <TrendingUp size={9} /> : <TrendingDown size={9} />}
+                    {card.change >= 0 ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
                     {card.change >= 0 ? "+" : ""}
                     {card.change}%
                   </span>
