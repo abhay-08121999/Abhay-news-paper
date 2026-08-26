@@ -16,20 +16,12 @@ const primaryNav = [
   { label: "Billionaires", path: "/billionaires" },
 ];
 
-const industriesLinks = [
-  { label: "Healthcare", path: "/healthcare" },
-  { label: "Manufacturing", path: "/manufacturing" },
-  { label: "Smart Cities", path: "/smart-cities" },
-  { label: "Supply Chain", path: "/supply-chain" },
-];
-
 const editions = ["Asia Edition", "Americas Edition", "Europe Edition", "India Edition"];
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [industriesOpen, setIndustriesOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [editionOpen, setEditionOpen] = useState(false);
   const [edition, setEdition] = useState("Asia Edition");
@@ -39,13 +31,12 @@ export function Header() {
   const isPremium = user?.tier === "premium";
 
   useEffect(() => {
-    if (!industriesOpen && !editionOpen) return;
+    if (!editionOpen) return;
     const timer = setTimeout(() => {
-      setIndustriesOpen(false);
       setEditionOpen(false);
     }, 5000);
     return () => clearTimeout(timer);
-  }, [industriesOpen, editionOpen]);
+  }, [editionOpen]);
 
   const handleSignOut = () => {
     signOut();
@@ -76,29 +67,6 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-
-            <div className="relative">
-              <button
-                className="pt-focusable flex items-center gap-0.5"
-                onClick={() => setIndustriesOpen(!industriesOpen)}
-              >
-                Industries <ChevronDown size={11} />
-              </button>
-              {industriesOpen && (
-                <div className="absolute left-0 top-full mt-0 w-48 bg-white border border-gray-200 shadow-lg z-50 py-1">
-                  {industriesLinks.map((link) => (
-                    <Link
-                      key={link.label}
-                      to={link.path}
-                      className="block px-4 py-2 text-xs text-gray-800 hover:bg-gray-50 hover:text-red-600 transition-colors"
-                      onClick={() => setIndustriesOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
           </nav>
 
           {/* Utility line on the right of the black bar (desktop) */}
@@ -123,7 +91,7 @@ export function Header() {
                 {edition} <ChevronDown size={11} />
               </button>
               {editionOpen && (
-                <div className="absolute right-0 top-full mt-0 w-44 bg-white border border-gray-200 shadow-lg z-50 py-1">
+                <div className="absolute right-0 top-full mt-0 w-44 bg-black border border-gray-800 shadow-lg z-50 py-1">
                   {editions.map((item) => (
                     <button
                       key={item}
@@ -131,7 +99,7 @@ export function Header() {
                         setEdition(item);
                         setEditionOpen(false);
                       }}
-                      className="block w-full text-left px-4 py-2 text-xs text-gray-800 hover:bg-gray-50 hover:text-red-600 transition-colors"
+                      className="block w-full text-left px-4 py-2 text-xs text-white hover:bg-gray-900 hover:text-red-500 transition-colors"
                     >
                       {item}
                     </button>
@@ -260,11 +228,6 @@ export function Header() {
             {primaryNav.map((item) => (
               <Link key={item.label} to={item.path} className="py-2.5 text-sm border-b border-gray-100" onClick={() => setMobileOpen(false)}>
                 {item.label}
-              </Link>
-            ))}
-            {industriesLinks.map((link) => (
-              <Link key={link.label} to={link.path} className="py-2.5 text-sm border-b border-gray-100 text-gray-600" onClick={() => setMobileOpen(false)}>
-                {link.label}
               </Link>
             ))}
             {!isSignedIn ? (
