@@ -1,14 +1,20 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { Clock, Zap, TrendingUp, TrendingDown } from "lucide-react";
+import { Clock, Zap, TrendingUp, TrendingDown, Radio } from "lucide-react";
 import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import Ener1Img from "../../../imports/Energy1.png";
 import Ener2Img from "../../../imports/Energy2.png";
 import Ener3Img from "../../../imports/Energy3.png";
 
-function SH({ title }: { title: string }) {
+function SH({ title, accent = "amber" }: { title: string; accent?: "amber" | "sky" | "slate" }) {
+  const dot = {
+    amber: "bg-amber-500",
+    sky: "bg-sky-500",
+    slate: "bg-slate-500",
+  }[accent];
   return (
-    <div className="border-b-2 border-black pb-2 mb-4">
-      <h2 className="uppercase tracking-wider">{title}</h2>
+    <div className="flex items-center gap-2 border-b-2 border-black pb-2 mb-4">
+      <span className={`w-1.5 h-1.5 rounded-full ${dot}`} />
+      <h2 className="uppercase tracking-[0.15em] text-sm font-semibold">{title}</h2>
     </div>
   );
 }
@@ -75,180 +81,199 @@ const policyNews = [
   { id: 5, title: "India Sets World Record: 500 GW Renewable Capacity Target 3 Years Ahead of Schedule", time: "7 hrs ago" },
 ];
 
+const snapshot = [
+  { label: "Cleantech Investment Needed (5 Yrs)", value: "USD 5–8 Trillion (AI infrastructure + enabling systems)" },
+  { label: "US IRA Clean Energy Commitments", value: "Over USD 300 Billion catalyzed since 2022" },
+  { label: "EU Net-Zero Industry Act", value: "Accelerating European clean tech manufacturing" },
+  { label: "Power Demand Driver", value: "AI data centers forcing grid policy reversals globally" },
+  { label: "Top Energy Deal Type (2026)", value: "Power generation, storage, and transmission assets" },
+];
+
+function NewsColumn({
+  title,
+  accent,
+  items,
+}: {
+  title: string;
+  accent: "amber" | "sky" | "slate";
+  items: { id: number; title: string; time: string }[];
+}) {
+  const border = {
+    amber: "border-l-amber-500",
+    sky: "border-l-sky-500",
+    slate: "border-l-slate-500",
+  }[accent];
+  return (
+    <div>
+      <SH title={title} accent={accent} />
+      <div className="divide-y divide-gray-100">
+        {items.map((n) => (
+          <div key={n.id} className={`py-3 pl-3 border-l-2 border-l-transparent hover:${border} transition-colors group cursor-pointer`}>
+            <p className="text-sm leading-snug group-hover:text-amber-700 transition-colors">{n.title}</p>
+            <span className="text-xs text-gray-400 flex items-center gap-1 mt-1.5">
+              <Clock size={10} />
+              {n.time}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function EnergyPage() {
   return (
     <div className="py-6 max-w-7xl mx-auto px-4">
       {/* Page header */}
-      <div className="border-b-4 border-black mb-8 pb-3 flex items-center gap-3">
-        <Zap size={22} />
+      <div className="border-b-4 border-black mb-10 pb-4 flex items-center gap-3">
+        <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center shrink-0">
+          <Zap size={16} className="text-amber-400" fill="currentColor" />
+        </div>
         <div>
-          <span className="text-xs text-gray-500 uppercase tracking-widest">Power & Resources</span>
-          <h1 className="mt-0.5">Energy & Natural Resources</h1>
+          <span className="text-xs text-amber-700 uppercase tracking-[0.2em] font-semibold">Power &amp; Resources</span>
+          <h1 className="mt-0.5 font-serif">Energy &amp; Natural Resources</h1>
         </div>
       </div>
 
       {/* Hero + prices + quote */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
         <div className="lg:col-span-2 group cursor-pointer">
-          <div className="overflow-hidden rounded mb-4">
+          <div className="overflow-hidden rounded-sm mb-4">
             <ImageWithFallback
               src={hero.image}
               alt={hero.title}
               className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
-          <span className="text-xs text-red-600 uppercase tracking-wider">{hero.category}</span>
-          <h3 className="mt-2 leading-tight">{hero.title}</h3>
+          <span className="text-xs text-amber-700 uppercase tracking-wider font-semibold">{hero.category}</span>
+          <h3 className="mt-2 leading-tight font-serif text-2xl group-hover:text-amber-700 transition-colors">{hero.title}</h3>
           <p className="text-gray-600 text-sm mt-2 leading-relaxed">{hero.excerpt}</p>
-          <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+          <div className="flex items-center gap-3 mt-3 text-xs text-gray-400 border-t border-gray-100 pt-3">
             <span>By {hero.author}</span>
             <span className="flex items-center gap-1"><Clock size={10} />{hero.time}</span>
           </div>
         </div>
 
         <div className="flex flex-col gap-6">
-          {/* Energy prices */}
-          <div>
-            <SH title="Energy Prices Live" />
-            <div className="divide-y divide-gray-100">
+          {/* Energy prices — ticker treatment */}
+          <div className="bg-slate-950 rounded-sm overflow-hidden">
+            <div className="flex items-center gap-2 px-4 pt-4 pb-3 border-b border-white/10">
+              <Radio size={12} className="text-amber-400 animate-pulse" />
+              <h2 className="uppercase tracking-[0.15em] text-xs font-semibold text-white">Energy Prices Live</h2>
+            </div>
+            <div className="divide-y divide-white/5 px-4">
               {energyPrices.map((e) => (
-                <div key={e.commodity} className="py-1.5 flex items-center justify-between">
-                  <span className="text-xs text-gray-700">{e.commodity}</span>
+                <div key={e.commodity} className="py-2 flex items-center justify-between">
+                  <span className="text-xs text-slate-300">{e.commodity}</span>
                   <div className="text-right">
-                    <p className="text-xs">{e.price}</p>
-                    <p className={`text-xs flex items-center justify-end gap-1 ${e.up ? "text-green-600" : "text-red-600"}`}>
+                    <p className="text-xs font-mono text-white tabular-nums">{e.price}</p>
+                    <p className={`text-xs font-mono flex items-center justify-end gap-1 tabular-nums ${e.up ? "text-emerald-400" : "text-red-400"}`}>
                       {e.up ? <TrendingUp size={10} /> : <TrendingDown size={10} />}{e.change}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
+            <div className="h-3" />
           </div>
 
           {/* Quote block */}
-          <div className="border border-gray-700 bg-slate-200 flex">
-            <div className="w-2 border-r border-gray-700 bg-slate-300 shrink-0" />
-            <div className="p-4">
-              <p className="italic text-sm leading-relaxed text-gray-900">
-                "AI-driven load growth, grid bottlenecks, cleantech market fragmentation, and geopolitics are redefining the terms of progress in 2026's energy landscape."
-              </p>
-              <p className="mt-2 font-bold text-gray-900 text-sm">
-                — S&P Global Energy Horizons Top Trends 2026
-              </p>
-            </div>
+          <div className="relative border border-slate-300 bg-slate-50 pl-5 pr-4 py-4 rounded-sm">
+            <span className="absolute left-2 top-1 text-4xl leading-none text-amber-500/40 font-serif select-none">&ldquo;</span>
+            <p className="italic text-sm leading-relaxed text-gray-900 relative">
+              AI-driven load growth, grid bottlenecks, cleantech market fragmentation, and geopolitics are redefining the terms of progress in 2026's energy landscape.
+            </p>
+            <p className="mt-3 font-semibold text-gray-900 text-xs uppercase tracking-wide">
+              — S&amp;P Global Energy Horizons Top Trends 2026
+            </p>
           </div>
         </div>
       </div>
 
       {/* Secondary hero 1 */}
-      <div className="mb-10 group cursor-pointer">
-        <div className="relative overflow-hidden rounded mb-4">
+      <div className="mb-12 group cursor-pointer">
+        <div className="relative overflow-hidden rounded-sm mb-4">
           <ImageWithFallback
             src={hero1.image}
             alt={hero1.title}
             className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+          <span className="absolute bottom-4 left-4 text-xs text-white bg-amber-600 px-2.5 py-1 uppercase tracking-wider font-semibold rounded-sm">
+            {hero1.category}
+          </span>
         </div>
-        <span className="text-xs text-red-600 uppercase tracking-wider">{hero1.category}</span>
-        <h3 className="mt-2 leading-tight">{hero1.title}</h3>
+        <h3 className="mt-2 leading-tight font-serif text-2xl group-hover:text-amber-700 transition-colors">{hero1.title}</h3>
         <p className="text-gray-600 text-sm mt-2 leading-relaxed">{hero1.excerpt}</p>
-        <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+        <div className="flex items-center gap-3 mt-3 text-xs text-gray-400 border-t border-gray-100 pt-3">
           <span>By {hero1.author}</span>
           <span className="flex items-center gap-1"><Clock size={10} /> {hero1.time}</span>
         </div>
       </div>
 
-      {/* Secondary hero 2 + industry table */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10 items-start">
+      {/* Secondary hero 2 + industry snapshot */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 items-start">
         <div className="group cursor-pointer">
-          <div className="relative overflow-hidden rounded mb-3">
+          <div className="relative overflow-hidden rounded-sm mb-3">
             <ImageWithFallback
               src={hero2.image}
               alt={hero2.title}
               className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+            <span className="absolute bottom-4 left-4 text-xs text-white bg-amber-600 px-2.5 py-1 uppercase tracking-wider font-semibold rounded-sm">
+              {hero2.category}
+            </span>
           </div>
-          <span className="text-xs text-red-600 uppercase tracking-wider">{hero2.category}</span>
-          <h3 className="mt-2 leading-tight">{hero2.title}</h3>
+          <h3 className="mt-2 leading-tight font-serif text-2xl group-hover:text-amber-700 transition-colors">{hero2.title}</h3>
           <p className="text-gray-600 text-sm mt-2 leading-relaxed">{hero2.excerpt}</p>
-          <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
+          <div className="flex items-center gap-3 mt-3 text-xs text-gray-400 border-t border-gray-100 pt-3">
             <span>By {hero2.author}</span>
             <span className="flex items-center gap-1"><Clock size={10} /> {hero2.time}</span>
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-gray-300 text-sm">
-            <tbody>
-              <tr>
-                <td className="w-1/3 bg-slate-200 font-bold p-3 border border-gray-300">
-                  Cleantech Investment Needed (5 Yrs)
-                </td>
-                <td className="p-3 border border-gray-300">
-                  USD 5–8 Trillion (AI infrastructure + enabling systems)
-                </td>
-              </tr>
-              <tr>
-                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
-                  US IRA Clean Energy Commitments
-                </td>
-                <td className="p-3 border border-gray-300">
-                  Over USD 300 Billion catalyzed since 2022
-                </td>
-              </tr>
-              <tr>
-                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
-                  EU Net-Zero Industry Act
-                </td>
-                <td className="p-3 border border-gray-300">
-                  Accelerating European clean tech manufacturing
-                </td>
-              </tr>
-              <tr>
-                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
-                  Power Demand Driver
-                </td>
-                <td className="p-3 border border-gray-300">
-                  AI data centers forcing grid policy reversals globally
-                </td>
-              </tr>
-              <tr>
-                <td className="bg-slate-200 font-bold p-3 border border-gray-300">
-                  Top Energy Deal Type (2026)
-                </td>
-                <td className="p-3 border border-gray-300">
-                  Power generation, storage, and transmission assets
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="border border-gray-300 rounded-sm overflow-hidden self-stretch">
+          <div className="bg-black px-4 py-3">
+            <h2 className="uppercase tracking-[0.15em] text-xs font-semibold text-white">Industry Snapshot</h2>
+          </div>
+          {snapshot.map((row, i) => (
+            <div
+              key={row.label}
+              className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 px-4 py-3.5 ${i % 2 === 1 ? "bg-slate-50" : "bg-white"} ${i !== snapshot.length - 1 ? "border-b border-gray-200" : ""}`}
+            >
+              <span className="text-xs font-semibold uppercase tracking-wide text-amber-700 sm:w-2/5 shrink-0">
+                {row.label}
+              </span>
+              <span className="text-sm text-gray-800">{row.value}</span>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Renewables */}
-      <div className="mb-10">
+      <div className="mb-12">
         <SH title="Renewable Energy" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {renewableStories.map((s) => (
             <div key={s.id} className="group cursor-pointer">
-              <div className="overflow-hidden rounded mb-3">
+              <div className="overflow-hidden rounded-sm mb-3 relative">
                 <ImageWithFallback
                   src={s.image}
                   alt={s.title}
                   className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                <span className="absolute top-0 left-0 w-full h-1 bg-emerald-500" />
               </div>
-              <h3 className="leading-snug group-hover:text-red-600 transition-colors">{s.title}</h3>
-              <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{s.time}</span>
+              <h3 className="leading-snug group-hover:text-amber-700 transition-colors">{s.title}</h3>
+              <span className="text-xs text-gray-400 flex items-center gap-1 mt-1.5"><Clock size={10} />{s.time}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Sponsored */}
-      <div className="mb-10">
+      <div className="mb-12">
         <SponsoredArticleCard
           headline="BP's Net Zero 2030 Strategy: How the Oil Major is Reinventing Itself for the Energy Transition"
           excerpt="BP has committed $60B to clean energy through 2030 while maintaining profitable hydrocarbons. How the company is navigating the world's most consequential transition."
@@ -262,40 +287,10 @@ export function EnergyPage() {
       </div>
 
       {/* Oil/Gas + Nuclear + Policy */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <SH title="Oil & Gas" />
-          <div className="divide-y divide-gray-100">
-            {oilGasNews.map((n) => (
-              <div key={n.id} className="py-2.5 group cursor-pointer">
-                <p className="text-sm group-hover:text-red-600 transition-colors">{n.title}</p>
-                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <SH title="Nuclear Power" />
-          <div className="divide-y divide-gray-100">
-            {nuclearNews.map((n) => (
-              <div key={n.id} className="py-2.5 group cursor-pointer">
-                <p className="text-sm group-hover:text-red-600 transition-colors">{n.title}</p>
-                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div>
-          <SH title="Policy & Regulation" />
-          <div className="divide-y divide-gray-100">
-            {policyNews.map((n) => (
-              <div key={n.id} className="py-2.5 group cursor-pointer">
-                <p className="text-sm group-hover:text-red-600 transition-colors">{n.title}</p>
-                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10 pt-2 border-t-2 border-black">
+        <NewsColumn title="Oil & Gas" accent="amber" items={oilGasNews} />
+        <NewsColumn title="Nuclear Power" accent="sky" items={nuclearNews} />
+        <NewsColumn title="Policy & Regulation" accent="slate" items={policyNews} />
       </div>
     </div>
   );
