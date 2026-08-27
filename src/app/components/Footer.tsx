@@ -50,11 +50,14 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="block mb-4">
+            <Link to="/" className="block mb-3">
               <span className="pt-logo text-2xl" style={{ color: "#ffffff" }}>
                 THE <span className="pt-logo-accent">PRIDE</span> TIMES
               </span>
             </Link>
+            <p className="text-gray-400 text-xs leading-relaxed">
+              The world's leading source for business intelligence, technology coverage, and global financial news.
+            </p>
           </div>
 
           {/* Link columns */}
