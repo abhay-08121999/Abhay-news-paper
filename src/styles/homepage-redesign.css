@@ -214,7 +214,7 @@ footer.pt-footer {
   background: #000000;
   color: #ffffff;
 
-  border-top: 1px solid #222222;
+  border-top: none;
 
   margin-top: 40px;
 }
@@ -481,7 +481,7 @@ footer .footer-bottom {
 
   margin-top: 0;
 
-  border-top: 1px solid #222222;
+  border-top: none;
 
   padding: 18px 50px;
 
