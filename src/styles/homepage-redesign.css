@@ -203,7 +203,9 @@
 
 /* =========================================================
    FOOTER — PREMIUM NEWSPAPER LAYOUT
-   Updated for proper horizontal + vertical spacing
+   Spacing rhythm reworked for clearer separation between the
+   masthead/columns/legal bar, and more breathing room within
+   each — everything else in the footer is unchanged.
 ========================================================= */
 
 .pt-footer,
@@ -214,12 +216,12 @@ footer.pt-footer {
 
   border-top: 1px solid #222222;
 
-  margin-top: 0;
+  margin-top: 64px;
 }
 
 
 /* ========================================
-   FOOTER MAIN CONTAINER — TIGHTER SPACING
+   FOOTER MAIN CONTAINER — OPEN, EVEN RHYTHM
 ======================================== */
 
 .pt-footer .pt-container,
@@ -229,7 +231,7 @@ footer.pt-footer .pt-container {
 
   margin: 0 auto;
 
-  padding: 36px 50px 28px;
+  padding: 56px 50px 40px;
 
   display: grid;
 
@@ -237,9 +239,9 @@ footer.pt-footer .pt-container {
     minmax(240px, 1.4fr)
     repeat(3, minmax(140px, 1fr));
 
-  column-gap: 40px;
+  column-gap: 48px;
 
-  row-gap: 28px;
+  row-gap: 40px;
 
   align-items: start;
 }
@@ -262,6 +264,8 @@ footer.pt-footer .pt-logo-wrapper {
   justify-content: flex-start;
 
   min-width: 0;
+
+  padding-right: 24px;
 }
 
 
@@ -304,7 +308,7 @@ footer .pt-logo-accent {
 footer .pt-logo + span {
   display: block;
 
-  margin-top: 2px;
+  margin-top: 6px;
 
   font-family: Arial, Helvetica, sans-serif;
 
@@ -321,7 +325,7 @@ footer .pt-logo + span {
 
 
 /* ========================================
-   FOOTER DESCRIPTION — SHORTER, TIGHTER LINE HEIGHT
+   FOOTER DESCRIPTION — MORE AIR ABOVE AND BELOW
 ======================================== */
 
 .pt-footer .pt-description,
@@ -330,13 +334,13 @@ footer .pt-description,
 footer .pt-tagline {
   max-width: 300px;
 
-  margin-top: 10px;
+  margin-top: 18px;
 
   font-family: Arial, Helvetica, sans-serif;
 
   font-size: 12px;
 
-  line-height: 1.5;
+  line-height: 1.65;
 
   color: #bcbcbc;
 }
@@ -363,7 +367,7 @@ footer .footer-column {
 
 
 /* ========================================
-   FOOTER COLUMN HEADINGS — SMALLER, TIGHTER
+   FOOTER COLUMN HEADINGS — CLEARER SEPARATION FROM LINKS
 ======================================== */
 
 .pt-footer h3,
@@ -374,7 +378,7 @@ footer h3,
 footer h4,
 footer .pt-footer-heading,
 footer .footer-heading {
-  margin: 0 0 14px 0;
+  margin: 0 0 20px 0;
 
   padding: 0;
 
@@ -395,7 +399,7 @@ footer .footer-heading {
 
 
 /* ========================================
-   FOOTER LINKS WRAPPER — TIGHTER VERTICAL RHYTHM
+   FOOTER LINKS WRAPPER — LOOSER VERTICAL RHYTHM
 ======================================== */
 
 .pt-footer ul,
@@ -414,7 +418,7 @@ footer .footer-links {
 
   flex-direction: column;
 
-  gap: 11px;
+  gap: 14px;
 }
 
 
@@ -467,7 +471,7 @@ footer a:hover {
 
 
 /* ========================================
-   FOOTER BOTTOM BORDER / COPYRIGHT — SLIMMER
+   FOOTER BOTTOM BORDER / COPYRIGHT — CLEAR OF THE GRID ABOVE
 ======================================== */
 
 .pt-footer-bottom,
@@ -475,9 +479,11 @@ footer .pt-footer-bottom,
 footer .footer-bottom {
   width: 100%;
 
+  margin-top: 8px;
+
   border-top: 1px solid #252525;
 
-  padding: 14px 50px;
+  padding: 22px 50px;
 
   display: flex;
 
@@ -518,7 +524,7 @@ footer .pt-footer-social {
 
   align-items: center;
 
-  gap: 16px;
+  gap: 20px;
 }
 
 .pt-footer-social a,
@@ -547,10 +553,11 @@ footer .pt-footer-social a:hover {
       minmax(220px, 1.4fr)
       repeat(3, minmax(120px, 1fr));
 
-    column-gap: 30px;
+    column-gap: 36px;
 
-    padding-left: 40px;
-    padding-right: 40px;
+    row-gap: 36px;
+
+    padding: 48px 40px 36px;
   }
 }
 
@@ -566,9 +573,9 @@ footer .pt-footer-social a:hover {
 
     column-gap: 40px;
 
-    row-gap: 32px;
+    row-gap: 40px;
 
-    padding: 32px 30px 32px;
+    padding: 40px 30px 36px;
   }
 
   .pt-footer .pt-branding,
@@ -576,6 +583,10 @@ footer .pt-footer-social a:hover {
   footer.pt-footer .pt-branding,
   footer.pt-footer .pt-logo-wrapper {
     grid-column: span 2;
+
+    padding-right: 0;
+
+    padding-bottom: 8px;
   }
 
   .pt-footer .pt-description,
@@ -584,14 +595,18 @@ footer .pt-footer-social a:hover {
   footer .pt-tagline {
     max-width: 420px;
 
-    margin-top: 14px;
+    margin-top: 16px;
   }
 
   .pt-footer-bottom,
   footer .pt-footer-bottom,
   footer .footer-bottom {
+    margin-top: 4px;
+
     padding-left: 30px;
     padding-right: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 
@@ -607,9 +622,9 @@ footer .pt-footer-social a:hover {
 
     column-gap: 0;
 
-    row-gap: 28px;
+    row-gap: 36px;
 
-    padding: 28px 20px 32px;
+    padding: 36px 20px 40px;
   }
 
   .pt-footer .pt-branding,
@@ -617,6 +632,8 @@ footer .pt-footer-social a:hover {
   footer.pt-footer .pt-branding,
   footer.pt-footer .pt-logo-wrapper {
     grid-column: span 1;
+
+    padding-bottom: 4px;
   }
 
   .pt-footer .pt-logo,
@@ -632,11 +649,11 @@ footer .pt-footer-social a:hover {
   footer .pt-tagline {
     max-width: 100%;
 
-    margin-top: 12px;
+    margin-top: 14px;
 
     font-size: 12px;
 
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   .pt-footer h3,
@@ -647,7 +664,7 @@ footer .pt-footer-social a:hover {
   footer h4,
   footer .pt-footer-heading,
   footer .footer-heading {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 
     font-size: 12px;
   }
@@ -658,7 +675,7 @@ footer .pt-footer-social a:hover {
   footer ul,
   footer .pt-footer-links,
   footer .footer-links {
-    gap: 10px;
+    gap: 13px;
   }
 
   .pt-footer a,
@@ -669,13 +686,17 @@ footer .pt-footer-social a:hover {
   .pt-footer-bottom,
   footer .pt-footer-bottom,
   footer .footer-bottom {
-    padding: 14px 20px;
+    margin-top: 0;
+
+    padding: 20px 20px 24px;
 
     flex-direction: column;
 
     align-items: flex-start;
 
     justify-content: flex-start;
+
+    gap: 14px;
   }
 }
 
