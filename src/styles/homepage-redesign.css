@@ -216,12 +216,12 @@ footer.pt-footer {
 
   border-top: 1px solid #222222;
 
-  margin-top: 64px;
+  margin-top: 40px;
 }
 
 
 /* ========================================
-   FOOTER MAIN CONTAINER — OPEN, EVEN RHYTHM
+   FOOTER MAIN CONTAINER — COMPACT, EVEN RHYTHM
 ======================================== */
 
 .pt-footer .pt-container,
@@ -231,17 +231,17 @@ footer.pt-footer .pt-container {
 
   margin: 0 auto;
 
-  padding: 56px 50px 40px;
+  padding: 40px 50px 28px;
 
   display: grid;
 
   grid-template-columns:
-    minmax(240px, 1.4fr)
+    minmax(260px, 1.4fr)
     repeat(3, minmax(140px, 1fr));
 
-  column-gap: 48px;
+  column-gap: 60px;
 
-  row-gap: 40px;
+  row-gap: 32px;
 
   align-items: start;
 }
@@ -325,7 +325,7 @@ footer .pt-logo + span {
 
 
 /* ========================================
-   FOOTER DESCRIPTION — MORE AIR ABOVE AND BELOW
+   FOOTER DESCRIPTION
 ======================================== */
 
 .pt-footer .pt-description,
@@ -334,13 +334,13 @@ footer .pt-description,
 footer .pt-tagline {
   max-width: 300px;
 
-  margin-top: 18px;
+  margin-top: 12px;
 
   font-family: Arial, Helvetica, sans-serif;
 
   font-size: 12px;
 
-  line-height: 1.65;
+  line-height: 1.55;
 
   color: #bcbcbc;
 }
@@ -367,7 +367,7 @@ footer .footer-column {
 
 
 /* ========================================
-   FOOTER COLUMN HEADINGS — CLEARER SEPARATION FROM LINKS
+   FOOTER COLUMN HEADINGS
 ======================================== */
 
 .pt-footer h3,
@@ -378,7 +378,7 @@ footer h3,
 footer h4,
 footer .pt-footer-heading,
 footer .footer-heading {
-  margin: 0 0 20px 0;
+  margin: 0 0 14px 0;
 
   padding: 0;
 
@@ -399,7 +399,7 @@ footer .footer-heading {
 
 
 /* ========================================
-   FOOTER LINKS WRAPPER — LOOSER VERTICAL RHYTHM
+   FOOTER LINKS WRAPPER
 ======================================== */
 
 .pt-footer ul,
@@ -418,7 +418,7 @@ footer .footer-links {
 
   flex-direction: column;
 
-  gap: 14px;
+  gap: 9px;
 }
 
 
@@ -471,7 +471,7 @@ footer a:hover {
 
 
 /* ========================================
-   FOOTER BOTTOM BORDER / COPYRIGHT — CLEAR OF THE GRID ABOVE
+   FOOTER BOTTOM BORDER / COPYRIGHT
 ======================================== */
 
 .pt-footer-bottom,
@@ -479,11 +479,11 @@ footer .pt-footer-bottom,
 footer .footer-bottom {
   width: 100%;
 
-  margin-top: 8px;
+  margin-top: 0;
 
-  border-top: 1px solid #252525;
+  border-top: 1px solid #222222;
 
-  padding: 22px 50px;
+  padding: 18px 50px;
 
   display: flex;
 
@@ -524,7 +524,7 @@ footer .pt-footer-social {
 
   align-items: center;
 
-  gap: 20px;
+  gap: 18px;
 }
 
 .pt-footer-social a,
@@ -555,9 +555,9 @@ footer .pt-footer-social a:hover {
 
     column-gap: 36px;
 
-    row-gap: 36px;
+    row-gap: 28px;
 
-    padding: 48px 40px 36px;
+    padding: 36px 40px 24px;
   }
 }
 
@@ -573,9 +573,9 @@ footer .pt-footer-social a:hover {
 
     column-gap: 40px;
 
-    row-gap: 40px;
+    row-gap: 32px;
 
-    padding: 40px 30px 36px;
+    padding: 32px 30px 28px;
   }
 
   .pt-footer .pt-branding,
@@ -586,7 +586,7 @@ footer .pt-footer-social a:hover {
 
     padding-right: 0;
 
-    padding-bottom: 8px;
+    padding-bottom: 4px;
   }
 
   .pt-footer .pt-description,
@@ -595,18 +595,18 @@ footer .pt-footer-social a:hover {
   footer .pt-tagline {
     max-width: 420px;
 
-    margin-top: 16px;
+    margin-top: 12px;
   }
 
   .pt-footer-bottom,
   footer .pt-footer-bottom,
   footer .footer-bottom {
-    margin-top: 4px;
+    margin-top: 0;
 
     padding-left: 30px;
     padding-right: 30px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 }
 
@@ -622,9 +622,9 @@ footer .pt-footer-social a:hover {
 
     column-gap: 0;
 
-    row-gap: 36px;
+    row-gap: 28px;
 
-    padding: 36px 20px 40px;
+    padding: 28px 20px 28px;
   }
 
   .pt-footer .pt-branding,
@@ -649,11 +649,11 @@ footer .pt-footer-social a:hover {
   footer .pt-tagline {
     max-width: 100%;
 
-    margin-top: 14px;
+    margin-top: 10px;
 
     font-size: 12px;
 
-    line-height: 1.6;
+    line-height: 1.5;
   }
 
   .pt-footer h3,
@@ -664,7 +664,7 @@ footer .pt-footer-social a:hover {
   footer h4,
   footer .pt-footer-heading,
   footer .footer-heading {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 
     font-size: 12px;
   }
@@ -675,7 +675,7 @@ footer .pt-footer-social a:hover {
   footer ul,
   footer .pt-footer-links,
   footer .footer-links {
-    gap: 13px;
+    gap: 8px;
   }
 
   .pt-footer a,
@@ -688,7 +688,7 @@ footer .pt-footer-social a:hover {
   footer .footer-bottom {
     margin-top: 0;
 
-    padding: 20px 20px 24px;
+    padding: 16px 20px 20px;
 
     flex-direction: column;
 
@@ -696,7 +696,7 @@ footer .pt-footer-social a:hover {
 
     justify-content: flex-start;
 
-    gap: 14px;
+    gap: 12px;
   }
 }
 
