@@ -46,11 +46,11 @@ export function Footer() {
   return (
     <footer className="bg-black text-white mt-4">
       {/* Main footer */}
-      <div className="pt-container py-8">
+      <div className="pt-container pt-7 pb-5">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="block mb-3">
+            <Link to="/" className="block mb-2">
               <span className="pt-logo text-2xl" style={{ color: "#ffffff" }}>
                 THE <span className="pt-logo-accent">PRIDE</span> TIMES
               </span>
