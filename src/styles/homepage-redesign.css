@@ -2041,13 +2041,13 @@ footer .pt-logo-accent {
 }
 
 .pt-stock-box-compact {
-  min-height: 158px;
+  min-height: 122px;
 
-  max-height: 158px;
+  max-height: 122px;
 
   overflow: hidden;
 
-  padding: 12px;
+  padding: 10px;
 }
 
 
