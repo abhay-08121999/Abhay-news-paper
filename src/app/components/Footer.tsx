@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Twitter, Linkedin, Facebook, Instagram } from "lucide-react";
+import logoImg from "../../imports/logo.png";
 
 const footerSections = [
   {
@@ -50,7 +51,8 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <Link to="/" className="block mb-2">
+            <Link to="/" className="flex items-center gap-2 mb-2">
+              <img src={logoImg} alt="The Pride Times" className="h-8 w-8 flex-shrink-0" />
               <span className="pt-logo text-2xl" style={{ color: "#ffffff" }}>
                 THE <span className="pt-logo-accent">PRIDE</span> TIMES
               </span>
