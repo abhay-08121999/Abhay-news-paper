@@ -465,7 +465,7 @@ const loadMarketData = async () => {
             {/* Market Snapshot — compact stock box, same shared styling as
                 the boxes on the Markets and Finance pages */}
             <div className="pt-stock-box pt-stock-box-compact">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-1.5">
                 <h3 className="text-xs font-bold uppercase tracking-tight">Market Snapshot</h3>
                 <div className="flex gap-3">
                   {["Indices", "Crypto"].map((t) => (
@@ -483,7 +483,7 @@ const loadMarketData = async () => {
               </div>
               <div className="divide-y divide-gray-100">
                 {(marketSnapshotData[activeMarketTab] || []).slice(0, 3).map((m) => (
-                  <div key={m.symbol} className="py-1.5 flex items-center justify-between">
+                  <div key={m.symbol} className="py-1 flex items-center justify-between">
                     <span className="text-[11px] text-gray-800 font-medium">{m.symbol}</span>
                     <div className="flex items-center gap-2">
                       <span className="text-[11px] text-gray-600">{m.value}</span>
@@ -492,7 +492,7 @@ const loadMarketData = async () => {
                   </div>
                 ))}
               </div>
-              <Link to="/markets" className="mt-2 text-[10px] text-black flex items-center gap-0.5 hover:gap-1.5 transition-all font-bold uppercase tracking-wide w-fit">
+              <Link to="/markets" className="mt-1 text-[10px] text-black flex items-center gap-0.5 hover:gap-1.5 transition-all font-bold uppercase tracking-wide w-fit">
                 View All Markets <ArrowRight size={10} />
               </Link>
             </div>
