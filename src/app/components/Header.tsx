@@ -51,13 +51,18 @@ export function Header() {
       <div className="pt-top-nav">
         <div className="pt-container h-full flex items-center justify-between">
           <nav className="hidden lg:flex items-center gap-6 h-full">
-            <Link to="/live-tv" className="pt-focusable flex items-center gap-2">
+            <a
+              href="https://www.youtube.com/@vmpridetimes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pt-focusable flex items-center gap-2"
+            >
               <span className="relative flex h-2.5 w-2.5 flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
               </span>
               Live TV
-            </Link>
+            </a>
 
             {primaryNav.map((item) => (
               <Link
@@ -219,13 +224,19 @@ export function Header() {
         <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 max-h-[70vh] overflow-y-auto">
           <nav className="flex flex-col gap-0">
             <Link to="/" className="py-2.5 text-sm border-b border-gray-100" onClick={() => setMobileOpen(false)}>Home</Link>
-            <Link to="/live-tv" className="py-2.5 text-sm border-b border-gray-100 flex items-center gap-2 text-red-600" onClick={() => setMobileOpen(false)}>
+            <a
+              href="https://www.youtube.com/@vmpridetimes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2.5 text-sm border-b border-gray-100 flex items-center gap-2 text-red-600"
+              onClick={() => setMobileOpen(false)}
+            >
               <span className="relative flex h-2 w-2 flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
               </span>
               Live TV
-            </Link>
+            </a>
             {primaryNav.map((item) => (
               <Link key={item.label} to={item.path} className="py-2.5 text-sm border-b border-gray-100" onClick={() => setMobileOpen(false)}>
                 {item.label}
