@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { TrendingUp, TrendingDown, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
 import { getQuotes } from "../../services/marketApi";
@@ -66,7 +66,8 @@ const megaMenuColumns = [
 export function MarketsTicker() {
   const [cards, setCards] = useState<TickerCard[]>([]);
   const [showSecurities, setShowSecurities] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
   const isPausedRef = useRef(false);
   const rafRef = useRef<number | null>(null);
 
@@ -121,31 +122,44 @@ export function MarketsTicker() {
     return () => clearTimeout(timer);
   }, [showSecurities]);
 
-  const scrollByAmount = (direction: "left" | "right", ref: RefObject<HTMLDivElement> = scrollRef) => {
-    const el = ref.current;
+  const scrollByAmount = (direction: "left" | "right") => {
+    const el = trackRef.current;
     if (!el) return;
-    const amount = 168 + 16; // card width + gap
-    el.scrollBy({ left: direction === "left" ? -amount * 2 : amount * 2, behavior: "smooth" });
+    const amount = (172 + 16) * 2; // card width + gap, two cards per click
+    const halfway = el.scrollWidth / 2;
+
+    offsetRef.current += direction === "left" ? -amount : amount;
+    if (offsetRef.current < 0) offsetRef.current += halfway;
+    if (offsetRef.current >= halfway) offsetRef.current -= halfway;
+
+    el.style.transition = "transform 0.4s ease";
+    el.style.transform = `translateX(-${offsetRef.current}px)`;
+    window.setTimeout(() => {
+      if (el) el.style.transition = "none";
+    }, 400);
   };
 
   // ── Continuous auto-scroll (Bloomberg-style moving ticker) ──
   // Cards are duplicated in the render below so the strip can loop
   // seamlessly: once we've scrolled past the first copy, we silently
   // snap back to 0 and keep going, so it never appears to jump or stop.
+  // Driven by a CSS transform (not scrollLeft) so sub-pixel movement is
+  // rendered smoothly by the compositor instead of being rounded to
+  // whole pixels every frame, which is what caused the visible jitter.
   useEffect(() => {
     if (cards.length === 0) return;
 
     const speed = 0.5; // px per frame — slow, readable, Bloomberg-style drift
 
     const step = () => {
-      const el = scrollRef.current;
+      const el = trackRef.current;
       if (el && !isPausedRef.current) {
         const halfway = el.scrollWidth / 2;
-        if (el.scrollLeft >= halfway) {
-          el.scrollLeft -= halfway;
-        } else {
-          el.scrollLeft += speed;
+        offsetRef.current += speed;
+        if (offsetRef.current >= halfway) {
+          offsetRef.current -= halfway;
         }
+        el.style.transform = `translateX(-${offsetRef.current}px)`;
       }
       rafRef.current = requestAnimationFrame(step);
     };
@@ -217,18 +231,17 @@ export function MarketsTicker() {
           </button>
 
           <div
-            ref={scrollRef}
-            className="flex items-center gap-4 overflow-x-auto scrollbar-hide py-2 flex-1"
+            className="overflow-hidden py-2 flex-1"
             onTouchStart={pauseAutoScroll}
             onTouchEnd={resumeAutoScroll}
           >
-            {/* Cards are rendered twice back-to-back so the auto-scroll
-                loop can snap from the end of the first copy to the start
-                of the second without any visible jump. */}
-            {[...cards, ...cards].map((card, i) => (
-              <div key={`${card.symbol}-${i}`} className="pt-market-card flex flex-col justify-center flex-shrink-0">
-                <span className="text-xs text-gray-400 font-medium truncate">{card.symbol}</span>
-                <div className="flex items-center gap-1.5">
+            <div ref={trackRef} className="flex items-center gap-4 w-max will-change-transform">
+              {/* Cards are rendered twice back-to-back so the auto-scroll
+                  loop can snap from the end of the first copy to the start
+                  of the second without any visible jump. */}
+              {[...cards, ...cards].map((card, i) => (
+                <div key={`${card.symbol}-${i}`} className="pt-market-card flex items-center gap-2 flex-shrink-0">
+                  <span className="text-xs text-gray-400 font-medium truncate">{card.symbol}</span>
                   <span className="text-sm font-semibold">{card.value}</span>
                   <span
                     className={`flex items-center gap-0.5 text-xs font-medium ${
@@ -240,8 +253,8 @@ export function MarketsTicker() {
                     {card.change}%
                   </span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <button
