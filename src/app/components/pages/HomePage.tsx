@@ -607,26 +607,6 @@ const loadMarketData = async () => {
           ))}
         </div>
 
-        {/* 2e. NEWSLETTER */}
-        <div className="pt-newsletter flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <h3 className="pt-newsletter-title">Stay Ahead with The Pride Times</h3>
-            <p className="text-gray-500 text-xs mt-1">Get the latest global insights delivered to your inbox.</p>
-          </div>
-          <form
-            className="flex items-center gap-2 w-full sm:w-auto"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="pt-newsletter-input px-3 text-sm outline-none flex-1 sm:w-64"
-            />
-            <button type="submit" className="pt-newsletter-button px-5 whitespace-nowrap">
-              Subscribe
-            </button>
-          </form>
-        </div>
       </main>
 
       <style>{`
