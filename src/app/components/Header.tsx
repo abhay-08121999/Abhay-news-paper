@@ -118,7 +118,7 @@ export function Header() {
 
       {/* ── Brand header ── */}
       <div className="pt-brand-header">
-        <div className="pt-container h-full flex items-center justify-between gap-3 py-9 min-w-0">
+        <div className="pt-container h-full flex items-center justify-between gap-3 py-6 min-w-0">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
             <div className="block min-w-0">
