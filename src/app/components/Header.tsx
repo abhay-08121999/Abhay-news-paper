@@ -12,8 +12,6 @@ const primaryNav = [
   { label: "Startup Success", path: "#" }, // no page for this yet
   { label: "CEO Spotlight", path: "/ceospotlight" },
   { label: "Magazines", path: "/magazine" },
-  { label: "Billionaires", path: "/billionaires" },
-  { label: "Leadership", path: "/leadership" },
   { label: "Innovation", path: "/innovation" },
 ];
 
