@@ -7,13 +7,14 @@ import { useAuth } from "../context/AuthContext";
    compact black bar, per the premium editorial redesign spec. */
 const primaryNav = [
   { label: "Markets", path: "/markets" },
-  { label: "Finance", path: "/finance" },
-  { label: "Technology", path: "/technology" },
-  { label: "Cybersecurity", path: "/cybersecurity" },
-  { label: "Energy", path: "/energy" },
-  { label: "World", path: "/world" },
-  { label: "Leadership", path: "/leadership" },
+  { label: "Business News", path: "/business-news" },
+  { label: "International Business", path: "#" }, // no page for this yet
+  { label: "Startup Success", path: "#" }, // no page for this yet
+  { label: "CEO Spotlight", path: "/ceospotlight" },
+  { label: "Magazines", path: "/magazine" },
   { label: "Billionaires", path: "/billionaires" },
+  { label: "Leadership", path: "/leadership" },
+  { label: "Innovation", path: "/innovation" },
 ];
 
 const editions = ["Asia Edition", "Americas Edition", "Europe Edition", "India Edition"];
