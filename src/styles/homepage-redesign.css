@@ -95,9 +95,13 @@
 }
 
 .pt-top-nav a:hover,
-.pt-top-nav button:hover,
+.pt-top-nav button:hover {
+  color: #ffffff;
+}
+
 .pt-top-nav a.active {
   color: #ffffff;
+  box-shadow: 0 2px 0 0 var(--pt-red);
 }
 
 .pt-top-nav .pt-edition-btn {
@@ -112,8 +116,8 @@
 ======================================== */
 
 .pt-brand-header {
-  min-height: 96px;
-  height: 96px;
+  min-height: 84px;
+  height: auto;
   background: var(--pt-white);
   border-bottom: 1px solid var(--pt-border);
 
@@ -745,6 +749,16 @@ footer .pt-logo-accent {
 
   border-radius: 8px;
 
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pt-search-box:focus-within {
+  border-color: var(--pt-red);
+
+  box-shadow: 0 0 0 3px rgba(227, 27, 35, 0.1);
+}
   background: var(--pt-white);
 }
 
@@ -1872,6 +1886,16 @@ footer .pt-logo-accent {
   border-radius: 12px;
 
   padding: 20px;
+
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pt-chart-panel:hover {
+  border-color: var(--pt-border-dark);
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
 .pt-chart-panel-title {
