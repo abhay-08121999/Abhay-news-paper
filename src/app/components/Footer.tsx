@@ -46,7 +46,7 @@ export function Footer() {
   return (
     <footer className="bg-black text-white mt-4">
       {/* Main footer */}
-      <div className="pt-container pt-7 pb-5">
+      <div className="pt-container pt-12 pb-5">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
