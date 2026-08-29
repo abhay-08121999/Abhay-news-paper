@@ -1,6 +1,5 @@
 import { Clock, Users, Award, ChevronRight, Quote } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import Lead1Img from "../../../imports/Lead1.png";
 import Lead2Img from "../../../imports/Lead2.png";
 
