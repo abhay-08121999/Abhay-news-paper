@@ -8,18 +8,21 @@ import {
   MessageSquare,
   Briefcase,
   TrendingUp,
+  ArrowUpRight,
 } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import CeospotImg from "../../../imports/Ceospot.png";
 
-/* =========================================================
+/* ============================================================
    SECTION HEADER
-========================================================= */
+============================================================ */
 
-function SH({
+function SectionHeader({
+  eyebrow,
   title,
   icon: Icon,
 }: {
+  eyebrow?: string;
   title: string;
   icon?: React.ComponentType<{
     size?: number;
@@ -27,162 +30,167 @@ function SH({
   }>;
 }) {
   return (
-    <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-6">
-      <div className="flex items-center gap-2">
-        {Icon && <Icon size={14} className="text-gray-500" />}
-        <h2 className="text-xs md:text-sm font-bold uppercase tracking-[0.18em]">
-          {title}
-        </h2>
-      </div>
+    <div className="mb-6 border-b border-black pb-3">
+      <div className="flex items-end justify-between gap-4">
+        <div>
+          {eyebrow && (
+            <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-red-600">
+              {eyebrow}
+            </p>
+          )}
 
-      <span className="hidden sm:block w-8 h-[2px] bg-red-600" />
+          <div className="flex items-center gap-2">
+            {Icon && <Icon size={15} strokeWidth={1.8} />}
+
+            <h2 className="font-serif text-xl md:text-2xl font-bold tracking-tight">
+              {title}
+            </h2>
+          </div>
+        </div>
+
+        <span className="hidden sm:block h-[3px] w-10 bg-red-600" />
+      </div>
     </div>
   );
 }
 
-/* =========================================================
-   HERO
-========================================================= */
+/* ============================================================
+   HERO DATA
+============================================================ */
 
 const hero = {
   category: "CEO SPOTLIGHT",
   title:
     "Tilman Fertitta: Building America's Largest Integrated Entertainment Empire",
   excerpt:
-    "Few executives have demonstrated the appetite for bold, large-scale deal-making that characterizes Tilman Fertitta's approach to business in 2026. The chairman and CEO of Fertitta Entertainment, whose holdings already include the Golden Nugget casino brand and the Houston Rockets, has staked a $17.6 billion claim on Caesars Entertainment — a move that would transform him into the undisputed titan of American gaming and hospitality. Fertitta's strategy reflects a conviction that integrated entertainment — combining casino gaming, luxury hotels, fine dining, sports, and live entertainment — represents one of the most defensible and scalable models in the leisure economy.",
+    "Few executives have demonstrated the appetite for bold, large-scale deal-making that characterizes Tilman Fertitta's approach to business in 2026. The chairman and CEO of Fertitta Entertainment, whose holdings already include the Golden Nugget casino brand and the Houston Rockets, has staked a $17.6 billion claim on Caesars Entertainment — a move that would transform him into the undisputed titan of American gaming and hospitality.",
   author: "Sagar Kumar",
   time: "May 2026",
   image: CeospotImg,
 };
 
-/* =========================================================
+/* ============================================================
    CEO INTERVIEWS
-========================================================= */
+============================================================ */
 
 const ceoInterviews = [
   {
     id: 1,
     name: "Satya Nadella",
     title: "CEO, Microsoft",
-    company: "Microsoft",
+    topic: "AI Strategy",
     quote:
-      "The next decade will be defined by how organizations use AI to augment human capability. Every tool we build is a collaboration engine.",
-    topic: "AI Strategy & The Future of Work",
+      "The next decade will be defined by how organizations use AI to augment human capability.",
     duration: "35 min read",
     image:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=85",
   },
   {
     id: 2,
     name: "Indra Nooyi",
     title: "Former CEO, PepsiCo",
-    company: "PepsiCo",
+    topic: "Leadership",
     quote:
-      "Sustainable business is not charity. The companies that will win in the next 20 years are those that embed purpose into their P&L.",
-    topic: "Sustainable Leadership",
+      "The companies that will win in the next 20 years are those that embed purpose into their P&L.",
     duration: "28 min read",
     image:
-      "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1551836022-4c4c79ecde51?auto=format&fit=crop&w=1000&q=85",
   },
   {
     id: 3,
     name: "Jensen Huang",
     title: "CEO, NVIDIA",
-    company: "NVIDIA",
+    topic: "AI Infrastructure",
     quote:
       "We are not a chip company. We are the engine of the AI industrial revolution.",
-    topic: "AI Infrastructure & Chip Wars",
     duration: "42 min read",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=85",
   },
 ];
 
-/* =========================================================
-   WOMEN IN LEADERSHIP
-========================================================= */
+/* ============================================================
+   WOMEN LEADERS
+============================================================ */
 
 const womenLeaders = [
   {
+    rank: "01",
     name: "Mary Barra",
     title: "CEO, General Motors",
     achievement:
       "Leading GM's transition toward an electric and software-defined vehicle portfolio.",
-    rank: 1,
   },
   {
+    rank: "02",
     name: "Jane Fraser",
     title: "CEO, Citigroup",
     achievement:
       "Driving a major organizational transformation across Citigroup's global businesses.",
-    rank: 2,
   },
   {
+    rank: "03",
     name: "Gita Gopinath",
     title: "First Deputy Managing Director, IMF",
     achievement:
       "A leading voice on global economic policy, trade and financial stability.",
-    rank: 3,
   },
   {
+    rank: "04",
     name: "Sunita Williams",
     title: "NASA Astronaut / Engineer",
     achievement:
       "A prominent figure in human spaceflight, engineering and international space cooperation.",
-    rank: 4,
   },
   {
+    rank: "05",
     name: "Nirmala Sitharaman",
     title: "Finance Minister, India",
     achievement:
       "A central figure in India's fiscal policy and infrastructure investment strategy.",
-    rank: 5,
   },
 ];
 
-/* =========================================================
+/* ============================================================
    LEADERSHIP OPINIONS
-========================================================= */
+============================================================ */
 
 const leadershipOpinions = [
   {
     id: 1,
-    author: "Sagar Kumar",
     title:
       "On AI and Investing: Why I Still Trust Human Judgment Over Algorithms",
     time: "1 day ago",
   },
   {
     id: 2,
-    author: "Sagar Kumar",
     title:
       "The Debt Cycle Is Approaching Its Peak — And Leaders Must Prepare Now",
     time: "2 days ago",
   },
   {
     id: 3,
-    author: "Sagar Kumar",
     title:
       "Why AGI Will Arrive Before 2030 — And Why That's Not Something to Fear",
     time: "3 days ago",
   },
   {
     id: 4,
-    author: "Sagar Kumar",
     title:
       "India's Moment Has Arrived — The Next 25 Years Belong to Us",
     time: "4 days ago",
   },
 ];
 
-/* =========================================================
+/* ============================================================
    EXECUTIVE MOVES
-========================================================= */
+============================================================ */
 
 const executiveMoves = [
   {
     id: 1,
     person: "Bob Iger",
+    role: "DISNEY",
     move:
       "Returns as Disney CEO for a third term after renewed shareholder pressure.",
     time: "3 hrs ago",
@@ -190,6 +198,7 @@ const executiveMoves = [
   {
     id: 2,
     person: "Christine Lagarde",
+    role: "ECB",
     move:
       "ECB leadership transition draws attention as potential successors emerge.",
     time: "5 hrs ago",
@@ -197,6 +206,7 @@ const executiveMoves = [
   {
     id: 3,
     person: "Shantanu Narayen",
+    role: "ADOBE",
     move:
       "Adobe CEO receives a major compensation package following a record year.",
     time: "7 hrs ago",
@@ -204,74 +214,68 @@ const executiveMoves = [
   {
     id: 4,
     person: "Arvind Krishna",
+    role: "IBM",
     move:
       "IBM CEO outlines a strategic review of the company's consulting operations.",
     time: "9 hrs ago",
   },
-  {
-    id: 5,
-    person: "Brian Chesky",
-    move:
-      "Airbnb CEO announces a large share buyback while signaling expansion plans.",
-    time: "11 hrs ago",
-  },
 ];
 
-/* =========================================================
-   PRIDE TIMES 30
-========================================================= */
+/* ============================================================
+   PT30
+============================================================ */
 
 const pt30Features = [
   {
-    rank: 1,
+    rank: "01",
     name: "Jensen Huang",
     role: "NVIDIA",
     insight:
       "Defining the AI infrastructure era through accelerated computing, robotics and data-center innovation.",
   },
   {
-    rank: 2,
+    rank: "02",
     name: "Satya Nadella",
-    role: "Microsoft",
+    role: "MICROSOFT",
     insight:
       "Leading enterprise AI adoption while reshaping Microsoft's cloud and productivity ecosystem.",
   },
   {
-    rank: 3,
+    rank: "03",
     name: "Sundar Pichai",
-    role: "Alphabet",
+    role: "ALPHABET",
     insight:
       "Driving AI integration across search, cloud, consumer products and emerging technology.",
   },
 ];
 
-/* =========================================================
-   SMALL STORY COMPONENT
-========================================================= */
+/* ============================================================
+   STORY ROW
+============================================================ */
 
-function StoryItem({
+function StoryRow({
   title,
   time,
-  author,
+  index,
 }: {
   title: string;
   time: string;
-  author?: string;
+  index?: number;
 }) {
   return (
-    <article className="group py-4 border-b border-gray-200 last:border-b-0 cursor-pointer">
-      <h3 className="font-serif text-sm md:text-[15px] font-bold leading-snug text-gray-900 group-hover:text-red-600 transition-colors">
-        {title}
-      </h3>
+    <article className="group flex gap-4 border-b border-gray-200 py-4 last:border-b-0 cursor-pointer">
+      {typeof index === "number" && (
+        <span className="pt-0.5 font-serif text-xl text-gray-300 transition-colors group-hover:text-red-600">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+      )}
 
-      <div className="flex items-center gap-3 mt-2 text-[10px] text-gray-400">
-        {author && <span className="text-gray-600">{author}</span>}
+      <div className="min-w-0">
+        <h3 className="font-serif text-sm md:text-[15px] font-bold leading-snug text-gray-900 transition-colors group-hover:text-red-600">
+          {title}
+        </h3>
 
-        {author && (
-          <span className="w-1 h-1 rounded-full bg-gray-300" />
-        )}
-
-        <span className="flex items-center gap-1">
+        <span className="mt-2 flex items-center gap-1 text-[10px] uppercase tracking-wide text-gray-400">
           <Clock size={9} />
           {time}
         </span>
@@ -280,151 +284,164 @@ function StoryItem({
   );
 }
 
-/* =========================================================
-   CEO SPOTLIGHT PAGE
-========================================================= */
+/* ============================================================
+   MAIN PAGE
+============================================================ */
 
 export function CeoSpotlightPage() {
   return (
     <main className="min-h-screen bg-white text-black">
-      <div className="max-w-[1180px] mx-auto px-4 md:px-6 py-6 md:py-9">
+      <div className="mx-auto w-full max-w-[1240px] px-4 py-7 sm:px-6 md:py-9 lg:px-8">
 
-        {/* =================================================
-            PAGE MASTHEAD
-        ================================================= */}
+        {/* ====================================================
+            MASTHEAD
+        ==================================================== */}
 
-        <header className="border-b-4 border-black pb-4 mb-7">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 bg-black text-white">
-              <Users size={20} />
+        <header className="mb-8 border-b-4 border-black pb-5">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+
+            <div className="flex items-center gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-black text-white">
+                <Users size={23} strokeWidth={1.7} />
+              </div>
+
+              <div>
+                <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.25em] text-red-600">
+                  Executive Intelligence
+                </p>
+
+                <h1 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                  CEO Spotlight
+                </h1>
+              </div>
             </div>
 
-            <div>
-              <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-gray-500">
-                Executive Intelligence
+            <div className="max-w-sm text-left sm:text-right">
+              <p className="text-[10px] uppercase tracking-[0.18em] text-gray-400">
+                The Pride Times
               </p>
 
-              <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-none tracking-tight">
-                CEO Spotlight
-              </h1>
+              <p className="mt-1 text-xs leading-relaxed text-gray-500">
+                Profiles, interviews and ideas from the people shaping global
+                business.
+              </p>
             </div>
           </div>
         </header>
 
-        {/* =================================================
-            EDITORIAL INTRO
-        ================================================= */}
+        {/* ====================================================
+            HERO
+        ==================================================== */}
 
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 pb-4 mb-7">
-          <p className="text-xs md:text-sm text-gray-500 max-w-2xl leading-relaxed">
-            Profiles, interviews and strategic insights from the executives
-            shaping global business, technology and capital markets.
-          </p>
-
-          <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-400">
-            <TrendingUp size={12} />
-            Leadership Intelligence
-          </div>
-        </div>
-
-        {/* =================================================
-            HERO STORY
-        ================================================= */}
-
-        <section className="mb-12 pb-10 border-b border-gray-300">
+        <section className="mb-12">
           <article className="group cursor-pointer">
 
             <div className="relative overflow-hidden bg-gray-100">
               <ImageWithFallback
                 src={hero.image}
                 alt={hero.title}
-                className="w-full h-[280px] sm:h-[360px] md:h-[450px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                className="h-[290px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] sm:h-[390px] md:h-[500px] lg:h-[570px]"
               />
 
-              <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-              <span className="absolute left-4 bottom-4 bg-red-600 text-white px-3 py-1.5 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em]">
-                {hero.category}
-              </span>
+              <div className="absolute bottom-5 left-5 sm:bottom-7 sm:left-7">
+                <span className="inline-flex items-center gap-2 bg-red-600 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                  {hero.category}
+                </span>
+              </div>
             </div>
 
-            <div className="max-w-5xl mt-5">
-              <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[46px] font-bold leading-[1.04] tracking-tight group-hover:text-red-600 transition-colors">
+            <div className="mt-6 max-w-[1050px]">
+              <h2 className="font-serif text-[30px] font-bold leading-[1.04] tracking-[-0.02em] sm:text-4xl md:text-5xl lg:text-[56px]">
                 {hero.title}
               </h2>
 
-              <p className="mt-4 text-sm md:text-base lg:text-[17px] text-gray-600 leading-relaxed max-w-4xl">
-                {hero.excerpt}
-              </p>
+              <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-[1fr_280px] md:gap-10">
+                <p className="text-sm leading-7 text-gray-600 md:text-[16px]">
+                  {hero.excerpt}
+                </p>
 
-              <div className="flex flex-wrap items-center gap-3 mt-5 pt-4 border-t border-gray-200 text-xs text-gray-400">
-                <span className="text-gray-700 font-medium">
-                  By {hero.author}
-                </span>
+                <div className="border-l-2 border-red-600 pl-4 md:self-start">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-gray-400">
+                    By
+                  </p>
 
-                <span className="w-1 h-1 rounded-full bg-gray-300" />
+                  <p className="mt-1 text-sm font-semibold">
+                    {hero.author}
+                  </p>
 
-                <span className="flex items-center gap-1">
-                  <Clock size={11} />
-                  {hero.time}
-                </span>
+                  <p className="mt-2 flex items-center gap-1 text-[10px] text-gray-400">
+                    <Clock size={10} />
+                    {hero.time}
+                  </p>
+                </div>
               </div>
             </div>
           </article>
         </section>
 
-        {/* =================================================
-            EXCLUSIVE CEO INTERVIEWS
-        ================================================= */}
+        {/* ====================================================
+            INTERVIEW SECTION
+        ==================================================== */}
 
-        <section className="mb-12">
-          <SH title="Exclusive CEO Interviews" icon={Quote} />
+        <section className="mb-14">
+          <SectionHeader
+            eyebrow="The Interview"
+            title="Inside the CEO Mind"
+            icon={Quote}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {ceoInterviews.map((c) => (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {ceoInterviews.map((ceo) => (
               <article
-                key={c.id}
-                className="group border border-gray-200 hover:border-black transition-all duration-300 flex flex-col overflow-hidden"
+                key={ceo.id}
+                className="group overflow-hidden border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-black hover:shadow-[0_12px_35px_rgba(0,0,0,0.08)]"
               >
-                <div className="overflow-hidden bg-gray-100">
+                <div className="relative overflow-hidden bg-gray-100">
                   <ImageWithFallback
-                    src={c.image}
-                    alt={c.name}
-                    className="w-full h-[210px] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    src={ceo.image}
+                    alt={ceo.name}
+                    className="h-[230px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
+
+                  <span className="absolute left-4 top-4 bg-black px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-white">
+                    {ceo.topic}
+                  </span>
                 </div>
 
-                <div className="p-5 flex flex-col flex-1">
-                  <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-red-600">
-                    {c.topic}
-                  </span>
-
-                  <h3 className="font-serif text-xl font-bold mt-2 leading-tight">
-                    {c.name}
-                  </h3>
-
-                  <p className="text-xs text-gray-500 mt-1">
-                    {c.title}
+                <div className="p-5 md:p-6">
+                  <p className="text-[10px] uppercase tracking-[0.12em] text-gray-400">
+                    {ceo.title}
                   </p>
 
-                  <blockquote className="relative mt-4 pl-4 border-l-2 border-red-600 text-sm italic text-gray-600 leading-relaxed flex-1">
+                  <h3 className="mt-1 font-serif text-2xl font-bold">
+                    {ceo.name}
+                  </h3>
+
+                  <div className="my-5 h-px bg-gray-200" />
+
+                  <div className="relative">
                     <Quote
-                      size={12}
-                      className="absolute -left-[7px] -top-1 bg-white text-red-600"
+                      size={20}
+                      className="absolute -left-1 -top-2 text-red-600 opacity-30"
                     />
 
-                    {c.quote}
-                  </blockquote>
+                    <p className="pl-4 font-serif text-sm italic leading-6 text-gray-600">
+                      {ceo.quote}
+                    </p>
+                  </div>
 
-                  <div className="flex items-center justify-between gap-3 mt-5 pt-4 border-t border-gray-100">
+                  <div className="mt-6 flex items-center justify-between border-t border-gray-100 pt-4">
                     <span className="text-[10px] text-gray-400">
-                      {c.duration}
+                      {ceo.duration}
                     </span>
 
-                    <button className="text-[10px] font-bold uppercase tracking-wide text-red-600 flex items-center gap-1 group-hover:gap-2 transition-all">
+                    <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide text-red-600 transition-all group-hover:gap-2">
                       Read Interview
                       <ChevronRight size={11} />
-                    </button>
+                    </span>
                   </div>
                 </div>
               </article>
@@ -432,59 +449,62 @@ export function CeoSpotlightPage() {
           </div>
         </section>
 
-        {/* =================================================
-            PT30 LEADERSHIP
-        ================================================= */}
+        {/* ====================================================
+            PT30 BLACK FEATURE
+        ==================================================== */}
 
-        <section className="mb-12 bg-black text-white">
-          <div className="p-6 md:p-8">
+        <section className="mb-14 overflow-hidden bg-[#090909] text-white">
+          <div className="p-6 sm:p-8 md:p-10">
 
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-7">
-              <div className="flex items-center gap-2">
-                <Award size={17} className="text-yellow-400" />
+            <div className="mb-8 flex flex-col gap-4 border-b border-white/15 pb-6 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <div className="mb-2 flex items-center gap-2">
+                  <Award size={16} className="text-yellow-400" />
 
-                <div>
-                  <p className="text-[9px] uppercase tracking-[0.2em] text-gray-500">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-yellow-400">
                     The Pride Times
-                  </p>
-
-                  <h2 className="text-sm md:text-base font-bold uppercase tracking-[0.16em] text-yellow-400">
-                    PT30 Leadership Profiles
-                  </h2>
+                  </span>
                 </div>
+
+                <h2 className="font-serif text-2xl font-bold md:text-3xl">
+                  PT30 Leadership Profiles
+                </h2>
               </div>
 
-              <span className="text-[9px] uppercase tracking-widest text-gray-500">
-                Executive Index
-              </span>
+              <p className="max-w-xs text-[10px] leading-relaxed text-gray-500 sm:text-right">
+                The executives influencing technology, capital, industry and
+                the future of business.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {pt30Features.map((p) => (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {pt30Features.map((person) => (
                 <article
-                  key={p.rank}
-                  className="relative group border border-gray-800 p-5 overflow-hidden hover:border-yellow-400 transition-colors"
+                  key={person.rank}
+                  className="group relative overflow-hidden border border-white/10 p-6 transition-colors hover:border-yellow-400"
                 >
-                  <span className="absolute -right-2 -top-5 font-serif text-[90px] leading-none text-gray-900 select-none">
-                    {String(p.rank).padStart(2, "0")}
-                  </span>
+                  <div className="absolute right-3 top-0 font-serif text-[100px] font-bold leading-none text-white/[0.035]">
+                    {person.rank}
+                  </div>
 
                   <div className="relative">
-                    <span className="text-[9px] uppercase tracking-[0.18em] text-gray-500">
-                      PT30 · {p.role}
+                    <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-gray-500">
+                      {person.role}
                     </span>
 
-                    <h3 className="font-serif text-xl font-bold mt-2">
-                      {p.name}
+                    <h3 className="mt-2 font-serif text-2xl font-bold">
+                      {person.name}
                     </h3>
 
-                    <p className="text-xs text-gray-400 leading-relaxed mt-3">
-                      {p.insight}
+                    <div className="my-5 h-px w-8 bg-yellow-400" />
+
+                    <p className="text-xs leading-6 text-gray-400">
+                      {person.insight}
                     </p>
 
-                    <button className="mt-5 text-[10px] uppercase tracking-wide text-yellow-400 flex items-center gap-1 group-hover:gap-2 transition-all">
-                      Full Profile
-                      <ChevronRight size={11} />
+                    <button className="mt-6 flex items-center gap-1 text-[9px] font-bold uppercase tracking-[0.15em] text-yellow-400 transition-all group-hover:gap-2">
+                      View Profile
+                      <ArrowUpRight size={11} />
                     </button>
                   </div>
                 </article>
@@ -493,38 +513,44 @@ export function CeoSpotlightPage() {
           </div>
         </section>
 
-        {/* =================================================
-            THREE COLUMN INTELLIGENCE SECTION
-        ================================================= */}
+        {/* ====================================================
+            LOWER EDITORIAL GRID
+        ==================================================== */}
 
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <section className="mb-14 grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_1fr_1fr]">
 
-          {/* WOMEN IN LEADERSHIP */}
+          {/* -----------------------------------------------
+              WOMEN IN LEADERSHIP
+          ----------------------------------------------- */}
 
           <div>
-            <SH title="Women in Leadership" icon={Users} />
+            <SectionHeader
+              eyebrow="Leadership"
+              title="Women in Leadership"
+              icon={Users}
+            />
 
             <div>
-              {womenLeaders.map((w) => (
+              {womenLeaders.map((leader) => (
                 <article
-                  key={w.rank}
-                  className="group flex gap-4 py-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50 px-2 -mx-2 transition-colors"
+                  key={leader.rank}
+                  className="group flex gap-4 border-b border-gray-200 py-5 first:pt-0 cursor-pointer"
                 >
-                  <span className="font-serif text-2xl text-gray-300 group-hover:text-red-600 w-7 shrink-0">
-                    {w.rank}
+                  <span className="font-serif text-2xl text-gray-300 transition-colors group-hover:text-red-600">
+                    {leader.rank}
                   </span>
 
-                  <div>
-                    <h3 className="font-serif text-sm font-bold leading-tight group-hover:text-red-600 transition-colors">
-                      {w.name}
+                  <div className="min-w-0">
+                    <h3 className="font-serif text-base font-bold leading-tight group-hover:text-red-600 transition-colors">
+                      {leader.name}
                     </h3>
 
-                    <p className="text-[10px] text-gray-500 mt-1">
-                      {w.title}
+                    <p className="mt-1 text-[10px] font-medium uppercase tracking-wide text-gray-400">
+                      {leader.title}
                     </p>
 
-                    <p className="text-[11px] text-gray-600 leading-relaxed mt-2">
-                      {w.achievement}
+                    <p className="mt-2 text-[11px] leading-5 text-gray-600">
+                      {leader.achievement}
                     </p>
                   </div>
                 </article>
@@ -532,119 +558,143 @@ export function CeoSpotlightPage() {
             </div>
           </div>
 
-          {/* LEADERSHIP OPINIONS */}
+          {/* -----------------------------------------------
+              OPINIONS
+          ----------------------------------------------- */}
 
           <div>
-            <SH title="Leadership Opinions" icon={MessageSquare} />
+            <SectionHeader
+              eyebrow="The Boardroom"
+              title="Leadership Opinions"
+              icon={MessageSquare}
+            />
 
             <div>
-              {leadershipOpinions.map((item) => (
-                <StoryItem
-                  key={item.id}
-                  title={item.title}
-                  author={item.author}
-                  time={item.time}
+              {leadershipOpinions.map((opinion, index) => (
+                <StoryRow
+                  key={opinion.id}
+                  title={opinion.title}
+                  time={opinion.time}
+                  index={index}
                 />
               ))}
             </div>
+
+            <button className="mt-5 flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.14em] text-red-600">
+              More Opinions
+              <ChevronRight size={11} />
+            </button>
           </div>
 
-          {/* EXECUTIVE MOVES */}
+          {/* -----------------------------------------------
+              EXECUTIVE MOVES
+          ----------------------------------------------- */}
 
           <div>
-            <SH title="Executive Moves" icon={Briefcase} />
+            <SectionHeader
+              eyebrow="Corporate World"
+              title="Executive Moves"
+              icon={Briefcase}
+            />
 
             <div>
-              {executiveMoves.map((item) => (
+              {executiveMoves.map((move) => (
                 <article
-                  key={item.id}
-                  className="group py-4 border-b border-gray-200 cursor-pointer"
+                  key={move.id}
+                  className="group border-b border-gray-200 py-4 last:border-b-0 cursor-pointer"
                 >
-                  <div className="flex items-start gap-3">
-                    <span className="text-[10px] font-bold text-red-600 uppercase tracking-wider shrink-0">
-                      {item.person}
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-red-600">
+                      {move.role}
+                    </span>
+
+                    <span className="text-[9px] text-gray-400">
+                      {move.time}
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-semibold leading-snug mt-1.5 group-hover:text-red-600 transition-colors">
-                    {item.move}
+                  <h3 className="mt-1.5 font-serif text-sm font-bold leading-snug group-hover:text-red-600 transition-colors">
+                    {move.person}
                   </h3>
 
-                  <span className="flex items-center gap-1 text-[10px] text-gray-400 mt-2">
-                    <Clock size={9} />
-                    {item.time}
-                  </span>
+                  <p className="mt-1.5 text-[11px] leading-5 text-gray-600">
+                    {move.move}
+                  </p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* =================================================
+        {/* ====================================================
             EXECUTIVE PRINCIPLES
-        ================================================= */}
+        ==================================================== */}
 
-        <section className="border-t-2 border-black pt-5 mb-10">
-          <SH title="Executive Intelligence" icon={TrendingUp} />
+        <section className="border-t-4 border-black pt-5">
+          <SectionHeader
+            eyebrow="The Leadership Playbook"
+            title="Executive Principles"
+            icon={TrendingUp}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-            <article className="border border-gray-200 p-5 hover:border-black transition-colors">
-              <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-red-600">
+          <div className="grid grid-cols-1 gap-px bg-gray-200 md:grid-cols-3">
+            <article className="bg-white p-6 md:p-7">
+              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-red-600">
                 01 · Strategy
               </span>
 
-              <h3 className="font-serif text-xl font-bold mt-2">
+              <h3 className="mt-3 font-serif text-xl font-bold leading-tight">
                 Build for the next decade
               </h3>
 
-              <p className="text-xs text-gray-500 leading-relaxed mt-3">
+              <p className="mt-3 text-xs leading-6 text-gray-500">
                 The strongest executives balance immediate performance with
                 long-term investments in people, technology and markets.
               </p>
             </article>
 
-            <article className="border border-gray-200 p-5 hover:border-black transition-colors">
-              <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-red-600">
+            <article className="bg-white p-6 md:p-7">
+              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-red-600">
                 02 · Technology
               </span>
 
-              <h3 className="font-serif text-xl font-bold mt-2">
+              <h3 className="mt-3 font-serif text-xl font-bold leading-tight">
                 Turn technology into advantage
               </h3>
 
-              <p className="text-xs text-gray-500 leading-relaxed mt-3">
+              <p className="mt-3 text-xs leading-6 text-gray-500">
                 Technology leadership increasingly depends on translating
                 emerging capabilities into measurable business outcomes.
               </p>
             </article>
 
-            <article className="border border-gray-200 p-5 hover:border-black transition-colors">
-              <span className="text-[9px] font-bold uppercase tracking-[0.16em] text-red-600">
+            <article className="bg-white p-6 md:p-7">
+              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-red-600">
                 03 · Leadership
               </span>
 
-              <h3 className="font-serif text-xl font-bold mt-2">
+              <h3 className="mt-3 font-serif text-xl font-bold leading-tight">
                 Lead through uncertainty
               </h3>
 
-              <p className="text-xs text-gray-500 leading-relaxed mt-3">
+              <p className="mt-3 text-xs leading-6 text-gray-500">
                 Resilient leaders create clarity during periods of economic,
                 technological and organizational change.
               </p>
             </article>
-
           </div>
         </section>
 
-        {/* =================================================
-            FOOTER NOTE
-        ================================================= */}
+        {/* ====================================================
+            PAGE FOOTER
+        ==================================================== */}
 
-        <div className="border-t border-gray-300 pt-4 pb-3 flex flex-wrap justify-between gap-2 text-[9px] uppercase tracking-[0.14em] text-gray-400">
-          <span>The Pride Times · CEO Spotlight</span>
-          <span>Executive Intelligence Desk</span>
-        </div>
+        <footer className="mt-10 border-t border-gray-300 pt-4">
+          <div className="flex flex-col gap-2 text-[9px] uppercase tracking-[0.15em] text-gray-400 sm:flex-row sm:items-center sm:justify-between">
+            <span>The Pride Times · CEO Spotlight</span>
+            <span>Executive Intelligence Desk</span>
+          </div>
+        </footer>
 
       </div>
     </main>
