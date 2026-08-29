@@ -1,6 +1,5 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock, Heart, Radio } from "lucide-react";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import HC1Img from "../../../imports/HC1.png";
 import HC2Img from "../../../imports/HC2.png";
 import HC3Img from "../../../imports/HC3.png";
