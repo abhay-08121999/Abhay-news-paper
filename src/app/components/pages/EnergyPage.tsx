@@ -1,6 +1,5 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock, Zap, TrendingUp, TrendingDown, Radio } from "lucide-react";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import Ener1Img from "../../../imports/Energy1.png";
 import Ener2Img from "../../../imports/Energy2.png";
 import Ener3Img from "../../../imports/Energy3.png";
