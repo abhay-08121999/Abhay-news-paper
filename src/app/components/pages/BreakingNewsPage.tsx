@@ -1,4 +1,4 @@
-import { Clock, Zap, ChevronRight, TrendingUp } from "lucide-react";
+import { Clock, Zap, ChevronRight, TrendingUp, Flame } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 
@@ -52,13 +52,13 @@ export function BreakingNewsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
         {/* =================================================
-            LIVE HEADER
+            LIVE HEADER (sticky)
         ================================================= */}
 
-        <header className="flex items-center gap-4 mb-10 pb-6 border-b-4 border-black">
+        <header className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm flex items-center gap-4 mb-10 pb-6 pt-1 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 border-b-4 border-black">
           <div className="flex items-center justify-center w-11 h-11 rounded-full bg-black text-white shrink-0 relative">
             <Zap size={19} strokeWidth={1.75} className="text-red-500" fill="currentColor" />
-            <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-red-600 rounded-full animate-pulse ring-2 ring-white" />
+            <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-red-600 rounded-full motion-safe:animate-pulse ring-2 ring-white" />
           </div>
 
           <div className="flex-1 min-w-0">
@@ -74,7 +74,7 @@ export function BreakingNewsPage() {
           </div>
 
           <span className="flex items-center gap-1.5 text-xs font-bold bg-red-600 text-white px-3.5 py-1.5 rounded-[2px] shrink-0">
-            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+            <span className="w-1.5 h-1.5 bg-white rounded-full motion-safe:animate-pulse" />
             LIVE
           </span>
         </header>
@@ -88,11 +88,14 @@ export function BreakingNewsPage() {
             <Link
               key={item.id}
               to={item.path}
-              className="group border-l-4 border-red-600 pl-4 py-0.5"
+              className="group border-l-4 border-red-600 pl-4 py-0.5 rounded-r-[2px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2"
             >
-              <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded-[2px] tracking-wide ${priorityColor[item.priority]}`}>
-                {item.priority}
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-[2px] tracking-wide ${priorityColor[item.priority]}`}>
+                  {item.hot && <Flame size={10} strokeWidth={2.5} />}
+                  {item.priority}
+                </span>
+              </div>
 
               <h3 className="mt-2.5 font-serif text-lg md:text-xl font-bold leading-[1.25] text-gray-950 transition-colors duration-200 group-hover:text-red-600">
                 {item.title}
@@ -133,9 +136,10 @@ export function BreakingNewsPage() {
                 <Link
                   key={item.id}
                   to={item.path}
-                  className="flex items-start gap-4 py-4 group hover:bg-gray-50 px-2 -mx-2 rounded-[2px] transition-colors"
+                  className="flex items-start gap-4 py-4 group hover:bg-gray-50 px-2 -mx-2 rounded-[2px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2"
                 >
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-[2px] whitespace-nowrap shrink-0 mt-0.5 tracking-wide ${priorityColor[item.priority]}`}>
+                  <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-[2px] whitespace-nowrap shrink-0 mt-0.5 tracking-wide ${priorityColor[item.priority]}`}>
+                    {item.hot && <Flame size={9} strokeWidth={2.5} />}
                     {item.priority}
                   </span>
 
@@ -156,7 +160,7 @@ export function BreakingNewsPage() {
                   <ChevronRight
                     size={15}
                     strokeWidth={2}
-                    className="text-gray-300 shrink-0 mt-1 transition-all duration-200 group-hover:text-red-600 group-hover:translate-x-0.5"
+                    className="text-gray-300 shrink-0 mt-1 motion-safe:transition-all motion-safe:duration-200 group-hover:text-red-600 group-hover:translate-x-0.5"
                   />
                 </Link>
               ))}
@@ -165,16 +169,17 @@ export function BreakingNewsPage() {
 
           {/* Live ticker sidebar */}
           <div>
-            <div className="bg-black text-white rounded-[2px] p-5 sticky top-6">
+            <div className="bg-black text-white rounded-[2px] p-5 lg:sticky lg:top-24">
               <div className="flex items-center gap-2 mb-4 pb-3.5 border-b border-white/10">
-                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                <div className="w-2 h-2 bg-red-500 rounded-full motion-safe:animate-pulse" />
                 <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-gray-300">
                   News Ticker
                 </span>
               </div>
 
-              <div className="min-h-[92px] mb-4">
-                <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded-[2px] tracking-wide ${priorityColor[allBreakingNews[ticker].priority]}`}>
+              <div key={ticker} className="min-h-[92px] mb-4 motion-safe:animate-[fadein_0.4s_ease-out]">
+                <span className={`inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-[2px] tracking-wide ${priorityColor[allBreakingNews[ticker].priority]}`}>
+                  {allBreakingNews[ticker].hot && <Flame size={10} strokeWidth={2.5} />}
                   {allBreakingNews[ticker].priority}
                 </span>
                 <p className="text-sm text-white mt-2.5 leading-[1.5] font-medium">
@@ -189,7 +194,7 @@ export function BreakingNewsPage() {
                 {allBreakingNews.slice(0, 8).map((_, i) => (
                   <div
                     key={i}
-                    className={`h-[3px] flex-1 rounded-full transition-colors duration-500 ${
+                    className={`h-[3px] flex-1 rounded-full motion-safe:transition-colors motion-safe:duration-500 ${
                       i === ticker % 8 ? "bg-red-600" : "bg-white/10"
                     }`}
                   />
@@ -204,7 +209,7 @@ export function BreakingNewsPage() {
                   {["Fed Cut", "AI Wars", "OPEC", "Ukraine EU", "NVIDIA", "Red Sea", "RBI"].map((t) => (
                     <span
                       key={t}
-                      className="text-xs font-medium bg-white/10 text-gray-300 px-2.5 py-1 rounded-[2px] hover:bg-white/20 hover:text-white cursor-pointer transition-colors flex items-center"
+                      className="text-xs font-medium bg-white/10 text-gray-300 px-2.5 py-1 rounded-[2px] hover:bg-white/20 hover:text-white cursor-pointer motion-safe:transition-all motion-safe:hover:-translate-y-0.5 flex items-center"
                     >
                       <TrendingUp size={9} strokeWidth={2.25} className="mr-1" />
                       {t}
@@ -217,6 +222,13 @@ export function BreakingNewsPage() {
 
         </div>
       </div>
+
+      <style>{`
+        @keyframes fadein {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
