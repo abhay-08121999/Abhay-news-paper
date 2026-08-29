@@ -6,18 +6,23 @@ import { Footer } from "./components/Footer";
 import { MarketsTicker } from "./components/MarketsTicker";
 import { PageLayout } from "./components/PageLayout";
 
-// Pages
+// ============================================================
+// MAIN PAGES
+// ============================================================
+
 import { HomePage } from "./components/pages/HomePage";
 import { TechnologyPage } from "./components/pages/TechnologyPage";
 import { FinancePage } from "./components/pages/FinancePage";
 import { BillionairesPage } from "./components/pages/BillionairesPage";
 import { WorldPage } from "./components/pages/WorldPage";
+
 import { CybersecurityPage } from "./components/pages/CybersecurityPage";
 import { EnergyPage } from "./components/pages/EnergyPage";
 import { HealthcarePage } from "./components/pages/HealthcarePage";
 import { ManufacturingPage } from "./components/pages/ManufacturingPage";
 import { SmartCitiesPage } from "./components/pages/SmartCitiesPage";
 import { SupplyChainPage } from "./components/pages/SupplyChainPage";
+
 import { FeaturedPage } from "./components/pages/FeaturedPage";
 import { BreakingNewsPage } from "./components/pages/BreakingNewsPage";
 import { MarketsPage } from "./components/pages/MarketsPage";
@@ -27,16 +32,29 @@ import { BusinessNewsPage } from "./components/pages/BusinessNewsPage";
 import { LeadershipPage } from "./components/pages/LeadershipPage";
 import { InnovationPage } from "./components/pages/InnovationPage";
 import { MagazinePage } from "./components/pages/MagazinePage";
+import { CeoSpotlightPage } from "./components/pages/CeoSpotlightPage";
+
+// ============================================================
+// LEGAL / SYSTEM PAGES
+// ============================================================
+
 import { Privacy } from "./components/pages/Privacy";
 import { Terms } from "./components/pages/Terms";
 import { CookiePolicy } from "./components/pages/CookiePolicy";
 import { Accessibility } from "./components/pages/Accessibility";
 import { ResetPasswordPage } from "./components/pages/ResetPasswordPage";
-import { CeoSpotlightPage } from "./components/pages/CeoSpotlightPage";
 
-// Auth
+// ============================================================
+// AUTH PAGES
+// ============================================================
+
 import { SignInPage } from "./components/auth/SignInPage";
 import { DashboardPage } from "./components/auth/DashboardPage";
+
+// ============================================================
+// MAGAZINE LAYOUT
+// Ads are disabled throughout the website.
+// ============================================================
 
 interface MagazineLayoutProps {
   children: React.ReactNode;
@@ -53,10 +71,14 @@ function MagazineLayout({
 }: MagazineLayoutProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
+
+      {/* Website Header */}
       <Header />
 
+      {/* Market ticker */}
       <MarketsTicker />
 
+      {/* Main page content */}
       <PageLayout
         showLeftSidebar={showLeftSidebar}
         showRightSidebar={showRightSidebar}
@@ -65,10 +87,16 @@ function MagazineLayout({
         {children}
       </PageLayout>
 
+      {/* Website Footer */}
       <Footer />
+
     </div>
   );
 }
+
+// ============================================================
+// APPLICATION
+// ============================================================
 
 export default function App() {
   return (
@@ -76,9 +104,9 @@ export default function App() {
       <BrowserRouter>
         <Routes>
 
-          {/* =====================================================
-              STANDALONE PAGES
-              ===================================================== */}
+          {/* ==================================================
+              AUTH / STANDALONE PAGES
+              ================================================== */}
 
           <Route
             path="/signin"
@@ -94,6 +122,10 @@ export default function App() {
             path="/reset-password"
             element={<ResetPasswordPage />}
           />
+
+          {/* ==================================================
+              LEGAL PAGES
+              ================================================== */}
 
           <Route
             path="/privacy"
@@ -115,10 +147,9 @@ export default function App() {
             element={<Accessibility />}
           />
 
-          {/* =====================================================
-              HOME PAGE
-              ADS DISABLED
-              ===================================================== */}
+          {/* ==================================================
+              HOME
+              ================================================== */}
 
           <Route
             path="/"
@@ -133,9 +164,9 @@ export default function App() {
             }
           />
 
-          {/* =====================================================
+          {/* ==================================================
               MAIN CATEGORY PAGES
-              ===================================================== */}
+              ================================================== */}
 
           <Route
             path="/technology"
@@ -189,9 +220,9 @@ export default function App() {
             }
           />
 
-          {/* =====================================================
+          {/* ==================================================
               HEADER CATEGORY PAGES
-              ===================================================== */}
+              ================================================== */}
 
           <Route
             path="/cybersecurity"
@@ -284,9 +315,9 @@ export default function App() {
             }
           />
 
-          {/* =====================================================
-              SUBHEADER / MORE PAGES
-              ===================================================== */}
+          {/* ==================================================
+              ADDITIONAL NEWS PAGES
+              ================================================== */}
 
           <Route
             path="/featured"
@@ -405,9 +436,9 @@ export default function App() {
             }
           />
 
-          {/* =====================================================
-              MORE → FEATURED
-              ===================================================== */}
+          {/* ==================================================
+              MORE
+              ================================================== */}
 
           <Route
             path="/more"
