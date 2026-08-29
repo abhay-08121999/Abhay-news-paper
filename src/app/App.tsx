@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -39,9 +40,9 @@ import { DashboardPage } from "./components/auth/DashboardPage";
 
 function MagazineLayout({
   children,
-  showLeftSidebar = true,
-  showRightSidebar = true,
-  topBanner = true,
+  showLeftSidebar = false,
+  showRightSidebar = false,
+  topBanner = false,
 }: {
   children: React.ReactNode;
   showLeftSidebar?: boolean;
@@ -51,14 +52,17 @@ function MagazineLayout({
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
+
       <MarketsTicker />
+
       <PageLayout
-  showLeftSidebar={showLeftSidebar}
-  showRightSidebar={showRightSidebar}
-  topBanner={topBanner}
->
-  {children}
-</PageLayout>
+        showLeftSidebar={showLeftSidebar}
+        showRightSidebar={showRightSidebar}
+        topBanner={topBanner}
+      >
+        {children}
+      </PageLayout>
+
       <Footer />
     </div>
   );
@@ -69,55 +73,223 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Standalone pages (no mag layout) */}
+          {/* Standalone pages */}
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/ads-manager" element={<AdManagerPage />} />
+
+          {/* Advertisement manager removed */}
+
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/cookiepolicy" element={<CookiePolicy />} />
           <Route path="/accessibility" element={<Accessibility />} />
 
           {/* Main magazine routes */}
-      <Route
-  path="/"
-  element={
-    <MagazineLayout
-      showLeftSidebar={false}
-      showRightSidebar={false}
-      topBanner={false}
-    >
-      <HomePage />
-    </MagazineLayout>
-  }
-/>
-          <Route path="/technology" element={<MagazineLayout><TechnologyPage /></MagazineLayout>} />
-          <Route path="/finance" element={<MagazineLayout><FinancePage /></MagazineLayout>} />
-          <Route path="/billionaires" element={<MagazineLayout><BillionairesPage /></MagazineLayout>} />
-          <Route path="/world" element={<MagazineLayout><WorldPage /></MagazineLayout>} />
+          <Route
+            path="/"
+            element={
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
+                <HomePage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/technology"
+            element={
+              <MagazineLayout>
+                <TechnologyPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/finance"
+            element={
+              <MagazineLayout>
+                <FinancePage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/billionaires"
+            element={
+              <MagazineLayout>
+                <BillionairesPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/world"
+            element={
+              <MagazineLayout>
+                <WorldPage />
+              </MagazineLayout>
+            }
+          />
 
           {/* Header category pages */}
-          <Route path="/cybersecurity" element={<MagazineLayout><CybersecurityPage /></MagazineLayout>} />
-          <Route path="/energy" element={<MagazineLayout><EnergyPage /></MagazineLayout>} />
-          <Route path="/healthcare" element={<MagazineLayout><HealthcarePage /></MagazineLayout>} />
-          <Route path="/manufacturing" element={<MagazineLayout><ManufacturingPage /></MagazineLayout>} />
-          <Route path="/smart-cities" element={<MagazineLayout><SmartCitiesPage /></MagazineLayout>} />
-          <Route path="/supply-chain" element={<MagazineLayout><SupplyChainPage /></MagazineLayout>} />
-          <Route path="/magazine" element={<MagazineLayout><MagazinePage /></MagazineLayout>} />
+          <Route
+            path="/cybersecurity"
+            element={
+              <MagazineLayout>
+                <CybersecurityPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/energy"
+            element={
+              <MagazineLayout>
+                <EnergyPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/healthcare"
+            element={
+              <MagazineLayout>
+                <HealthcarePage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/manufacturing"
+            element={
+              <MagazineLayout>
+                <ManufacturingPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/smart-cities"
+            element={
+              <MagazineLayout>
+                <SmartCitiesPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/supply-chain"
+            element={
+              <MagazineLayout>
+                <SupplyChainPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/magazine"
+            element={
+              <MagazineLayout>
+                <MagazinePage />
+              </MagazineLayout>
+            }
+          />
 
           {/* Subheader / More pages */}
-          <Route path="/featured" element={<MagazineLayout><FeaturedPage /></MagazineLayout>} />
-          <Route path="/breaking-news" element={<MagazineLayout><BreakingNewsPage /></MagazineLayout>} />
-          <Route path="/markets" element={<MagazineLayout><MarketsPage /></MagazineLayout>} />
-          <Route path="/cover-stories" element={<MagazineLayout><CoverStoriesPage /></MagazineLayout>} />
-          <Route path="/white-house-watch" element={<MagazineLayout><WhiteHouseWatchPage /></MagazineLayout>} />
-          <Route path="/business-news" element={<MagazineLayout><BusinessNewsPage /></MagazineLayout>} />
-          <Route path="/leadership" element={<MagazineLayout><LeadershipPage /></MagazineLayout>} />
-          <Route path="/innovation" element={<MagazineLayout><InnovationPage /></MagazineLayout>} />
-          <Route path="/ceospotlight" element={<MagazineLayout><CeoSpotlightPage /></MagazineLayout>} />
-          {/* "More" catch-all → redirect to featured */}
-          <Route path="/more" element={<MagazineLayout><FeaturedPage /></MagazineLayout>} />
+          <Route
+            path="/featured"
+            element={
+              <MagazineLayout>
+                <FeaturedPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/breaking-news"
+            element={
+              <MagazineLayout>
+                <BreakingNewsPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/markets"
+            element={
+              <MagazineLayout>
+                <MarketsPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/cover-stories"
+            element={
+              <MagazineLayout>
+                <CoverStoriesPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/white-house-watch"
+            element={
+              <MagazineLayout>
+                <WhiteHouseWatchPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/business-news"
+            element={
+              <MagazineLayout>
+                <BusinessNewsPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/leadership"
+            element={
+              <MagazineLayout>
+                <LeadershipPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/innovation"
+            element={
+              <MagazineLayout>
+                <InnovationPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/ceospotlight"
+            element={
+              <MagazineLayout>
+                <CeoSpotlightPage />
+              </MagazineLayout>
+            }
+          />
+
+          {/* More → Featured */}
+          <Route
+            path="/more"
+            element={
+              <MagazineLayout>
+                <FeaturedPage />
+              </MagazineLayout>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
