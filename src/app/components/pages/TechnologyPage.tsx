@@ -1,5 +1,3 @@
-```tsx
-import { ImageWithFallback } from "../figma/ImageWithFallback";
 import {
   Clock,
   ChevronRight,
@@ -12,6 +10,8 @@ import {
   Building2,
   Truck,
 } from "lucide-react";
+
+import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 import HeroImg from "../../../imports/heroimage.png";
 import Hero1Img from "../../../imports/Techheroimage.png";
@@ -32,6 +32,7 @@ function SectionHeader({
     <div className="flex items-center justify-between border-t-2 border-black border-b border-gray-300 py-2.5 mb-6">
       <div className="flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-red-700 rounded-full" />
+
         <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.15em] text-black">
           {title}
         </h2>
@@ -59,7 +60,7 @@ const techHero = {
   title:
     "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
   excerpt:
-    "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and South Korea, expanding its already well-established relationship with China's Unitree. The chipmaker's shares climbed approximately 6% during the June 1 session, bringing its year-to-date gains to roughly 20%. The move signals Nvidia's determined pivot from GPU sales to powering the physical AI economy — a strategy that positions the company at the intersection of software, semiconductors, and robotics manufacturing.",
+    "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and South Korea, expanding its already well-established relationship with China's Unitree. The chipmaker's shares climbed approximately 6% during the June 1 session, bringing its year-to-date gains to roughly 20%.",
   author: "Sagar Kumar",
   time: "1 June 2026",
   image: HeroImg,
@@ -70,7 +71,7 @@ const techHero1 = {
   title:
     "Intel Attempts Inference-Chip Comeback as AI Compute Wars Intensify",
   excerpt:
-    "Intel has unveiled a renewed push into the inference accelerator market, positioning its next-generation Gaudi chips as a cost-effective alternative for enterprises deploying large-scale AI models at inference time.",
+    "Intel has unveiled a renewed push into the inference accelerator market, positioning its next-generation Gaudi chips as a cost-effective alternative for enterprises deploying large-scale AI models.",
   author: "Sagar Kumar",
   time: "1 June 2026",
   image: Hero1Img,
@@ -78,17 +79,16 @@ const techHero1 = {
 
 const techHero2 = {
   category: "ARTIFICIAL INTELLIGENCE",
-  title:
-    "SoftBank Bets Big on European Data Centers",
+  title: "SoftBank Bets Big on European Data Centers",
   excerpt:
-    "Japan's SoftBank Group has committed to a massive European data center investment, aligning its capital with the continent's growing appetite for AI compute infrastructure.",
+    "Japan's SoftBank Group has committed to a major European data center investment, aligning its capital with the continent's growing appetite for AI compute infrastructure.",
   author: "Sagar Kumar",
   time: "30 May 2026",
   image: Hero2Img,
 };
 
 /* =========================================================
-   CATEGORIES
+   CATEGORY NAVIGATION
 ========================================================= */
 
 const techCategories = [
@@ -103,12 +103,12 @@ const techCategories = [
 
 /* =========================================================
    AI STORIES
-   TWO-COLUMN LAYOUT
+   TWO COLUMN LAYOUT
 ========================================================= */
 
 const aiStories = [
   {
-    id: 5,
+    id: 1,
     title:
       "SpaceX prices IPO at $135 per share, raising $75B at a $1.77T valuation in the largest IPO ever.",
     excerpt:
@@ -118,7 +118,7 @@ const aiStories = [
       "https://images.unsplash.com/photo-1517976547714-720226b864c1?auto=format&fit=crop&w=1400&q=85",
   },
   {
-    id: 6,
+    id: 2,
     title:
       "SpaceX agrees to acquire AI coding startup Cursor for $60B, folding the asset into xAI.",
     excerpt:
@@ -128,7 +128,7 @@ const aiStories = [
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=85",
   },
   {
-    id: 7,
+    id: 3,
     title:
       "Anthropic surpasses OpenAI with a $30B run rate and prepares a confidential IPO filing.",
     excerpt:
@@ -138,7 +138,7 @@ const aiStories = [
       "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&q=85",
   },
   {
-    id: 8,
+    id: 4,
     title:
       "Nvidia unveils the RTX Spark Superchip at Computex, pairing Blackwell RTX graphics with Grace CPU for AI PCs.",
     excerpt:
@@ -148,7 +148,7 @@ const aiStories = [
       "https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=1400&q=85",
   },
   {
-    id: 1,
+    id: 5,
     title:
       "NVIDIA's Blackwell Ultra GPU Delivers 40x Speed Boost for LLM Training",
     excerpt:
@@ -158,7 +158,7 @@ const aiStories = [
       "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1400&q=85",
   },
   {
-    id: 2,
+    id: 6,
     title:
       "Google DeepMind Achieves Breakthrough in Protein Structure Prediction for Drug Discovery",
     excerpt:
@@ -170,79 +170,87 @@ const aiStories = [
 ];
 
 /* =========================================================
-   OTHER STORIES
+   CYBERSECURITY
 ========================================================= */
 
 const cyberStories = [
   {
-    id: 5,
+    id: 1,
     title:
       "Florida sues OpenAI and Sam Altman, alleging ChatGPT caused harm as regulators warn growth is being prioritized over safety.",
     time: "Just now",
   },
   {
-    id: 6,
+    id: 2,
     title:
       "White House pressure reportedly pulled back Anthropic's most capable models amid concerns over high-risk AI systems.",
     time: "Just now",
   },
   {
-    id: 1,
+    id: 3,
     title: "Zero-Day Exploit Threatens 2 Billion Android Devices Globally",
     time: "3 hrs ago",
   },
   {
-    id: 2,
+    id: 4,
     title:
       "US CISA Issues Emergency Directive After Critical Infrastructure Breach",
     time: "5 hrs ago",
   },
   {
-    id: 3,
+    id: 5,
     title:
       "Quantum Encryption Startup Raises $400M Series C to Secure Financial Networks",
     time: "7 hrs ago",
   },
   {
-    id: 4,
+    id: 6,
     title:
       "Ransomware Attacks Hit Record High in Q1 2026, Costing Enterprises $12B",
     time: "9 hrs ago",
   },
 ];
 
+/* =========================================================
+   ENERGY
+========================================================= */
+
 const energyStories = [
   {
-    id: 4,
+    id: 1,
     title:
       "Ohio suspends a major data-center tax incentive after AI infrastructure costs surge, deepening grid and community pushback.",
     time: "Just now",
   },
   {
-    id: 5,
+    id: 2,
     title:
       "Analysts say 30-50% of planned U.S. AI data centers may miss 2026 timelines or be canceled over transformer shortages, grid delays, and local opposition.",
     time: "Just now",
   },
   {
-    id: 1,
+    id: 3,
     title:
       "Global Solar Capacity Crosses 5 Terawatts — a Historic Milestone for Clean Energy",
     time: "2 hrs ago",
   },
   {
-    id: 2,
+    id: 4,
     title:
       "Hydrogen Fuel Cell Trucks Begin Commercial Operations on Trans-European Routes",
     time: "4 hrs ago",
   },
   {
-    id: 3,
+    id: 5,
     title:
       "Saudi Arabia's NEOM Project Reveals 100% Renewable Powered Megacity Grid",
     time: "6 hrs ago",
   },
 ];
+
+/* =========================================================
+   HEALTHCARE
+========================================================= */
 
 const healthcareStories = [
   {
@@ -265,32 +273,40 @@ const healthcareStories = [
   },
 ];
 
+/* =========================================================
+   MANUFACTURING
+========================================================= */
+
 const manufacturingStories = [
   {
-    id: 4,
+    id: 1,
     title:
       "DriveNets raises $410M backed by AMD to expand software-defined networking for AI data centers.",
     time: "Just now",
   },
   {
-    id: 1,
+    id: 2,
     title:
       "Tesla's Gigafactory India Begins Production of Next-Gen 4680 Battery Cells",
     time: "2 hrs ago",
   },
   {
-    id: 2,
+    id: 3,
     title:
       "3D-Printed Steel Bridges Deploy in Rotterdam, Cutting Construction Costs by 65%",
     time: "5 hrs ago",
   },
   {
-    id: 3,
+    id: 4,
     title:
       "South Korea's Hyundai Robotics Ships 50,000 Humanoid Factory Workers Globally",
     time: "7 hrs ago",
   },
 ];
+
+/* =========================================================
+   SMART CITIES
+========================================================= */
 
 const smartCityStories = [
   {
@@ -312,6 +328,10 @@ const smartCityStories = [
     time: "9 hrs ago",
   },
 ];
+
+/* =========================================================
+   SUPPLY CHAIN
+========================================================= */
 
 const supplyChainStories = [
   {
@@ -405,9 +425,9 @@ function SmallStoryList({
 }) {
   return (
     <div>
-      {stories.map((s, index) => (
+      {stories.map((story, index) => (
         <div
-          key={`${s.id}-${index}`}
+          key={`${story.id}-${index}`}
           className="py-4 border-b border-gray-200 cursor-pointer group transition-colors hover:bg-gray-50 px-1"
         >
           <div className="flex gap-3">
@@ -417,12 +437,12 @@ function SmallStoryList({
 
             <div>
               <p className="text-[13px] md:text-[14px] font-semibold leading-[1.25] text-gray-900 group-hover:text-red-700 transition-colors">
-                {s.title}
+                {story.title}
               </p>
 
               <span className="text-[9px] text-gray-400 flex items-center gap-1 mt-2">
                 <Clock size={9} />
-                {s.time}
+                {story.time}
               </span>
             </div>
           </div>
@@ -441,9 +461,7 @@ export function TechnologyPage() {
     <main className="bg-[#f7f7f5] text-[#111] min-h-screen">
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* =================================================
-            PAGE TITLE
-        ================================================= */}
+        {/* PAGE HEADER */}
 
         <header className="pt-8 md:pt-12 pb-5 border-b-[3px] border-black">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
@@ -464,9 +482,7 @@ export function TechnologyPage() {
           </div>
         </header>
 
-        {/* =================================================
-            CATEGORY NAVIGATION
-        ================================================= */}
+        {/* CATEGORY NAVIGATION */}
 
         <nav className="border-b border-gray-300 py-3 mb-7 sticky top-0 z-20 bg-[#f7f7f5]/95 backdrop-blur-sm">
           <div className="flex items-center gap-4 md:gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
@@ -485,13 +501,11 @@ export function TechnologyPage() {
           </div>
         </nav>
 
-        {/* =================================================
-            HERO
-        ================================================= */}
+        {/* HERO SECTION */}
 
         <section className="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr_0.72fr] gap-0 border-b border-black">
 
-          {/* MAIN */}
+          {/* MAIN HERO */}
 
           <article className="group lg:pr-6 pb-7 lg:pb-8">
             <div className="relative overflow-hidden mb-4">
@@ -528,7 +542,7 @@ export function TechnologyPage() {
             </div>
           </article>
 
-          {/* SECOND */}
+          {/* SECOND FEATURE */}
 
           <article className="group lg:px-6 lg:border-l border-gray-300 py-7 lg:py-0">
             <div className="overflow-hidden mb-4">
@@ -556,7 +570,7 @@ export function TechnologyPage() {
             </div>
           </article>
 
-          {/* EDITOR */}
+          {/* EDITOR'S PICK */}
 
           <aside className="lg:border-l border-gray-300 lg:pl-6 py-7 lg:py-0">
             <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
@@ -592,9 +606,7 @@ export function TechnologyPage() {
           </aside>
         </section>
 
-        {/* =================================================
-            TECHNOLOGY INDEX
-        ================================================= */}
+        {/* TECHNOLOGY INDEX */}
 
         <section className="border-y border-black py-4 my-7">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -603,9 +615,11 @@ export function TechnologyPage() {
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 AI Infrastructure
               </p>
+
               <p className="font-serif text-[22px] font-bold">
                 +27.4%
               </p>
+
               <span className="text-[9px] text-green-700">
                 ▲ Global investment
               </span>
@@ -615,9 +629,11 @@ export function TechnologyPage() {
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 Cybersecurity
               </p>
+
               <p className="font-serif text-[22px] font-bold">
                 $214B
               </p>
+
               <span className="text-[9px] text-gray-500">
                 Market estimate
               </span>
@@ -627,9 +643,11 @@ export function TechnologyPage() {
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 Semiconductor
               </p>
+
               <p className="font-serif text-[22px] font-bold">
                 +18.2%
               </p>
+
               <span className="text-[9px] text-green-700">
                 ▲ Annual growth
               </span>
@@ -639,9 +657,11 @@ export function TechnologyPage() {
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 Robotics
               </p>
+
               <p className="font-serif text-[22px] font-bold">
                 4.8M
               </p>
+
               <span className="text-[9px] text-gray-500">
                 Units deployed
               </span>
@@ -650,9 +670,7 @@ export function TechnologyPage() {
           </div>
         </section>
 
-        {/* =================================================
-            FEATURE STORY
-        ================================================= */}
+        {/* FEATURE STORY */}
 
         <section className="grid grid-cols-1 lg:grid-cols-2 border-b border-gray-300">
 
@@ -693,6 +711,7 @@ export function TechnologyPage() {
 
           <div className="lg:pl-7 py-7">
             <div className="border-t-2 border-black">
+
               <div className="py-3 border-b border-gray-300">
                 <h3 className="text-[11px] font-black uppercase tracking-[0.15em]">
                   Industry Statistics
@@ -700,6 +719,7 @@ export function TechnologyPage() {
               </div>
 
               <div className="text-[11px]">
+
                 {[
                   ["Global IT Spend (2025)", "USD 5.43 Trillion"],
                   ["AI Market", "USD 103.28 Billion at 40%+ CAGR"],
@@ -721,6 +741,7 @@ export function TechnologyPage() {
                     </div>
                   </div>
                 ))}
+
               </div>
             </div>
           </div>
@@ -728,23 +749,24 @@ export function TechnologyPage() {
 
         {/* =================================================
             AI & MACHINE LEARNING
-            TWO COLUMNS — FIXED
+            TWO COLUMNS
         ================================================= */}
 
         <section className="py-9" id="innovation">
           <SectionHeader title="AI & Machine Learning" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-9">
 
-            {aiStories.map((s, index) => (
+            {aiStories.map((story, index) => (
               <article
-                key={`${s.id}-${index}`}
+                key={`${story.id}-${index}`}
                 className="group cursor-pointer"
               >
                 <div className="relative overflow-hidden mb-4">
+
                   <ImageWithFallback
-                    src={s.image}
-                    alt={s.title}
+                    src={story.image}
+                    alt={story.title}
                     className={`w-full object-cover transition-transform duration-500 group-hover:scale-[1.035] ${
                       index === 0
                         ? "h-[300px] md:h-[390px]"
@@ -757,6 +779,7 @@ export function TechnologyPage() {
                       Featured
                     </span>
                   )}
+
                 </div>
 
                 <span className="text-[8px] uppercase tracking-[0.15em] text-red-700 font-bold">
@@ -770,16 +793,16 @@ export function TechnologyPage() {
                       : "text-[19px] md:text-[22px]"
                   }`}
                 >
-                  {s.title}
+                  {story.title}
                 </h3>
 
                 <p className="text-[11px] md:text-[12px] leading-[1.65] text-gray-500 mt-2">
-                  {s.excerpt}
+                  {story.excerpt}
                 </p>
 
                 <div className="flex items-center gap-1 text-[9px] text-gray-400 mt-3">
                   <Clock size={8} />
-                  {s.time}
+                  {story.time}
                 </div>
               </article>
             ))}
@@ -832,7 +855,7 @@ export function TechnologyPage() {
 
         {/* =================================================
             HEALTHCARE
-            TWO-COLUMN CONTENT
+            TWO COLUMNS
         ================================================= */}
 
         <section
@@ -844,7 +867,9 @@ export function TechnologyPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
 
             <article className="group">
+
               <div className="relative overflow-hidden">
+
                 <ImageWithFallback
                   src={sectionImages.healthcare}
                   alt="Healthcare and biotechnology"
@@ -852,6 +877,7 @@ export function TechnologyPage() {
                 />
 
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-24">
+
                   <span className="text-[8px] uppercase tracking-[0.15em] text-white font-bold">
                     Healthcare Innovation
                   </span>
@@ -859,14 +885,19 @@ export function TechnologyPage() {
                   <h3 className="font-serif text-white text-[22px] md:text-[28px] font-bold leading-tight mt-1">
                     {healthcareStories[0].title}
                   </h3>
+
                 </div>
+
               </div>
+
             </article>
 
             <div>
+
               <SmallStoryList stories={healthcareStories.slice(1)} />
 
               <div className="mt-5 bg-black text-white p-5">
+
                 <span className="text-[8px] uppercase tracking-[0.15em] text-gray-400">
                   Market Insight
                 </span>
@@ -875,7 +906,9 @@ export function TechnologyPage() {
                   Global healthcare AI market projected to reach $187B by
                   2030, growing at 37% CAGR.
                 </p>
+
               </div>
+
             </div>
 
           </div>
@@ -895,11 +928,13 @@ export function TechnologyPage() {
             <SectionHeader title="Manufacturing & Industry 4.0" />
 
             <div className="group overflow-hidden mb-5">
+
               <ImageWithFallback
                 src={sectionImages.manufacturing}
                 alt="Advanced manufacturing"
                 className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
+
             </div>
 
             <SmallStoryList stories={manufacturingStories} />
@@ -912,11 +947,13 @@ export function TechnologyPage() {
             <SectionHeader title="Smart Cities" />
 
             <div className="group overflow-hidden mb-5">
+
               <ImageWithFallback
                 src={sectionImages.smartCities}
                 alt="Smart city technology"
                 className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
+
             </div>
 
             <SmallStoryList stories={smartCityStories} />
@@ -933,11 +970,13 @@ export function TechnologyPage() {
           className="py-8 border-t-2 border-black pb-12"
           id="supply-chain"
         >
+
           <SectionHeader title="Supply Chain & Logistics" />
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
 
             <div className="group overflow-hidden">
+
               <ImageWithFallback
                 src={sectionImages.supplyChain}
                 alt="Supply chain and logistics"
@@ -945,6 +984,7 @@ export function TechnologyPage() {
               />
 
               <div className="border-x border-b border-gray-300 p-5">
+
                 <span className="text-[8px] uppercase tracking-[0.15em] text-red-700 font-bold">
                   Logistics & Trade
                 </span>
@@ -953,7 +993,9 @@ export function TechnologyPage() {
                   The global supply chain is being rebuilt around data,
                   automation and artificial intelligence.
                 </h3>
+
               </div>
+
             </div>
 
             <div>
@@ -961,10 +1003,10 @@ export function TechnologyPage() {
             </div>
 
           </div>
+
         </section>
 
       </div>
     </main>
   );
 }
-```
