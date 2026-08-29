@@ -1,6 +1,5 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock, Factory } from "lucide-react";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import Manu1Img from "../../../imports/Manu1.png";
 import Manu2Img from "../../../imports/Manu2.png";
 import Manu3Img from "../../../imports/Manu3.png";
