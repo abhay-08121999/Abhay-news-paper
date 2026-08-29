@@ -3,12 +3,12 @@ import { Clock, Globe, AlertTriangle } from "lucide-react";
 
 function SectionHeader({ title, id, subtitle }: { title: string; id?: string; subtitle?: string }) {
   return (
-    <div id={id} className="flex items-end justify-between border-b-2 border-black pb-2.5 mb-5">
+    <div id={id} className="flex items-end justify-between border-b-2 border-black pb-3 mb-6">
       <div>
-        <h2 className="uppercase tracking-[0.15em] text-sm font-semibold">{title}</h2>
-        {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
+        <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">{title}</h2>
+        {subtitle && <p className="text-xs text-gray-500 mt-1 tracking-wide">{subtitle}</p>}
       </div>
-      <span className="hidden sm:block h-px flex-1 max-w-16 bg-gray-200 ml-4 mb-1.5" />
+      <span className="hidden sm:block h-px flex-1 max-w-20 bg-gradient-to-r from-gray-200 to-transparent ml-4 mb-1.5" />
     </div>
   );
 }
@@ -94,9 +94,9 @@ const diplomacyTracker = [
 ];
 
 const severityColor: Record<string, string> = {
-  high: "bg-red-50 text-red-700 border-red-200",
-  medium: "bg-amber-50 text-amber-700 border-amber-200",
-  low: "bg-sky-50 text-sky-700 border-sky-200",
+  high: "bg-red-50/70 text-red-700 border-red-200",
+  medium: "bg-amber-50/70 text-amber-700 border-amber-200",
+  low: "bg-sky-50/70 text-sky-700 border-sky-200",
 };
 
 const severityDot: Record<string, string> = {
@@ -106,9 +106,9 @@ const severityDot: Record<string, string> = {
 };
 
 const statusColor: Record<string, string> = {
-  Signed: "bg-emerald-100 text-emerald-700",
-  Active: "bg-sky-100 text-sky-700",
-  Finalizing: "bg-amber-100 text-amber-700",
+  Signed: "bg-emerald-100 text-emerald-700 ring-1 ring-emerald-200",
+  Active: "bg-sky-100 text-sky-700 ring-1 ring-sky-200",
+  Finalizing: "bg-amber-100 text-amber-700 ring-1 ring-amber-200",
 };
 
 export function WorldPage() {
@@ -116,35 +116,36 @@ export function WorldPage() {
     <main className="max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
       {/* Page title */}
       <div className="border-b-4 border-black mb-12 pb-4 flex items-center gap-3.5">
-        <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center shrink-0 shadow-sm">
+        <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center shrink-0 shadow-sm ring-1 ring-black/10">
           <Globe size={17} className="text-red-500" />
         </div>
         <div>
-          <span className="text-xs text-red-600 uppercase tracking-[0.22em] font-semibold">Global Coverage</span>
+          <span className="text-xs text-red-600 uppercase tracking-[0.24em] font-semibold">Global Coverage</span>
           <h1 className="mt-0.5 font-serif tracking-tight">World &amp; Geopolitics</h1>
         </div>
       </div>
 
       {/* Hero + White House sidebar */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-14">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
         {/* Hero */}
         <div className="lg:col-span-2 group cursor-pointer">
-          <div className="overflow-hidden rounded-sm mb-5 shadow-sm ring-1 ring-black/5">
+          <div className="relative overflow-hidden rounded-md mb-5 shadow-md ring-1 ring-black/5">
             <ImageWithFallback
               src={worldHero.image}
               alt={worldHero.title}
-              className="w-full h-72 lg:h-96 object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
+              className="w-full h-72 lg:h-96 object-cover group-hover:scale-[1.035] transition-transform duration-700 ease-out"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </div>
-          <span className="text-xs text-red-600 uppercase tracking-wider font-semibold">{worldHero.category}</span>
-          <h3 className="mt-2.5 leading-tight font-serif text-2xl md:text-3xl group-hover:text-red-700 transition-colors duration-300">
+          <span className="text-xs text-red-600 uppercase tracking-[0.14em] font-semibold">{worldHero.category}</span>
+          <h3 className="mt-3 leading-[1.15] font-serif text-2xl md:text-3xl group-hover:text-red-700 transition-colors duration-300">
             {worldHero.title}
           </h3>
-          <p className="text-gray-600 text-sm mt-3 leading-relaxed">{worldHero.excerpt}</p>
-          <div className="flex items-center gap-3 mt-4 text-xs text-gray-400 border-t border-gray-100 pt-3">
+          <p className="text-gray-600 text-sm mt-3.5 leading-relaxed">{worldHero.excerpt}</p>
+          <div className="flex items-center gap-3 mt-4 text-xs text-gray-400 border-t border-gray-100 pt-3.5">
             <span className="font-medium text-gray-500">By {worldHero.author}</span>
             <span className="w-1 h-1 rounded-full bg-gray-300" />
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1.5">
               <Clock size={10} /> {worldHero.time}
             </span>
           </div>
@@ -152,23 +153,26 @@ export function WorldPage() {
 
         {/* White House Watch */}
         <div>
-          <div className="bg-slate-950 text-white rounded-sm overflow-hidden shadow-md ring-1 ring-black/10">
+          <div className="bg-slate-950 text-white rounded-md overflow-hidden shadow-lg ring-1 ring-black/10 h-full flex flex-col">
             <div className="flex items-center gap-2 px-4 pt-4 pb-3 border-b border-white/10">
-              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-xs text-slate-300 uppercase tracking-[0.15em] font-semibold">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+              </span>
+              <span className="text-xs text-slate-300 uppercase tracking-[0.16em] font-semibold">
                 White House Watch
               </span>
             </div>
-            <div className="divide-y divide-white/5 px-4">
+            <div className="divide-y divide-white/[0.06] px-4 flex-1">
               {whiteHouseNews.map((item) => (
-                <div key={item.id} className="py-3 group cursor-pointer">
-                  <span className="text-[10px] bg-white/10 text-slate-300 px-1.5 py-0.5 rounded-sm mb-1.5 inline-block uppercase tracking-wide font-medium">
+                <div key={item.id} className="py-3.5 group/item cursor-pointer">
+                  <span className="text-[10px] bg-white/[0.08] text-slate-300 px-1.5 py-0.5 rounded-sm mb-1.5 inline-block uppercase tracking-wider font-medium">
                     {item.label}
                   </span>
-                  <p className="text-sm text-slate-200 leading-snug group-hover:text-white transition-colors">
+                  <p className="text-sm text-slate-200 leading-snug group-hover/item:text-white transition-colors">
                     {item.title}
                   </p>
-                  <span className="text-[11px] text-slate-500 flex items-center gap-1 mt-1.5">
+                  <span className="text-[11px] text-slate-500 flex items-center gap-1.5 mt-1.5 tracking-wide">
                     <Clock size={10} /> {item.time}
                   </span>
                 </div>
@@ -180,24 +184,24 @@ export function WorldPage() {
       </div>
 
       {/* Geopolitics alerts */}
-      <div className="mb-14">
-        <div className="flex items-center gap-2 border-b-2 border-black pb-2.5 mb-5">
+      <div className="mb-16">
+        <div className="flex items-center gap-2 border-b-2 border-black pb-3 mb-6">
           <AlertTriangle size={15} className="text-red-600" />
-          <h2 className="uppercase tracking-[0.15em] text-sm font-semibold">Geopolitical Risk Monitor</h2>
+          <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">Geopolitical Risk Monitor</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {geopoliticsAlerts.map((alert) => (
             <div
               key={alert.id}
-              className={`border rounded-sm p-4 flex items-start gap-3 transition-shadow hover:shadow-sm ${
+              className={`border rounded-md p-4 flex items-start gap-3 transition-all duration-200 hover:shadow-sm hover:-translate-y-0.5 ${
                 severityColor[alert.severity]
               }`}
             >
               <span className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${severityDot[alert.severity]}`} />
               <div>
                 <p className="text-sm leading-snug text-gray-900">{alert.title}</p>
-                <span className="text-xs opacity-70 mt-1.5 block tracking-wide">
-                  {alert.region} · {alert.severity.toUpperCase()} risk
+                <span className="text-[11px] opacity-70 mt-1.5 block tracking-wide uppercase font-medium">
+                  {alert.region} · {alert.severity} risk
                 </span>
               </div>
             </div>
@@ -206,25 +210,25 @@ export function WorldPage() {
       </div>
 
       {/* Regional news 2x2 grid */}
-      <div className="mb-14">
+      <div className="mb-16">
         <SectionHeader title="Regional Coverage" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-9">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
           {globalRegions.map((region) => (
             <div key={region.region}>
-              <div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-200">
+              <div className="flex items-center gap-2 mb-3 pb-2.5 border-b border-gray-200">
                 <Globe size={13} className="text-gray-400" />
-                <h3 className="uppercase tracking-[0.12em] text-xs font-semibold text-gray-700">{region.region}</h3>
+                <h3 className="uppercase tracking-[0.13em] text-xs font-semibold text-gray-700">{region.region}</h3>
               </div>
               <div className="divide-y divide-gray-100">
                 {region.stories.map((s) => (
                   <div
                     key={s.id}
-                    className="py-3 pl-3 -ml-3 border-l-2 border-l-transparent hover:border-l-red-500 hover:bg-red-50/40 transition-all duration-200 group cursor-pointer rounded-r-sm"
+                    className="py-3.5 pl-3.5 -ml-3.5 border-l-2 border-l-transparent hover:border-l-red-500 hover:bg-red-50/40 transition-all duration-200 group cursor-pointer rounded-r-sm"
                   >
                     <p className="text-sm leading-snug text-gray-900 group-hover:text-red-700 transition-colors">
                       {s.title}
                     </p>
-                    <span className="text-[11px] text-gray-400 flex items-center gap-1 mt-1.5 tracking-wide">
+                    <span className="text-[11px] text-gray-400 flex items-center gap-1.5 mt-2 tracking-wide">
                       <Clock size={10} /> {s.time}
                     </span>
                   </div>
@@ -236,7 +240,7 @@ export function WorldPage() {
       </div>
 
       {/* UN + Diplomacy tracker */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* UN resolutions */}
         <div>
           <SectionHeader title="UN & International Bodies" />
@@ -244,7 +248,7 @@ export function WorldPage() {
             {unResolutions.map((r) => (
               <div
                 key={r.id}
-                className="border border-gray-200 rounded-sm p-4 hover:shadow-sm hover:border-gray-300 transition-all cursor-pointer bg-white"
+                className="border border-gray-200 rounded-md p-4 hover:shadow-sm hover:border-gray-300 hover:-translate-y-0.5 transition-all duration-200 cursor-pointer bg-white"
               >
                 <div className="flex items-start justify-between gap-4">
                   <p className="text-sm leading-snug text-gray-900">{r.title}</p>
@@ -260,17 +264,17 @@ export function WorldPage() {
         {/* Diplomacy tracker */}
         <div>
           <SectionHeader title="Diplomacy Tracker" subtitle="Active negotiations & agreements" />
-          <div className="border border-gray-200 rounded-sm overflow-hidden shadow-sm">
-            <table className="w-full text-sm">
+          <div className="border border-gray-200 rounded-md overflow-hidden shadow-sm">
+            <table className="w-full text-sm border-collapse">
               <thead>
                 <tr className="border-b border-gray-200 bg-slate-50">
-                  <th className="text-left py-2.5 px-4 text-xs text-gray-500 font-semibold uppercase tracking-wide">
+                  <th className="text-left py-3 px-4 text-[11px] text-gray-500 font-semibold uppercase tracking-wider">
                     Parties
                   </th>
-                  <th className="text-left py-2.5 px-3 text-xs text-gray-500 font-semibold uppercase tracking-wide">
+                  <th className="text-left py-3 px-3 text-[11px] text-gray-500 font-semibold uppercase tracking-wider">
                     Type
                   </th>
-                  <th className="text-right py-2.5 px-4 text-xs text-gray-500 font-semibold uppercase tracking-wide">
+                  <th className="text-right py-3 px-4 text-[11px] text-gray-500 font-semibold uppercase tracking-wider">
                     Status
                   </th>
                 </tr>
@@ -278,14 +282,14 @@ export function WorldPage() {
               <tbody className="divide-y divide-gray-100">
                 {diplomacyTracker.map((d, i) => (
                   <tr key={i} className="hover:bg-amber-50/30 transition-colors">
-                    <td className="py-3 px-4 text-sm text-gray-900 font-medium">
-                      {d.country1} — {d.country2}
+                    <td className="py-3.5 px-4 text-sm text-gray-900 font-medium">
+                      {d.country1} <span className="text-gray-300 mx-0.5">—</span> {d.country2}
                     </td>
-                    <td className="py-3 px-3 text-xs text-gray-500">{d.type}</td>
-                    <td className="py-3 px-4 text-right">
+                    <td className="py-3.5 px-3 text-xs text-gray-500">{d.type}</td>
+                    <td className="py-3.5 px-4 text-right">
                       <span
-                        className={`text-xs px-2 py-0.5 rounded-sm font-medium ${
-                          statusColor[d.status] ?? "bg-gray-100 text-gray-600"
+                        className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
+                          statusColor[d.status] ?? "bg-gray-100 text-gray-600 ring-1 ring-gray-200"
                         }`}
                       >
                         {d.status}
