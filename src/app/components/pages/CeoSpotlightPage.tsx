@@ -1,11 +1,16 @@
-
-import { Clock, Users, Award, Star, ChevronRight } from "lucide-react";
+import { Clock, Users, Award, ChevronRight, Quote } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import CeospotImg from "../../../imports/Ceospot.png";
 
+/* Section header — hairline rule + uppercase eyebrow, consistent site-wide */
 function SH({ title }: { title: string }) {
-  return <div className="border-b-2 border-black pb-2 mb-4"><h2 className="uppercase tracking-wider">{title}</h2></div>;
+  return (
+    <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-5">
+      <h2 className="text-sm uppercase tracking-[0.2em]">{title}</h2>
+      <span className="hidden sm:block w-6 h-[2px] bg-red-600" />
+    </div>
+  );
 }
 
 const hero = {
@@ -81,58 +86,80 @@ const pt30Features = [
 
 export function CeoSpotlightPage() {
   return (
-    <div className="py-6">
-      <div className="border-b-4 border-black mb-6 pb-2 flex items-center gap-3">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8">
+      {/* Masthead */}
+      <div className="border-b-4 border-black mb-10 pb-3 flex items-center gap-3">
         <Users size={22} />
         <div>
-          <span className="text-xs text-gray-500 uppercase tracking-widest">Executive Intelligence</span>
-          <h1 className="mt-0.5">CEO Spotlight</h1>
+          <span className="text-xs text-gray-500 uppercase tracking-[0.25em]">Executive Intelligence</span>
+          <h1 className="font-serif text-3xl md:text-4xl mt-0.5">CEO Spotlight</h1>
         </div>
       </div>
 
-       {/* Hero */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-              <div className="lg:col-span-2">
-                <div className="group cursor-pointer">
-                  <div className="relative overflow-hidden rounded mb-4">
-        <ImageWithFallback
-          src={hero.image}
-          alt={hero.title}
-          className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-      
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent " />
+      {/* Hero */}
+      <div className="mb-14 pb-10 border-b border-gray-200">
+        <article className="group cursor-pointer">
+          <div className="relative overflow-hidden mb-4">
+            <ImageWithFallback
+              src={hero.image}
+              alt={hero.title}
+              className="w-full h-72 lg:h-96 object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent" />
+            <span className="absolute bottom-3 left-3 bg-red-600 text-white text-[10px] uppercase tracking-[0.15em] px-2 py-1">
+              {hero.category}
+            </span>
+          </div>
+
+          <h1 className="font-serif text-2xl lg:text-3xl leading-tight group-hover:text-red-600 transition-colors duration-300 max-w-3xl">
+            {hero.title.trim()}
+          </h1>
+          <p className="text-gray-600 text-sm mt-3 leading-relaxed max-w-3xl">
+            {hero.excerpt.trim()}
+          </p>
+
+          <div className="flex items-center gap-3 mt-4 pt-3 border-t border-gray-200 text-xs text-gray-400">
+            <span className="text-gray-700">By {hero.author}</span>
+            <span className="w-1 h-1 rounded-full bg-gray-300" />
+            <span className="flex items-center gap-1">
+              <Clock size={11} /> {hero.time}
+            </span>
+          </div>
+        </article>
       </div>
-                  <span className="text-xs text-red-600 uppercase tracking-wider">{hero.category}</span>
-                  <h1 className="mt-2 leading-tight">{hero.title}</h1>
-                  <p className="text-gray-600 text-sm mt-2 leading-relaxed ">{hero.excerpt}</p>
-                  </div>
-                  </div>
-                  <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
-                    <span>By {hero.author}</span>
-                    <span className="flex items-center gap-1"><Clock size={10} /> {hero.time}</span>
-                  </div>
-                </div>
 
       {/* CEO interviews */}
-      <div className="mb-8">
+      <div className="mb-14">
         <SH title="Exclusive CEO Interviews" />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {ceoInterviews.map((c) => (
-            <div key={c.id} className="group cursor-pointer border border-gray-200 rounded overflow-hidden hover:shadow-md transition-shadow">
+            <div
+              key={c.id}
+              className="group cursor-pointer border border-gray-200 hover:border-black overflow-hidden transition-colors duration-300 flex flex-col"
+            >
               <div className="overflow-hidden">
-                <ImageWithFallback src={c.image} alt={c.name} className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500" />
+                <ImageWithFallback
+                  src={c.image}
+                  alt={c.name}
+                  className="w-full h-40 object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                />
               </div>
-              <div className="p-4">
-                <p className="text-xs text-red-600 uppercase tracking-wider">{c.topic}</p>
-                <h3 className="mt-1 leading-snug">{c.name}</h3>
-                <p className="text-xs text-gray-500 mb-2">{c.title}</p>
-                <blockquote className="text-xs text-gray-600 italic border-l-2 border-red-600 pl-2 line-clamp-3">
-                  "{c.quote}"
+              <div className="p-5 flex flex-col flex-1">
+                <p className="text-[11px] text-red-600 uppercase tracking-wider">{c.topic}</p>
+                <h3 className="font-serif text-lg mt-1.5 leading-snug">{c.name}</h3>
+                <p className="text-xs text-gray-500 mb-3">{c.title}</p>
+
+                <blockquote className="relative text-xs text-gray-600 italic pl-4 border-l-2 border-red-600 leading-relaxed flex-1">
+                  <Quote size={12} className="absolute -left-[7px] -top-1 bg-white text-red-600" />
+                  {c.quote}
                 </blockquote>
-                <button className="mt-3 text-xs text-red-600 flex items-center gap-1 hover:underline">
-                  Read Full Interview <ChevronRight size={10} />
-                </button>
+
+                <div className="flex items-center justify-between mt-4 pt-3 border-t border-gray-100">
+                  <span className="text-[11px] text-gray-400">{c.duration}</span>
+                  <button className="text-xs text-red-600 flex items-center gap-1 hover:gap-1.5 transition-all">
+                    Read Full Interview <ChevronRight size={10} />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -140,20 +167,28 @@ export function CeoSpotlightPage() {
       </div>
 
       {/* PT30 Leadership Insights */}
-      <div className="mb-8 bg-black text-white rounded p-6">
-        <div className="flex items-center gap-2 mb-4">
+      <div className="mb-14 bg-black text-white p-6 md:p-8">
+        <div className="flex items-center gap-2 mb-6">
           <Award size={16} className="text-yellow-400" />
-          <h2 className="text-sm uppercase tracking-wider text-yellow-400">Pride Times 30 — Leadership Profiles</h2>
+          <h2 className="text-sm uppercase tracking-[0.2em] text-yellow-400">Pride Times 30 — Leadership Profiles</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {pt30Features.map((p) => (
-            <div key={p.rank} className="border border-gray-700 rounded p-4">
-              <span className="text-xs text-gray-500">#{p.rank} PT30</span>
-              <h3 className="text-white mt-1">{p.name}</h3>
-              <p className="text-gray-400 text-xs mt-1">{p.insight}</p>
-              <button className="mt-3 text-xs text-yellow-400 hover:underline flex items-center gap-1">
-                Full Profile <ChevronRight size={10} />
-              </button>
+            <div
+              key={p.rank}
+              className="group relative border border-gray-800 hover:border-yellow-400/60 p-5 transition-colors duration-300 overflow-hidden"
+            >
+              <span className="absolute -right-2 -top-3 font-serif text-6xl text-gray-800/70 select-none">
+                {String(p.rank).padStart(2, "0")}
+              </span>
+              <div className="relative">
+                <span className="text-xs text-gray-500">PT30</span>
+                <h3 className="font-serif text-white text-lg mt-1">{p.name.trim()}</h3>
+                <p className="text-gray-400 text-xs mt-1.5 leading-relaxed">{p.insight.trim()}</p>
+                <button className="mt-4 text-xs text-yellow-400 hover:underline flex items-center gap-1">
+                  Full Profile <ChevronRight size={10} />
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -170,18 +205,23 @@ export function CeoSpotlightPage() {
         disclosureText="Paid content by McKinsey & Company. Does not reflect editorial opinion."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
         {/* Women in Leadership */}
         <div>
           <SH title="Women in Leadership" />
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col">
             {womenLeaders.map((w) => (
-              <div key={w.rank} className="flex items-start gap-3 py-2 border-b border-gray-100 last:border-0">
-                <span className="text-xs text-gray-400 w-4 flex-shrink-0">{w.rank}</span>
+              <div
+                key={w.rank}
+                className="flex items-start gap-4 py-3 border-b border-gray-100 last:border-0 group cursor-pointer"
+              >
+                <span className="font-serif text-xl text-gray-300 w-6 flex-shrink-0 group-hover:text-red-600 transition-colors">
+                  {w.rank}
+                </span>
                 <div>
-                  <p className="text-sm">{w.name}</p>
+                  <p className="text-sm group-hover:text-red-600 transition-colors">{w.name}</p>
                   <p className="text-xs text-gray-500">{w.title}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{w.achievement}</p>
+                  <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{w.achievement}</p>
                 </div>
               </div>
             ))}
@@ -193,10 +233,12 @@ export function CeoSpotlightPage() {
           <SH title="Leadership Opinion" />
           <div className="divide-y divide-gray-100">
             {leadershipOpinions.map((o) => (
-              <div key={o.id} className="py-2.5 group cursor-pointer">
-                <p className="text-xs text-gray-500 uppercase tracking-wider">{o.author}</p>
-                <p className="text-sm group-hover:text-red-600 transition-colors mt-0.5">{o.title}</p>
-                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{o.time}</span>
+              <div key={o.id} className="py-3 group cursor-pointer">
+                <p className="text-[11px] text-gray-500 uppercase tracking-wider">{o.author}</p>
+                <p className="text-sm group-hover:text-red-600 transition-colors mt-1 leading-snug">{o.title}</p>
+                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1.5">
+                  <Clock size={10} /> {o.time}
+                </span>
               </div>
             ))}
           </div>
@@ -207,10 +249,12 @@ export function CeoSpotlightPage() {
           <SH title="Executive Moves" />
           <div className="divide-y divide-gray-100">
             {executiveMoves.map((m) => (
-              <div key={m.id} className="py-2.5 group cursor-pointer">
-                <p className="text-xs text-gray-700 uppercase tracking-wider">{m.person}</p>
-                <p className="text-sm group-hover:text-red-600 transition-colors mt-0.5">{m.move}</p>
-                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{m.time}</span>
+              <div key={m.id} className="py-3 group cursor-pointer">
+                <p className="text-[11px] text-gray-700 uppercase tracking-wider">{m.person}</p>
+                <p className="text-sm group-hover:text-red-600 transition-colors mt-1 leading-snug">{m.move}</p>
+                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1.5">
+                  <Clock size={10} /> {m.time}
+                </span>
               </div>
             ))}
           </div>
@@ -219,4 +263,3 @@ export function CeoSpotlightPage() {
     </div>
   );
 }
-
