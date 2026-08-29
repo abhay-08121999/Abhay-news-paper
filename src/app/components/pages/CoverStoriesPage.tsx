@@ -1,8 +1,26 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { Download, BookOpen, Clock, ChevronRight } from "lucide-react";
+import { Download, BookOpen, Clock, ChevronRight, Newspaper } from "lucide-react";
 import { Link } from "react-router";
 import CVImg from "../../../imports/Coverstory.png";
 
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+function SH({ title }: { title: string }) {
+  return (
+    <div className="flex items-center gap-2.5 border-b-2 border-black pb-2.5 mb-6">
+      <span className="h-1.5 w-1.5 rounded-full bg-red-600 shrink-0" />
+      <h2 className="text-[13px] md:text-sm font-bold uppercase tracking-[0.16em] text-gray-900">
+        {title}
+      </h2>
+    </div>
+  );
+}
+
+/* =========================================================
+   DATA
+========================================================= */
 
 const hero = {
   category: "Deal Tracker",
@@ -12,6 +30,26 @@ const hero = {
   time: "May-June 2026",
   image: CVImg,
 };
+
+const dealRows = [
+  ["Jun 1", "Berkshire Hathaway", "Taylor Morrison Home", "$6.8B", "Real Estate / Homebuilding"],
+  ["May 30", "AIG", "Everest Insurance (Colombia)", "Undisclosed", "Insurance / LatAm"],
+  ["May 29", "Fertitta Entertainment", "Caesars Entertainment", "$17.6B", "Gaming & Hospitality"],
+  ["May 29", "Scotiabank", "Maple Financial Group", "Undisclosed", "Banking & Wealth Mgmt"],
+  ["May 28", "Autodesk", "MaintainX", "Undisclosed", "Industrial Software"],
+  ["May 28", "GlobalFoundries", "Synopsys Processor IP", "Undisclosed", "Semiconductors / AI"],
+  ["May 27", "CordenPharma", "Undisclosed CDMO Target", "Undisclosed", "Pharma Manufacturing"],
+  ["May 26", "Laurentide Controls", "C. Latendresse Inc.", "Undisclosed", "Industrial Controls"],
+  ["Ongoing", "SoftBank Group", "European Data Center Assets", "Multi-Bn", "AI Infrastructure"],
+  ["Q2 2026", "ProCap Financial", "CFO Silvia Inc.", "Undisclosed", "Agentic Finance / AI"],
+];
+
+const keyThemes = [
+  "AI-driven consolidation continues to dominate technology and semiconductor deal flow, with acquirers seeking to build end-to-end stacks from chip design to application layer.",
+  "Financial services deal-making is accelerating as banks and insurers seek scale, geographic diversification, and wealth management capability ahead of anticipated regulatory changes.",
+  "Gaming and hospitality mega-deals signal private capital confidence in the durability of integrated entertainment spending despite macroeconomic uncertainty.",
+  "Industrial software acquisitions reflect manufacturers' growing demand for connected operations platforms that unify design, build, and maintain workflows.",
+];
 
 const covers = [
   { month: "May 2026", headline: "The AI Economy: How Artificial Intelligence is Reshaping Global GDP", subhead: "Plus: World Billionaires · India's Rise · Green Energy Revolution", image: "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?w=400&h=550&fit=crop", current: true, path: "/technology" },
@@ -31,207 +69,257 @@ const dailyStories = [
   { id: 6, time: "6:00 PM IST", title: "Evening Digest: Today's Top 10 Business Stories", category: "All" },
 ];
 
+const currentIssueFeatures = [
+  "The $2 Trillion AI Investment Wave",
+  "Which Sectors Win and Which Get Disrupted",
+  "How to Position Your Portfolio",
+  "The Human Capital Challenge",
+  "Government Policy and AI Governance",
+];
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
 export function CoverStoriesPage() {
   return (
-    <div className="py-6">
-      <div className="border-b-4 border-black mb-6 pb-2">
-        <span className="text-xs text-gray-500 uppercase tracking-widest">Mergers & Acquisitions</span>
-        <h1 className="mt-0.5">GLOBAL M&A TRACKER</h1>
-      </div>
+    <div className="w-full bg-white text-gray-900 antialiased">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
-      {/* Hero */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-8">
-                    <div className="lg:col-span-2">
-                      <div className="group cursor-pointer">
-                        <div className="relative overflow-hidden rounded mb-4">
-              <ImageWithFallback
-                src={hero.image}
-                alt={hero.title}
-                className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent " />
+        {/* =================================================
+            PAGE HEADER
+        ================================================= */}
+
+        <header className="border-b-4 border-black pb-5 mb-10">
+          <div className="flex items-center gap-3.5">
+            <div className="flex items-center justify-center w-11 h-11 rounded-full bg-black text-white shrink-0">
+              <Newspaper size={19} strokeWidth={1.75} />
             </div>
-                        <span className="text-xs text-red-600 uppercase tracking-wider">{hero.category}</span>
-                        <h1 className="mt-2 leading-tight">{hero.title}</h1>
-                        <p className="text-gray-600 text-sm mt-2 leading-relaxed ">{hero.excerpt}</p>
-                        </div>
-                        </div>
-                        <div className="flex items-center gap-3 mt-3 text-xs text-gray-400">
-                          <span>By {hero.author}</span>
-                          <span className="flex items-center gap-1"><Clock size={10} /> {hero.time}</span>
-                        </div>
-                      </div>
-
-                      {/* Recent M&A Deals Table */}
-<div className="mt-4 mb-8 overflow-x-auto">
-
-  <table className="w-full border border-gray-300 text-sm">
-    <thead>
-      <tr className="bg-[#0b2344] text-white">
-        <th className="px-4 py-3 text-left">Date</th>
-        <th className="px-4 py-3 text-left">Acquirer</th>
-        <th className="px-4 py-3 text-left">Target</th>
-        <th className="px-4 py-3 text-left">Value</th>
-        <th className="px-4 py-3 text-left">Sector</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      {[
-        ["Jun 1", "Berkshire Hathaway", "Taylor Morrison Home", "$6.8B", "Real Estate / Homebuilding"],
-        ["May 30", "AIG", "Everest Insurance (Colombia)", "Undisclosed", "Insurance / LatAm"],
-        ["May 29", "Fertitta Entertainment", "Caesars Entertainment", "$17.6B", "Gaming & Hospitality"],
-        ["May 29", "Scotiabank", "Maple Financial Group", "Undisclosed", "Banking & Wealth Mgmt"],
-        ["May 28", "Autodesk", "MaintainX", "Undisclosed", "Industrial Software"],
-        ["May 28", "GlobalFoundries", "Synopsys Processor IP", "Undisclosed", "Semiconductors / AI"],
-        ["May 27", "CordenPharma", "Undisclosed CDMO Target", "Undisclosed", "Pharma Manufacturing"],
-        ["May 26", "Laurentide Controls", "C. Latendresse Inc.", "Undisclosed", "Industrial Controls"],
-        ["Ongoing", "SoftBank Group", "European Data Center Assets", "Multi-Bn", "AI Infrastructure"],
-        ["Q2 2026", "ProCap Financial", "CFO Silvia Inc.", "Undisclosed", "Agentic Finance / AI"],
-      ].map((row, index) => (
-        <tr
-          key={index}
-          className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
-        >
-          <td className="border border-gray-300 px-4 py-3">{row[0]}</td>
-          <td className="border border-gray-300 px-4 py-3">{row[1]}</td>
-          <td className="border border-gray-300 px-4 py-3">{row[2]}</td>
-          <td className="border border-gray-300 px-4 py-3">{row[3]}</td>
-          <td className="border border-gray-300 px-4 py-3">{row[4]}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
-{/* Key Themes in Recent M&A Activity */}
-<div className="mt-8 mb-8">
-  <h2 className="text-xl font-bold mb-4">
-    Key Themes in Recent M&A Activity
-  </h2>
-
-  <ol className="list-decimal pl-7 space-y-3 text-[16px] leading-relaxed text-gray-900">
-    <li>
-      AI-driven consolidation continues to dominate technology and
-      semiconductor deal flow, with acquirers seeking to build end-to-end
-      stacks from chip design to application layer.
-    </li>
-
-    <li>
-      Financial services deal-making is accelerating as banks and insurers
-      seek scale, geographic diversification, and wealth management capability
-      ahead of anticipated regulatory changes.
-    </li>
-
-    <li>
-      Gaming and hospitality mega-deals signal private capital confidence in
-      the durability of integrated entertainment spending despite
-      macroeconomic uncertainty.
-    </li>
-
-    <li>
-      Industrial software acquisitions reflect manufacturers' growing demand
-      for connected operations platforms that unify design, build, and
-      maintain workflows.
-    </li>
-  </ol>
-
-  {/* Quote Box */}
-  <div className="mt-10 border border-gray-400 bg-slate-100 flex">
-    <div className="w-8 bg-blue-100 border-r border-gray-400"></div>
-
-    <div className="p-5">
-      <blockquote className="italic text-sm leading-relaxed text-gray-900">
-        “Approximately one-third of the 100 largest corporate M&A
-        transactions in 2025 cited AI as part of their strategic rationale —
-        with Technology, Manufacturing, and Power the most active
-        AI-referencing sectors.”
-      </blockquote>
-
-      <p className="mt-2 font-bold text-sl">
-        — PwC Global M&A Industry Trends 2026
-      </p>
-    </div>
-  </div>
-</div>
-
-      {/* Daily cover schedule */}
-      <div className="bg-gray-900 text-white rounded p-5 mb-8">
-        <h2 className="text-sm uppercase tracking-wider text-gray-300 mb-4">Today's Cover Story Schedule — May 22, 2026</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {dailyStories.map((s) => (
-            <div key={s.id} className="border border-gray-700 rounded p-3 hover:border-gray-500 transition-colors cursor-pointer group">
-              <div className="flex items-center gap-2 mb-1">
-                <Clock size={10} className="text-gray-400" />
-                <span className="text-xs text-gray-400">{s.time}</span>
-                <span className="text-xs bg-gray-700 text-gray-300 px-1.5 py-0.5 rounded ml-auto">{s.category}</span>
-              </div>
-              <p className="text-sm text-gray-200 group-hover:text-white transition-colors leading-snug">{s.title}</p>
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-red-600">
+                Mergers & Acquisitions
+              </p>
+              <h1 className="mt-1 font-serif text-3xl md:text-[42px] font-bold tracking-tight leading-tight">
+                Global M&A Tracker
+              </h1>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </header>
 
-      {/* Magazine covers grid */}
-      <div className="mb-8">
-        <div className="border-b-2 border-black pb-2 mb-5">
-          <h2 className="uppercase tracking-wider">Magazine Covers Archive</h2>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {covers.map((cover) => (
-            <Link key={cover.month} to={cover.path} className="group">
-              <div className="relative overflow-hidden rounded shadow-md mb-2">
-                <ImageWithFallback
-                  src={cover.image}
-                  alt={cover.month}
-                  className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {cover.current && (
-                  <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-0.5 rounded">
-                    CURRENT
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="absolute bottom-2 left-2 right-2">
-                    <p className="text-white text-xs flex items-center gap-1">
-                      <BookOpen size={10} /> Read Issue
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <p className="text-xs text-gray-500 uppercase tracking-wider">{cover.month}</p>
-              <p className="text-xs leading-snug mt-0.5 group-hover:text-red-600 transition-colors">{cover.headline}</p>
-            </Link>
-          ))}
-        </div>
-      </div>
+        {/* =================================================
+            HERO
+        ================================================= */}
 
-      {/* Current issue feature */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 border border-gray-200 rounded p-6">
-        <div>
-          <span className="text-xs text-red-600 uppercase tracking-wider">Current Issue Deep Dive</span>
-          <h2 className="mt-2 leading-snug">{covers[0].headline}</h2>
-          <p className="text-gray-500 text-sm mt-2 mb-4">{covers[0].subhead}</p>
-          <ul className="flex flex-col gap-2 mb-5">
-            {["The $2 Trillion AI Investment Wave", "Which Sectors Win and Which Get Disrupted", "How to Position Your Portfolio", "The Human Capital Challenge", "Government Policy and AI Governance"].map((f) => (
-              <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
-                <ChevronRight size={12} className="text-red-600 flex-shrink-0" /> {f}
+        <article className="group cursor-pointer mb-10">
+          <div className="relative overflow-hidden rounded-[2px]">
+            <ImageWithFallback
+              src={hero.image}
+              alt={hero.title}
+              className="w-full h-72 lg:h-[420px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-90" />
+            <span className="absolute left-4 bottom-4 bg-red-600 text-white px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase rounded-[2px] shadow-sm">
+              {hero.category}
+            </span>
+          </div>
+
+          <h1 className="mt-4 font-serif text-2xl md:text-[36px] font-bold leading-[1.15] text-gray-950 transition-colors duration-200 group-hover:text-red-600">
+            {hero.title}
+          </h1>
+
+          <p className="text-gray-600 text-sm md:text-[15px] leading-[1.75] mt-3 max-w-4xl">
+            {hero.excerpt}
+          </p>
+
+          <div className="flex flex-wrap items-center gap-4 mt-4 pt-3 border-t border-gray-200 text-xs text-gray-400">
+            <span className="font-medium text-gray-500">By {hero.author}</span>
+            <span className="flex items-center gap-1.5">
+              <Clock size={11} strokeWidth={2.25} />
+              {hero.time}
+            </span>
+          </div>
+        </article>
+
+        {/* =================================================
+            RECENT M&A DEALS TABLE
+        ================================================= */}
+
+        <section className="mb-14">
+          <SH title="Recent M&A Deals" />
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b-2 border-gray-900">
+                  <th className="py-3 pr-4 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">Date</th>
+                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">Acquirer</th>
+                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">Target</th>
+                  <th className="px-3 py-3 text-right text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">Value</th>
+                  <th className="pl-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400 hidden sm:table-cell">Sector</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {dealRows.map((row, index) => (
+                  <tr key={index} className="hover:bg-gray-50 transition-colors">
+                    <td className="py-3.5 pr-4 text-gray-500 whitespace-nowrap">{row[0]}</td>
+                    <td className="px-3 py-3.5 font-semibold text-gray-900">{row[1]}</td>
+                    <td className="px-3 py-3.5 text-gray-600">{row[2]}</td>
+                    <td className={`px-3 py-3.5 text-right font-bold tabular-nums whitespace-nowrap ${row[3] === "Undisclosed" ? "text-gray-400 font-medium" : "text-gray-900"}`}>
+                      {row[3]}
+                    </td>
+                    <td className="pl-3 py-3.5 text-xs text-gray-500 hidden sm:table-cell">{row[4]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* =================================================
+            KEY THEMES + QUOTE
+        ================================================= */}
+
+        <section className="mb-14">
+          <SH title="Key Themes in Recent M&A Activity" />
+
+          <ol className="space-y-4">
+            {keyThemes.map((theme, i) => (
+              <li key={i} className="flex gap-4">
+                <span className="shrink-0 flex items-center justify-center w-7 h-7 rounded-full bg-black text-white text-xs font-bold">
+                  {i + 1}
+                </span>
+                <p className="text-[15px] leading-[1.75] text-gray-700 pt-0.5">{theme}</p>
               </li>
             ))}
-          </ul>
-          <div className="flex gap-3">
-            <button className="bg-black text-white text-sm px-5 py-2 rounded hover:bg-gray-800 transition-colors flex items-center gap-2">
-              <BookOpen size={14} /> Read Online
-            </button>
-            <button className="border border-gray-300 text-sm px-5 py-2 rounded hover:bg-gray-50 transition-colors flex items-center gap-2">
-              <Download size={14} /> Download
-            </button>
+          </ol>
+
+          <div className="mt-8 border-l-4 border-red-600 bg-gray-50 pl-6 pr-6 py-6">
+            <blockquote className="italic text-[15px] md:text-base leading-[1.75] text-gray-900">
+              "Approximately one-third of the 100 largest corporate M&A
+              transactions in 2025 cited AI as part of their strategic rationale —
+              with Technology, Manufacturing, and Power the most active
+              AI-referencing sectors."
+            </blockquote>
+            <p className="mt-3 text-xs font-bold uppercase tracking-[0.14em] text-gray-500">
+              — PwC Global M&A Industry Trends 2026
+            </p>
           </div>
-        </div>
-        <div>
-          <ImageWithFallback src={covers[0].image} alt={covers[0].headline} className="w-full h-72 object-cover rounded shadow-lg" />
-        </div>
+        </section>
+
+        {/* =================================================
+            DAILY COVER SCHEDULE
+        ================================================= */}
+
+        <section className="bg-black text-white rounded-[2px] p-6 md:p-7 mb-14">
+          <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-5">
+            Today's Cover Story Schedule — May 22, 2026
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {dailyStories.map((s) => (
+              <div
+                key={s.id}
+                className="border border-white/10 rounded-[2px] p-4 hover:border-white/30 hover:bg-white/5 transition-colors cursor-pointer group"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <Clock size={10} strokeWidth={2.25} className="text-gray-500" />
+                  <span className="text-[11px] text-gray-500 tabular-nums">{s.time}</span>
+                  <span className="text-[10px] font-bold bg-white/10 text-gray-300 px-2 py-0.5 rounded-[2px] ml-auto uppercase tracking-wide">
+                    {s.category}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-200 leading-[1.5] transition-colors group-hover:text-white">
+                  {s.title}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* =================================================
+            MAGAZINE COVERS ARCHIVE
+        ================================================= */}
+
+        <section className="mb-14">
+          <SH title="Magazine Covers Archive" />
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {covers.map((cover) => (
+              <Link key={cover.month} to={cover.path} className="group">
+                <div className="relative overflow-hidden rounded-[2px] mb-2.5">
+                  <ImageWithFallback
+                    src={cover.image}
+                    alt={cover.month}
+                    className="w-full h-60 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                  />
+                  {cover.current && (
+                    <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-[2px] tracking-wide">
+                      CURRENT
+                    </span>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-2.5 left-2.5 right-2.5">
+                      <p className="text-white text-xs font-medium flex items-center gap-1.5">
+                        <BookOpen size={11} strokeWidth={2.25} />
+                        Read Issue
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.12em]">{cover.month}</p>
+                <p className="text-xs leading-[1.4] mt-1 text-gray-700 transition-colors group-hover:text-red-600">
+                  {cover.headline}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* =================================================
+            CURRENT ISSUE DEEP DIVE
+        ================================================= */}
+
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 border border-gray-200 rounded-[2px] p-6 md:p-8">
+          <div>
+            <span className="text-[11px] font-bold text-red-600 uppercase tracking-[0.16em]">
+              Current Issue Deep Dive
+            </span>
+
+            <h2 className="mt-2 font-serif text-2xl md:text-[28px] font-bold leading-[1.2] text-gray-950">
+              {covers[0].headline}
+            </h2>
+
+            <p className="text-gray-500 text-sm leading-[1.6] mt-2 mb-5">{covers[0].subhead}</p>
+
+            <ul className="flex flex-col gap-2.5 mb-6">
+              {currentIssueFeatures.map((f) => (
+                <li key={f} className="flex items-center gap-2.5 text-sm text-gray-700">
+                  <ChevronRight size={13} strokeWidth={2.25} className="text-red-600 shrink-0" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex flex-wrap gap-3">
+              <button className="bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-[2px] hover:bg-gray-800 transition-colors flex items-center gap-2">
+                <BookOpen size={14} strokeWidth={2} />
+                Read Online
+              </button>
+              <button className="border border-gray-300 text-sm font-semibold px-5 py-2.5 rounded-[2px] hover:bg-gray-50 hover:border-gray-400 transition-colors flex items-center gap-2">
+                <Download size={14} strokeWidth={2} />
+                Download
+              </button>
+            </div>
+          </div>
+
+          <div className="overflow-hidden rounded-[2px]">
+            <ImageWithFallback
+              src={covers[0].image}
+              alt={covers[0].headline}
+              className="w-full h-72 lg:h-full object-cover shadow-lg"
+            />
+          </div>
+        </section>
+
       </div>
     </div>
   );
