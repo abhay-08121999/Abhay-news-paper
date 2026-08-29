@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { Clock, ArrowRight, TrendingUp, TrendingDown, Play, Radio } from "lucide-react";
+import { Clock, ArrowRight, TrendingUp, TrendingDown } from "lucide-react";
 import HeroImg from "../../../imports/heroimage.png";
 import InsImg from "../../../imports/Insightimage.png";
 import LN3Img from "../../../imports/LN3image.png";
@@ -202,24 +202,74 @@ const magazinePreview = {
 };
 
 const prideTimes30 = [
-  { rank: 1, name: "Jensen Huang ", company: "Nvidia ", sector: "Defining the AI infrastructure era at COMPUTEX 2026. " },
-  { rank: 2, name: "Satya Nadella ", company: "Microsoft ", sector: "Leading ethical AI adoption and enterprise digital transformation. " },
-  { rank: 3, name: "Sundar Pichai ", company: "Alphabet / Google ", sector: "Driving AI integration across search, cloud, and automotive tech. " },
-  { rank: 4, name: "Elon Musk ", company: "Tesla / SpaceX / X ", sector: "Disrupting energy, space, and AI; SpaceX IPO on the horizon. " },
-  { rank: 5, name: "Sam Altman ", company: "OpenAI", sector: "Shaping the frontier of large language models and AGI research. " },
-  { rank: 6, name: "Andy Jassy ", company: "Amazon ", sector: "Scaling AWS as AI's preferred cloud infrastructure partner." },
-  { rank: 7, name: "Lisa Su ", company: "AMD", sector: "Challenging Nvidia's AI chip dominance with competitive GPU roadmap. " },
-  { rank: 8, name: "CC Wei ", company: "TSMC", sector: "Controlling the world's most advanced semiconductor manufacturing. " },
-  { rank: 9, name: "Alex Karp ", company: "Palantir ", sector: "Surging 6 places in IMD rankings on AI and defense demand. " },
-  { rank: 10, name: "Mary Barra ", company: "General Motors ", sector: "Navigating EV transition amid battery supply chain pressures. " },
+  {
+    rank: 1,
+    name: "Jensen Huang ",
+    company: "Nvidia ",
+    sector: "Defining the AI infrastructure era at COMPUTEX 2026. ",
+  },
+  {
+    rank: 2,
+    name: "Satya Nadella ",
+    company: "Microsoft ",
+    sector: "Leading ethical AI adoption and enterprise digital transformation. ",
+  },
+  {
+    rank: 3,
+    name: "Sundar Pichai ",
+    company: "Alphabet / Google ",
+    sector: "Driving AI integration across search, cloud, and automotive tech. ",
+  },
+  {
+    rank: 4,
+    name: "Elon Musk ",
+    company: "Tesla / SpaceX / X ",
+    sector: "Disrupting energy, space, and AI; SpaceX IPO on the horizon. ",
+  },
+  {
+    rank: 5,
+    name: "Sam Altman ",
+    company: "OpenAI",
+    sector: "Shaping the frontier of large language models and AGI research. ",
+  },
+  {
+    rank: 6,
+    name: "Andy Jassy ",
+    company: "Amazon ",
+    sector: "Scaling AWS as AI's preferred cloud infrastructure partner.",
+  },
+  {
+    rank: 7,
+    name: "Lisa Su ",
+    company: "AMD",
+    sector: "Challenging Nvidia's AI chip dominance with competitive GPU roadmap. ",
+  },
+  {
+    rank: 8,
+    name: "CC Wei ",
+    company: "TSMC",
+    sector: "Controlling the world's most advanced semiconductor manufacturing. ",
+  },
+  {
+    rank: 9,
+    name: "Alex Karp ",
+    company: "Palantir ",
+    sector: "Surging 6 places in IMD rankings on AI and defense demand. ",
+  },
+  {
+    rank: 10,
+    name: "Mary Barra ",
+    company: "General Motors ",
+    sector: "Navigating EV transition amid battery supply chain pressures. ",
+  },
 ];
 
 /* ─── HELPERS ───────────────────────────────────────── */
 
 function ChangeChip({ change, up }: { change: string; up: boolean }) {
   return (
-    <span className={`text-xs font-semibold tabular-nums flex items-center gap-1 ${up ? "text-green-700" : "text-red-600"}`}>
-      {up ? <TrendingUp size={11} strokeWidth={2.25} /> : <TrendingDown size={11} strokeWidth={2.25} />}
+    <span className={`text-xs font-medium flex items-center gap-0.5 ${up ? "text-gray-800" : "text-gray-500"}`}>
+      {up ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
       {change}
     </span>
   );
@@ -307,6 +357,7 @@ const loadMarketData = async () => {
   }
 };
   // Video sidebar uses the top Technology item; Latest picks up the remainder
+  // Video sidebar uses the top Technology item; Latest picks up the remainder
   const allNewsItems = latestNewsData["All"];
   const videoFeature = allNewsItems[0];
   const latestRest = allNewsItems.slice(1, 4);
@@ -319,381 +370,255 @@ const loadMarketData = async () => {
   ];
 
   return (
-    <div className="bg-white min-h-screen font-sans text-gray-900 antialiased">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-white min-h-screen font-sans text-black antialiased">
 
-        {/* ── BREAKING TICKER ── */}
-        <div className="flex items-center gap-4 bg-black text-white text-xs px-4 py-2.5 rounded-[2px] mt-5 mb-8 overflow-hidden">
-          <span className="flex items-center gap-1.5 font-bold uppercase tracking-[0.14em] text-red-500 shrink-0">
-            <Radio size={11} strokeWidth={2.25} className="motion-safe:animate-pulse" />
-            Breaking
-          </span>
-          <p className="flex-1 min-w-0 truncate text-gray-200">{breakingNewsBar.text}</p>
-          <div className="hidden lg:flex items-center gap-4 shrink-0 border-l border-white/15 pl-4">
-            {breakingNewsBar.markets.map((m) => (
-              <span key={m.label} className="flex items-center gap-1.5 tabular-nums">
-                <span className="text-gray-400">{m.label}</span>
-                <span className={m.up ? "text-green-400" : "text-red-400"}>{m.change}</span>
+      {/* ── 2. MAIN CONTENT ── */}
+      <main className="pt-container pt-5 pb-10">
+
+        {/* 2a. Three-column editorial hero: Top Story | Main Article + Related | Videos + Latest */}
+        <div className="pt-main-grid pt-section pb-6 border-b border-gray-200">
+
+          {/* TOP STORY */}
+          <Link to="/technology" className="pt-top-story group">
+            <ImageWithFallback src={heroStory.image} alt={heroStory.title} className="pt-top-story-image" />
+            <div className="pt-top-story-overlay" />
+            <span className="pt-top-story-badge">{heroStory.category}</span>
+            <div className="pt-top-story-content">
+              <h1 className="pt-top-story-title">{heroStory.title}</h1>
+              <p className="pt-top-story-description line-clamp-3">{heroStory.excerpt}</p>
+              <span className="pt-read-story-btn inline-flex items-center gap-1.5">
+                Read Full Story <ArrowRight size={13} />
               </span>
-            ))}
-          </div>
-          <span className="hidden sm:flex items-center gap-1 text-gray-500 shrink-0">
-            <Clock size={10} strokeWidth={2.25} />
-            {breakingNewsBar.time}
-          </span>
-        </div>
+            </div>
+          </Link>
 
-        {/* ── MAIN CONTENT ── */}
-        <main className="pb-14">
-
-          {/* 2a. Three-column editorial hero: Top Story | Main Article + Related | Videos + Latest */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 pb-10 mb-10 border-b border-gray-200">
-
-            {/* TOP STORY */}
-            <Link to="/technology" className="group relative block overflow-hidden rounded-[2px]">
-              <ImageWithFallback
-                src={heroStory.image}
-                alt={heroStory.title}
-                className="w-full h-72 lg:h-[520px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-              <span className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase rounded-[2px]">
-                {heroStory.category}
+          {/* MAIN ARTICLE + RELATED STORY */}
+          <div className="min-w-0">
+            <Link to={sideStories[0].link} className="group block">
+              <div className="pt-main-article-image-wrap">
+                <ImageWithFallback src={sideStories[0].image} alt={sideStories[0].title} className="pt-main-article-image" />
+              </div>
+              <span className="pt-card-category mt-3 block">{sideStories[0].tag}</span>
+              <h2 className="pt-main-article-title group-hover:underline decoration-1 underline-offset-4">
+                {sideStories[0].title}
+              </h2>
+              <p className="text-sm text-gray-600 mt-2 leading-relaxed line-clamp-3">{sideStories[0].excerpt}</p>
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-black uppercase tracking-wide mt-3 border-b border-black pb-0.5">
+                Read More <ArrowRight size={11} />
               </span>
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <h1 className="font-serif text-2xl md:text-[28px] font-bold leading-[1.15] text-white">
-                  {heroStory.title}
-                </h1>
-                <p className="text-sm text-gray-200 leading-[1.6] mt-2.5 line-clamp-3">
-                  {heroStory.excerpt}
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-white uppercase tracking-wide mt-3.5 border-b border-white/60 pb-0.5">
-                  Read Full Story
-                  <ArrowRight size={13} strokeWidth={2.25} />
+            </Link>
+
+            {/* RELATED STORY */}
+            <Link to={sideStories[1].link} className="pt-related-story group flex gap-3">
+              <div className="flex-shrink-0 w-[110px] h-[80px] overflow-hidden rounded-md">
+                <ImageWithFallback
+                  src={sideStories[1].image}
+                  alt={sideStories[1].title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="pt-card-category">{sideStories[1].tag}</span>
+                <h3 className="text-sm font-bold leading-snug mt-1 group-hover:underline decoration-1 underline-offset-2 line-clamp-2">
+                  {sideStories[1].title}
+                </h3>
+                <span className="pt-card-time flex items-center gap-1 mt-1">
+                  <Clock size={9} /> {sideStories[1].time}
                 </span>
               </div>
             </Link>
-
-            {/* MAIN ARTICLE + RELATED STORY */}
-            <div className="min-w-0">
-              <Link to={sideStories[0].link} className="group block">
-                <div className="overflow-hidden rounded-[2px]">
-                  <ImageWithFallback
-                    src={sideStories[0].image}
-                    alt={sideStories[0].title}
-                    className="w-full h-52 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                  />
-                </div>
-                <span className="block mt-3.5 text-[11px] font-bold text-red-600 uppercase tracking-[0.14em]">
-                  {sideStories[0].tag}
-                </span>
-                <h2 className="font-serif text-xl font-bold leading-[1.25] mt-1.5 text-gray-950 group-hover:text-red-600 transition-colors">
-                  {sideStories[0].title}
-                </h2>
-                <p className="text-sm text-gray-600 mt-2 leading-[1.65] line-clamp-3">
-                  {sideStories[0].excerpt}
-                </p>
-                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-900 uppercase tracking-wide mt-3 border-b border-gray-900 pb-0.5">
-                  Read More
-                  <ArrowRight size={11} strokeWidth={2.25} />
-                </span>
-              </Link>
-
-              {/* RELATED STORY */}
-              <Link to={sideStories[1].link} className="group flex gap-3.5 mt-6 pt-6 border-t border-gray-200">
-                <div className="shrink-0 w-[110px] h-[80px] overflow-hidden rounded-[2px]">
-                  <ImageWithFallback
-                    src={sideStories[1].image}
-                    alt={sideStories[1].title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.14em]">
-                    {sideStories[1].tag}
-                  </span>
-                  <h3 className="text-sm font-bold leading-[1.35] mt-1 text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
-                    {sideStories[1].title}
-                  </h3>
-                  <span className="flex items-center gap-1 text-[11px] text-gray-400 mt-1.5">
-                    <Clock size={9} strokeWidth={2.25} />
-                    {sideStories[1].time}
-                  </span>
-                </div>
-              </Link>
-            </div>
-
-            {/* TODAY'S VIDEOS + LATEST + MARKET SNAPSHOT */}
-            <div className="min-w-0 flex flex-col gap-7">
-              <div>
-                <h2 className="font-serif text-lg font-bold mb-3.5">Today's Videos</h2>
-                <Link to={videoFeature.link} className="group block">
-                  <div className="relative overflow-hidden rounded-[2px]">
-                    <ImageWithFallback
-                      src={videoFeature.image}
-                      alt={videoFeature.title}
-                      className="w-full h-40 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/25 transition-colors">
-                      <div className="w-11 h-11 rounded-full bg-white/95 flex items-center justify-center shadow-md">
-                        <Play size={16} fill="black" className="text-black ml-0.5" />
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="text-sm font-semibold leading-[1.4] mt-2.5 text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
-                    {videoFeature.title}
-                  </h3>
-                </Link>
-              </div>
-
-              <div>
-                <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-gray-900 border-b-2 border-black pb-2.5 mb-1">
-                  Latest
-                </h2>
-                <div className="divide-y divide-gray-200">
-                  {latestRest.map((item) => (
-                    <Link key={item.id} to={item.link} className="group flex flex-col gap-1 py-3 first:pt-3">
-                      <span className="text-[10px] uppercase tracking-wide text-gray-400">{item.time}</span>
-                      <span className="text-sm font-medium leading-[1.4] text-gray-800 group-hover:text-red-600 transition-colors">
-                        {item.title}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              {/* Market Snapshot — compact stock box */}
-              <div className="border border-gray-200 rounded-[2px] p-4">
-                <div className="flex items-center justify-between mb-2.5">
-                  <h3 className="text-[11px] font-bold uppercase tracking-[0.14em] text-gray-900">
-                    Market Snapshot
-                  </h3>
-                  <div className="flex gap-3">
-                    {["Indices", "Crypto"].map((t) => (
-                      <button
-                        key={t}
-                        type="button"
-                        onClick={() => setActiveMarketTab(t)}
-                        className={`text-[10px] font-semibold uppercase tracking-wide transition-colors ${
-                          activeMarketTab === t ? "text-red-600" : "text-gray-400 hover:text-gray-700"
-                        }`}
-                      >
-                        {t}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div className="divide-y divide-gray-100">
-                  {(marketSnapshotData[activeMarketTab] || []).slice(0, 3).map((m) => (
-                    <div key={m.symbol} className="py-1.5 flex items-center justify-between">
-                      <span className="text-[11px] font-semibold text-gray-800">{m.symbol}</span>
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-[11px] text-gray-500 tabular-nums">{m.value}</span>
-                        <ChangeChip change={m.change} up={m.up} />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <Link
-                  to="/markets"
-                  className="mt-2.5 text-[10px] font-bold text-red-600 flex items-center gap-1 hover:gap-2 transition-all uppercase tracking-wide w-fit"
-                >
-                  View All Markets
-                  <ArrowRight size={10} strokeWidth={2.25} />
-                </Link>
-              </div>
-            </div>
           </div>
 
-          {/* 2b. SECONDARY NEWS — four-card editorial grid */}
-          <div className="mb-14">
-            <div className="flex items-center justify-between gap-4 border-b-2 border-black pb-2.5 mb-6">
-              <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-gray-900 shrink-0">
-                More Stories
-              </h2>
-              <div className="flex items-center gap-5 overflow-x-auto no-scrollbar">
-                {latestNewsTabs.map((t) => (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => setActiveNewsTab(t)}
-                    className={`text-[11px] font-semibold whitespace-nowrap uppercase tracking-wide transition-colors ${
-                      activeNewsTab === t ? "text-red-600" : "text-gray-400 hover:text-gray-700"
-                    }`}
-                  >
-                    {t}
-                  </button>
+          {/* TODAY'S VIDEOS + LATEST */}
+          <div className="pt-video-sidebar min-w-0 flex flex-col gap-5">
+            <div>
+              <h2 className="video-section-title text-lg font-bold mb-3">Today's Videos</h2>
+              <Link to={videoFeature.link} className="pt-video-card group block">
+                <div className="relative">
+                  <ImageWithFallback src={videoFeature.image} alt={videoFeature.title} className="pt-video-thumbnail" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
+                    <div className="pt-video-play-btn">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z" /></svg>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="pt-video-title group-hover:underline decoration-1 underline-offset-2">
+                  {videoFeature.title}
+                </h3>
+              </Link>
+            </div>
+
+            <div>
+              <h2 className="pt-latest-title mb-2">Latest</h2>
+              <div>
+                {latestRest.map((item) => (
+                  <Link key={item.id} to={item.link} className="pt-latest-item group">
+                    <span className="pt-latest-time">{item.time}</span>
+                    <span className="pt-latest-headline group-hover:underline decoration-1 underline-offset-2">
+                      {item.title}
+                    </span>
+                  </Link>
                 ))}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {secondaryCards.map((card) => (
-                <Link key={card.id} to={card.link} className="group block">
-                  <div className="overflow-hidden rounded-[2px]">
-                    <ImageWithFallback
-                      src={card.image}
-                      alt={card.title}
-                      className="w-full h-40 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                    />
-                  </div>
-                  <div className="mt-3">
-                    <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.14em]">
-                      {card.category}
+            {/* Market Snapshot — compact stock box, same shared styling as
+                the boxes on the Markets and Finance pages */}
+            <div className="pt-stock-box pt-stock-box-compact">
+              <div className="flex items-center justify-between mb-1.5">
+                <h3 className="text-xs font-bold uppercase tracking-tight">Market Snapshot</h3>
+                <div className="flex gap-3">
+                  {["Indices", "Crypto"].map((t) => (
+                    <span
+                      key={t}
+                      onClick={() => setActiveMarketTab(t)}
+                      className={`text-[10px] cursor-pointer uppercase tracking-wide transition-colors ${
+                        activeMarketTab === t ? "text-black font-bold" : "text-gray-400 hover:text-gray-700"
+                      }`}
+                    >
+                      {t}
                     </span>
-                    <h3 className="text-sm font-semibold leading-[1.4] mt-1 text-gray-900 group-hover:text-red-600 transition-colors line-clamp-3">
-                      {card.title}
-                    </h3>
-                    <span className="flex items-center gap-1 text-[11px] text-gray-400 mt-2">
-                      <Clock size={9} strokeWidth={2.25} />
-                      {card.time}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-
-              {/* Editor's Pick as a fifth editorial card */}
-              {editorsPicks.map((p) => (
-                <Link key={p.id} to="/leadership" className="group block">
-                  <div className="overflow-hidden rounded-[2px]">
-                    <ImageWithFallback
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-40 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                    />
-                  </div>
-                  <div className="mt-3">
-                    <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.14em]">
-                      Editor's Pick
-                    </span>
-                    <h3 className="text-sm font-semibold leading-[1.4] mt-1 text-gray-900 group-hover:text-red-600 transition-colors line-clamp-3">
-                      {p.title}
-                    </h3>
-                    <span className="flex items-center gap-1 text-[11px] text-gray-400 mt-2">
-                      <Clock size={9} strokeWidth={2.25} />
-                      {p.time}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* 2c. TRUST / STATISTICS BANNER */}
-          <div className="bg-black rounded-[2px] py-8 px-6 mb-14">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { label: "Global Readers", value: "2M+" },
-                { label: "Countries Covered", value: "120+" },
-                { label: "Trusted by Leaders", value: "Worldwide" },
-                { label: "In-Depth", value: "Impartial" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="font-serif text-white text-2xl sm:text-3xl font-bold">{stat.value}</div>
-                  <div className="text-gray-400 text-[11px] uppercase tracking-[0.14em] mt-1.5">{stat.label}</div>
+                  ))}
                 </div>
-              ))}
+              </div>
+              <div className="divide-y divide-gray-100">
+                {(marketSnapshotData[activeMarketTab] || []).slice(0, 3).map((m) => (
+                  <div key={m.symbol} className="py-1 flex items-center justify-between">
+                    <span className="text-[11px] text-gray-800 font-medium">{m.symbol}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-gray-600">{m.value}</span>
+                      <ChangeChip change={m.change} up={m.up} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Link to="/markets" className="mt-1 text-[10px] text-black flex items-center gap-0.5 hover:gap-1.5 transition-all font-bold uppercase tracking-wide w-fit">
+                View All Markets <ArrowRight size={10} />
+              </Link>
             </div>
           </div>
+        </div>
 
-          {/* 2d. MAGAZINE + LEADERSHIP PROMOTIONAL CONTENT */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
-
-            {/* MAGAZINE */}
-            <div className="bg-black rounded-[2px] flex flex-col sm:flex-row overflow-hidden">
-              <div className="sm:w-2/5 h-[160px] sm:h-auto overflow-hidden">
-                <ImageWithFallback src={magazinePreview.image} alt={magazinePreview.title} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-1 p-6 flex flex-col justify-center">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] mb-2 text-gray-500">
-                  Pride Times Magazine
-                </p>
-                <h3 className="font-serif text-xl font-bold text-white leading-tight">{magazinePreview.title}</h3>
-                <p className="text-[13px] text-gray-400 mt-2 mb-4 leading-[1.5]">{magazinePreview.subtitle}</p>
-                <Link
-                  to="/magazine"
-                  className="inline-flex items-center gap-1.5 w-fit text-xs font-bold uppercase tracking-wide text-white border-b border-white/50 pb-0.5 hover:border-white transition-colors"
+        {/* 2b. SECONDARY NEWS — four-card editorial grid */}
+        <div className="pt-section">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-bold uppercase tracking-tight">More Stories</h2>
+            <div className="flex items-center gap-4 overflow-x-auto no-scrollbar">
+              {latestNewsTabs.map((t) => (
+                <span
+                  key={t}
+                  onClick={() => setActiveNewsTab(t)}
+                  className={`text-[11px] whitespace-nowrap cursor-pointer uppercase tracking-wide transition-colors ${
+                    activeNewsTab === t ? "text-red-600 font-bold" : "text-gray-400 hover:text-gray-700"
+                  }`}
                 >
-                  Read Digital Edition
-                  <ArrowRight size={11} strokeWidth={2.25} />
-                </Link>
-              </div>
+                  {t}
+                </span>
+              ))}
             </div>
-
-            {/* LEADERSHIP EDITORIAL BANNER */}
-            {pt30.map((s) => (
-              <Link key={s.id} to={s.link} className="group flex border border-gray-200 rounded-[2px] overflow-hidden">
-                <div className="w-[40%] shrink-0 overflow-hidden">
-                  <ImageWithFallback
-                    src={s.image}
-                    alt={s.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+          </div>
+          <div className="pt-secondary-grid">
+            {secondaryCards.map((card) => (
+              <Link key={card.id} to={card.link} className="pt-secondary-card group block">
+                <div className="pt-secondary-card-image-wrap">
+                  <ImageWithFallback src={card.image} alt={card.title} className="pt-secondary-card-image" />
                 </div>
-                <div className="flex-1 p-6 flex flex-col justify-center min-w-0">
-                  <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.14em]">
-                    {s.tag}
+                <div className="pt-secondary-card-body">
+                  <span className="pt-card-category">{card.category}</span>
+                  <h3 className="pt-card-title group-hover:underline decoration-1 underline-offset-2">{card.title}</h3>
+                  <span className="pt-card-time flex items-center gap-1">
+                    <Clock size={9} /> {card.time}
                   </span>
-                  <h3 className="font-serif text-lg font-bold leading-[1.2] mt-1.5 text-gray-950 group-hover:text-red-600 transition-colors">
-                    {s.title}
-                  </h3>
-                  <p className="text-xs text-gray-500 leading-[1.5] mt-1.5 line-clamp-2">{s.excerpt}</p>
-                  <span className="mt-3 text-[11px] font-bold text-gray-900 uppercase tracking-wide flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Read More
-                    <ArrowRight size={11} strokeWidth={2.25} />
+                </div>
+              </Link>
+            ))}
+
+            {/* Editor's Pick as a fifth editorial card, spanning full width on small screens */}
+            {editorsPicks.map((p) => (
+              <Link key={p.id} to="/leadership" className="pt-secondary-card group block">
+                <div className="pt-secondary-card-image-wrap">
+                  <ImageWithFallback src={p.image} alt={p.title} className="pt-secondary-card-image" />
+                </div>
+                <div className="pt-secondary-card-body">
+                  <span className="pt-card-category">Editor's Pick</span>
+                  <h3 className="pt-card-title group-hover:underline decoration-1 underline-offset-2">{p.title}</h3>
+                  <span className="pt-card-time flex items-center gap-1">
+                    <Clock size={9} /> {p.time}
                   </span>
                 </div>
               </Link>
             ))}
           </div>
+        </div>
 
-          {/* 2e. PRIDE TIMES 30 — LEADERS TO WATCH */}
-          <section>
-            <div className="flex items-center justify-between border-b-2 border-black pb-2.5 mb-5">
-              <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-gray-900">
-                Pride Times 30 — Leaders to Watch in 2026
-              </h2>
-              <Link
-                to="/billionaires"
-                className="text-[11px] font-semibold text-gray-400 hover:text-red-600 transition-colors flex items-center gap-1"
-              >
-                Full List
-                <ArrowRight size={11} strokeWidth={2.25} />
+        {/* 2c. TRUST / STATISTICS BANNER */}
+        <div className="pt-stats-banner pt-section">
+          <div className="pt-stats-grid">
+            {[
+              { label: "Global Readers", value: "2M+" },
+              { label: "Countries Covered", value: "120+" },
+              { label: "Trusted by Leaders", value: "Worldwide" },
+              { label: "In-Depth", value: "Impartial" },
+            ].map((stat) => (
+              <div key={stat.label} className="pt-stat-item text-center">
+                <div className="text-white text-xl sm:text-2xl font-bold">{stat.value}</div>
+                <div className="text-gray-300 text-[11px] uppercase tracking-wide mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 2d. MAGAZINE + LEADERSHIP PROMOTIONAL CONTENT */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-section">
+          {/* MAGAZINE */}
+          <div className="pt-magazine-card flex flex-col sm:flex-row">
+            <div className="sm:w-2/5 h-[160px] sm:h-auto overflow-hidden">
+              <ImageWithFallback src={magazinePreview.image} alt={magazinePreview.title} className="w-full h-full object-cover" />
+            </div>
+            <div className="flex-1 p-5 flex flex-col justify-center">
+              <p className="text-[9px] font-bold uppercase tracking-widest mb-1.5 text-gray-400">Pride Times Magazine</p>
+              <h3 className="pt-magazine-title">{magazinePreview.title}</h3>
+              <p className="text-[12px] text-gray-300 mt-1.5 mb-3">{magazinePreview.subtitle}</p>
+              <Link to="/magazine" className="pt-magazine-button inline-flex items-center gap-1.5 w-fit">
+                Read Digital Edition <ArrowRight size={11} />
               </Link>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-gray-200">
-              {prideTimes30.map((l, i) => (
-                <div
-                  key={l.rank}
-                  className={`flex items-start gap-4 py-4 ${
-                    i % 2 === 0 ? "sm:pr-8 sm:border-r sm:border-gray-200" : "sm:pl-8"
-                  } ${i < prideTimes30.length - 2 ? "sm:border-b sm:border-gray-200" : ""}`}
-                >
-                  <span className="font-serif text-2xl font-bold text-gray-200 tabular-nums shrink-0 w-9">
-                    {String(l.rank).padStart(2, "0")}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-bold text-gray-900">
-                      {l.name}
-                      <span className="font-normal text-gray-400"> · {l.company}</span>
-                    </p>
-                    <p className="text-xs text-gray-500 leading-[1.5] mt-1">{l.sector}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+          {/* LEADERSHIP EDITORIAL BANNER */}
+          {pt30.map((s) => (
+            <Link key={s.id} to={s.link} className="pt-leadership-banner group flex">
+              <div className="w-[40%] flex-shrink-0 overflow-hidden">
+                <ImageWithFallback
+                  src={s.image}
+                  alt={s.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="flex-1 p-5 flex flex-col justify-center min-w-0">
+                <span className="pt-leadership-category uppercase tracking-widest">{s.tag}</span>
+                <h3 className="pt-leadership-title mt-1.5 group-hover:underline decoration-1 underline-offset-2">{s.title}</h3>
+                <p className="pt-leadership-description mt-1.5 line-clamp-2">{s.excerpt}</p>
+                <span className="mt-3 text-[11px] text-black flex items-center gap-1 font-bold uppercase tracking-wide group-hover:gap-2 transition-all">
+                  Read More <ArrowRight size={11} />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
 
-        </main>
-      </div>
+      </main>
 
       <style>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* Formal, restrained reading experience */
-        html { scroll-behavior: smooth; }
+        * { scroll-behavior: smooth; }
+
+        /* Thin, unobtrusive scrollbar for horizontally scrollable rows on desktop */
+        .scrollbar-hide::-webkit-scrollbar { height: 3px; }
+        .scrollbar-hide::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.25); }
 
         /* Neutral text selection */
         ::selection { background: rgba(0, 0, 0, 0.12); color: inherit; }
