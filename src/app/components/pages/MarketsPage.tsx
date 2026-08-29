@@ -110,7 +110,7 @@ export function MarketsPage() {
   }
 
   return (
-    <div className="py-6">
+    <div className="py-6 pt-markets-page">
       {/* Header */}
       <div className="pt-markets-header flex items-center gap-3">
         <div className="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center flex-shrink-0">
