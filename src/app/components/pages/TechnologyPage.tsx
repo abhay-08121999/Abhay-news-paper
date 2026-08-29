@@ -1,3 +1,4 @@
+```tsx
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import {
   Clock,
@@ -28,10 +29,9 @@ function SectionHeader({
   link?: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-t-2 border-black border-b border-gray-300 py-2.5 mb-5">
+    <div className="flex items-center justify-between border-t-2 border-black border-b border-gray-300 py-2.5 mb-6">
       <div className="flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-red-700 rounded-full" />
-
         <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.15em] text-black">
           {title}
         </h2>
@@ -59,7 +59,7 @@ const techHero = {
   title:
     "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
   excerpt:
-    "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and South Korea, expanding its already well-established relationship with China's Unitree. The chipmaker's shares climbed approximately 6% during the June 1 session, bringing its year-to-date gains to roughly 20%. The move signals Nvidia's determined pivot from GPU sales to powering the physical AI economy — a strategy that positions the company at the intersection of software, semiconductors, and robotics manufacturing. Chief Executive Jensen Huang described the initiative as central to Nvidia's next decade of growth, noting that intelligent robots require the same kind of dense compute that large language models demand, but with the added requirement of real-time sensor processing and sub-millisecond decision loops.",
+    "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and South Korea, expanding its already well-established relationship with China's Unitree. The chipmaker's shares climbed approximately 6% during the June 1 session, bringing its year-to-date gains to roughly 20%. The move signals Nvidia's determined pivot from GPU sales to powering the physical AI economy — a strategy that positions the company at the intersection of software, semiconductors, and robotics manufacturing.",
   author: "Sagar Kumar",
   time: "1 June 2026",
   image: HeroImg,
@@ -70,7 +70,7 @@ const techHero1 = {
   title:
     "Intel Attempts Inference-Chip Comeback as AI Compute Wars Intensify",
   excerpt:
-    "Intel has unveiled a renewed push into the inference accelerator market, positioning its next-generation Gaudi chips as a cost-effective alternative for enterprises deploying large-scale AI models at inference time. Analysts remain cautious about Intel's ability to reclaim lost ground from Nvidia, but note that the inference segment offers a viable path for differentiation.",
+    "Intel has unveiled a renewed push into the inference accelerator market, positioning its next-generation Gaudi chips as a cost-effective alternative for enterprises deploying large-scale AI models at inference time.",
   author: "Sagar Kumar",
   time: "1 June 2026",
   image: Hero1Img,
@@ -78,9 +78,10 @@ const techHero1 = {
 
 const techHero2 = {
   category: "ARTIFICIAL INTELLIGENCE",
-  title: "SoftBank Bets Big on European Data Centers",
+  title:
+    "SoftBank Bets Big on European Data Centers",
   excerpt:
-    "Japan's SoftBank Group has committed to a massive European data center investment, aligning its capital with the continent's growing appetite for AI compute infrastructure. The initiative forms part of SoftBank's broader strategy to build an end-to-end AI stack that encompasses hardware, connectivity, and application layers across key markets.",
+    "Japan's SoftBank Group has committed to a massive European data center investment, aligning its capital with the continent's growing appetite for AI compute infrastructure.",
   author: "Sagar Kumar",
   time: "30 May 2026",
   image: Hero2Img,
@@ -102,7 +103,7 @@ const techCategories = [
 
 /* =========================================================
    AI STORIES
-   Every story uses a different image.
+   TWO-COLUMN LAYOUT
 ========================================================= */
 
 const aiStories = [
@@ -114,7 +115,7 @@ const aiStories = [
       "The share listing positions SpaceX among the world's five largest companies while underscoring investor appetite for AI infrastructure and space-tech capital.",
     time: "Just now",
     image:
-      "https://images.unsplash.com/photo-1517976547714-720226b864c1?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1517976547714-720226b864c1?auto=format&fit=crop&w=1400&q=85",
   },
   {
     id: 6,
@@ -124,7 +125,7 @@ const aiStories = [
       "The all-stock deal is expected to close in Q3 2026 and signals a major move into coding agents.",
     time: "Just now",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=85",
   },
   {
     id: 7,
@@ -134,7 +135,7 @@ const aiStories = [
       "Industry trackers say enterprise API and agentic product usage have driven the company's revenue to new heights.",
     time: "Just now",
     image:
-      "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&q=85",
   },
   {
     id: 8,
@@ -144,7 +145,7 @@ const aiStories = [
       "The new chip is designed to bring data-center-caliber AI power to desktops and workstations.",
     time: "Just now",
     image:
-      "https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=1400&q=85",
   },
   {
     id: 1,
@@ -154,7 +155,7 @@ const aiStories = [
       "The new architecture fundamentally changes what's possible in real-time AI inference at scale.",
     time: "2 hrs ago",
     image:
-      "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1400&q=85",
   },
   {
     id: 2,
@@ -164,17 +165,7 @@ const aiStories = [
       "AlphaFold 4 identifies drug candidates for diseases that have resisted treatment for decades.",
     time: "4 hrs ago",
     image:
-      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=85",
-  },
-  {
-    id: 3,
-    title:
-      "Microsoft's AI-Powered Copilot Now Manages 60% of Enterprise Software Workflows",
-    excerpt:
-      "Productivity data from 500 Fortune companies reveals dramatic efficiency improvements.",
-    time: "6 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
+      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1400&q=85",
   },
 ];
 
@@ -362,8 +353,7 @@ const supplyChainStories = [
 ];
 
 /* =========================================================
-   SECTION IMAGES
-   Each technology section gets a unique image.
+   UNIQUE SECTION IMAGES
 ========================================================= */
 
 const sectionImages = {
@@ -387,7 +377,7 @@ const sectionImages = {
 };
 
 /* =========================================================
-   INNOVATION FEATURE
+   EDITOR'S PICK
 ========================================================= */
 
 const innovationFeature = {
@@ -496,12 +486,12 @@ export function TechnologyPage() {
         </nav>
 
         {/* =================================================
-            TOP HERO GRID
+            HERO
         ================================================= */}
 
         <section className="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr_0.72fr] gap-0 border-b border-black">
 
-          {/* MAIN STORY */}
+          {/* MAIN */}
 
           <article className="group lg:pr-6 pb-7 lg:pb-8">
             <div className="relative overflow-hidden mb-4">
@@ -538,7 +528,7 @@ export function TechnologyPage() {
             </div>
           </article>
 
-          {/* SECONDARY STORY */}
+          {/* SECOND */}
 
           <article className="group lg:px-6 lg:border-l border-gray-300 py-7 lg:py-0">
             <div className="overflow-hidden mb-4">
@@ -557,7 +547,7 @@ export function TechnologyPage() {
               {techHero1.title}
             </h2>
 
-            <p className="text-[11px] leading-[1.65] text-gray-600 mt-3 line-clamp-6">
+            <p className="text-[11px] leading-[1.65] text-gray-600 mt-3">
               {techHero1.excerpt}
             </p>
 
@@ -566,7 +556,7 @@ export function TechnologyPage() {
             </div>
           </article>
 
-          {/* EDITOR'S PICK */}
+          {/* EDITOR */}
 
           <aside className="lg:border-l border-gray-300 lg:pl-6 py-7 lg:py-0">
             <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
@@ -590,7 +580,7 @@ export function TechnologyPage() {
                 {innovationFeature.title}
               </h3>
 
-              <p className="text-[10px] text-gray-500 leading-[1.6] mt-2 line-clamp-5">
+              <p className="text-[10px] text-gray-500 leading-[1.6] mt-2">
                 {innovationFeature.excerpt}
               </p>
 
@@ -661,7 +651,7 @@ export function TechnologyPage() {
         </section>
 
         {/* =================================================
-            THIRD FEATURE + STATISTICS
+            FEATURE STORY
         ================================================= */}
 
         <section className="grid grid-cols-1 lg:grid-cols-2 border-b border-gray-300">
@@ -693,6 +683,7 @@ export function TechnologyPage() {
 
             <div className="flex items-center gap-3 mt-4 text-[9px] text-gray-500">
               <span>By {techHero2.author}</span>
+
               <span className="flex items-center gap-1">
                 <Clock size={9} />
                 {techHero2.time}
@@ -709,59 +700,27 @@ export function TechnologyPage() {
               </div>
 
               <div className="text-[11px]">
-                <div className="grid grid-cols-[42%_58%] border-b border-gray-200">
-                  <div className="font-bold py-3 pr-3">
-                    Global IT Spend (2025)
-                  </div>
-                  <div className="py-3">
-                    USD 5.43 Trillion
-                  </div>
-                </div>
+                {[
+                  ["Global IT Spend (2025)", "USD 5.43 Trillion"],
+                  ["AI Market", "USD 103.28 Billion at 40%+ CAGR"],
+                  ["Cybersecurity Growth", "12.2% annually"],
+                  ["Semiconductor CapEx by 2030", "~USD 1 Trillion"],
+                  ["IoT Connected Devices", "Projected 40 Billion by 2030"],
+                  ["Tech M&A Megadeals", "26 deals"],
+                ].map(([label, value]) => (
+                  <div
+                    key={label}
+                    className="grid grid-cols-[42%_58%] border-b border-gray-200"
+                  >
+                    <div className="font-bold py-3 pr-3">
+                      {label}
+                    </div>
 
-                <div className="grid grid-cols-[42%_58%] border-b border-gray-200">
-                  <div className="font-bold py-3 pr-3">
-                    AI Market
+                    <div className="py-3">
+                      {value}
+                    </div>
                   </div>
-                  <div className="py-3">
-                    USD 103.28 Billion at 40%+ CAGR
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[42%_58%] border-b border-gray-200">
-                  <div className="font-bold py-3 pr-3">
-                    Cybersecurity Growth
-                  </div>
-                  <div className="py-3">
-                    12.2% annually
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[42%_58%] border-b border-gray-200">
-                  <div className="font-bold py-3 pr-3">
-                    Semiconductor CapEx by 2030
-                  </div>
-                  <div className="py-3">
-                    ~USD 1 Trillion
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[42%_58%] border-b border-gray-200">
-                  <div className="font-bold py-3 pr-3">
-                    IoT Connected Devices
-                  </div>
-                  <div className="py-3">
-                    Projected 40 Billion by 2030
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-[42%_58%] border-b border-gray-200">
-                  <div className="font-bold py-3 pr-3">
-                    Tech M&A Megadeals
-                  </div>
-                  <div className="py-3">
-                    26 deals
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
@@ -769,30 +728,27 @@ export function TechnologyPage() {
 
         {/* =================================================
             AI & MACHINE LEARNING
+            TWO COLUMNS — FIXED
         ================================================= */}
 
         <section className="py-9" id="innovation">
           <SectionHeader title="AI & Machine Learning" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-8">
 
             {aiStories.map((s, index) => (
               <article
-                key={s.id}
-                className={`group cursor-pointer ${
-                  index === 0
-                    ? "lg:col-span-2 lg:row-span-2"
-                    : ""
-                }`}
+                key={`${s.id}-${index}`}
+                className="group cursor-pointer"
               >
-                <div className="relative overflow-hidden mb-3">
+                <div className="relative overflow-hidden mb-4">
                   <ImageWithFallback
                     src={s.image}
                     alt={s.title}
                     className={`w-full object-cover transition-transform duration-500 group-hover:scale-[1.035] ${
                       index === 0
-                        ? "h-[280px] md:h-[360px]"
-                        : "h-[150px] md:h-[165px]"
+                        ? "h-[300px] md:h-[390px]"
+                        : "h-[240px] md:h-[300px]"
                     }`}
                   />
 
@@ -808,20 +764,18 @@ export function TechnologyPage() {
                 </span>
 
                 <h3
-                  className={`font-serif font-bold leading-[1.08] mt-1 group-hover:underline ${
+                  className={`font-serif font-bold leading-[1.05] mt-1 group-hover:underline ${
                     index === 0
-                      ? "text-[21px] md:text-[26px]"
-                      : "text-[15px] md:text-[16px]"
+                      ? "text-[23px] md:text-[28px]"
+                      : "text-[19px] md:text-[22px]"
                   }`}
                 >
                   {s.title}
                 </h3>
 
-                {index === 0 && (
-                  <p className="text-[11px] leading-relaxed text-gray-500 mt-2">
-                    {s.excerpt}
-                  </p>
-                )}
+                <p className="text-[11px] md:text-[12px] leading-[1.65] text-gray-500 mt-2">
+                  {s.excerpt}
+                </p>
 
                 <div className="flex items-center gap-1 text-[9px] text-gray-400 mt-3">
                   <Clock size={8} />
@@ -835,6 +789,7 @@ export function TechnologyPage() {
 
         {/* =================================================
             CYBERSECURITY + ENERGY
+            TWO COLUMNS
         ================================================= */}
 
         <section className="grid grid-cols-1 lg:grid-cols-2 border-t-2 border-black">
@@ -849,7 +804,7 @@ export function TechnologyPage() {
               <ImageWithFallback
                 src={sectionImages.cybersecurity}
                 alt="Cybersecurity technology"
-                className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
             </div>
 
@@ -866,7 +821,7 @@ export function TechnologyPage() {
               <ImageWithFallback
                 src={sectionImages.energy}
                 alt="Energy technology"
-                className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
             </div>
 
@@ -876,25 +831,27 @@ export function TechnologyPage() {
         </section>
 
         {/* =================================================
-            HEALTHCARE & BIOTECH
+            HEALTHCARE
+            TWO-COLUMN CONTENT
         ================================================= */}
 
-        <section className="py-8 border-t-2 border-black" id="healthcare">
-
+        <section
+          className="py-8 border-t-2 border-black"
+          id="healthcare"
+        >
           <SectionHeader title="Healthcare & BioTech" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.6fr] gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
 
             <article className="group">
               <div className="relative overflow-hidden">
                 <ImageWithFallback
                   src={sectionImages.healthcare}
                   alt="Healthcare and biotechnology"
-                  className="w-full h-[280px] md:h-[360px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                  className="w-full h-[280px] md:h-[380px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
                 />
 
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-24">
-
                   <span className="text-[8px] uppercase tracking-[0.15em] text-white font-bold">
                     Healthcare Innovation
                   </span>
@@ -902,7 +859,6 @@ export function TechnologyPage() {
                   <h3 className="font-serif text-white text-[22px] md:text-[28px] font-bold leading-tight mt-1">
                     {healthcareStories[0].title}
                   </h3>
-
                 </div>
               </div>
             </article>
@@ -916,8 +872,8 @@ export function TechnologyPage() {
                 </span>
 
                 <p className="font-serif text-[18px] leading-tight mt-2">
-                  Global healthcare AI market projected to reach $187B by 2030,
-                  growing at 37% CAGR.
+                  Global healthcare AI market projected to reach $187B by
+                  2030, growing at 37% CAGR.
                 </p>
               </div>
             </div>
@@ -927,6 +883,7 @@ export function TechnologyPage() {
 
         {/* =================================================
             MANUFACTURING + SMART CITIES
+            TWO COLUMNS
         ================================================= */}
 
         <section className="grid grid-cols-1 lg:grid-cols-2 border-t-2 border-black">
@@ -941,7 +898,7 @@ export function TechnologyPage() {
               <ImageWithFallback
                 src={sectionImages.manufacturing}
                 alt="Advanced manufacturing"
-                className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
             </div>
 
@@ -958,7 +915,7 @@ export function TechnologyPage() {
               <ImageWithFallback
                 src={sectionImages.smartCities}
                 alt="Smart city technology"
-                className="w-full h-[220px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
             </div>
 
@@ -969,6 +926,7 @@ export function TechnologyPage() {
 
         {/* =================================================
             SUPPLY CHAIN
+            TWO COLUMNS
         ================================================= */}
 
         <section
@@ -977,35 +935,29 @@ export function TechnologyPage() {
         >
           <SectionHeader title="Supply Chain & Logistics" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
 
             <div className="group overflow-hidden">
               <ImageWithFallback
                 src={sectionImages.supplyChain}
                 alt="Supply chain and logistics"
-                className="w-full h-[300px] md:h-[360px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                className="w-full h-[300px] md:h-[390px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
               />
 
-              <div className="border-x border-b border-gray-300 p-4">
+              <div className="border-x border-b border-gray-300 p-5">
                 <span className="text-[8px] uppercase tracking-[0.15em] text-red-700 font-bold">
                   Logistics & Trade
                 </span>
 
-                <h3 className="font-serif text-[21px] md:text-[25px] font-bold leading-tight mt-1">
+                <h3 className="font-serif text-[21px] md:text-[26px] font-bold leading-tight mt-1">
                   The global supply chain is being rebuilt around data,
                   automation and artificial intelligence.
                 </h3>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7">
-              <SmallStoryList
-                stories={supplyChainStories.slice(0, 3)}
-              />
-
-              <SmallStoryList
-                stories={supplyChainStories.slice(3)}
-              />
+            <div>
+              <SmallStoryList stories={supplyChainStories} />
             </div>
 
           </div>
@@ -1015,3 +967,4 @@ export function TechnologyPage() {
     </main>
   );
 }
+```
