@@ -1,4 +1,4 @@
-```tsx
+
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock, Factory, TrendingUp, Cpu, Car, Plane } from "lucide-react";
 
@@ -655,4 +655,4 @@ export function ManufacturingPage() {
     </div>
   );
 }
-```
+
