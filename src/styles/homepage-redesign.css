@@ -1692,58 +1692,63 @@ footer .pt-logo-accent {
 
 /* ========================================
    GLOBAL MARKETS PAGE
+   (Bloomberg-style dense financial layout:
+   flat panels, hairline rules, condensed caps,
+   sharp corners instead of soft rounded cards)
 ======================================== */
 
 .pt-markets-header {
   border-bottom: 3px solid var(--pt-black);
 
-  padding-bottom: 16px;
+  padding-bottom: 12px;
 
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .pt-markets-eyebrow {
-  font-size: 11px;
+  font-size: 10px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
 
   text-transform: uppercase;
 
-  color: var(--pt-text-muted);
+  color: var(--pt-red);
 }
 
 .pt-markets-title {
   font-family: Georgia, "Times New Roman", serif;
 
-  font-size: 30px;
+  font-size: 28px;
 
   font-weight: 700;
 
   color: var(--pt-black);
 
-  line-height: 1.1;
+  line-height: 1.05;
+
+  letter-spacing: -0.01em;
 }
 
 .pt-live-badge {
-  font-size: 11px;
+  font-size: 10px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
 
   text-transform: uppercase;
 
   color: var(--pt-success);
 
-  background: rgba(0, 200, 117, 0.1);
+  background: transparent;
 
-  border: 1px solid rgba(0, 200, 117, 0.25);
+  border: 1px solid var(--pt-success);
 
-  border-radius: 999px;
+  border-radius: 2px;
 
-  padding: 6px 12px;
+  padding: 4px 9px 4px 8px;
 }
 
 .pt-live-dot {
@@ -1781,94 +1786,102 @@ footer .pt-logo-accent {
 
 /* ========================================
    QUICK OVERVIEW INDEX CARDS
+   (ticker-strip cells, not soft dashboard cards)
 ======================================== */
 
-.pt-index-card {
+.pt-markets-page .pt-index-card {
   background: var(--pt-white);
 
-  border: 1px solid var(--pt-border);
+  border: none;
+  border-right: 1px solid var(--pt-border);
 
-  border-radius: 10px;
+  border-radius: 0;
 
-  padding: 16px;
+  padding: 4px 20px;
 
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease,
-    border-color 0.2s ease;
+  transition: background-color 0.15s ease;
 }
 
-.pt-index-card-compact {
-  width: 168px;
+.pt-markets-page .pt-index-card:last-child {
+  border-right: none;
+}
 
-  min-width: 168px;
+.pt-markets-page .pt-index-card-compact {
+  width: auto;
 
-  padding: 12px 14px;
+  min-width: 132px;
+
+  padding: 2px 16px;
 
   border-color: var(--pt-border);
 }
 
-.pt-index-card:hover {
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.08);
+.pt-markets-page .pt-index-card:hover {
+  background: var(--pt-light-bg);
 
-  border-color: var(--pt-border-dark);
+  border-color: var(--pt-border);
 
-  transform: translateY(-2px);
+  transform: none;
 }
 
-.pt-index-card-name {
-  font-size: 11px;
+.pt-markets-page .pt-index-card-name {
+  font-size: 10px;
 
   font-weight: 700;
 
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 
   text-transform: uppercase;
 
   color: var(--pt-text-muted);
+
+  white-space: nowrap;
 }
 
-.pt-index-card-value {
-  font-family: Georgia, "Times New Roman", serif;
+.pt-markets-page .pt-index-card-value {
+  font-family: "Courier New", ui-monospace, monospace;
 
-  font-size: 22px;
+  font-size: 18px;
 
   font-weight: 700;
 
   color: var(--pt-black);
 
-  margin-top: 4px;
+  margin-top: 2px;
+
+  white-space: nowrap;
 }
 
-.pt-index-card-change {
+.pt-markets-page .pt-index-card-change {
   display: inline-flex;
 
   align-items: center;
 
-  gap: 4px;
+  gap: 3px;
 
-  font-size: 12px;
+  font-size: 11px;
 
-  font-weight: 600;
+  font-weight: 700;
 
-  margin-top: 6px;
+  margin-top: 3px;
 
-  padding: 3px 8px;
+  padding: 0;
 
-  border-radius: 5px;
+  border-radius: 0;
+
+  white-space: nowrap;
 }
 
-.pt-index-card-change.up {
+.pt-markets-page .pt-index-card-change.up {
   color: var(--pt-success);
 
-  background: rgba(0, 200, 117, 0.1);
+  background: transparent;
 }
 
-.pt-index-card-change.down {
+.pt-markets-page .pt-index-card-change.down {
   color: var(--pt-danger);
 
-  background: rgba(227, 27, 35, 0.08);
+  background: transparent;
 }
 
 
@@ -1881,51 +1894,53 @@ footer .pt-logo-accent {
 
   border: 1px solid var(--pt-border);
 
-  border-radius: 12px;
+  border-radius: 0;
 
-  padding: 20px;
+  padding: 16px 18px 10px;
 
-  transition:
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .pt-chart-panel:hover {
   border-color: var(--pt-border-dark);
 
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
 }
 
 .pt-chart-panel-title {
-  font-size: 12px;
+  font-size: 11px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 
   text-transform: uppercase;
 
-  color: var(--pt-text-secondary);
+  color: var(--pt-text-primary);
 
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid var(--pt-border);
 
   display: flex;
 
   align-items: center;
 
-  gap: 8px;
+  gap: 7px;
 }
 
 .pt-chart-panel-title::before {
   content: "";
 
-  width: 3px;
+  width: 9px;
 
-  height: 14px;
+  height: 9px;
 
   background: var(--pt-red);
 
-  border-radius: 2px;
+  border-radius: 0;
 
   display: inline-block;
 }
@@ -1936,29 +1951,31 @@ footer .pt-logo-accent {
 ======================================== */
 
 .pt-markets-tabs {
-  border-bottom: 1px solid var(--pt-border);
+  border-bottom: 1px solid var(--pt-black);
 
   margin-bottom: 0;
 }
 
 .pt-markets-tab {
-  font-size: 13px;
+  font-size: 12px;
 
-  font-weight: 600;
+  font-weight: 700;
 
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
 
   text-transform: uppercase;
 
   color: var(--pt-text-muted);
 
-  padding: 10px 4px;
+  padding: 9px 2px;
 
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
+
+  margin-bottom: -1px;
 
   transition:
-    color 0.2s ease,
-    border-color 0.2s ease;
+    color 0.15s ease,
+    border-color 0.15s ease;
 
   white-space: nowrap;
 }
@@ -1983,15 +2000,17 @@ footer .pt-logo-accent {
 
   border: 1px solid var(--pt-border);
 
-  border-radius: 0 0 12px 12px;
+  border-top: none;
 
-  padding: 24px;
+  border-radius: 0;
+
+  padding: 18px 20px 20px;
 }
 
 .pt-markets-section-title {
   font-family: Georgia, "Times New Roman", serif;
 
-  font-size: 18px;
+  font-size: 16px;
 
   font-weight: 700;
 
@@ -1999,37 +2018,50 @@ footer .pt-logo-accent {
 
   border-bottom: 2px solid var(--pt-black);
 
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+
+  text-transform: capitalize;
 }
 
 .pt-market-table-head {
-  font-size: 11px;
+  font-size: 10px;
 
-  font-weight: 700;
+  font-weight: 800;
 
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
 
   text-transform: uppercase;
 
   color: var(--pt-text-muted);
 
-  border-bottom: 1px solid var(--pt-border);
+  border-bottom: 1px solid var(--pt-black);
 }
 
 .pt-market-table-row {
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--pt-border);
 
-  transition: background-color 0.15s ease;
+  transition: background-color 0.12s ease;
 }
 
-.pt-market-table-row:hover {
+.pt-market-table-row:nth-child(even) {
   background: var(--pt-light-bg);
 }
 
+.pt-market-table-row:hover {
+  background: rgba(227, 27, 35, 0.05);
+}
+
 .pt-market-table-row td {
-  padding: 12px 8px;
+  padding: 9px 8px;
+
+  font-family: "Courier New", ui-monospace, monospace;
+  font-size: 13px;
+}
+
+.pt-market-table-row td:first-child {
+  font-family: inherit;
 }
 
 .pt-markets-loading {
@@ -2049,26 +2081,29 @@ footer .pt-logo-accent {
    STOCK BOX
 ======================================== */
 
-.pt-stock-box {
+.pt-markets-page .pt-stock-box {
   background: var(--pt-white);
 
-  border: 1px solid var(--pt-border);
+  border-top: 1px solid var(--pt-black);
+  border-bottom: 1px solid var(--pt-black);
+  border-left: none;
+  border-right: none;
 
-  border-radius: 10px;
+  border-radius: 0;
 
   overflow-x: auto;
 
-  padding: 16px;
+  padding: 10px 0;
 }
 
-.pt-stock-box-compact {
-  min-height: 122px;
+.pt-markets-page .pt-stock-box-compact {
+  min-height: 110px;
 
-  max-height: 122px;
+  max-height: 110px;
 
   overflow: hidden;
 
-  padding: 10px;
+  padding: 8px 0;
 }
 
 
