@@ -130,28 +130,39 @@ export function MarketsPage() {
         </div>
 
         {/* ── Quick jump ─────────────────────────────────────── */}
-        <div className="flex flex-wrap gap-x-7 gap-y-2 mb-8 text-[11px] uppercase tracking-[0.12em]">
-          <a href="#sectors" className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5">
+        {/* Sizing classes are repeated on every element (not just the wrapper) because
+            <button> does not inherit font-size/font-family from its parent by default —
+            only the <a> tags were picking up the wrapper's text-[11px] uppercase tracking. */}
+        <div className="flex flex-wrap gap-x-7 gap-y-2 mb-8">
+          <a
+            href="#sectors"
+            className="text-[11px] font-sans uppercase tracking-[0.12em] leading-none text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
+          >
             Overview
           </a>
-          <a href="#sectors" className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5">
+          <a
+            href="#sectors"
+            className="text-[11px] font-sans uppercase tracking-[0.12em] leading-none text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
+          >
             Sector Performance
           </a>
           <button
+            type="button"
             onClick={() => {
               setActiveTab("indices");
               document.getElementById("markets-table")?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
+            className="text-[11px] font-sans uppercase tracking-[0.12em] leading-none text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
           >
             Global Indices
           </button>
           <button
+            type="button"
             onClick={() => {
               setActiveTab("crypto");
               document.getElementById("markets-table")?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
+            className="text-[11px] font-sans uppercase tracking-[0.12em] leading-none text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
           >
             Cryptocurrency
           </button>
