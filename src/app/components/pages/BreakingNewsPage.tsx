@@ -2,6 +2,10 @@ import { Clock, Zap, ChevronRight, TrendingUp } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 
+/* =========================================================
+   DATA
+========================================================= */
+
 const allBreakingNews = [
   { id: 1, category: "FINANCE", title: "Federal Reserve Announces Surprise 50bps Rate Cut — Biggest in 4 Years", time: "3 min ago", hot: true, priority: "BREAKING", path: "/finance" },
   { id: 2, category: "TECHNOLOGY", title: "OpenAI Launches GPT-5 — Claims Surpasses PhD-Level Performance on All Academic Benchmarks", time: "12 min ago", hot: true, priority: "BREAKING", path: "/technology" },
@@ -31,6 +35,10 @@ const priorityColor: Record<string, string> = {
   NEWS: "bg-gray-800 text-white",
 };
 
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
 export function BreakingNewsPage() {
   const [ticker, setTicker] = useState(0);
 
@@ -40,92 +48,173 @@ export function BreakingNewsPage() {
   }, []);
 
   return (
-    <div className="py-6">
-      {/* Live indicator */}
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b-4 border-black">
-        <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 bg-red-600 rounded-full animate-pulse" />
-          <Zap size={18} className="text-red-600" />
-        </div>
-        <div>
-          <h1 className="text-2xl leading-tight">Breaking News</h1>
-          <p className="text-xs text-gray-500">Live updates · Refreshing automatically · May 22, 2026</p>
-        </div>
-        <span className="ml-auto text-xs bg-red-600 text-white px-3 py-1 rounded animate-pulse">LIVE</span>
-      </div>
+    <div className="w-full bg-white text-gray-900 antialiased">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
-      {/* Top 3 featured breaking stories */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        {allBreakingNews.slice(0, 3).map((item) => (
-          <Link key={item.id} to={item.path} className="border-l-4 border-red-600 pl-4 group">
-            <span className={`text-xs px-2 py-0.5 rounded ${priorityColor[item.priority]}`}>{item.priority}</span>
-            <h3 className="mt-2 leading-snug group-hover:text-red-600 transition-colors">{item.title}</h3>
-            <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
-              <span className="uppercase tracking-wider">{item.category}</span>
-              <span>·</span>
-              <span className="flex items-center gap-1"><Clock size={10} />{item.time}</span>
-            </div>
-          </Link>
-        ))}
-      </div>
+        {/* =================================================
+            LIVE HEADER
+        ================================================= */}
 
-      {/* Full feed */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
-          <div className="border-b border-gray-200 pb-2 mb-4 flex items-center justify-between">
-            <h2 className="text-sm uppercase tracking-wider">All Breaking Stories</h2>
-            <span className="text-xs text-gray-400">{allBreakingNews.length} stories</span>
+        <header className="flex items-center gap-4 mb-10 pb-6 border-b-4 border-black">
+          <div className="flex items-center justify-center w-11 h-11 rounded-full bg-black text-white shrink-0 relative">
+            <Zap size={19} strokeWidth={1.75} className="text-red-500" fill="currentColor" />
+            <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-red-600 rounded-full animate-pulse ring-2 ring-white" />
           </div>
-          <div className="divide-y divide-gray-100">
-            {allBreakingNews.map((item) => (
-              <Link key={item.id} to={item.path} className="flex items-start gap-3 py-3 group hover:bg-gray-50 px-1 rounded transition-colors -mx-1">
-                <span className={`text-xs px-1.5 py-0.5 rounded whitespace-nowrap flex-shrink-0 mt-0.5 ${priorityColor[item.priority]}`}>
-                  {item.priority}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm leading-snug group-hover:text-red-600 transition-colors">{item.title}</p>
-                  <div className="flex items-center gap-2 mt-1 text-xs text-gray-400">
-                    <span className="text-red-600 uppercase tracking-wider">{item.category}</span>
-                    <span>·</span>
-                    <span className="flex items-center gap-1"><Clock size={10} />{item.time}</span>
-                  </div>
-                </div>
-                <ChevronRight size={14} className="text-gray-300 flex-shrink-0 mt-1 group-hover:text-red-600 transition-colors" />
-              </Link>
-            ))}
-          </div>
-        </div>
 
-        {/* Live ticker sidebar */}
-        <div>
-          <div className="bg-black text-white rounded p-4 sticky top-20">
-            <div className="flex items-center gap-2 mb-4 border-b border-gray-700 pb-3">
-              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              <span className="text-xs uppercase tracking-wider">News Ticker</span>
-            </div>
-            <div className="min-h-24 mb-4">
-              <span className={`text-xs px-1.5 py-0.5 rounded ${priorityColor[allBreakingNews[ticker].priority]}`}>
-                {allBreakingNews[ticker].priority}
+          <div className="flex-1 min-w-0">
+            <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-red-600">
+              Live Updates
+            </p>
+            <h1 className="mt-0.5 font-serif text-3xl md:text-[42px] font-bold tracking-tight leading-tight">
+              Breaking News
+            </h1>
+            <p className="text-xs text-gray-400 mt-1">
+              Refreshing automatically · May 22, 2026
+            </p>
+          </div>
+
+          <span className="flex items-center gap-1.5 text-xs font-bold bg-red-600 text-white px-3.5 py-1.5 rounded-[2px] shrink-0">
+            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+            LIVE
+          </span>
+        </header>
+
+        {/* =================================================
+            TOP 3 FEATURED
+        ================================================= */}
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-14">
+          {allBreakingNews.slice(0, 3).map((item) => (
+            <Link
+              key={item.id}
+              to={item.path}
+              className="group border-l-4 border-red-600 pl-4 py-0.5"
+            >
+              <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded-[2px] tracking-wide ${priorityColor[item.priority]}`}>
+                {item.priority}
               </span>
-              <p className="text-sm text-white mt-2 leading-snug">{allBreakingNews[ticker].title}</p>
-              <span className="text-xs text-gray-400 mt-2 block">{allBreakingNews[ticker].time}</span>
+
+              <h3 className="mt-2.5 font-serif text-lg md:text-xl font-bold leading-[1.25] text-gray-950 transition-colors duration-200 group-hover:text-red-600">
+                {item.title}
+              </h3>
+
+              <div className="flex items-center gap-2 mt-3 text-xs text-gray-400">
+                <span className="font-semibold text-gray-500 uppercase tracking-wider">{item.category}</span>
+                <span>·</span>
+                <span className="flex items-center gap-1.5">
+                  <Clock size={10} strokeWidth={2.25} />
+                  {item.time}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* =================================================
+            FULL FEED + TICKER SIDEBAR
+        ================================================= */}
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+          {/* Full feed */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2.5 border-b-2 border-black pb-2.5 mb-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-red-600 shrink-0" />
+              <h2 className="text-[13px] md:text-sm font-bold uppercase tracking-[0.16em] text-gray-900 flex-1">
+                All Breaking Stories
+              </h2>
+              <span className="text-[11px] uppercase tracking-wide text-gray-400">
+                {allBreakingNews.length} stories
+              </span>
             </div>
-            <div className="flex gap-1 mb-4">
-              {allBreakingNews.slice(0, 8).map((_, i) => (
-                <div key={i} className={`h-0.5 flex-1 rounded ${i === ticker % 8 ? "bg-red-600" : "bg-gray-700"}`} />
+
+            <div className="divide-y divide-gray-200">
+              {allBreakingNews.map((item) => (
+                <Link
+                  key={item.id}
+                  to={item.path}
+                  className="flex items-start gap-4 py-4 group hover:bg-gray-50 px-2 -mx-2 rounded-[2px] transition-colors"
+                >
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-[2px] whitespace-nowrap shrink-0 mt-0.5 tracking-wide ${priorityColor[item.priority]}`}>
+                    {item.priority}
+                  </span>
+
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm md:text-[15px] leading-[1.5] text-gray-800 transition-colors group-hover:text-red-600">
+                      {item.title}
+                    </p>
+                    <div className="flex items-center gap-2 mt-1.5 text-xs text-gray-400">
+                      <span className="font-semibold text-red-600 uppercase tracking-wider">{item.category}</span>
+                      <span>·</span>
+                      <span className="flex items-center gap-1.5">
+                        <Clock size={10} strokeWidth={2.25} />
+                        {item.time}
+                      </span>
+                    </div>
+                  </div>
+
+                  <ChevronRight
+                    size={15}
+                    strokeWidth={2}
+                    className="text-gray-300 shrink-0 mt-1 transition-all duration-200 group-hover:text-red-600 group-hover:translate-x-0.5"
+                  />
+                </Link>
               ))}
             </div>
-            <div className="border-t border-gray-700 pt-3">
-              <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">Trending Topics</p>
-              <div className="flex flex-wrap gap-1.5">
-                {["Fed Cut", "AI Wars", "OPEC", "Ukraine EU", "NVIDIA", "Red Sea", "RBI"].map((t) => (
-                  <span key={t} className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded hover:bg-gray-700 cursor-pointer transition-colors">
-                    <TrendingUp size={8} className="inline mr-1" />{t}
-                  </span>
+          </div>
+
+          {/* Live ticker sidebar */}
+          <div>
+            <div className="bg-black text-white rounded-[2px] p-5 sticky top-6">
+              <div className="flex items-center gap-2 mb-4 pb-3.5 border-b border-white/10">
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-gray-300">
+                  News Ticker
+                </span>
+              </div>
+
+              <div className="min-h-[92px] mb-4">
+                <span className={`inline-block text-[10px] font-bold px-2 py-0.5 rounded-[2px] tracking-wide ${priorityColor[allBreakingNews[ticker].priority]}`}>
+                  {allBreakingNews[ticker].priority}
+                </span>
+                <p className="text-sm text-white mt-2.5 leading-[1.5] font-medium">
+                  {allBreakingNews[ticker].title}
+                </p>
+                <span className="text-xs text-gray-500 mt-2 block">
+                  {allBreakingNews[ticker].time}
+                </span>
+              </div>
+
+              <div className="flex gap-1 mb-5">
+                {allBreakingNews.slice(0, 8).map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-[3px] flex-1 rounded-full transition-colors duration-500 ${
+                      i === ticker % 8 ? "bg-red-600" : "bg-white/10"
+                    }`}
+                  />
                 ))}
+              </div>
+
+              <div className="border-t border-white/10 pt-4">
+                <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.16em] mb-3">
+                  Trending Topics
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Fed Cut", "AI Wars", "OPEC", "Ukraine EU", "NVIDIA", "Red Sea", "RBI"].map((t) => (
+                    <span
+                      key={t}
+                      className="text-xs font-medium bg-white/10 text-gray-300 px-2.5 py-1 rounded-[2px] hover:bg-white/20 hover:text-white cursor-pointer transition-colors flex items-center"
+                    >
+                      <TrendingUp size={9} strokeWidth={2.25} className="mr-1" />
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
