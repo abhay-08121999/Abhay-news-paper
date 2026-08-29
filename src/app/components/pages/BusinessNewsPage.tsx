@@ -1,6 +1,5 @@
 import { Clock, Briefcase, TrendingUp, TrendingDown } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 
 function SH({ title }: { title: string }) {
   return <div className="border-b-2 border-black pb-2 mb-4"><h2 className="uppercase tracking-wider">{title}</h2></div>;
