@@ -1,267 +1,169 @@
-
+```tsx
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { Clock, Factory, TrendingUp, Cpu, Plane, Car, Bot } from "lucide-react";
+import { Clock, Factory, TrendingUp, Cpu, Car, Plane } from "lucide-react";
 
 import Manu1Img from "../../../imports/Manu1.png";
 import Manu2Img from "../../../imports/Manu2.png";
 import Manu3Img from "../../../imports/Manu3.png";
 
-function SectionHeader({
-  title,
-  subtitle,
-}: {
+interface Story {
+  id: number;
   title: string;
-  subtitle?: string;
-}) {
-  return (
-    <div className="mb-5 border-b-2 border-black pb-3">
-      <div className="flex items-center justify-between gap-4">
-        <h2 className="font-serif text-lg md:text-xl font-bold uppercase tracking-[0.12em] text-gray-950">
-          {title}
-        </h2>
-
-        {subtitle && (
-          <span className="hidden sm:block text-[10px] uppercase tracking-[0.16em] text-gray-500">
-            {subtitle}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function StoryMeta({
-  author,
-  time,
-}: {
-  author: string;
   time: string;
-}) {
-  return (
-    <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-gray-200 pt-3 text-[11px] uppercase tracking-wide text-gray-400">
-      <span>By {author}</span>
-
-      <span className="flex items-center gap-1.5">
-        <Clock size={11} />
-        {time}
-      </span>
-    </div>
-  );
 }
 
-function StoryCard({
-  image,
-  category,
-  title,
-  excerpt,
-  author,
-  time,
-  large = false,
-}: {
-  image: string;
+interface HeroStory {
   category: string;
   title: string;
   excerpt: string;
   author: string;
   time: string;
-  large?: boolean;
-}) {
-  return (
-    <article className="group cursor-pointer">
-      <div
-        className={`relative mb-4 overflow-hidden bg-gray-100 ${
-          large ? "h-72 md:h-[430px]" : "h-64 md:h-72"
-        }`}
-      >
-        <ImageWithFallback
-          src={image}
-          alt={title}
-          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-
-        <span className="absolute bottom-4 left-4 bg-red-700 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white">
-          {category}
-        </span>
-      </div>
-
-      <h3
-        className={`font-serif font-bold leading-tight text-gray-950 transition-colors duration-200 group-hover:text-red-700 ${
-          large
-            ? "text-2xl md:text-3xl lg:text-4xl"
-            : "text-xl md:text-2xl"
-        }`}
-      >
-        {title}
-      </h3>
-
-      <p
-        className={`mt-3 leading-relaxed text-gray-600 ${
-          large ? "text-sm md:text-base" : "text-sm"
-        }`}
-      >
-        {excerpt}
-      </p>
-
-      <StoryMeta author={author} time={time} />
-    </article>
-  );
+  image: string;
 }
 
-function NewsList({
-  items,
-  accent = "red",
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+function SectionHeader({
+  title,
+  icon,
 }: {
-  items: { id: number; title: string; time: string }[];
-  accent?: "red" | "gray";
+  title: string;
+  icon?: React.ReactNode;
 }) {
   return (
-    <div className="divide-y divide-gray-200">
-      {items.map((item, index) => (
-        <article
-          key={`${item.id}-${index}`}
-          className="group cursor-pointer border-l-2 border-transparent py-4 pl-4 transition-all duration-200 hover:border-red-600 hover:bg-gray-50"
-        >
-          <div className="flex items-start gap-3">
-            <span className="mt-1 min-w-[22px] font-serif text-xs font-bold text-gray-400">
-              {String(index + 1).padStart(2, "0")}
-            </span>
+    <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-5">
+      <div className="flex items-center gap-2">
+        {icon && <span className="text-red-600">{icon}</span>}
 
-            <div>
-              <h3
-                className={`text-sm font-medium leading-relaxed transition-colors ${
-                  accent === "red"
-                    ? "group-hover:text-red-700"
-                    : "group-hover:text-gray-700"
-                }`}
-              >
-                {item.title}
-              </h3>
+        <h2 className="text-sm md:text-base font-bold uppercase tracking-[0.12em] text-gray-900">
+          {title}
+        </h2>
+      </div>
 
-              <span className="mt-2 flex items-center gap-1.5 text-[10px] uppercase tracking-wide text-gray-400">
-                <Clock size={10} />
-                {item.time}
-              </span>
-            </div>
-          </div>
-        </article>
-      ))}
+      <span className="hidden sm:block text-[10px] uppercase tracking-widest text-gray-400">
+        The Pride Times
+      </span>
     </div>
   );
 }
 
-const hero = {
-  category: "Industry 4.0",
+/* =========================================================
+   DATA
+========================================================= */
+
+const hero: HeroStory = {
+  category: "INDUSTRY 4.0",
   title:
     "ISM Manufacturing Index Hits 54 in May — Strongest Reading in 14 Months",
   excerpt:
-    "The Institute for Supply Management's Manufacturing Index reached 54 in May 2026, beating the consensus Dow Jones forecast of 53.2 and rising 1.3 points from April. The reading, which measures the share of manufacturing companies reporting business expansion, confirms that U.S. factory activity is accelerating into the second quarter of 2026 on the back of strong new orders and improved employment conditions.New orders surged 2.7 points to 56.8, while imports rose a corresponding 2.7 points to 53, signaling both domestic demand strength and a willingness among manufacturers to restock inventories. Employment within the manufacturing sector also improved, rising 2.2 points, though at 48.6 the gauge remains just below the 50-point expansion threshold, indicating that hiring growth has not yet fully recovered from earlier contractions.",
+    "The Institute for Supply Management's Manufacturing Index reached 54 in May 2026, beating the consensus Dow Jones forecast of 53.2 and rising 1.3 points from April. The reading confirms that U.S. factory activity is accelerating into the second quarter of 2026 on the back of strong new orders and improved employment conditions. New orders surged 2.7 points to 56.8, while imports rose a corresponding 2.7 points to 53, signaling both domestic demand strength and a willingness among manufacturers to restock inventories.",
   author: "Sagar Kumar",
   time: "1 June 2026",
   image: Manu1Img,
 };
 
-const hero1 = {
-  category: "Industry 4.0",
+const hero1: HeroStory = {
+  category: "INDUSTRY 4.0",
   title:
     "Autodesk to Acquire MaintainX, Advancing Unified Operations Platform",
   excerpt:
-    "Autodesk has announced the acquisition of MaintainX, a leading computerized maintenance management system (CMMS) platform, in a move that advances the design software giant's push toward a unified platform connecting design, construction, and operations workflows. The deal reflects growing demand from industrial manufacturers for software that integrates asset maintenance intelligence with the design and build data that modern factories generate throughout the product lifecycle.MaintainX has built a strong presence among mid-market industrial customers, with particular traction in food and beverage, pharmaceuticals, and heavy manufacturing. Autodesk's distribution network and enterprise relationships are expected to accelerate the platform's penetration into large-scale manufacturing environments globally.",
+    "Autodesk has announced the acquisition of MaintainX, a leading computerized maintenance management system platform, in a move that advances the design software giant's push toward a unified platform connecting design, construction, and operations workflows. The deal reflects growing demand from industrial manufacturers for software that integrates asset maintenance intelligence with the design and build data that modern factories generate throughout the product lifecycle.",
   author: "Sagar Kumar",
   time: "28 May 2026",
   image: Manu2Img,
 };
 
-const hero2 = {
-  category: "Industry 4.0",
+const hero2: HeroStory = {
+  category: "INDUSTRY 4.0",
   title: "Robotics and Automation Reshaping Factory Floor Economics",
   excerpt:
-    "The integration of AI-powered robotics onto factory floors is accelerating faster than many manufacturers anticipated at the start of the decade. GlobalFoundries' completed acquisition of Synopsys' Processor IP Solutions Business — focused on Physical AI — signals the intensifying competition to embed intelligence directly into the silicon that powers industrial automation equipment.Industry analysts tracking automation deployment note that collaborative robots (cobots) are now economically viable for tasks that previously required human dexterity, including wire harness assembly, small-component placement, and quality inspection. The ROI threshold for robotic deployment has fallen from an average of 4 years in 2020 to approximately 18 months in 2026, driven by software improvements, sensor cost reductions, and the availability of pre-trained models tailored to industrial settings.",
+    "The integration of AI-powered robotics onto factory floors is accelerating faster than many manufacturers anticipated at the start of the decade. Collaborative robots are becoming economically viable for tasks that previously required human dexterity, including wire harness assembly, small-component placement, and quality inspection. Software improvements, sensor cost reductions, and industrial AI models are reducing the ROI threshold for robotic deployment.",
   author: "Sagar Kumar",
   time: "June 2026",
   image: Manu3Img,
 };
 
-const autoStories = [
+const autoStories: Story[] = [
   {
-    id: 5,
+    id: 1,
     title:
       "Manufacturing executives say Iran conflict and Middle East tensions are inflating supply-chain costs across transportation-equipment networks.",
     time: "Just now",
   },
   {
-    id: 6,
+    id: 2,
     title:
       "GM supplier Dauch workers ratify a contract while 5,000 Lockheed Martin IAM employees approve a new labor deal.",
     time: "Just now",
   },
   {
-    id: 7,
+    id: 3,
     title:
-      "Major food processor plans at least 2,000 layoffs as it closes a Pennsylvania beef plant and restructures Pilgrim's Pride operations.",
+      "Major food processor plans at least 2,000 layoffs as it closes a Pennsylvania beef plant and restructures operations.",
     time: "Just now",
   },
   {
-    id: 1,
+    id: 4,
     title:
       "Toyota Launches All-Solid-State Battery EV — 800-Mile Range, 10-Minute Charge at $35,000 Price Point",
     time: "1 hr ago",
   },
   {
-    id: 2,
+    id: 5,
     title:
       "Volkswagen's Wolfsburg Plant Becomes World's First Carbon-Neutral Auto Factory",
     time: "3 hrs ago",
   },
   {
-    id: 3,
+    id: 6,
     title:
       "Tesla Cybertruck 2.0 with 750-Mile Range Begins Production at Gigafactory Texas",
     time: "5 hrs ago",
   },
   {
-    id: 4,
+    id: 7,
     title:
       "Tata Motors Claims Top Spot in Indian EV Market with 38% Share",
     time: "7 hrs ago",
   },
 ];
 
-const roboticsStories = [
+const roboticsStories: Story[] = [
   {
-    id: 5,
+    id: 1,
     title:
       "Neura raises capital to scale humanoid and industrial robot manufacturing, deployment, and training infrastructure.",
     time: "Just now",
   },
   {
-    id: 1,
+    id: 2,
     title:
       "Boston Dynamics Humanoid Atlas Now Assembles Complex Electronics at Honda Plant",
     time: "2 hrs ago",
   },
   {
-    id: 2,
+    id: 3,
     title:
       "Foxconn Replaces 200,000 Workers with AI-Guided Robotic Arms in 18 Months",
     time: "4 hrs ago",
   },
   {
-    id: 3,
+    id: 4,
     title:
       "ABB's New Collaborative Robot Wins Safety Certification for Human-Facing Assembly Lines",
     time: "6 hrs ago",
   },
   {
-    id: 4,
+    id: 5,
     title:
       "Amazon's Manufacturing Robotics Division Files 400+ Patents in a Single Quarter",
     time: "8 hrs ago",
   },
 ];
 
-const aeroDefense = [
+const aeroDefense: Story[] = [
   {
     id: 1,
     title:
@@ -288,7 +190,7 @@ const aeroDefense = [
   },
 ];
 
-const semiconductors = [
+const semiconductors: Story[] = [
   {
     id: 1,
     title:
@@ -329,349 +231,428 @@ const semiconductors = [
 
 const mfgIndex = [
   {
-    country: "USA (ISM PMI)",
+    country: "USA",
+    label: "ISM Manufacturing PMI",
     value: "54.2",
     status: "Expanding",
   },
   {
-    country: "Germany (Manufacturing PMI)",
+    country: "Germany",
+    label: "Manufacturing PMI",
     value: "52.4",
     status: "Expanding",
   },
   {
-    country: "China (Caixin PMI)",
+    country: "China",
+    label: "Caixin PMI",
     value: "51.8",
     status: "Expanding",
   },
   {
-    country: "India (Manufacturing PMI)",
+    country: "India",
+    label: "Manufacturing PMI",
     value: "58.9",
     status: "Strong Growth",
   },
   {
-    country: "Japan (Manufacturing PMI)",
+    country: "Japan",
+    label: "Manufacturing PMI",
     value: "49.7",
     status: "Contracting",
   },
   {
-    country: "UK (Manufacturing PMI)",
+    country: "UK",
+    label: "Manufacturing PMI",
     value: "50.3",
     status: "Flat",
   },
 ];
 
-export function ManufacturingPage() {
+/* =========================================================
+   STORY CARD
+========================================================= */
+
+function StoryCard({ story }: { story: Story }) {
   return (
-    <main className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
+    <article className="group py-3 border-b border-gray-200 last:border-b-0 cursor-pointer">
+      <h3 className="text-sm md:text-[15px] leading-snug font-medium text-gray-900 group-hover:text-red-600 transition-colors duration-200">
+        {story.title}
+      </h3>
 
-        {/* =========================================================
-            PAGE HEADER
-        ========================================================== */}
-        <header className="mb-8 border-b-4 border-black pb-5 md:mb-10">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white">
-                <Factory size={20} />
-              </div>
-
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-700 sm:text-xs">
-                  Industry & Production
-                </p>
-
-                <h1 className="mt-1 font-serif text-3xl font-bold tracking-tight text-gray-950 sm:text-4xl lg:text-5xl">
-                  Manufacturing & Industry
-                </h1>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-gray-500">
-              <TrendingUp size={14} />
-              Industry 4.0
-            </div>
-          </div>
-        </header>
-
-        {/* =========================================================
-            HERO + PMI
-        ========================================================== */}
-        <section className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
-
-          {/* Hero */}
-          <div className="lg:col-span-2">
-            <StoryCard
-              image={hero.image}
-              category={hero.category}
-              title={hero.title}
-              excerpt={hero.excerpt}
-              author={hero.author}
-              time={hero.time}
-              large
-            />
-          </div>
-
-          {/* PMI PANEL */}
-          <aside className="h-fit border border-gray-200 bg-gray-50">
-            <div className="border-b-4 border-black bg-white px-5 py-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-red-700">
-                    Global Indicators
-                  </p>
-
-                  <h2 className="mt-1 font-serif text-xl font-bold">
-                    Manufacturing PMI
-                  </h2>
-                </div>
-
-                <Factory size={20} className="text-gray-400" />
-              </div>
-            </div>
-
-            <div className="px-5">
-              {mfgIndex.map((item) => {
-                const expanding = parseFloat(item.value) >= 50;
-
-                return (
-                  <div
-                    key={item.country}
-                    className="flex items-center justify-between border-b border-gray-200 py-4 last:border-b-0"
-                  >
-                    <div className="pr-3">
-                      <p className="text-xs font-medium leading-snug text-gray-800">
-                        {item.country}
-                      </p>
-
-                      <p
-                        className={`mt-1 text-[10px] uppercase tracking-wide ${
-                          expanding
-                            ? "text-green-700"
-                            : "text-red-700"
-                        }`}
-                      >
-                        {item.status}
-                      </p>
-                    </div>
-
-                    <p className="font-mono text-lg font-bold tabular-nums text-gray-950">
-                      {item.value}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="border-t border-gray-200 bg-white px-5 py-3">
-              <p className="text-[10px] leading-relaxed text-gray-400">
-                PMI above 50 = expansion. Data: May 2026.
-              </p>
-            </div>
-          </aside>
-        </section>
-
-        {/* =========================================================
-            EDITORIAL QUOTE
-        ========================================================== */}
-        <section className="mb-12 border-y-2 border-black py-7">
-          <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[100px_1fr]">
-            <div className="hidden h-20 w-full bg-gray-100 md:block">
-              <div className="flex h-full items-center justify-center">
-                <Factory size={30} className="text-gray-400" />
-              </div>
-            </div>
-
-            <div>
-              <p className="font-serif text-xl italic leading-relaxed text-gray-800 md:text-2xl">
-                "Last year was about managing disruptions. Right now, it's
-                about redesigning your global network."
-              </p>
-
-              <p className="mt-3 text-xs font-bold uppercase tracking-[0.12em] text-gray-500">
-                — Abe Eshkenazi, CEO, Association for Supply Chain Management
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            FEATURE STORY
-        ========================================================== */}
-        <section className="mb-12">
-          <SectionHeader
-            title="Featured Industry Story"
-            subtitle="Manufacturing Intelligence"
-          />
-
-          <StoryCard
-            image={hero1.image}
-            category={hero1.category}
-            title={hero1.title}
-            excerpt={hero1.excerpt}
-            author={hero1.author}
-            time={hero1.time}
-            large
-          />
-        </section>
-
-        {/* =========================================================
-            SECONDARY STORIES
-        ========================================================== */}
-        <section className="mb-12 grid grid-cols-1 gap-8 border-b border-gray-200 pb-12 lg:grid-cols-2">
-          <StoryCard
-            image={hero2.image}
-            category={hero2.category}
-            title={hero2.title}
-            excerpt={hero2.excerpt}
-            author={hero2.author}
-            time={hero2.time}
-          />
-
-          <div className="border-t border-gray-200 pt-8 lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
-            <StoryCard
-              image={hero3.image}
-              category={hero3.category}
-              title={hero3.title}
-              excerpt={hero3.excerpt}
-              author={hero3.author}
-              time={hero3.time}
-            />
-          </div>
-        </section>
-
-        {/* =========================================================
-            INDUSTRY STATISTICS
-        ========================================================== */}
-        <section className="mb-12">
-          <SectionHeader
-            title="Industry Statistics"
-            subtitle="Key Manufacturing Data"
-          />
-
-          <div className="overflow-hidden border border-gray-300">
-            <div className="hidden grid-cols-3 bg-gray-950 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-white md:grid">
-              <div>Indicator</div>
-              <div className="col-span-2">Latest Reading</div>
-            </div>
-
-            <div>
-              <div className="grid grid-cols-1 border-b border-gray-300 md:grid-cols-3">
-                <div className="bg-gray-100 p-4 font-bold text-gray-900">
-                  ISM Manufacturing Index (May)
-                </div>
-
-                <div className="p-4 text-sm text-gray-700 md:col-span-2">
-                  54.0 — above consensus of 53.2 (CNBC / ISM)
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 border-b border-gray-300 md:grid-cols-3">
-                <div className="bg-gray-100 p-4 font-bold text-gray-900">
-                  New Orders Sub-Index
-                </div>
-
-                <div className="p-4 text-sm text-gray-700 md:col-span-2">
-                  56.8 (+2.7 points from April)
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 border-b border-gray-300 md:grid-cols-3">
-                <div className="bg-gray-100 p-4 font-bold text-gray-900">
-                  Manufacturing M&A (2025)
-                </div>
-
-                <div className="p-4 text-sm text-gray-700 md:col-span-2">
-                  11 megadeals — ranked 3rd globally (PwC)
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 border-b border-gray-300 md:grid-cols-3">
-                <div className="bg-gray-100 p-4 font-bold text-gray-900">
-                  AI Mentioned in Deals
-                </div>
-
-                <div className="p-4 text-sm text-gray-700 md:col-span-2">
-                  Most frequently cited in Technology and Manufacturing
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3">
-                <div className="bg-gray-100 p-4 font-bold text-gray-900">
-                  Cobot ROI Threshold
-                </div>
-
-                <div className="p-4 text-sm text-gray-700 md:col-span-2">
-                  Reduced from 4 years (2020) to ~18 months (2026)
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================
-            AUTOMOTIVE + ROBOTICS
-        ========================================================== */}
-        <section className="mb-12 grid grid-cols-1 gap-10 border-t-2 border-black pt-6 md:grid-cols-2">
-
-          <div>
-            <div className="mb-4 flex items-center gap-3">
-              <Car size={19} className="text-red-700" />
-              <SectionHeader title="Automotive & EV" />
-            </div>
-
-            <NewsList items={autoStories} />
-          </div>
-
-          <div>
-            <div className="mb-4 flex items-center gap-3">
-              <Bot size={19} className="text-red-700" />
-              <SectionHeader title="Robotics & Automation" />
-            </div>
-
-            <NewsList items={roboticsStories} />
-          </div>
-        </section>
-
-        {/* =========================================================
-            SEMICONDUCTORS + AEROSPACE
-        ========================================================== */}
-        <section className="grid grid-cols-1 gap-10 border-t-2 border-black pt-6 md:grid-cols-2">
-
-          <div>
-            <div className="mb-4 flex items-center gap-3">
-              <Cpu size={19} className="text-red-700" />
-              <SectionHeader title="Semiconductors & Electronics" />
-            </div>
-
-            <NewsList items={semiconductors} />
-          </div>
-
-          <div>
-            <div className="mb-4 flex items-center gap-3">
-              <Plane size={19} className="text-red-700" />
-              <SectionHeader title="Aerospace & Defense" />
-            </div>
-
-            <NewsList items={aeroDefense} />
-          </div>
-        </section>
-
-        {/* =========================================================
-            BOTTOM EDITORIAL BAR
-        ========================================================== */}
-        <section className="mt-12 border-y-2 border-black py-5">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">
-              The Pride Times · Manufacturing & Industry
-            </p>
-
-            <p className="text-[10px] uppercase tracking-[0.14em] text-gray-400">
-              Industry 4.0 · Production · Automation · Supply Chain
-            </p>
-          </div>
-        </section>
+      <div className="flex items-center gap-1.5 mt-2 text-[11px] text-gray-400">
+        <Clock size={11} />
+        <span>{story.time}</span>
       </div>
-    </main>
+    </article>
   );
 }
 
+/* =========================================================
+   HERO STORY
+========================================================= */
+
+function HeroStoryCard({
+  story,
+  large = false,
+}: {
+  story: HeroStory;
+  large?: boolean;
+}) {
+  return (
+    <article className="group cursor-pointer">
+      <div
+        className={`relative overflow-hidden bg-gray-100 rounded-sm ${
+          large ? "h-72 md:h-[430px]" : "h-64 md:h-80"
+        }`}
+      >
+        <ImageWithFallback
+          src={story.image}
+          alt={story.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+        <div className="absolute left-4 bottom-4">
+          <span className="inline-block bg-red-600 text-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
+            {story.category}
+          </span>
+        </div>
+      </div>
+
+      <div className="pt-4">
+        <h2
+          className={`font-serif font-bold leading-tight text-gray-950 group-hover:text-red-600 transition-colors ${
+            large
+              ? "text-2xl md:text-4xl"
+              : "text-xl md:text-2xl"
+          }`}
+        >
+          {story.title}
+        </h2>
+
+        <p className="mt-3 text-sm md:text-[15px] leading-7 text-gray-600">
+          {story.excerpt}
+        </p>
+
+        <div className="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-gray-200 text-[11px] text-gray-400 uppercase tracking-wide">
+          <span>By {story.author}</span>
+
+          <span className="flex items-center gap-1">
+            <Clock size={11} />
+            {story.time}
+          </span>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* =========================================================
+   PMI PANEL
+========================================================= */
+
+function ManufacturingPMI() {
+  return (
+    <aside className="border border-gray-200 bg-gray-50 p-5 h-fit">
+      <div className="flex items-center gap-2 border-b border-gray-300 pb-3 mb-2">
+        <TrendingUp size={16} className="text-red-600" />
+
+        <h2 className="text-xs font-bold uppercase tracking-[0.15em]">
+          Manufacturing PMI
+        </h2>
+      </div>
+
+      <div>
+        {mfgIndex.map((item) => {
+          const numericValue = Number(item.value);
+          const positive = numericValue >= 50;
+
+          return (
+            <div
+              key={`${item.country}-${item.value}`}
+              className="flex items-center justify-between py-3 border-b border-gray-200 last:border-0"
+            >
+              <div className="pr-3">
+                <p className="text-sm font-semibold text-gray-900">
+                  {item.country}
+                </p>
+
+                <p className="text-[10px] text-gray-500 uppercase tracking-wide mt-0.5">
+                  {item.label}
+                </p>
+              </div>
+
+              <div className="text-right shrink-0">
+                <p className="font-mono text-sm font-bold">
+                  {item.value}
+                </p>
+
+                <p
+                  className={`text-[10px] font-semibold uppercase ${
+                    positive ? "text-green-600" : "text-red-600"
+                  }`}
+                >
+                  {item.status}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <p className="text-[10px] leading-5 text-gray-400 mt-3">
+        PMI above 50 indicates expansion. Data referenced: May 2026.
+      </p>
+    </aside>
+  );
+}
+
+/* =========================================================
+   QUOTE BLOCK
+========================================================= */
+
+function IndustryQuote() {
+  return (
+    <div className="border-y-2 border-gray-900 py-5 my-2">
+      <div className="flex gap-4">
+        <div className="w-1 bg-red-600 shrink-0" />
+
+        <div>
+          <p className="font-serif italic text-lg md:text-xl leading-relaxed text-gray-800">
+            "Last year was about managing disruptions. Right now, it's about redesigning your global network."
+          </p>
+
+          <p className="mt-3 text-xs md:text-sm font-bold uppercase tracking-wide text-gray-700">
+            — Abe Eshkenazi, CEO, Association for Supply Chain Management
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   INDUSTRY STATISTICS
+========================================================= */
+
+function IndustryStatistics() {
+  return (
+    <section>
+      <SectionHeader title="Industry Statistics" icon={<Factory size={16} />} />
+
+      <div className="overflow-x-auto border border-gray-300">
+        <table className="w-full border-collapse text-sm">
+          <tbody>
+            <tr>
+              <td className="w-1/3 bg-gray-100 border-b border-r border-gray-300 p-3 font-bold">
+                ISM Manufacturing Index
+              </td>
+              <td className="border-b border-gray-300 p-3">
+                54.0 — above consensus of 53.2
+              </td>
+            </tr>
+
+            <tr>
+              <td className="bg-gray-100 border-b border-r border-gray-300 p-3 font-bold">
+                New Orders Sub-Index
+              </td>
+              <td className="border-b border-gray-300 p-3">
+                56.8 — up 2.7 points from April
+              </td>
+            </tr>
+
+            <tr>
+              <td className="bg-gray-100 border-b border-r border-gray-300 p-3 font-bold">
+                Manufacturing M&A
+              </td>
+              <td className="border-b border-gray-300 p-3">
+                11 megadeals in 2025 — ranked 3rd globally
+              </td>
+            </tr>
+
+            <tr>
+              <td className="bg-gray-100 border-b border-r border-gray-300 p-3 font-bold">
+                AI in Manufacturing Deals
+              </td>
+              <td className="border-b border-gray-300 p-3">
+                Among the most frequently cited technologies
+              </td>
+            </tr>
+
+            <tr>
+              <td className="bg-gray-100 border-r border-gray-300 p-3 font-bold">
+                Cobot ROI Threshold
+              </td>
+              <td className="p-3">
+                Reduced from roughly 4 years in 2020 to about 18 months in 2026
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+export function ManufacturingPage() {
+  return (
+    <div className="w-full bg-white text-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+
+        {/* =================================================
+            PAGE HEADER
+        ================================================= */}
+
+        <header className="border-b-4 border-black pb-4 mb-8">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center">
+              <Factory size={19} />
+            </div>
+
+            <div>
+              <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-red-600">
+                Industry & Production
+              </p>
+
+              <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-none mt-1">
+                Manufacturing & Industry
+              </h1>
+            </div>
+          </div>
+
+          <div className="mt-4 flex items-center justify-between text-[10px] uppercase tracking-widest text-gray-400">
+            <span>Industry 4.0 · Automation · Manufacturing</span>
+            <span className="hidden md:block">The Pride Times</span>
+          </div>
+        </header>
+
+        {/* =================================================
+            TOP HERO + PMI
+        ================================================= */}
+
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          <div className="lg:col-span-2">
+            <HeroStoryCard story={hero} large />
+          </div>
+
+          <ManufacturingPMI />
+        </section>
+
+        {/* =================================================
+            QUOTE
+        ================================================= */}
+
+        <IndustryQuote />
+
+        {/* =================================================
+            FEATURE STORY
+        ================================================= */}
+
+        <section className="mt-12 mb-12">
+          <HeroStoryCard story={hero1} large />
+        </section>
+
+        {/* =================================================
+            SECONDARY STORY
+        ================================================= */}
+
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+          <HeroStoryCard story={hero2} />
+
+          <IndustryStatistics />
+        </section>
+
+        {/* =================================================
+            AUTOMOTIVE + ROBOTICS
+        ================================================= */}
+
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 border-t-2 border-black pt-8 mb-12">
+          <div>
+            <SectionHeader
+              title="Automotive & EV"
+              icon={<Car size={16} />}
+            />
+
+            <div>
+              {autoStories.map((story) => (
+                <StoryCard
+                  key={`auto-${story.id}`}
+                  story={story}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <SectionHeader
+              title="Robotics & Automation"
+              icon={<Cpu size={16} />}
+            />
+
+            <div>
+              {roboticsStories.map((story) => (
+                <StoryCard
+                  key={`robotics-${story.id}`}
+                  story={story}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* =================================================
+            SEMICONDUCTORS + AEROSPACE
+        ================================================= */}
+
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 border-t-2 border-black pt-8">
+          <div>
+            <SectionHeader
+              title="Semiconductors & Electronics"
+              icon={<Cpu size={16} />}
+            />
+
+            <div>
+              {semiconductors.map((story) => (
+                <StoryCard
+                  key={`semi-${story.id}`}
+                  story={story}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <SectionHeader
+              title="Aerospace & Defense"
+              icon={<Plane size={16} />}
+            />
+
+            <div>
+              {aeroDefense.map((story) => (
+                <StoryCard
+                  key={`aero-${story.id}`}
+                  story={story}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* =================================================
+            BOTTOM EDITORIAL BAR
+        ================================================= */}
+
+        <div className="mt-12 pt-4 border-t border-gray-300 flex flex-col sm:flex-row justify-between gap-2 text-[10px] uppercase tracking-widest text-gray-400">
+          <span>Manufacturing & Industry</span>
+          <span>Industry 4.0 · Automation · Supply Chain</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
