@@ -1,5 +1,5 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { Clock, BookOpen, Download, Star, Crown, ChevronRight, Play } from "lucide-react";
+import { BookOpen, Download, Crown, ChevronRight, Play } from "lucide-react";
 import { Link } from "react-router";
 import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
@@ -320,6 +320,10 @@ export function MagazinePage() {
               </div>
               <p className="text-[11px] text-gray-500 uppercase tracking-wider">{issue.month}</p>
               <p className="font-serif text-sm leading-snug mt-1 group-hover:text-red-600 transition-colors">{issue.headline}</p>
+              <ChevronRight
+                size={12}
+                className="text-red-600 mt-1.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
+              />
             </div>
           ))}
         </div>
@@ -386,7 +390,7 @@ export function MagazinePage() {
             Get unlimited access to every article, every issue, all special reports, exclusive interviews, and premium newsletters. Ad-free. Starting at $4.99/month.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to={isSignedIn ? "/dashboard" : "/signin"} className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 transition-colors text-sm">
+            <Link to={isSignedIn ? "/dashboard" : "/signin"} className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 transition-colors text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">
               Start Free 30-Day Trial
             </Link>
             <button className="border border-gray-600 hover:border-gray-400 text-white px-8 py-3 transition-colors text-sm">
@@ -401,7 +405,7 @@ export function MagazinePage() {
 
       <button
         onClick={() => setSelectedArticle(null)}
-        className="absolute top-4 right-4 z-20 bg-white rounded-full w-10 h-10 shadow"
+        className="absolute top-4 right-4 z-20 bg-white hover:bg-gray-100 rounded-full w-10 h-10 shadow transition-colors"
       >
         ✕
       </button>
@@ -445,7 +449,7 @@ export function MagazinePage() {
 
   setZoom(1);
 }}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 shadow-lg text-2xl"
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 shadow-lg text-2xl transition-colors"
       >
         ←
       </button>
@@ -460,7 +464,7 @@ export function MagazinePage() {
 
   setZoom(1);
 }}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 shadow-lg text-2xl"
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 shadow-lg text-2xl transition-colors"
       >
         →
       </button>
@@ -499,7 +503,7 @@ export function MagazinePage() {
 
     <button
       onClick={() => setShowBanner(false)}
-      className="absolute top-5 right-5 bg-white rounded-full w-10 h-10 z-50"
+      className="absolute top-5 right-5 bg-white hover:bg-gray-100 rounded-full w-10 h-10 z-50 transition-colors"
     >
       ✕
     </button>
@@ -523,7 +527,7 @@ export function MagazinePage() {
                   : prev - 1
               )
             }
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 text-2xl"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 text-2xl transition-colors"
           >
             ←
           </button>
@@ -536,7 +540,7 @@ export function MagazinePage() {
                   : prev + 1
               )
             }
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 text-2xl"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 text-2xl transition-colors"
           >
             →
           </button>
