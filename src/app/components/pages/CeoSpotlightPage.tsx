@@ -1,6 +1,5 @@
 import { Clock, Users, Award, ChevronRight, Quote, MessageSquare, Briefcase } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import CeospotImg from "../../../imports/Ceospot.png";
 
 /* Section header — hairline rule + uppercase eyebrow, consistent site-wide */
