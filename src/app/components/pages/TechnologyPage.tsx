@@ -15,7 +15,6 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 import HeroImg from "../../../imports/heroimage.png";
 import Hero1Img from "../../../imports/Techheroimage.png";
-import Hero2Img from "../../../imports/hero1image.png";
 
 /* =========================================================
    SECTION HEADER
@@ -33,7 +32,7 @@ function SectionHeader({
       <div className="flex items-center gap-2">
         <span className="w-1.5 h-1.5 bg-red-700 rounded-full" />
 
-        <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.15em] text-black">
+        <h2 className="text-[11px] md:text-[12px] font-black uppercase tracking-[0.15em]">
           {title}
         </h2>
       </div>
@@ -41,7 +40,7 @@ function SectionHeader({
       {link && (
         <a
           href={link}
-          className="text-[9px] uppercase tracking-[0.12em] text-gray-500 hover:text-red-700 flex items-center gap-1 transition-colors"
+          className="text-[9px] uppercase tracking-[0.12em] text-gray-500 hover:text-red-700 flex items-center gap-1"
         >
           See All
           <ChevronRight size={11} />
@@ -53,9 +52,10 @@ function SectionHeader({
 
 /* =========================================================
    HERO STORIES
+   ONLY TWO STORIES
 ========================================================= */
 
-const techHero = {
+const leadStory = {
   category: "ARTIFICIAL INTELLIGENCE",
   title:
     "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
@@ -66,7 +66,7 @@ const techHero = {
   image: HeroImg,
 };
 
-const techHero1 = {
+const secondaryStory = {
   category: "ARTIFICIAL INTELLIGENCE",
   title:
     "Intel Attempts Inference-Chip Comeback as AI Compute Wars Intensify",
@@ -75,16 +75,6 @@ const techHero1 = {
   author: "Sagar Kumar",
   time: "1 June 2026",
   image: Hero1Img,
-};
-
-const techHero2 = {
-  category: "ARTIFICIAL INTELLIGENCE",
-  title: "SoftBank Bets Big on European Data Centers",
-  excerpt:
-    "Japan's SoftBank Group has committed to a major European data center investment, aligning its capital with the continent's growing appetite for AI compute infrastructure.",
-  author: "Sagar Kumar",
-  time: "30 May 2026",
-  image: Hero2Img,
 };
 
 /* =========================================================
@@ -103,7 +93,6 @@ const techCategories = [
 
 /* =========================================================
    AI STORIES
-   TWO COLUMN LAYOUT
 ========================================================= */
 
 const aiStories = [
@@ -132,7 +121,7 @@ const aiStories = [
     title:
       "Anthropic surpasses OpenAI with a $30B run rate and prepares a confidential IPO filing.",
     excerpt:
-      "Industry trackers say enterprise API and agentic product usage have driven the company's revenue to new heights.",
+      "Enterprise API and agentic product usage continue to drive rapid growth across the AI industry.",
     time: "Just now",
     image:
       "https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1400&q=85",
@@ -142,7 +131,7 @@ const aiStories = [
     title:
       "Nvidia unveils the RTX Spark Superchip at Computex, pairing Blackwell RTX graphics with Grace CPU for AI PCs.",
     excerpt:
-      "The new chip is designed to bring data-center-caliber AI power to desktops and workstations.",
+      "The new chip brings powerful AI processing capabilities to desktops and professional workstations.",
     time: "Just now",
     image:
       "https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&w=1400&q=85",
@@ -152,7 +141,7 @@ const aiStories = [
     title:
       "NVIDIA's Blackwell Ultra GPU Delivers 40x Speed Boost for LLM Training",
     excerpt:
-      "The new architecture fundamentally changes what's possible in real-time AI inference at scale.",
+      "The architecture changes what is possible in real-time AI inference at scale.",
     time: "2 hrs ago",
     image:
       "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=1400&q=85",
@@ -162,7 +151,7 @@ const aiStories = [
     title:
       "Google DeepMind Achieves Breakthrough in Protein Structure Prediction for Drug Discovery",
     excerpt:
-      "AlphaFold 4 identifies drug candidates for diseases that have resisted treatment for decades.",
+      "New AI models are opening new possibilities for pharmaceutical research.",
     time: "4 hrs ago",
     image:
       "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1400&q=85",
@@ -188,7 +177,8 @@ const cyberStories = [
   },
   {
     id: 3,
-    title: "Zero-Day Exploit Threatens 2 Billion Android Devices Globally",
+    title:
+      "Zero-Day Exploit Threatens 2 Billion Android Devices Globally",
     time: "3 hrs ago",
   },
   {
@@ -397,20 +387,6 @@ const sectionImages = {
 };
 
 /* =========================================================
-   EDITOR'S PICK
-========================================================= */
-
-const innovationFeature = {
-  title:
-    "Innovation of the Year: Solid-State Batteries Set to Transform Electric Mobility",
-  excerpt:
-    "After decades of promise, solid-state battery technology has finally crossed the threshold of commercial viability. Toyota's new QuantumBattery delivers 800 miles of range, charges in 8 minutes, and lasts 20 years — fundamentally altering the economics of electric vehicles and grid storage alike.",
-  author: "Sagar Kumar",
-  image:
-    "https://images.unsplash.com/photo-1760012945940-74d6bf54c0fb?auto=format&fit=crop&w=1400&q=85",
-};
-
-/* =========================================================
    SMALL STORY LIST
 ========================================================= */
 
@@ -426,9 +402,9 @@ function SmallStoryList({
   return (
     <div>
       {stories.map((story, index) => (
-        <div
+        <article
           key={`${story.id}-${index}`}
-          className="py-4 border-b border-gray-200 cursor-pointer group transition-colors hover:bg-gray-50 px-1"
+          className="py-4 border-b border-gray-200 cursor-pointer group px-1 hover:bg-gray-50 transition-colors"
         >
           <div className="flex gap-3">
             <span className="font-serif text-[18px] font-bold text-gray-300 leading-none min-w-[24px]">
@@ -436,9 +412,9 @@ function SmallStoryList({
             </span>
 
             <div>
-              <p className="text-[13px] md:text-[14px] font-semibold leading-[1.25] text-gray-900 group-hover:text-red-700 transition-colors">
+              <h3 className="text-[13px] md:text-[14px] font-semibold leading-[1.3] text-gray-900 group-hover:text-red-700 transition-colors">
                 {story.title}
-              </p>
+              </h3>
 
               <span className="text-[9px] text-gray-400 flex items-center gap-1 mt-2">
                 <Clock size={9} />
@@ -446,7 +422,7 @@ function SmallStoryList({
               </span>
             </div>
           </div>
-        </div>
+        </article>
       ))}
     </div>
   );
@@ -459,13 +435,19 @@ function SmallStoryList({
 export function TechnologyPage() {
   return (
     <main className="bg-[#f7f7f5] text-[#111] min-h-screen">
+
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* PAGE HEADER */}
+        {/* =================================================
+            HEADER
+        ================================================= */}
 
         <header className="pt-8 md:pt-12 pb-5 border-b-[3px] border-black">
+
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+
             <div>
+
               <p className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] font-bold text-red-700 mb-2">
                 The Future of Business & Innovation
               </p>
@@ -473,150 +455,143 @@ export function TechnologyPage() {
               <h1 className="font-serif text-[42px] md:text-[54px] lg:text-[64px] font-black leading-[0.9] tracking-[-0.04em]">
                 Technology
               </h1>
+
             </div>
 
-            <p className="max-w-[350px] text-[11px] md:text-[12px] leading-[1.7] text-gray-500">
+            <p className="max-w-[380px] text-[11px] md:text-[12px] leading-[1.7] text-gray-500">
               Artificial intelligence, cybersecurity, robotics,
               biotechnology and the technologies reshaping the global economy.
             </p>
+
           </div>
+
         </header>
 
-        {/* CATEGORY NAVIGATION */}
+        {/* =================================================
+            CATEGORY NAV
+        ================================================= */}
 
-        <nav className="border-b border-gray-300 py-3 mb-7 sticky top-0 z-20 bg-[#f7f7f5]/95 backdrop-blur-sm">
+        <nav className="border-b border-gray-300 py-3 mb-8">
+
           <div className="flex items-center gap-4 md:gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
+
             {techCategories.map(({ icon: Icon, label }) => (
               <button
                 key={label}
-                className="flex items-center gap-2 text-[9px] md:text-[10px] uppercase tracking-[0.12em] font-semibold text-gray-600 hover:text-red-700 transition-all duration-200 whitespace-nowrap group"
+                className="flex items-center gap-2 text-[9px] md:text-[10px] uppercase tracking-[0.12em] font-semibold text-gray-600 hover:text-red-700 transition-colors whitespace-nowrap"
               >
-                <span className="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-red-700 transition-colors">
+
+                <span className="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center">
                   <Icon size={11} />
                 </span>
 
                 {label}
+
               </button>
             ))}
+
           </div>
+
         </nav>
 
-        {/* HERO SECTION */}
+        {/* =================================================
+            OPENING NEWS AREA
+            ONLY 2 STORIES
+        ================================================= */}
 
-        <section className="grid grid-cols-1 lg:grid-cols-[1.55fr_1fr_0.72fr] gap-0 border-b border-black">
+        <section className="grid grid-cols-1 lg:grid-cols-[1.65fr_1fr] gap-0 border-b-2 border-black pb-8">
 
-          {/* MAIN HERO */}
+          {/* MAIN NEWS */}
 
-          <article className="group lg:pr-6 pb-7 lg:pb-8">
-            <div className="relative overflow-hidden mb-4">
+          <article className="group lg:pr-8">
+
+            <div className="relative overflow-hidden mb-5">
+
               <ImageWithFallback
-                src={techHero.image}
-                alt={techHero.title}
-                className="w-full h-[280px] md:h-[390px] lg:h-[430px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                src={leadStory.image}
+                alt={leadStory.title}
+                className="w-full h-[300px] sm:h-[380px] md:h-[440px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-70" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
-              <span className="absolute left-4 bottom-4 bg-red-700 text-white px-3 py-1 text-[8px] font-bold uppercase tracking-[0.15em]">
-                {techHero.category}
+              <span className="absolute bottom-4 left-4 bg-red-700 text-white px-3 py-1.5 text-[8px] font-bold uppercase tracking-[0.15em]">
+                {leadStory.category}
               </span>
+
             </div>
 
-            <h2 className="font-serif text-[27px] md:text-[34px] lg:text-[39px] font-black leading-[0.98] tracking-[-0.025em] group-hover:underline decoration-2 underline-offset-4">
-              {techHero.title}
+            <h2 className="font-serif text-[28px] sm:text-[32px] md:text-[38px] lg:text-[44px] font-black leading-[0.98] tracking-[-0.025em] group-hover:underline decoration-2 underline-offset-4">
+              {leadStory.title}
             </h2>
 
-            <p className="text-[12px] md:text-[13px] leading-[1.7] text-gray-600 mt-4 max-w-[760px]">
-              {techHero.excerpt}
+            <p className="text-[12px] md:text-[13px] leading-[1.75] text-gray-600 mt-4 max-w-[850px]">
+              {leadStory.excerpt}
             </p>
 
             <div className="flex items-center gap-4 mt-4 text-[9px] uppercase tracking-wider text-gray-500">
+
               <span className="font-bold text-black">
-                By {techHero.author}
+                By {leadStory.author}
               </span>
 
               <span className="flex items-center gap-1">
                 <Clock size={10} />
-                {techHero.time}
+                {leadStory.time}
               </span>
+
             </div>
+
           </article>
 
-          {/* SECOND FEATURE */}
+          {/* SECOND NEWS */}
 
-          <article className="group lg:px-6 lg:border-l border-gray-300 py-7 lg:py-0">
-            <div className="overflow-hidden mb-4">
+          <article className="group lg:pl-8 mt-8 lg:mt-0 lg:border-l border-gray-300">
+
+            <div className="overflow-hidden mb-5">
+
               <ImageWithFallback
-                src={techHero1.image}
-                alt={techHero1.title}
-                className="w-full h-[230px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                src={secondaryStory.image}
+                alt={secondaryStory.title}
+                className="w-full h-[250px] sm:h-[300px] lg:h-[330px] object-cover transition-transform duration-600 group-hover:scale-[1.035]"
               />
+
             </div>
 
             <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-red-700">
-              {techHero1.category}
+              {secondaryStory.category}
             </span>
 
-            <h2 className="font-serif text-[21px] md:text-[25px] font-bold leading-[1.04] mt-2 group-hover:underline">
-              {techHero1.title}
+            <h2 className="font-serif text-[24px] md:text-[29px] lg:text-[32px] font-black leading-[1.02] mt-2 group-hover:underline">
+              {secondaryStory.title}
             </h2>
 
-            <p className="text-[11px] leading-[1.65] text-gray-600 mt-3">
-              {techHero1.excerpt}
+            <p className="text-[11px] md:text-[12px] leading-[1.7] text-gray-600 mt-4">
+              {secondaryStory.excerpt}
             </p>
 
-            <div className="mt-4 pt-3 border-t border-gray-200 text-[9px] text-gray-500">
-              By {techHero1.author} · {techHero1.time}
+            <div className="mt-5 pt-4 border-t border-gray-200 text-[9px] text-gray-500">
+              By {secondaryStory.author} · {secondaryStory.time}
             </div>
+
           </article>
 
-          {/* EDITOR'S PICK */}
-
-          <aside className="lg:border-l border-gray-300 lg:pl-6 py-7 lg:py-0">
-            <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-4">
-              <span className="text-[10px] uppercase tracking-[0.16em] font-black">
-                Editor's Pick
-              </span>
-
-              <ArrowRight size={13} />
-            </div>
-
-            <div className="group">
-              <div className="overflow-hidden mb-3">
-                <ImageWithFallback
-                  src={innovationFeature.image}
-                  alt={innovationFeature.title}
-                  className="w-full h-[155px] object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                />
-              </div>
-
-              <h3 className="font-serif text-[18px] font-bold leading-[1.05]">
-                {innovationFeature.title}
-              </h3>
-
-              <p className="text-[10px] text-gray-500 leading-[1.6] mt-2">
-                {innovationFeature.excerpt}
-              </p>
-
-              <button className="mt-4 text-[9px] font-bold uppercase tracking-[0.12em] flex items-center gap-2 hover:text-red-700 transition-colors">
-                Read Deep Dive
-                <ArrowRight size={11} />
-              </button>
-            </div>
-          </aside>
         </section>
 
-        {/* TECHNOLOGY INDEX */}
+        {/* =================================================
+            MARKET / TECHNOLOGY NUMBERS
+        ================================================= */}
 
-        <section className="border-y border-black py-4 my-7">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <section className="border-b border-black py-5">
 
-            <div className="border-r border-gray-200 pr-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+
+            <div className="pr-4 md:border-r border-gray-200">
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 AI Infrastructure
               </p>
 
-              <p className="font-serif text-[22px] font-bold">
+              <p className="font-serif text-[24px] font-bold mt-1">
                 +27.4%
               </p>
 
@@ -625,12 +600,12 @@ export function TechnologyPage() {
               </span>
             </div>
 
-            <div className="md:border-r border-gray-200 pr-4">
+            <div className="pl-4 md:pl-5 pr-4 md:border-r border-gray-200">
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 Cybersecurity
               </p>
 
-              <p className="font-serif text-[22px] font-bold">
+              <p className="font-serif text-[24px] font-bold mt-1">
                 $214B
               </p>
 
@@ -639,12 +614,12 @@ export function TechnologyPage() {
               </span>
             </div>
 
-            <div className="border-r border-gray-200 pr-4">
+            <div className="mt-4 md:mt-0 pr-4 md:pl-5 md:border-r border-gray-200">
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 Semiconductor
               </p>
 
-              <p className="font-serif text-[22px] font-bold">
+              <p className="font-serif text-[24px] font-bold mt-1">
                 +18.2%
               </p>
 
@@ -653,12 +628,12 @@ export function TechnologyPage() {
               </span>
             </div>
 
-            <div>
+            <div className="mt-4 md:mt-0 pl-4 md:pl-5">
               <p className="text-[8px] uppercase tracking-wider text-gray-500">
                 Robotics
               </p>
 
-              <p className="font-serif text-[22px] font-bold">
+              <p className="font-serif text-[24px] font-bold mt-1">
                 4.8M
               </p>
 
@@ -668,100 +643,26 @@ export function TechnologyPage() {
             </div>
 
           </div>
-        </section>
 
-        {/* FEATURE STORY */}
-
-        <section className="grid grid-cols-1 lg:grid-cols-2 border-b border-gray-300">
-
-          <article className="group lg:pr-7 py-7 lg:border-r border-gray-300">
-            <div className="relative overflow-hidden mb-4">
-              <ImageWithFallback
-                src={techHero2.image}
-                alt={techHero2.title}
-                className="w-full h-[250px] md:h-[330px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
-              />
-
-              <span className="absolute left-4 bottom-4 bg-black text-white px-3 py-1 text-[8px] font-bold uppercase tracking-wider">
-                Featured
-              </span>
-            </div>
-
-            <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-red-700">
-              {techHero2.category}
-            </span>
-
-            <h2 className="font-serif text-[24px] md:text-[30px] font-black leading-[1] mt-2 group-hover:underline">
-              {techHero2.title}
-            </h2>
-
-            <p className="text-[12px] leading-[1.7] text-gray-600 mt-3">
-              {techHero2.excerpt}
-            </p>
-
-            <div className="flex items-center gap-3 mt-4 text-[9px] text-gray-500">
-              <span>By {techHero2.author}</span>
-
-              <span className="flex items-center gap-1">
-                <Clock size={9} />
-                {techHero2.time}
-              </span>
-            </div>
-          </article>
-
-          <div className="lg:pl-7 py-7">
-            <div className="border-t-2 border-black">
-
-              <div className="py-3 border-b border-gray-300">
-                <h3 className="text-[11px] font-black uppercase tracking-[0.15em]">
-                  Industry Statistics
-                </h3>
-              </div>
-
-              <div className="text-[11px]">
-
-                {[
-                  ["Global IT Spend (2025)", "USD 5.43 Trillion"],
-                  ["AI Market", "USD 103.28 Billion at 40%+ CAGR"],
-                  ["Cybersecurity Growth", "12.2% annually"],
-                  ["Semiconductor CapEx by 2030", "~USD 1 Trillion"],
-                  ["IoT Connected Devices", "Projected 40 Billion by 2030"],
-                  ["Tech M&A Megadeals", "26 deals"],
-                ].map(([label, value]) => (
-                  <div
-                    key={label}
-                    className="grid grid-cols-[42%_58%] border-b border-gray-200"
-                  >
-                    <div className="font-bold py-3 pr-3">
-                      {label}
-                    </div>
-
-                    <div className="py-3">
-                      {value}
-                    </div>
-                  </div>
-                ))}
-
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* =================================================
             AI & MACHINE LEARNING
-            TWO COLUMNS
+            2 COLUMN NEWS GRID
         ================================================= */}
 
-        <section className="py-9" id="innovation">
+        <section className="py-10" id="innovation">
+
           <SectionHeader title="AI & Machine Learning" />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-7 gap-y-9">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
 
             {aiStories.map((story, index) => (
               <article
                 key={`${story.id}-${index}`}
                 className="group cursor-pointer"
               >
+
                 <div className="relative overflow-hidden mb-4">
 
                   <ImageWithFallback
@@ -789,7 +690,7 @@ export function TechnologyPage() {
                 <h3
                   className={`font-serif font-bold leading-[1.05] mt-1 group-hover:underline ${
                     index === 0
-                      ? "text-[23px] md:text-[28px]"
+                      ? "text-[24px] md:text-[29px]"
                       : "text-[19px] md:text-[22px]"
                   }`}
                 >
@@ -804,67 +705,76 @@ export function TechnologyPage() {
                   <Clock size={8} />
                   {story.time}
                 </div>
+
               </article>
             ))}
 
           </div>
+
         </section>
 
         {/* =================================================
             CYBERSECURITY + ENERGY
-            TWO COLUMNS
         ================================================= */}
 
         <section className="grid grid-cols-1 lg:grid-cols-2 border-t-2 border-black">
 
           <div
             id="cybersecurity"
-            className="lg:pr-7 py-7 lg:border-r border-gray-300"
+            className="lg:pr-8 py-8 lg:border-r border-gray-300"
           >
+
             <SectionHeader title="Cybersecurity" />
 
             <div className="group overflow-hidden mb-5">
+
               <ImageWithFallback
                 src={sectionImages.cybersecurity}
                 alt="Cybersecurity technology"
-                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
+
             </div>
 
             <SmallStoryList stories={cyberStories} />
+
           </div>
 
           <div
             id="energy"
-            className="lg:pl-7 py-7"
+            className="lg:pl-8 py-8"
           >
+
             <SectionHeader title="Energy Technology" />
 
             <div className="group overflow-hidden mb-5">
+
               <ImageWithFallback
                 src={sectionImages.energy}
                 alt="Energy technology"
-                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
+
             </div>
 
             <SmallStoryList stories={energyStories} />
+
           </div>
 
         </section>
 
         {/* =================================================
             HEALTHCARE
-            TWO COLUMNS
         ================================================= */}
 
         <section
-          className="py-8 border-t-2 border-black"
+          className="py-9 border-t-2 border-black"
           id="healthcare"
         >
+
           <SectionHeader title="Healthcare & BioTech" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             <article className="group">
 
@@ -873,10 +783,10 @@ export function TechnologyPage() {
                 <ImageWithFallback
                   src={sectionImages.healthcare}
                   alt="Healthcare and biotechnology"
-                  className="w-full h-[280px] md:h-[380px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                  className="w-full h-[290px] md:h-[390px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
                 />
 
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-24">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-5 pt-24">
 
                   <span className="text-[8px] uppercase tracking-[0.15em] text-white font-bold">
                     Healthcare Innovation
@@ -896,13 +806,13 @@ export function TechnologyPage() {
 
               <SmallStoryList stories={healthcareStories.slice(1)} />
 
-              <div className="mt-5 bg-black text-white p-5">
+              <div className="mt-6 bg-black text-white p-6">
 
                 <span className="text-[8px] uppercase tracking-[0.15em] text-gray-400">
                   Market Insight
                 </span>
 
-                <p className="font-serif text-[18px] leading-tight mt-2">
+                <p className="font-serif text-[19px] leading-tight mt-2">
                   Global healthcare AI market projected to reach $187B by
                   2030, growing at 37% CAGR.
                 </p>
@@ -912,19 +822,20 @@ export function TechnologyPage() {
             </div>
 
           </div>
+
         </section>
 
         {/* =================================================
             MANUFACTURING + SMART CITIES
-            TWO COLUMNS
         ================================================= */}
 
         <section className="grid grid-cols-1 lg:grid-cols-2 border-t-2 border-black">
 
           <div
             id="manufacturing"
-            className="py-7 lg:pr-7 lg:border-r border-gray-300"
+            className="py-8 lg:pr-8 lg:border-r border-gray-300"
           >
+
             <SectionHeader title="Manufacturing & Industry 4.0" />
 
             <div className="group overflow-hidden mb-5">
@@ -932,18 +843,20 @@ export function TechnologyPage() {
               <ImageWithFallback
                 src={sectionImages.manufacturing}
                 alt="Advanced manufacturing"
-                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
 
             </div>
 
             <SmallStoryList stories={manufacturingStories} />
+
           </div>
 
           <div
             id="smart-cities"
-            className="py-7 lg:pl-7"
+            className="py-8 lg:pl-8"
           >
+
             <SectionHeader title="Smart Cities" />
 
             <div className="group overflow-hidden mb-5">
@@ -951,36 +864,36 @@ export function TechnologyPage() {
               <ImageWithFallback
                 src={sectionImages.smartCities}
                 alt="Smart city technology"
-                className="w-full h-[240px] md:h-[280px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
 
             </div>
 
             <SmallStoryList stories={smartCityStories} />
+
           </div>
 
         </section>
 
         {/* =================================================
             SUPPLY CHAIN
-            TWO COLUMNS
         ================================================= */}
 
         <section
-          className="py-8 border-t-2 border-black pb-12"
+          className="py-9 border-t-2 border-black pb-14"
           id="supply-chain"
         >
 
           <SectionHeader title="Supply Chain & Logistics" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-7">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             <div className="group overflow-hidden">
 
               <ImageWithFallback
                 src={sectionImages.supplyChain}
                 alt="Supply chain and logistics"
-                className="w-full h-[300px] md:h-[390px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                className="w-full h-[300px] md:h-[400px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
               />
 
               <div className="border-x border-b border-gray-300 p-5">
@@ -1007,6 +920,7 @@ export function TechnologyPage() {
         </section>
 
       </div>
+
     </main>
   );
 }
