@@ -1,13 +1,16 @@
-import { Clock, Users, Award, ChevronRight, Quote } from "lucide-react";
+import { Clock, Users, Award, ChevronRight, Quote, MessageSquare, Briefcase } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import CeospotImg from "../../../imports/Ceospot.png";
 
 /* Section header — hairline rule + uppercase eyebrow, consistent site-wide */
-function SH({ title }: { title: string }) {
+function SH({ title, icon: Icon }: { title: string; icon?: React.ComponentType<{ size?: number; className?: string }> }) {
   return (
     <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-5">
-      <h2 className="text-sm uppercase tracking-[0.2em]">{title}</h2>
+      <div className="flex items-center gap-2">
+        {Icon && <Icon size={14} className="text-gray-400" />}
+        <h2 className="text-sm uppercase tracking-[0.2em]">{title}</h2>
+      </div>
       <span className="hidden sm:block w-6 h-[2px] bg-red-600" />
     </div>
   );
@@ -114,7 +117,7 @@ export function CeoSpotlightPage() {
           <h1 className="font-serif text-2xl lg:text-3xl leading-tight group-hover:text-red-600 transition-colors duration-300 max-w-3xl">
             {hero.title.trim()}
           </h1>
-          <p className="text-gray-600 text-sm mt-3 leading-relaxed max-w-3xl">
+          <p className="text-gray-600 text-sm mt-3 leading-relaxed max-w-3xl first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:text-black first-letter:mr-1 first-letter:float-left first-letter:leading-[0.85]">
             {hero.excerpt.trim()}
           </p>
 
@@ -130,12 +133,12 @@ export function CeoSpotlightPage() {
 
       {/* CEO interviews */}
       <div className="mb-14">
-        <SH title="Exclusive CEO Interviews" />
+        <SH title="Exclusive CEO Interviews" icon={Quote} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {ceoInterviews.map((c) => (
             <div
               key={c.id}
-              className="group cursor-pointer border border-gray-200 hover:border-black overflow-hidden transition-colors duration-300 flex flex-col"
+              className="group cursor-pointer border border-gray-200 hover:border-black overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg flex flex-col"
             >
               <div className="overflow-hidden">
                 <ImageWithFallback
@@ -167,7 +170,7 @@ export function CeoSpotlightPage() {
       </div>
 
       {/* PT30 Leadership Insights */}
-      <div className="mb-14 bg-black text-white p-6 md:p-8">
+      <div className="mb-14 bg-gradient-to-br from-black to-zinc-900 text-white p-6 md:p-8">
         <div className="flex items-center gap-2 mb-6">
           <Award size={16} className="text-yellow-400" />
           <h2 className="text-sm uppercase tracking-[0.2em] text-yellow-400">Pride Times 30 — Leadership Profiles</h2>
@@ -176,7 +179,7 @@ export function CeoSpotlightPage() {
           {pt30Features.map((p) => (
             <div
               key={p.rank}
-              className="group relative border border-gray-800 hover:border-yellow-400/60 p-5 transition-colors duration-300 overflow-hidden"
+              className="group relative border border-gray-800 hover:border-yellow-400/60 p-5 transition-all duration-300 hover:-translate-y-0.5 overflow-hidden"
             >
               <span className="absolute -right-2 -top-3 font-serif text-6xl text-gray-800/70 select-none">
                 {String(p.rank).padStart(2, "0")}
@@ -208,12 +211,12 @@ export function CeoSpotlightPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
         {/* Women in Leadership */}
         <div>
-          <SH title="Women in Leadership" />
+          <SH title="Women in Leadership" icon={Users} />
           <div className="flex flex-col">
             {womenLeaders.map((w) => (
               <div
                 key={w.rank}
-                className="flex items-start gap-4 py-3 border-b border-gray-100 last:border-0 group cursor-pointer"
+                className="flex items-start gap-4 py-3 px-2 -mx-2 border-b border-gray-100 last:border-0 group cursor-pointer hover:bg-gray-50 transition-colors rounded-sm"
               >
                 <span className="font-serif text-xl text-gray-300 w-6 flex-shrink-0 group-hover:text-red-600 transition-colors">
                   {w.rank}
@@ -230,10 +233,10 @@ export function CeoSpotlightPage() {
 
         {/* Opinions */}
         <div>
-          <SH title="Leadership Opinion" />
+          <SH title="Leadership Opinion" icon={MessageSquare} />
           <div className="divide-y divide-gray-100">
             {leadershipOpinions.map((o) => (
-              <div key={o.id} className="py-3 group cursor-pointer">
+              <div key={o.id} className="py-3 px-2 -mx-2 group cursor-pointer hover:bg-gray-50 transition-colors rounded-sm">
                 <p className="text-[11px] text-gray-500 uppercase tracking-wider">{o.author}</p>
                 <p className="text-sm group-hover:text-red-600 transition-colors mt-1 leading-snug">{o.title}</p>
                 <span className="text-xs text-gray-400 flex items-center gap-1 mt-1.5">
@@ -246,10 +249,10 @@ export function CeoSpotlightPage() {
 
         {/* Executive moves */}
         <div>
-          <SH title="Executive Moves" />
+          <SH title="Executive Moves" icon={Briefcase} />
           <div className="divide-y divide-gray-100">
             {executiveMoves.map((m) => (
-              <div key={m.id} className="py-3 group cursor-pointer">
+              <div key={m.id} className="py-3 px-2 -mx-2 group cursor-pointer hover:bg-gray-50 transition-colors rounded-sm">
                 <p className="text-[11px] text-gray-700 uppercase tracking-wider">{m.person}</p>
                 <p className="text-sm group-hover:text-red-600 transition-colors mt-1 leading-snug">{m.move}</p>
                 <span className="text-xs text-gray-400 flex items-center gap-1 mt-1.5">
