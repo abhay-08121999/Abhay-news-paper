@@ -1,4 +1,4 @@
-import { BarChart2 } from "lucide-react";
+import { BarChart2, Radio } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, BarChart, Bar, Cell } from "recharts";
 import { useState, useEffect } from "react";
 import { getQuotes } from "../../../services/marketApi";
@@ -22,15 +22,26 @@ const sectorData = [
 
 const UP = "#34D399";
 const DOWN = "#C1523F";
+const GRID = "#3A3934";
+const MUTE = "#8A887F";
+
+/* =========================================================
+   MARKET TABLE
+========================================================= */
 
 function MarketTable({ data, cols }: { data: Record<string, string | boolean>[]; cols: string[] }) {
   const visibleCols = cols.filter((c) => c !== "up");
   return (
     <table className="w-full text-sm border-collapse font-mono">
       <thead>
-        <tr className="text-[10px] uppercase tracking-wider text-[#8A887F]">
+        <tr className="text-[10px] uppercase tracking-[0.14em] text-[#8A887F]">
           {visibleCols.map((col) => (
-            <th key={col} className={`text-left font-normal py-2 ${col === "change" ? "text-right" : ""}`}>
+            <th
+              key={col}
+              className={`text-left font-normal py-2.5 border-b border-dashed border-[#3A3934] ${
+                col === "change" ? "text-right" : ""
+              }`}
+            >
               {col}
             </th>
           ))}
@@ -38,11 +49,11 @@ function MarketTable({ data, cols }: { data: Record<string, string | boolean>[];
       </thead>
       <tbody>
         {data.map((row, i) => (
-          <tr key={i} className="border-t border-white/10 hover:bg-white/[0.03] transition-colors">
+          <tr key={i} className="border-b border-white/5 last:border-b-0 hover:bg-white/[0.035] transition-colors">
             {visibleCols.map((col) => (
               <td
                 key={col}
-                className={`py-2.5 text-[13px] ${
+                className={`py-3 text-[13px] ${
                   col === "change"
                     ? "text-right font-semibold tabular-nums"
                     : col === "name" || col === "pair" || col === "bond"
@@ -52,8 +63,9 @@ function MarketTable({ data, cols }: { data: Record<string, string | boolean>[];
                 style={col === "change" ? { color: row.up ? UP : DOWN } : undefined}
               >
                 {col === "change" ? (
-                  <span className="inline-flex items-center justify-end gap-1">
-                    {row.up ? "▲" : "▼"} {String(row[col])}
+                  <span className="inline-flex items-center justify-end gap-1.5">
+                    <span className="text-[10px]">{row.up ? "▲" : "▼"}</span>
+                    {String(row[col])}
                   </span>
                 ) : typeof row[col] !== "boolean" ? (
                   String(row[col])
@@ -66,6 +78,10 @@ function MarketTable({ data, cols }: { data: Record<string, string | boolean>[];
     </table>
   );
 }
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
 
 export function MarketsPage() {
   const [activeTab, setActiveTab] = useState("indices");
@@ -90,33 +106,43 @@ export function MarketsPage() {
   }, []);
 
   return (
-    <main className="bg-[#FAFAF7] text-[#17140F]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
+    <main className="bg-[#FAFAF7] text-[#17140F] antialiased">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+
         {/* ── Masthead ───────────────────────────────────────── */}
-        <div className="flex items-baseline justify-between border-t-[3px] border-b border-[#17140F] py-2 mb-1 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#55534C]">
+        <div className="flex items-baseline justify-between border-t-[3px] border-b border-[#17140F] py-2.5 mb-1 text-[10px] sm:text-xs uppercase tracking-[0.22em] text-[#55534C]">
           <span className="flex items-center gap-2 font-semibold text-[#17140F]">
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A32F26] opacity-60" />
+              <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A32F26] opacity-60" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A32F26]" />
             </span>
             Real-Time Data
           </span>
-          <span>Terminal Feed &middot; Refreshes every 30s</span>
+          <span className="hidden sm:inline">Terminal Feed &middot; Refreshes every 30s</span>
+          <span className="sm:hidden">Refreshes / 30s</span>
         </div>
-        <div className="border-b-4 border-[#17140F] pb-5 mb-8">
-          <h1 className="font-serif text-4xl sm:text-5xl tracking-tight">Global Markets</h1>
+
+        <div className="border-b-4 border-[#17140F] pb-5 mb-8 flex items-end justify-between gap-4">
+          <h1 className="font-serif text-4xl sm:text-5xl tracking-tight leading-none">Global Markets</h1>
+          <p className="hidden md:block text-[11px] uppercase tracking-[0.16em] text-[#8A887F] pb-1">
+            Indices &middot; Sectors &middot; Crypto
+          </p>
         </div>
 
         {/* ── Quick jump ─────────────────────────────────────── */}
-        <div className="flex flex-wrap gap-x-6 gap-y-1.5 mb-8 text-[11px] uppercase tracking-wide">
-          <a href="#sectors" className="text-[#55534C] hover:text-[#A32F26] transition-colors">Overview</a>
-          <a href="#sectors" className="text-[#55534C] hover:text-[#A32F26] transition-colors">Sector Performance</a>
+        <div className="flex flex-wrap gap-x-7 gap-y-2 mb-8 text-[11px] uppercase tracking-[0.12em]">
+          <a href="#sectors" className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5">
+            Overview
+          </a>
+          <a href="#sectors" className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5">
+            Sector Performance
+          </a>
           <button
             onClick={() => {
               setActiveTab("indices");
               document.getElementById("markets-table")?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className="text-[#55534C] hover:text-[#A32F26] transition-colors"
+            className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
           >
             Global Indices
           </button>
@@ -125,81 +151,95 @@ export function MarketsPage() {
               setActiveTab("crypto");
               document.getElementById("markets-table")?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
-            className="text-[#55534C] hover:text-[#A32F26] transition-colors"
+            className="text-[#55534C] hover:text-[#A32F26] transition-colors border-b border-transparent hover:border-[#A32F26] pb-0.5"
           >
             Cryptocurrency
           </button>
         </div>
 
         {/* ── Terminal console ───────────────────────────────── */}
-        <div className="bg-[#17140F] text-[#EDE9DD] border border-[#17140F]">
+        <div className="bg-[#17140F] text-[#EDE9DD] border border-[#17140F] shadow-[0_1px_0_0_#D9D4C7]">
+
           {/* Console chrome */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-dashed border-[#55534C]">
+          <div className="flex items-center justify-between px-4 py-3.5 border-b border-dashed border-[#55534C]">
             <div className="flex items-center gap-3">
               <span className="flex gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-[#C1523F]" />
                 <span className="w-2 h-2 rounded-full bg-[#B8752E]" />
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#EDE9DD]/80">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#EDE9DD]/80">
                 Market Terminal
               </span>
             </div>
-            <span className="font-mono text-[9px] text-[#A32F26] flex items-center gap-1.5">
-              <BarChart2 size={11} /> LIVE
+            <span className="font-mono text-[9px] font-semibold text-[#A32F26] flex items-center gap-1.5">
+              <Radio size={11} strokeWidth={2.25} className="motion-safe:animate-pulse" />
+              LIVE
             </span>
           </div>
 
           {loading ? (
-            <div className="py-16 text-center font-mono text-xs text-[#8A887F] uppercase tracking-widest">
+            <div className="py-20 text-center font-mono text-xs text-[#8A887F] uppercase tracking-[0.2em]">
               <BarChart2 size={20} className="mx-auto mb-3 opacity-40" />
               Loading market data&hellip;
             </div>
           ) : (
             <>
               {/* Index strip */}
-              <div className="flex items-stretch gap-0 overflow-x-auto scrollbar-hide border-b border-dashed border-[#55534C]">
+              <div className="flex items-stretch gap-0 overflow-x-auto no-scrollbar border-b border-dashed border-[#55534C]">
                 {marketData.indices.map((idx: any, i: number) => (
                   <div
                     key={idx.name}
-                    className={`flex-shrink-0 px-5 py-3.5 font-mono ${i > 0 ? "border-l border-[#3A3934]" : ""}`}
+                    className={`flex-shrink-0 px-5 py-4 font-mono ${i > 0 ? "border-l border-[#3A3934]" : ""}`}
                   >
-                    <p className="text-[10px] uppercase tracking-wider text-[#8A887F]">{idx.name}</p>
-                    <p className="text-sm text-[#EDE9DD] mt-0.5 tabular-nums">{idx.value}</p>
+                    <p className="text-[10px] uppercase tracking-[0.14em] text-[#8A887F]">{idx.name}</p>
+                    <p className="text-[15px] text-[#EDE9DD] mt-1 tabular-nums font-semibold">{idx.value}</p>
                     <span
-                      className="text-[11px] tabular-nums flex items-center gap-1 mt-0.5"
+                      className="text-[11px] tabular-nums flex items-center gap-1 mt-1"
                       style={{ color: idx.up ? UP : DOWN }}
                     >
-                      {idx.up ? "▲" : "▼"} {idx.change} ({idx.pts})
+                      <span className="text-[9px]">{idx.up ? "▲" : "▼"}</span>
+                      {idx.change} ({idx.pts})
                     </span>
                   </div>
                 ))}
               </div>
 
               {/* Charts */}
-              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dashed divide-[#55534C]" id="sectors">
-                <div className="p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-[#8A887F] mb-2">S&amp;P 500 — Today</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dashed divide-[#3A3934]" id="sectors">
+                <div className="p-4 md:p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8A887F]">
+                      S&amp;P 500 — Today
+                    </p>
+                    <span className="text-[10px] font-mono tabular-nums" style={{ color: UP }}>
+                      +1.2%
+                    </span>
+                  </div>
                   <ResponsiveContainer width="100%" height={170}>
                     <LineChart data={spChartData}>
-                      <CartesianGrid strokeDasharray="2 4" stroke="#3A3934" vertical={false} />
-                      <XAxis dataKey="time" tick={{ fontSize: 10, fill: "#8A887F" }} axisLine={{ stroke: "#3A3934" }} tickLine={false} />
-                      <YAxis tick={{ fontSize: 10, fill: "#8A887F" }} domain={[5800, 5900]} axisLine={false} tickLine={false} />
+                      <CartesianGrid strokeDasharray="2 4" stroke={GRID} vertical={false} />
+                      <XAxis dataKey="time" tick={{ fontSize: 10, fill: MUTE }} axisLine={{ stroke: GRID }} tickLine={false} />
+                      <YAxis tick={{ fontSize: 10, fill: MUTE }} domain={[5800, 5900]} axisLine={false} tickLine={false} />
                       <Tooltip
                         contentStyle={{ fontSize: 11, borderRadius: 0, border: "1px solid #3A3934", background: "#17140F", color: "#EDE9DD" }}
+                        labelStyle={{ color: MUTE }}
                       />
-                      <Line type="monotone" dataKey="value" stroke={UP} strokeWidth={2} dot={false} />
+                      <Line type="monotone" dataKey="value" stroke={UP} strokeWidth={2} dot={false} activeDot={{ r: 4, fill: UP, stroke: "#17140F", strokeWidth: 2 }} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="p-4">
-                  <p className="font-mono text-[10px] uppercase tracking-wider text-[#8A887F] mb-2">Sector Performance Today (%)</p>
+                <div className="p-4 md:p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#8A887F] mb-3">
+                    Sector Performance Today (%)
+                  </p>
                   <ResponsiveContainer width="100%" height={170}>
                     <BarChart data={sectorData} layout="vertical">
-                      <XAxis type="number" tick={{ fontSize: 10, fill: "#8A887F" }} axisLine={{ stroke: "#3A3934" }} tickLine={false} />
+                      <XAxis type="number" tick={{ fontSize: 10, fill: MUTE }} axisLine={{ stroke: GRID }} tickLine={false} />
                       <YAxis dataKey="sector" type="category" tick={{ fontSize: 10, fill: "#B8B4A8" }} width={58} axisLine={false} tickLine={false} />
                       <Tooltip
                         contentStyle={{ fontSize: 11, borderRadius: 0, border: "1px solid #3A3934", background: "#17140F", color: "#EDE9DD" }}
+                        cursor={{ fill: "rgba(255,255,255,0.03)" }}
                       />
                       <Bar dataKey="change" radius={0}>
                         {sectorData.map((entry, i) => (
@@ -217,7 +257,7 @@ export function MarketsPage() {
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`font-mono text-[10px] uppercase tracking-wider px-3 py-2 transition-colors ${
+                    className={`font-mono text-[10px] uppercase tracking-[0.14em] px-3 py-2.5 transition-colors ${
                       activeTab === tab
                         ? "text-[#EDE9DD] border-b-2 border-[#A32F26]"
                         : "text-[#8A887F] border-b-2 border-transparent hover:text-[#B8B4A8]"
@@ -228,7 +268,7 @@ export function MarketsPage() {
                 ))}
               </div>
 
-              <div className="px-4 pb-4" id="markets-table">
+              <div className="px-4 pb-5" id="markets-table">
                 {activeTab === "indices" && (
                   <MarketTable data={marketData.indices as any} cols={["name", "value", "change", "up"]} />
                 )}
@@ -240,6 +280,11 @@ export function MarketsPage() {
           )}
         </div>
       </div>
+
+      <style>{`
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </main>
   );
 }
