@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { AuthProvider } from "./context/AuthContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -38,17 +38,19 @@ import { CeoSpotlightPage } from "./components/pages/CeoSpotlightPage";
 import { SignInPage } from "./components/auth/SignInPage";
 import { DashboardPage } from "./components/auth/DashboardPage";
 
+interface MagazineLayoutProps {
+  children: React.ReactNode;
+  showLeftSidebar?: boolean;
+  showRightSidebar?: boolean;
+  topBanner?: boolean;
+}
+
 function MagazineLayout({
   children,
   showLeftSidebar = false,
   showRightSidebar = false,
   topBanner = false,
-}: {
-  children: React.ReactNode;
-  showLeftSidebar?: boolean;
-  showRightSidebar?: boolean;
-  topBanner?: boolean;
-}) {
+}: MagazineLayoutProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Header />
@@ -73,19 +75,51 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Standalone pages */}
-          <Route path="/signin" element={<SignInPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-          {/* Advertisement manager removed */}
+          {/* =====================================================
+              STANDALONE PAGES
+              ===================================================== */}
 
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/cookiepolicy" element={<CookiePolicy />} />
-          <Route path="/accessibility" element={<Accessibility />} />
+          <Route
+            path="/signin"
+            element={<SignInPage />}
+          />
 
-          {/* Main magazine routes */}
+          <Route
+            path="/dashboard"
+            element={<DashboardPage />}
+          />
+
+          <Route
+            path="/reset-password"
+            element={<ResetPasswordPage />}
+          />
+
+          <Route
+            path="/privacy"
+            element={<Privacy />}
+          />
+
+          <Route
+            path="/terms"
+            element={<Terms />}
+          />
+
+          <Route
+            path="/cookiepolicy"
+            element={<CookiePolicy />}
+          />
+
+          <Route
+            path="/accessibility"
+            element={<Accessibility />}
+          />
+
+          {/* =====================================================
+              HOME PAGE
+              ADS DISABLED
+              ===================================================== */}
+
           <Route
             path="/"
             element={
@@ -99,10 +133,18 @@ export default function App() {
             }
           />
 
+          {/* =====================================================
+              MAIN CATEGORY PAGES
+              ===================================================== */}
+
           <Route
             path="/technology"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <TechnologyPage />
               </MagazineLayout>
             }
@@ -111,7 +153,11 @@ export default function App() {
           <Route
             path="/finance"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <FinancePage />
               </MagazineLayout>
             }
@@ -120,7 +166,11 @@ export default function App() {
           <Route
             path="/billionaires"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <BillionairesPage />
               </MagazineLayout>
             }
@@ -129,17 +179,28 @@ export default function App() {
           <Route
             path="/world"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <WorldPage />
               </MagazineLayout>
             }
           />
 
-          {/* Header category pages */}
+          {/* =====================================================
+              HEADER CATEGORY PAGES
+              ===================================================== */}
+
           <Route
             path="/cybersecurity"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <CybersecurityPage />
               </MagazineLayout>
             }
@@ -148,7 +209,11 @@ export default function App() {
           <Route
             path="/energy"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <EnergyPage />
               </MagazineLayout>
             }
@@ -157,7 +222,11 @@ export default function App() {
           <Route
             path="/healthcare"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <HealthcarePage />
               </MagazineLayout>
             }
@@ -166,7 +235,11 @@ export default function App() {
           <Route
             path="/manufacturing"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <ManufacturingPage />
               </MagazineLayout>
             }
@@ -175,7 +248,11 @@ export default function App() {
           <Route
             path="/smart-cities"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <SmartCitiesPage />
               </MagazineLayout>
             }
@@ -184,7 +261,11 @@ export default function App() {
           <Route
             path="/supply-chain"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <SupplyChainPage />
               </MagazineLayout>
             }
@@ -193,17 +274,28 @@ export default function App() {
           <Route
             path="/magazine"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <MagazinePage />
               </MagazineLayout>
             }
           />
 
-          {/* Subheader / More pages */}
+          {/* =====================================================
+              SUBHEADER / MORE PAGES
+              ===================================================== */}
+
           <Route
             path="/featured"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <FeaturedPage />
               </MagazineLayout>
             }
@@ -212,7 +304,11 @@ export default function App() {
           <Route
             path="/breaking-news"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <BreakingNewsPage />
               </MagazineLayout>
             }
@@ -221,7 +317,11 @@ export default function App() {
           <Route
             path="/markets"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <MarketsPage />
               </MagazineLayout>
             }
@@ -230,7 +330,11 @@ export default function App() {
           <Route
             path="/cover-stories"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <CoverStoriesPage />
               </MagazineLayout>
             }
@@ -239,7 +343,11 @@ export default function App() {
           <Route
             path="/white-house-watch"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <WhiteHouseWatchPage />
               </MagazineLayout>
             }
@@ -248,7 +356,11 @@ export default function App() {
           <Route
             path="/business-news"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <BusinessNewsPage />
               </MagazineLayout>
             }
@@ -257,7 +369,11 @@ export default function App() {
           <Route
             path="/leadership"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <LeadershipPage />
               </MagazineLayout>
             }
@@ -266,7 +382,11 @@ export default function App() {
           <Route
             path="/innovation"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <InnovationPage />
               </MagazineLayout>
             }
@@ -275,21 +395,33 @@ export default function App() {
           <Route
             path="/ceospotlight"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <CeoSpotlightPage />
               </MagazineLayout>
             }
           />
 
-          {/* More → Featured */}
+          {/* =====================================================
+              MORE → FEATURED
+              ===================================================== */}
+
           <Route
             path="/more"
             element={
-              <MagazineLayout>
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
                 <FeaturedPage />
               </MagazineLayout>
             }
           />
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>
