@@ -5,7 +5,6 @@ import {
   AlertTriangle,
   ChevronRight,
 } from "lucide-react";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import CS2Img from "../../../imports/CS2.png";
 import CS3Img from "../../../imports/CS3.png";
 
