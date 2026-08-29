@@ -2,11 +2,6 @@ import { ReactNode } from "react";
 
 interface PageLayoutProps {
   children: ReactNode;
-
-  /**
-   * These props are kept for compatibility with existing pages.
-   * Advertisement rendering has been completely removed.
-   */
   showLeftSidebar?: boolean;
   showRightSidebar?: boolean;
   topBanner?: boolean;
@@ -19,10 +14,12 @@ export function PageLayout({
   topBanner: _topBanner = false,
 }: PageLayoutProps) {
   return (
-    <div className="w-full min-h-screen">
-      <main className="w-full min-w-0">
-        {children}
-      </main>
+    <div className="flex flex-col w-full min-h-screen">
+      <div className="w-full px-4 py-2">
+        <main className="w-full min-w-0">
+          {children}
+        </main>
+      </div>
     </div>
   );
 }
