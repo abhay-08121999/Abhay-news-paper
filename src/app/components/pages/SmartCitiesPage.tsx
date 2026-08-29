@@ -1,6 +1,5 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock, Building2, Wifi, Leaf, Car, BarChart2 } from "lucide-react";
-import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 import Smartc1Img from "../../../imports/Smartc1.png";
 import Smartc2Img from "../../../imports/Smartc2.png";
 import Smartc3Img from "../../../imports/Smartc3.png";
