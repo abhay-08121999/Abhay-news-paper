@@ -28,6 +28,19 @@ import NPRTBann2Img from "../../../imports/NPRTBANNER02.png";
 import NPRTBann3Img from "../../../imports/NPRTBANNER03.png";
 import NPRTBann4Img from "../../../imports/NPRTBANNER04.png";
 
+/* Section header — hairline rule + uppercase eyebrow, consistent site-wide */
+function SH({ title, icon: Icon }: { title: string; icon?: React.ComponentType<{ size?: number; className?: string }> }) {
+  return (
+    <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-5">
+      <div className="flex items-center gap-2">
+        {Icon && <Icon size={14} className="text-gray-400" />}
+        <h2 className="font-serif text-2xl leading-snug">{title}</h2>
+      </div>
+      <span className="hidden sm:block w-6 h-[2px] bg-red-600" />
+    </div>
+  );
+}
+
 
 const currentIssue = {
   month: "JUNE 2026",
@@ -176,38 +189,36 @@ export function MagazinePage() {
 };
 
   return (
-    <div className="py-6">
-      <div className="border-b-4 border-black mb-6 pb-2">
-        <span className="text-xs text-gray-500 uppercase tracking-widest">Digital & Print</span>
-        <h1 className="mt-0.5">The Pride Times Magazine</h1>
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8">
+      <div className="border-b-4 border-black mb-10 pb-3 flex items-center gap-3">
+        <BookOpen size={22} />
+        <div>
+          <span className="text-xs text-gray-500 uppercase tracking-[0.25em]">Digital &amp; Print</span>
+          <h1 className="font-serif text-3xl md:text-4xl mt-0.5">The Pride Times Magazine</h1>
+        </div>
       </div>
 
       {/* Current Issue Hero */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12 pb-10 border-b border-gray-200">
         <div className="relative">
-          <div className="absolute top-3 left-3 z-10 bg-red-600 text-white text-xs px-3 py-1 rounded">
-            CURRENT 
+          <div className="absolute top-3 left-3 z-10 bg-red-600 text-white text-[10px] uppercase tracking-[0.15em] px-2.5 py-1">
+            CURRENT
           </div>
           <ImageWithFallback
             src={currentIssue.images[0]}
             alt={currentIssue.coverHeadline}
-            className="w-full h-96 object-cover rounded shadow-2xl"
+            className="w-full h-96 object-cover shadow-xl"
           />
         </div>
         <div className="flex flex-col justify-center">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs text-gray-500 uppercase tracking-widest">{currentIssue.month}</span>
-            <span className="text-gray-300">·</span>
-            <span className="text-xs text-gray-500">{currentIssue.volume}</span>
-          </div>
-          <h1 className="leading-tight mb-3">{currentIssue.coverHeadline}</h1>
+          <span className="text-xs text-gray-500 uppercase tracking-[0.2em] mb-2">{currentIssue.month}</span>
+          <h1 className="font-serif text-2xl lg:text-3xl leading-tight mb-3">{currentIssue.coverHeadline}</h1>
           <p className="text-gray-500 text-sm mb-4">{currentIssue.coverSubhead}</p>
-          <div className="mb-5">
-            <p className="text-xs text-gray-500 uppercase tracking-wider mb-2"></p>
-            <ul className="flex flex-col gap-1.5">
+          <div className="mb-6">
+            <ul className="flex flex-col gap-2">
               {currentIssue.features.map((f, i) => (
-                <li key={i} className="flex items-center gap-2 text-sm">
-                  <span className="w-1 h-1 bg-red-600 rounded-full flex-shrink-0" />
+                <li key={i} className="flex items-start gap-2 text-sm leading-relaxed text-gray-700">
+                  <span className="w-1 h-1 bg-red-600 rounded-full flex-shrink-0 mt-2" />
                   {f}
                 </li>
               ))}
@@ -229,7 +240,7 @@ export function MagazinePage() {
   setCurrentImage(0);
   setZoom(1);
 }}
-  className="bg-black text-white text-sm px-6 py-2.5 rounded hover:bg-gray-800 transition-colors flex items-center gap-2"
+  className="bg-black text-white text-sm px-6 py-2.5 hover:bg-gray-800 transition-colors flex items-center gap-2"
 >
   <BookOpen size={14} />
   Read Now
@@ -243,7 +254,7 @@ export function MagazinePage() {
       content: currentIssue.features.join("\n\n")
     })
   }
-  className="border border-gray-300 text-sm px-6 py-2.5 rounded hover:bg-gray-50 transition-colors flex items-center gap-2"
+  className="border border-gray-300 hover:border-black text-sm px-6 py-2.5 hover:bg-gray-50 transition-colors flex items-center gap-2"
 >
   <Download size={14} />
   Download PDF
@@ -263,7 +274,7 @@ export function MagazinePage() {
   <img
     src={banner1Images[0]}
     alt="Banner"
-   className="w-full h-[300px] md:h-[500px] object-cover rounded-xl shadow-lg"
+   className="w-full h-[300px] md:h-[500px] object-cover shadow-lg"
   />
 </div>
 <div
@@ -278,12 +289,12 @@ export function MagazinePage() {
   <img
     src={banner2Images[0]}
     alt="Banner"
-    className="w-full h-[160px] object-cover rounded-xl shadow-lg"
+    className="w-full h-[160px] object-cover shadow-lg"
   />
 </div>
       {/* Past Issues */}
       <div className="mb-10">
-        <SH title="Articles" />
+        <SH title="Articles" icon={BookOpen} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {Articles.map((issue) => (
          <div
@@ -295,7 +306,7 @@ export function MagazinePage() {
   setZoom(1);
 }}
 >
-              <div className="relative overflow-hidden rounded shadow-md mb-2">
+              <div className="relative overflow-hidden shadow-md mb-3 transition-transform duration-300 group-hover:-translate-y-0.5">
                 <ImageWithFallback
                   src={issue.image}
                   alt={issue.month}
@@ -307,8 +318,8 @@ export function MagazinePage() {
                   </div>
                 )}
               </div>
-              <p className="text-xs text-gray-500 uppercase tracking-wider">{issue.month}</p>
-              <p className="text-xs leading-snug mt-0.5 group-hover:text-red-600 transition-colors">{issue.headline}</p>
+              <p className="text-[11px] text-gray-500 uppercase tracking-wider">{issue.month}</p>
+              <p className="font-serif text-sm leading-snug mt-1 group-hover:text-red-600 transition-colors">{issue.headline}</p>
             </div>
           ))}
         </div>
@@ -316,12 +327,12 @@ export function MagazinePage() {
 
       {/* Special Reports */}
       <div className="mb-10">
-        <SH title="Special Reports & Research" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <SH title="Special Reports &amp; Research" icon={BookOpen} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {specialReports.map((r) => (
-            <div key={r.title} className="flex items-center justify-between border border-gray-200 rounded p-4 hover:shadow-md transition-shadow group cursor-pointer">
+            <div key={r.title} className="flex items-center justify-between border border-gray-200 hover:border-black p-4 transition-colors duration-300 group cursor-pointer">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
+                <div className="w-9 h-9 bg-gray-100 flex items-center justify-center flex-shrink-0">
                   <BookOpen size={14} className="text-gray-400" />
                 </div>
                 <div>
@@ -340,16 +351,16 @@ export function MagazinePage() {
 
       {/* Premium content */}
       <div className="mb-10">
-        <div className="flex items-center gap-2 border-b-2 border-black pb-2 mb-4">
+        <div className="flex items-center gap-2 border-b-2 border-black pb-2 mb-5">
           <Crown size={14} className="text-yellow-500" />
-          <h2 className="uppercase tracking-wider">Premium Exclusive Content</h2>
-          {!isPremium && <span className="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded ml-auto">Premium Only</span>}
+          <h2 className="font-serif text-2xl leading-snug">Premium Exclusive Content</h2>
+          {!isPremium && <span className="text-[11px] bg-yellow-100 text-yellow-700 px-2 py-0.5 ml-auto uppercase tracking-wide">Premium Only</span>}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {premiumContent.map((c) => (
-            <div key={c.title} className={`border rounded p-4 group cursor-pointer transition-shadow hover:shadow-md ${!isPremium ? "opacity-60" : ""}`}>
+            <div key={c.title} className={`border border-gray-200 hover:border-black p-4 group cursor-pointer transition-colors duration-300 ${!isPremium ? "opacity-60" : ""}`}>
               <div className="flex items-start gap-3">
-                <div className={`w-8 h-8 rounded flex items-center justify-center flex-shrink-0 ${c.type === "Video" ? "bg-red-100" : "bg-blue-50"}`}>
+                <div className={`w-9 h-9 flex items-center justify-center flex-shrink-0 ${c.type === "Video" ? "bg-red-100" : "bg-blue-50"}`}>
                   {c.type === "Video" ? <Play size={14} className="text-red-600" /> : <BookOpen size={14} className="text-blue-600" />}
                 </div>
                 <div>
@@ -368,17 +379,17 @@ export function MagazinePage() {
 
       {/* Subscribe CTA */}
       {!isPremium && (
-        <div className="bg-black text-white rounded p-8 text-center">
+        <div className="bg-gradient-to-br from-black to-zinc-900 text-white p-8 md:p-10 text-center">
           <Crown size={24} className="text-yellow-400 mx-auto mb-3" />
-          <h2 className="text-white mb-2">Unlock the Complete Pride Times Experience</h2>
-          <p className="text-gray-400 text-sm mb-6 max-w-lg mx-auto">
+          <h2 className="font-serif text-2xl text-white mb-2">Unlock the Complete Pride Times Experience</h2>
+          <p className="text-gray-400 text-sm mb-6 max-w-lg mx-auto leading-relaxed">
             Get unlimited access to every article, every issue, all special reports, exclusive interviews, and premium newsletters. Ad-free. Starting at $4.99/month.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to={isSignedIn ? "/dashboard" : "/signin"} className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded transition-colors text-sm">
+            <Link to={isSignedIn ? "/dashboard" : "/signin"} className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 transition-colors text-sm">
               Start Free 30-Day Trial
             </Link>
-            <button className="border border-gray-600 hover:border-gray-400 text-white px-8 py-3 rounded transition-colors text-sm">
+            <button className="border border-gray-600 hover:border-gray-400 text-white px-8 py-3 transition-colors text-sm">
               Compare Plans
             </button>
           </div>
@@ -459,11 +470,11 @@ export function MagazinePage() {
 
       <div className="px-12 py-10">
 
-        <p className="text-yellow-700 uppercase text-sm font-semibold">
+        <p className="text-red-600 uppercase text-xs tracking-wider font-semibold">
           {selectedArticle.category}
         </p>
 
-        <h1 className="text-xl font-bold mt-3 leading-tight">
+        <h1 className="font-serif text-2xl font-normal mt-3 leading-tight">
           {selectedArticle.headline}
         </h1>
 
@@ -534,61 +545,6 @@ export function MagazinePage() {
     </div>
   </div>
 )}
-{showBanner && (
-  <div className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center">
-
-    <button
-      onClick={() => setShowBanner(false)}
-      className="absolute top-5 right-5 bg-white rounded-full w-10 h-10 z-50"
-    >
-      ✕
-    </button>
-
-    <div className="relative w-full max-w-6xl px-4">
-      
-
-      <img
-        src={bannerImages[currentImage]}
-        alt="Banner"
-        className="w-full max-h-[90vh] object-contain"
-      />
-
-      {bannerImages.length > 1 && (
-        <>
-          <button
-            onClick={() =>
-              setCurrentImage((prev) =>
-                prev === 0
-                  ? bannerImages.length - 1
-                  : prev - 1
-              )
-            }
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 text-2xl"
-          >
-            ←
-          </button>
-
-          <button
-            onClick={() =>
-              setCurrentImage((prev) =>
-                prev === bannerImages.length - 1
-                  ? 0
-                  : prev + 1
-              )
-            }
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 text-2xl"
-          >
-            →
-          </button>
-        </>
-      )}
-    </div>
-  </div>
-)}
     </div>
   );
-}
-
-function SH({ title }: { title: string }) {
-  return <div className="border-b-2 border-black pb-2 mb-4"><h2 className="uppercase tracking-wider">{title}</h2></div>;
 }
