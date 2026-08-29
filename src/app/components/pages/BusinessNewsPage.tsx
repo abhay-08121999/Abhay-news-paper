@@ -3,7 +3,7 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { SponsoredArticleCard } from "../ads/SponsoredArticleCard";
 
 function SH({ title }: { title: string }) {
-  return <h2 className="pt-bizweek-section-title">{title}</h2>;
+  return <div className="border-b-2 border-black pb-2 mb-4"><h2 className="uppercase tracking-wider">{title}</h2></div>;
 }
 
 const hero = {
@@ -50,53 +50,51 @@ const startupNews = [
 
 export function BusinessNewsPage() {
   return (
-    <div className="py-6 pt-bizweek-page">
-      <div className="pt-bizweek-masthead flex items-center gap-3">
+    <div className="py-6">
+      <div className="border-b-4 border-black mb-6 pb-2 flex items-center gap-3">
         <Briefcase size={22} />
         <div>
-          <span className="pt-bizweek-eyebrow">Corporate Intelligence</span>
-          <h1 className="pt-bizweek-masthead-title">Business News</h1>
+          <span className="text-xs text-gray-500 uppercase tracking-widest">Corporate Intelligence</span>
+          <h1 className="mt-0.5">Business News</h1>
         </div>
       </div>
 
-      <div className="pt-bizweek-hero group cursor-pointer">
-        <div className="pt-bizweek-hero-image-wrap">
-          <ImageWithFallback src={hero.image} alt={hero.title} className="pt-bizweek-hero-image" />
+      <div className="group cursor-pointer mb-8">
+        <div className="overflow-hidden rounded mb-4">
+          <ImageWithFallback src={hero.image} alt={hero.title} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
         </div>
-        <div>
-          <span className="pt-bizweek-hero-category">{hero.category}</span>
-          <h1 className="pt-bizweek-hero-title">{hero.title}</h1>
-          <p className="pt-bizweek-hero-excerpt">{hero.excerpt}</p>
-          <div className="pt-bizweek-hero-byline flex items-center gap-3">
-            <span>By {hero.author}</span>
-            <span className="flex items-center gap-1"><Clock size={10} />{hero.time}</span>
-          </div>
+        <span className="text-xs text-red-600 uppercase tracking-wider">{hero.category}</span>
+        <h1 className="mt-2 leading-tight">{hero.title}</h1>
+        <p className="text-gray-600 text-sm mt-2">{hero.excerpt}</p>
+        <div className="flex items-center gap-3 mt-2 text-xs text-gray-400">
+          <span>By {hero.author}</span>
+          <span className="flex items-center gap-1"><Clock size={10} />{hero.time}</span>
         </div>
       </div>
 
       {/* Earnings */}
-      <div className="mb-10">
+      <div className="mb-8">
         <SH title="Earnings Season" />
-        <div className="pt-bizweek-table-wrap">
-          <table className="pt-bizweek-table">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
             <thead>
-              <tr>
-                <th>Company</th>
-                <th className="pt-num">EPS</th>
-                <th className="pt-num">vs Est.</th>
-                <th className="pt-num hidden sm:table-cell">Revenue</th>
-                <th className="pt-num">Result</th>
+              <tr className="border-b border-gray-200">
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Company</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">EPS</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">vs Est.</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider hidden sm:table-cell">Revenue</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Result</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-gray-100">
               {earningsNews.map((e) => (
-                <tr key={e.ticker}>
-                  <td>{e.company} <span className="pt-bizweek-table-ticker">({e.ticker})</span></td>
-                  <td className="pt-num">{e.eps}</td>
-                  <td className={`pt-num pt-bizweek-delta ${e.status === "BEAT" ? "up" : "down"}`}>{e.beat}</td>
-                  <td className="pt-num hidden sm:table-cell pt-bizweek-table-sector">{e.revenue}</td>
-                  <td className="pt-num">
-                    <span className={`pt-bizweek-tag ${e.status === "BEAT" ? "pt-beat" : "pt-miss"}`}>{e.status}</span>
+                <tr key={e.ticker} className="hover:bg-gray-50 transition-colors">
+                  <td className="py-2.5">{e.company} <span className="text-gray-400">({e.ticker})</span></td>
+                  <td className="py-2.5 text-right">{e.eps}</td>
+                  <td className={`py-2.5 text-right text-xs ${e.status === "BEAT" ? "text-green-600" : "text-red-600"}`}>{e.beat}</td>
+                  <td className="py-2.5 text-right hidden sm:table-cell text-gray-600">{e.revenue}</td>
+                  <td className="py-2.5 text-right">
+                    <span className={`text-xs px-2 py-0.5 rounded ${e.status === "BEAT" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}`}>{e.status}</span>
                   </td>
                 </tr>
               ))}
@@ -106,28 +104,28 @@ export function BusinessNewsPage() {
       </div>
 
       {/* M&A */}
-      <div className="mb-10">
+      <div className="mb-8">
         <SH title="M&A Tracker" />
-        <div className="pt-bizweek-table-wrap">
-          <table className="pt-bizweek-table">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
             <thead>
-              <tr>
-                <th>Acquirer</th>
-                <th>Target</th>
-                <th className="pt-num">Value</th>
-                <th className="hidden md:table-cell">Sector</th>
-                <th className="pt-num">Status</th>
+              <tr className="border-b border-gray-200">
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Acquirer</th>
+                <th className="text-left py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Target</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Value</th>
+                <th className="text-left py-2 pl-4 text-xs text-gray-500 font-normal uppercase tracking-wider hidden md:table-cell">Sector</th>
+                <th className="text-right py-2 text-xs text-gray-500 font-normal uppercase tracking-wider">Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-gray-100">
               {maDeals.map((d) => (
-                <tr key={d.id}>
-                  <td>{d.acquirer}</td>
-                  <td className="pt-bizweek-table-sector">{d.target}</td>
-                  <td className="pt-num" style={{ fontWeight: 700 }}>{d.value}</td>
-                  <td className="hidden md:table-cell pt-bizweek-table-sector">{d.sector}</td>
-                  <td className="pt-num">
-                    <span className={`pt-bizweek-tag ${d.status === "Closed" ? "pt-closed" : d.status === "Announced" ? "pt-announced" : "pt-pending"}`}>{d.status}</span>
+                <tr key={d.id} className="hover:bg-gray-50 transition-colors">
+                  <td className="py-2.5">{d.acquirer}</td>
+                  <td className="py-2.5 text-gray-600">{d.target}</td>
+                  <td className="py-2.5 text-right font-medium">{d.value}</td>
+                  <td className="py-2.5 pl-4 text-gray-500 text-xs hidden md:table-cell">{d.sector}</td>
+                  <td className="py-2.5 text-right">
+                    <span className={`text-xs px-2 py-0.5 rounded ${d.status === "Closed" ? "bg-green-100 text-green-700" : d.status === "Announced" ? "bg-blue-100 text-blue-700" : "bg-yellow-100 text-yellow-700"}`}>{d.status}</span>
                   </td>
                 </tr>
               ))}
@@ -147,26 +145,26 @@ export function BusinessNewsPage() {
         disclosureText="Paid content by Goldman Sachs. Not editorial content."
       />
 
-      <div className="pt-bizweek-list-grid mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div>
           <SH title="Corporate News" />
-          <div>
+          <div className="divide-y divide-gray-100">
             {corporateNews.map((n) => (
-              <div key={n.id} className="pt-bizweek-list-item cursor-pointer">
-                <span className="pt-bizweek-list-category">{n.category}</span>
-                <p className="pt-bizweek-list-headline">{n.title}</p>
-                <span className="pt-bizweek-list-time"><Clock size={10} />{n.time}</span>
+              <div key={n.id} className="py-2.5 group cursor-pointer">
+                <span className="text-xs text-red-600 uppercase tracking-wider">{n.category}</span>
+                <p className="text-sm group-hover:text-red-600 transition-colors mt-0.5">{n.title}</p>
+                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
               </div>
             ))}
           </div>
         </div>
         <div>
           <SH title="Startups & Venture" />
-          <div>
+          <div className="divide-y divide-gray-100">
             {startupNews.map((n) => (
-              <div key={n.id} className="pt-bizweek-list-item cursor-pointer">
-                <p className="pt-bizweek-list-headline">{n.title}</p>
-                <span className="pt-bizweek-list-time"><Clock size={10} />{n.time}</span>
+              <div key={n.id} className="py-2.5 group cursor-pointer">
+                <p className="text-sm group-hover:text-red-600 transition-colors">{n.title}</p>
+                <span className="text-xs text-gray-400 flex items-center gap-1 mt-1"><Clock size={10} />{n.time}</span>
               </div>
             ))}
           </div>
