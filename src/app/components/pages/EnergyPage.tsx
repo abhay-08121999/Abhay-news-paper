@@ -11,17 +11,21 @@ function SH({ title, accent = "amber" }: { title: string; accent?: "amber" | "sk
     slate: "bg-slate-500",
   }[accent];
   return (
-    <div className="flex items-center gap-2 border-b-2 border-black pb-2.5 mb-5">
-      <span className={`w-1.5 h-1.5 rounded-full ${dot}`} />
-      <h2 className="uppercase tracking-[0.15em] text-sm font-semibold">{title}</h2>
+    <div className="flex items-center justify-between border-b-2 border-black pb-2.5 mb-5">
+      <div className="flex items-center gap-2">
+        <span className={`w-1.5 h-1.5 rounded-full ${dot}`} />
+        <h2 className="uppercase tracking-[0.15em] text-sm font-semibold">{title}</h2>
+      </div>
+      <span className="hidden sm:block h-px flex-1 max-w-16 bg-gray-200 ml-4" />
     </div>
   );
 }
 
 const hero = {
   category: "CLEAN ENERGY TRANSITION",
-  title: "Data Centers and AI Workloads Force Energy Policy Reversals Globally ",
-  excerpt: "The insatiable power appetite of AI data centers is generating a policy crisis that is reverberating from Ireland to Indiana. Multiple governments that had committed to rapid renewable energy transitions are finding themselves reversing or delaying coal and gas plant retirements to ensure grid stability in the face of surging demand. In the United States, the Department of Energy has authorized emergency grid reliability protocols in five states where data center construction is outpacing transmission infrastructure deployment. Technology companies — led by Microsoft, Google, Amazon, and a growing cohort of AI infrastructure firms — have publicly committed to 100% clean energy procurement. However, the sheer scale of new compute capacity being built is stretching the practical limits of current renewable energy availability, forcing uncomfortable compromises between decarbonization targets and operational reliability.",
+  title: "Data Centers and AI Workloads Force Energy Policy Reversals Globally",
+  excerpt:
+    "The insatiable power appetite of AI data centers is generating a policy crisis that is reverberating from Ireland to Indiana. Multiple governments that had committed to rapid renewable energy transitions are finding themselves reversing or delaying coal and gas plant retirements to ensure grid stability in the face of surging demand. In the United States, the Department of Energy has authorized emergency grid reliability protocols in five states where data center construction is outpacing transmission infrastructure deployment. Technology companies — led by Microsoft, Google, Amazon, and a growing cohort of AI infrastructure firms — have publicly committed to 100% clean energy procurement. However, the sheer scale of new compute capacity being built is stretching the practical limits of current renewable energy availability, forcing uncomfortable compromises between decarbonization targets and operational reliability.",
   author: "Sagar Kumar",
   time: "1 June 2026",
   image: Ener1Img,
@@ -29,7 +33,8 @@ const hero = {
 const hero1 = {
   category: "CLEAN ENERGY TRANSITION",
   title: "JP Morgan: Energy Resiliency Now a National Security Imperative",
-  excerpt: "A joint assessment by JP Morgan's Climate Advisory and Security and Resiliency teams concludes that energy resiliency and diversified energy mix have become essential components of national security strategy. The report, featuring contributions from Dr. Sarah Kapnick and security lead Michael Johnson, argues that the convergence of AI-driven demand growth with geopolitical supply chain risks has elevated grid security from a utility management issue to a strategic priority for heads of state. The analysis identifies dealmaking in power generation, storage, and transmission as the most active M&A subsector within energy in 2026, as utilities, industrial companies, and sovereign wealth funds compete for assets that provide reliable, resilient power generation capacity.",
+  excerpt:
+    "A joint assessment by JP Morgan's Climate Advisory and Security and Resiliency teams concludes that energy resiliency and diversified energy mix have become essential components of national security strategy. The report, featuring contributions from Dr. Sarah Kapnick and security lead Michael Johnson, argues that the convergence of AI-driven demand growth with geopolitical supply chain risks has elevated grid security from a utility management issue to a strategic priority for heads of state. The analysis identifies dealmaking in power generation, storage, and transmission as the most active M&A subsector within energy in 2026, as utilities, industrial companies, and sovereign wealth funds compete for assets that provide reliable, resilient power generation capacity.",
   author: "Sagar Kumar",
   time: "May 2026",
   image: Ener2Img,
@@ -37,7 +42,8 @@ const hero1 = {
 const hero2 = {
   category: "CLEAN ENERGY TRANSITION",
   title: "China's Dominant Position in Clean Tech Supply Chains Creates New Risk Calculus",
-  excerpt: "China's commanding position across clean technology supply chains — spanning solar panels, battery storage, green hydrogen production equipment, and electric vehicle components — continues to shape global deployment trajectories while generating strategic risk for Western economies. S&P Global's Energy Horizons 2026 report identifies this dynamic as a key variable in the outcome of the US-China AI and clean energy race. Western governments are responding through the combination of tariffs, domestic manufacturing incentives, and allied reshoring initiatives. The U.S. Inflation Reduction Act has catalyzed over $300 billion in clean energy commitments, while the European Union's Net-Zero Industry Act is accelerating its own manufacturing base for critical clean technologies. However, analysts note that China's cost advantages in key components are likely to persist for the remainder of this decade.",
+  excerpt:
+    "China's commanding position across clean technology supply chains — spanning solar panels, battery storage, green hydrogen production equipment, and electric vehicle components — continues to shape global deployment trajectories while generating strategic risk for Western economies. S&P Global's Energy Horizons 2026 report identifies this dynamic as a key variable in the outcome of the US-China AI and clean energy race. Western governments are responding through the combination of tariffs, domestic manufacturing incentives, and allied reshoring initiatives. The U.S. Inflation Reduction Act has catalyzed over $300 billion in clean energy commitments, while the European Union's Net-Zero Industry Act is accelerating its own manufacturing base for critical clean technologies. However, analysts note that China's cost advantages in key components are likely to persist for the remainder of this decade.",
   author: "Sagar Kumar",
   time: "May 2026",
   image: Ener3Img,
@@ -102,6 +108,11 @@ function NewsColumn({
     sky: "border-l-sky-500",
     slate: "border-l-slate-500",
   }[accent];
+  const wash = {
+    amber: "hover:bg-amber-50/50",
+    sky: "hover:bg-sky-50/50",
+    slate: "hover:bg-slate-50/60",
+  }[accent];
   return (
     <div>
       <SH title={title} accent={accent} />
@@ -109,10 +120,12 @@ function NewsColumn({
         {items.map((n) => (
           <div
             key={n.id}
-            className={`py-3.5 pl-3 -ml-3 border-l-2 border-l-transparent hover:${border} hover:bg-gray-50/60 transition-colors duration-200 group cursor-pointer`}
+            className={`py-3.5 pl-3.5 -ml-3.5 border-l-2 border-l-transparent hover:${border} ${wash} transition-all duration-200 group cursor-pointer rounded-r-sm`}
           >
-            <p className="text-sm leading-snug group-hover:text-amber-700 transition-colors">{n.title}</p>
-            <span className="text-xs text-gray-400 flex items-center gap-1 mt-2">
+            <p className="text-sm leading-snug text-gray-900 group-hover:text-amber-700 transition-colors">
+              {n.title}
+            </p>
+            <span className="text-[11px] text-gray-400 flex items-center gap-1 mt-2 tracking-wide">
               <Clock size={10} />
               {n.time}
             </span>
@@ -127,47 +140,56 @@ export function EnergyPage() {
   return (
     <div className="py-8 max-w-7xl mx-auto px-4 sm:px-6">
       {/* Page header */}
-      <div className="border-b-4 border-black mb-12 pb-4 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-black flex items-center justify-center shrink-0">
-          <Zap size={16} className="text-amber-400" fill="currentColor" />
+      <div className="border-b-4 border-black mb-12 pb-4 flex items-center gap-3.5">
+        <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center shrink-0 shadow-sm">
+          <Zap size={17} className="text-amber-400" fill="currentColor" />
         </div>
         <div>
-          <span className="text-xs text-amber-700 uppercase tracking-[0.2em] font-semibold">Power &amp; Resources</span>
-          <h1 className="mt-0.5 font-serif">Energy &amp; Natural Resources</h1>
+          <span className="text-xs text-amber-700 uppercase tracking-[0.22em] font-semibold">
+            Power &amp; Resources
+          </span>
+          <h1 className="mt-0.5 font-serif tracking-tight">Energy &amp; Natural Resources</h1>
         </div>
       </div>
 
       {/* Hero + prices + quote */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-14">
         <div className="lg:col-span-2 group cursor-pointer">
-          <div className="overflow-hidden rounded-sm mb-5">
+          <div className="overflow-hidden rounded-sm mb-5 shadow-sm ring-1 ring-black/5">
             <ImageWithFallback
               src={hero.image}
               alt={hero.title}
-              className="w-full h-72 md:h-80 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+              className="w-full h-72 md:h-80 object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
             />
           </div>
           <span className="text-xs text-amber-700 uppercase tracking-wider font-semibold">{hero.category}</span>
-          <h3 className="mt-2.5 leading-tight font-serif text-2xl md:text-3xl group-hover:text-amber-700 transition-colors">
+          <h3 className="mt-2.5 leading-tight font-serif text-2xl md:text-3xl group-hover:text-amber-700 transition-colors duration-300">
             {hero.title}
           </h3>
           <p className="text-gray-600 text-sm mt-3 leading-relaxed">{hero.excerpt}</p>
           <div className="flex items-center gap-3 mt-4 text-xs text-gray-400 border-t border-gray-100 pt-3">
-            <span>By {hero.author}</span>
-            <span className="flex items-center gap-1"><Clock size={10} />{hero.time}</span>
+            <span className="font-medium text-gray-500">By {hero.author}</span>
+            <span className="w-1 h-1 rounded-full bg-gray-300" />
+            <span className="flex items-center gap-1">
+              <Clock size={10} />
+              {hero.time}
+            </span>
           </div>
         </div>
 
         <div className="flex flex-col gap-7">
           {/* Energy prices — ticker treatment */}
-          <div className="bg-slate-950 rounded-sm overflow-hidden shadow-sm">
+          <div className="bg-slate-950 rounded-sm overflow-hidden shadow-md ring-1 ring-black/10">
             <div className="flex items-center gap-2 px-4 pt-4 pb-3 border-b border-white/10">
               <Radio size={12} className="text-amber-400 animate-pulse" />
               <h2 className="uppercase tracking-[0.15em] text-xs font-semibold text-white">Energy Prices Live</h2>
             </div>
             <div className="divide-y divide-white/5 px-4">
               {energyPrices.map((e) => (
-                <div key={e.commodity} className="py-2.5 flex items-center justify-between">
+                <div
+                  key={e.commodity}
+                  className="py-2.5 flex items-center justify-between hover:bg-white/[0.03] transition-colors -mx-4 px-4"
+                >
                   <span className="text-xs text-slate-300">{e.commodity}</span>
                   <div className="text-right">
                     <p className="text-xs font-mono text-white tabular-nums">{e.price}</p>
@@ -187,7 +209,7 @@ export function EnergyPage() {
           </div>
 
           {/* Quote block */}
-          <div className="relative border border-slate-300 bg-slate-50 pl-6 pr-5 py-5 rounded-sm">
+          <div className="relative border border-slate-300 bg-slate-50 pl-6 pr-5 py-5 rounded-sm shadow-sm">
             <span className="absolute left-2.5 top-1.5 text-4xl leading-none text-amber-500/40 font-serif select-none">
               &ldquo;
             </span>
@@ -204,48 +226,54 @@ export function EnergyPage() {
 
       {/* Secondary hero 1 */}
       <div className="mb-14 group cursor-pointer">
-        <div className="relative overflow-hidden rounded-sm mb-4">
+        <div className="relative overflow-hidden rounded-sm mb-4 shadow-sm ring-1 ring-black/5">
           <ImageWithFallback
             src={hero1.image}
             alt={hero1.title}
-            className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            className="w-full h-72 lg:h-96 object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-          <span className="absolute bottom-4 left-4 text-xs text-white bg-amber-600 px-2.5 py-1 uppercase tracking-wider font-semibold rounded-sm">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+          <span className="absolute bottom-4 left-4 text-xs text-white bg-amber-600 px-2.5 py-1 uppercase tracking-wider font-semibold rounded-sm shadow-sm">
             {hero1.category}
           </span>
         </div>
-        <h3 className="mt-2 leading-tight font-serif text-2xl md:text-3xl group-hover:text-amber-700 transition-colors">
+        <h3 className="mt-2 leading-tight font-serif text-2xl md:text-3xl group-hover:text-amber-700 transition-colors duration-300">
           {hero1.title}
         </h3>
         <p className="text-gray-600 text-sm mt-2.5 leading-relaxed">{hero1.excerpt}</p>
         <div className="flex items-center gap-3 mt-3.5 text-xs text-gray-400 border-t border-gray-100 pt-3">
-          <span>By {hero1.author}</span>
-          <span className="flex items-center gap-1"><Clock size={10} /> {hero1.time}</span>
+          <span className="font-medium text-gray-500">By {hero1.author}</span>
+          <span className="w-1 h-1 rounded-full bg-gray-300" />
+          <span className="flex items-center gap-1">
+            <Clock size={10} /> {hero1.time}
+          </span>
         </div>
       </div>
 
       {/* Secondary hero 2 + industry snapshot */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14 items-start">
         <div className="group cursor-pointer">
-          <div className="relative overflow-hidden rounded-sm mb-3.5">
+          <div className="relative overflow-hidden rounded-sm mb-3.5 shadow-sm ring-1 ring-black/5">
             <ImageWithFallback
               src={hero2.image}
               alt={hero2.title}
-              className="w-full h-72 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+              className="w-full h-72 lg:h-96 object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-            <span className="absolute bottom-4 left-4 text-xs text-white bg-amber-600 px-2.5 py-1 uppercase tracking-wider font-semibold rounded-sm">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+            <span className="absolute bottom-4 left-4 text-xs text-white bg-amber-600 px-2.5 py-1 uppercase tracking-wider font-semibold rounded-sm shadow-sm">
               {hero2.category}
             </span>
           </div>
-          <h3 className="mt-2 leading-tight font-serif text-2xl md:text-3xl group-hover:text-amber-700 transition-colors">
+          <h3 className="mt-2 leading-tight font-serif text-2xl md:text-3xl group-hover:text-amber-700 transition-colors duration-300">
             {hero2.title}
           </h3>
           <p className="text-gray-600 text-sm mt-2.5 leading-relaxed">{hero2.excerpt}</p>
           <div className="flex items-center gap-3 mt-3.5 text-xs text-gray-400 border-t border-gray-100 pt-3">
-            <span>By {hero2.author}</span>
-            <span className="flex items-center gap-1"><Clock size={10} /> {hero2.time}</span>
+            <span className="font-medium text-gray-500">By {hero2.author}</span>
+            <span className="w-1 h-1 rounded-full bg-gray-300" />
+            <span className="flex items-center gap-1">
+              <Clock size={10} /> {hero2.time}
+            </span>
           </div>
         </div>
 
@@ -256,14 +284,14 @@ export function EnergyPage() {
           {snapshot.map((row, i) => (
             <div
               key={row.label}
-              className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 px-4 py-4 ${
+              className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 px-4 py-4 transition-colors hover:bg-amber-50/40 ${
                 i % 2 === 1 ? "bg-slate-50" : "bg-white"
               } ${i !== snapshot.length - 1 ? "border-b border-gray-200" : ""}`}
             >
               <span className="text-xs font-semibold uppercase tracking-wide text-amber-700 sm:w-2/5 shrink-0">
                 {row.label}
               </span>
-              <span className="text-sm text-gray-800">{row.value}</span>
+              <span className="text-sm text-gray-800 leading-snug">{row.value}</span>
             </div>
           ))}
         </div>
@@ -271,20 +299,20 @@ export function EnergyPage() {
 
       {/* Renewables */}
       <div className="mb-14">
-        <SH title="Renewable Energy" />
+        <SH title="Renewable Energy" accent="slate" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
           {renewableStories.map((s) => (
             <div key={s.id} className="group cursor-pointer">
-              <div className="overflow-hidden rounded-sm mb-3 relative">
+              <div className="overflow-hidden rounded-sm mb-3 relative shadow-sm ring-1 ring-black/5">
                 <ImageWithFallback
                   src={s.image}
                   alt={s.title}
-                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  className="w-full h-40 object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
                 />
                 <span className="absolute top-0 left-0 w-full h-1 bg-emerald-500" />
               </div>
-              <h3 className="leading-snug group-hover:text-amber-700 transition-colors">{s.title}</h3>
-              <span className="text-xs text-gray-400 flex items-center gap-1 mt-2">
+              <h3 className="leading-snug group-hover:text-amber-700 transition-colors duration-300">{s.title}</h3>
+              <span className="text-[11px] text-gray-400 flex items-center gap-1 mt-2 tracking-wide">
                 <Clock size={10} />
                 {s.time}
               </span>
