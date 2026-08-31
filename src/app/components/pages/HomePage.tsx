@@ -1,3 +1,4 @@
+```tsx
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
@@ -295,7 +296,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 3,
       hot: false,
-      title: "SoftBank Bets Big on European Data Centers",
+      title:
+        "SoftBank Bets Big on European Data Centers",
       time: "1 hr ago",
       image:
         "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwaGFja2luZyUyMGRhdGElMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
@@ -603,7 +605,7 @@ export function HomePage() {
 
             <Link
               to="/technology"
-              className="group relative block overflow-hidden rounded-[2px]"
+              className="group relative block overflow-hidden rounded-md"
             >
               <ImageWithFallback
                 src={heroStory.image}
@@ -641,7 +643,7 @@ export function HomePage() {
                 to={sideStories[0].link}
                 className="group block"
               >
-                <div className="overflow-hidden rounded-[2px]">
+                <div className="overflow-hidden rounded-md">
                   <ImageWithFallback
                     src={sideStories[0].image}
                     alt={sideStories[0].title}
@@ -673,7 +675,7 @@ export function HomePage() {
                 to={sideStories[1].link}
                 className="group flex gap-3.5 mt-6 pt-6 border-t border-gray-200"
               >
-                <div className="shrink-0 w-[110px] h-[80px] overflow-hidden rounded-[2px]">
+                <div className="shrink-0 w-[110px] h-[80px] overflow-hidden rounded-md">
                   <ImageWithFallback
                     src={sideStories[1].image}
                     alt={sideStories[1].title}
@@ -713,7 +715,7 @@ export function HomePage() {
                   to={videoFeature.link}
                   className="group block"
                 >
-                  <div className="relative overflow-hidden rounded-[2px]">
+                  <div className="relative overflow-hidden rounded-md">
                     <ImageWithFallback
                       src={videoFeature.image}
                       alt={videoFeature.title}
@@ -873,7 +875,7 @@ export function HomePage() {
                   to={card.link}
                   className="group block"
                 >
-                  <div className="overflow-hidden rounded-[2px]">
+                  <div className="overflow-hidden rounded-md">
                     <ImageWithFallback
                       src={card.image}
                       alt={card.title}
@@ -910,7 +912,7 @@ export function HomePage() {
                   to="/leadership"
                   className="group block"
                 >
-                  <div className="overflow-hidden rounded-[2px]">
+                  <div className="overflow-hidden rounded-md">
                     <ImageWithFallback
                       src={p.image}
                       alt={p.title}
@@ -993,7 +995,7 @@ export function HomePage() {
                 <ImageWithFallback
                   src={magazinePreview.image}
                   alt={magazinePreview.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-md"
                 />
               </div>
 
@@ -1032,7 +1034,7 @@ export function HomePage() {
                 to={s.link}
                 className="group flex border border-gray-200 rounded-[2px] overflow-hidden"
               >
-                <div className="w-[40%] shrink-0 overflow-hidden">
+                <div className="w-[40%] shrink-0 overflow-hidden rounded-md">
 
                   <ImageWithFallback
                     src={s.image}
@@ -1156,3 +1158,4 @@ export function HomePage() {
     </div>
   );
 }
+```
