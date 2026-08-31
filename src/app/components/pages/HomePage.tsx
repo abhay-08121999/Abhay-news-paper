@@ -656,7 +656,7 @@ export function HomePage() {
 
             <Link
               to="/technology"
-              className="group relative block overflow-hidden rounded-lg"
+              className="group relative block overflow-hidden rounded-lg border border-gray-200"
             >
 
               <ImageWithFallback
@@ -754,7 +754,7 @@ export function HomePage() {
 
               <Link
                 to={sideStories[0].link}
-                className="group block pb-6 border-b border-gray-200"
+                className="group block p-4 border border-gray-200 rounded-md"
               >
 
                 <div className="overflow-hidden rounded-md">
@@ -848,10 +848,11 @@ export function HomePage() {
                   group
                   flex
                   gap-3.5
-                  mt-6
-                  pt-6
-                  border-t
-                  border-gray-100
+                  mt-4
+                  p-4
+                  border
+                  border-gray-200
+                  rounded-md
                 "
               >
 
@@ -966,7 +967,7 @@ export function HomePage() {
 
                 <Link
                   to={videoFeature.link}
-                  className="group block"
+                  className="group block p-3 border border-gray-200 rounded-md"
                 >
 
                   <div className="relative overflow-hidden rounded-md">
@@ -1065,7 +1066,7 @@ export function HomePage() {
                   Latest
                 </h2>
 
-                <div className="divide-y divide-gray-200">
+                <div className="flex flex-col gap-2.5">
 
                   {latestRest.map((item) => (
 
@@ -1077,9 +1078,10 @@ export function HomePage() {
                         flex
                         flex-col
                         gap-1
-                        py-3
-                        first:pt-3
-                        last:pb-1
+                        p-3
+                        border
+                        border-gray-200
+                        rounded-md
                       "
                     >
 
@@ -1986,34 +1988,23 @@ export function HomePage() {
                 grid
                 grid-cols-1
                 sm:grid-cols-2
-                divide-y
-                sm:divide-y-0
-                divide-gray-200
+                gap-3
               "
             >
 
-              {prideTimes30.map((leader, index) => (
+              {prideTimes30.map((leader) => (
 
                 <div
                   key={leader.rank}
-                  className={`
+                  className="
                     flex
                     items-start
                     gap-4
-                    py-4
-
-                    ${
-                      index % 2 === 0
-                        ? "sm:pr-8 sm:border-r sm:border-gray-200"
-                        : "sm:pl-8"
-                    }
-
-                    ${
-                      index < prideTimes30.length - 2
-                        ? "sm:border-b sm:border-gray-200"
-                        : ""
-                    }
-                  `}
+                    p-4
+                    border
+                    border-gray-200
+                    rounded-md
+                  "
                 >
 
                   <span
