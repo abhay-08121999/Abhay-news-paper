@@ -1,4 +1,3 @@
-```tsx
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
@@ -153,7 +152,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       title: "Gold surges to $2,400 amid global uncertainty",
       time: "40 min ago",
       image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/markets",
     },
     {
@@ -182,7 +181,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 1,
       hot: true,
-      title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+      title:
+        "U.S. Equity Markets Rally on Strong Manufacturing Data",
       time: "20 min ago",
       image:
         "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxzbWFydCUyMGNpdHklMjB1cmJhbiUyMGZ1dHVyZSUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
@@ -205,7 +205,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "Fertitta Entertainment to Acquire Caesars Entertainment for $17.6 Billion",
       time: "2 hr ago",
       image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/finance",
     },
     {
@@ -215,7 +215,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "Scotiabank to Acquire Maple Financial in Wealth Expansion Play",
       time: "3 hr ago",
       image:
-        "https://images.unsplash.com/photo-1778406466505-6129d0555557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1778406466505-6129d0555557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/finance",
     },
   ],
@@ -248,7 +248,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "Goldman Sachs raises S&P 500 year-end target to 6,500",
       time: "2 hr ago",
       image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/business-news",
     },
     {
@@ -280,7 +280,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
       time: "5 min ago",
       image:
-        "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwaW5ub3ZpZW50JTIwdGVjaG5vbG9neSUyMGluZm92YXRpb24lMjBkaWdpdGFsJTIwZnV0dXJlfGVufDF8fHx8MTc3OTM4NTk3N3ww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwaW5ub3ZhdGlvbiUyMGRpZ2l0YWwlMjBmdXR1cmV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/technology",
     },
     {
@@ -310,7 +310,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "Quantum computing startup achieves 1,000-qubit milestone",
       time: "2 hr ago",
       image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/technology",
     },
   ],
@@ -333,7 +333,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "China's Dominant Position in Clean Tech Supply Chains Creates New Risk Calculus",
       time: "1 hr ago",
       image:
-        "https://images.unsplash.com/photo-1778406466505-6129d0555557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1778406466505-6129d0555557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/energy",
     },
     {
@@ -353,7 +353,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "Shell posts record profits as LNG demand surges in Asia",
       time: "3 hr ago",
       image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
       link: "/energy",
     },
   ],
@@ -521,6 +521,7 @@ function ChangeChip({
       ) : (
         <TrendingDown size={11} strokeWidth={2.25} />
       )}
+
       {change}
     </span>
   );
@@ -593,8 +594,6 @@ export function HomePage() {
     <div className="bg-white min-h-screen font-sans text-gray-900 antialiased">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── MAIN CONTENT ── */}
-
         <main className="pt-8 md:pt-10 pb-14">
 
           {/* ── THREE COLUMN HERO ── */}
@@ -610,16 +609,17 @@ export function HomePage() {
               <ImageWithFallback
                 src={heroStory.image}
                 alt={heroStory.title}
-                className="w-full h-72 lg:h-[520px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                className="w-full h-72 lg:h-[520px] object-cover rounded-md transition-transform duration-700 ease-out group-hover:scale-[1.04]"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent rounded-md" />
 
               <span className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 text-[10px] font-bold tracking-[0.16em] uppercase rounded-[2px]">
                 {heroStory.category}
               </span>
 
               <div className="absolute inset-x-0 bottom-0 p-5">
+
                 <h1 className="font-serif text-2xl md:text-[28px] font-bold leading-[1.15] text-white">
                   {heroStory.title}
                 </h1>
@@ -632,23 +632,27 @@ export function HomePage() {
                   Read Full Story
                   <ArrowRight size={13} strokeWidth={2.25} />
                 </span>
+
               </div>
             </Link>
 
-            {/* MAIN ARTICLE + RELATED STORY */}
+            {/* MAIN ARTICLE */}
 
             <div className="min-w-0">
 
               <Link
                 to={sideStories[0].link}
-                className="group block"
+                className="group block pb-6 border-b border-gray-200"
               >
+
                 <div className="overflow-hidden rounded-md">
+
                   <ImageWithFallback
                     src={sideStories[0].image}
                     alt={sideStories[0].title}
-                    className="w-full h-52 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                    className="w-full h-52 object-cover rounded-md transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                   />
+
                 </div>
 
                 <span className="block mt-3.5 text-[11px] font-bold text-red-600 uppercase tracking-[0.14em]">
@@ -667,23 +671,28 @@ export function HomePage() {
                   Read More
                   <ArrowRight size={11} strokeWidth={2.25} />
                 </span>
+
               </Link>
 
               {/* RELATED STORY */}
 
               <Link
                 to={sideStories[1].link}
-                className="group flex gap-3.5 mt-6 pt-6 border-t border-gray-200"
+                className="group flex gap-3.5 mt-6 pt-6"
               >
+
                 <div className="shrink-0 w-[110px] h-[80px] overflow-hidden rounded-md">
+
                   <ImageWithFallback
                     src={sideStories[1].image}
                     alt={sideStories[1].title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-105"
                   />
+
                 </div>
 
                 <div className="min-w-0 flex-1">
+
                   <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.14em]">
                     {sideStories[1].tag}
                   </span>
@@ -696,17 +705,21 @@ export function HomePage() {
                     <Clock size={9} strokeWidth={2.25} />
                     {sideStories[1].time}
                   </span>
+
                 </div>
+
               </Link>
+
             </div>
 
-            {/* TODAY'S VIDEOS + LATEST + MARKET SNAPSHOT */}
+            {/* VIDEOS + LATEST + MARKET */}
 
             <div className="min-w-0 flex flex-col gap-7">
 
               {/* VIDEOS */}
 
-              <div>
+              <div className="pb-6 border-b border-gray-200">
+
                 <h2 className="font-serif text-lg font-bold mb-3.5">
                   Today's Videos
                 </h2>
@@ -715,44 +728,57 @@ export function HomePage() {
                   to={videoFeature.link}
                   className="group block"
                 >
+
                   <div className="relative overflow-hidden rounded-md">
+
                     <ImageWithFallback
                       src={videoFeature.image}
                       alt={videoFeature.title}
-                      className="w-full h-40 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      className="w-full h-40 object-cover rounded-md transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
 
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/25 transition-colors">
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/25 transition-colors rounded-md">
+
                       <div className="w-11 h-11 rounded-full bg-white/95 flex items-center justify-center shadow-md">
+
                         <Play
                           size={16}
                           fill="black"
                           className="text-black ml-0.5"
                         />
+
                       </div>
+
                     </div>
+
                   </div>
 
                   <h3 className="text-sm font-semibold leading-[1.4] mt-2.5 text-gray-900 group-hover:text-red-600 transition-colors line-clamp-2">
                     {videoFeature.title}
                   </h3>
+
                 </Link>
+
               </div>
 
               {/* LATEST */}
 
-              <div>
+              <div className="pb-6 border-b border-gray-200">
+
                 <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-gray-900 border-b-2 border-black pb-2.5 mb-1">
                   Latest
                 </h2>
 
                 <div className="divide-y divide-gray-200">
+
                   {latestRest.map((item) => (
+
                     <Link
                       key={item.id}
                       to={item.link}
                       className="group flex flex-col gap-1 py-3 first:pt-3"
                     >
+
                       <span className="text-[10px] uppercase tracking-wide text-gray-400">
                         {item.time}
                       </span>
@@ -760,14 +786,18 @@ export function HomePage() {
                       <span className="text-sm font-medium leading-[1.4] text-gray-800 group-hover:text-red-600 transition-colors">
                         {item.title}
                       </span>
+
                     </Link>
+
                   ))}
+
                 </div>
+
               </div>
 
               {/* MARKET SNAPSHOT */}
 
-              <div className="border border-gray-200 rounded-[2px] p-4">
+              <div className="border border-gray-200 rounded-md p-4">
 
                 <div className="flex items-center justify-between mb-2.5">
 
@@ -776,7 +806,9 @@ export function HomePage() {
                   </h3>
 
                   <div className="flex gap-3">
+
                     {["Indices", "Crypto"].map((t) => (
+
                       <button
                         key={t}
                         type="button"
@@ -791,25 +823,32 @@ export function HomePage() {
                       >
                         {t}
                       </button>
+
                     ))}
+
                   </div>
+
                 </div>
 
                 <div className="divide-y divide-gray-100">
+
                   {(marketSnapshotData[
                     activeMarketTab
                   ] || [])
                     .slice(0, 3)
                     .map((m: any) => (
+
                       <div
                         key={m.symbol}
                         className="py-1.5 flex items-center justify-between"
                       >
+
                         <span className="text-[11px] font-semibold text-gray-800">
                           {m.symbol}
                         </span>
 
                         <div className="flex items-center gap-2.5">
+
                           <span className="text-[11px] text-gray-500 tabular-nums">
                             {m.value}
                           </span>
@@ -818,9 +857,13 @@ export function HomePage() {
                             change={m.change}
                             up={m.up}
                           />
+
                         </div>
+
                       </div>
+
                     ))}
+
                 </div>
 
                 <Link
@@ -828,13 +871,18 @@ export function HomePage() {
                   className="mt-2.5 text-[10px] font-bold text-red-600 flex items-center gap-1 hover:gap-2 transition-all uppercase tracking-wide w-fit"
                 >
                   View All Markets
+
                   <ArrowRight
                     size={10}
                     strokeWidth={2.25}
                   />
+
                 </Link>
+
               </div>
+
             </div>
+
           </div>
 
           {/* ── SECONDARY NEWS ── */}
@@ -848,7 +896,9 @@ export function HomePage() {
               </h2>
 
               <div className="flex items-center gap-5 overflow-x-auto no-scrollbar">
+
                 {latestNewsTabs.map((t) => (
+
                   <button
                     key={t}
                     type="button"
@@ -863,24 +913,33 @@ export function HomePage() {
                   >
                     {t}
                   </button>
+
                 ))}
+
               </div>
+
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-6">
+
+              {/* NEWS CARDS */}
 
               {secondaryCards.map((card) => (
+
                 <Link
                   key={card.id}
                   to={card.link}
-                  className="group block"
+                  className="group block pb-5 border-b border-gray-200"
                 >
+
                   <div className="overflow-hidden rounded-md">
+
                     <ImageWithFallback
                       src={card.image}
                       alt={card.title}
-                      className="w-full h-40 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                      className="w-full h-40 object-cover rounded-md transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                     />
+
                   </div>
 
                   <div className="mt-3">
@@ -894,30 +953,40 @@ export function HomePage() {
                     </h3>
 
                     <span className="flex items-center gap-1 text-[11px] text-gray-400 mt-2">
+
                       <Clock
                         size={9}
                         strokeWidth={2.25}
                       />
+
                       {card.time}
+
                     </span>
+
                   </div>
+
                 </Link>
+
               ))}
 
               {/* EDITOR'S PICK */}
 
               {editorsPicks.map((p) => (
+
                 <Link
                   key={p.id}
                   to="/leadership"
-                  className="group block"
+                  className="group block pb-5 border-b border-gray-200"
                 >
+
                   <div className="overflow-hidden rounded-md">
+
                     <ImageWithFallback
                       src={p.image}
                       alt={p.title}
-                      className="w-full h-40 object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                      className="w-full h-40 object-cover rounded-md transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                     />
+
                   </div>
 
                   <div className="mt-3">
@@ -931,21 +1000,29 @@ export function HomePage() {
                     </h3>
 
                     <span className="flex items-center gap-1 text-[11px] text-gray-400 mt-2">
+
                       <Clock
                         size={9}
                         strokeWidth={2.25}
                       />
+
                       {p.time}
+
                     </span>
+
                   </div>
+
                 </Link>
+
               ))}
+
             </div>
+
           </div>
 
           {/* ── TRUST / STATISTICS ── */}
 
-          <div className="bg-black rounded-[2px] py-8 px-6 mb-14">
+          <div className="bg-black rounded-md py-8 px-6 mb-14">
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
 
@@ -967,10 +1044,12 @@ export function HomePage() {
                   value: "Impartial",
                 },
               ].map((stat) => (
+
                 <div
                   key={stat.label}
                   className="text-center"
                 >
+
                   <div className="font-serif text-white text-2xl sm:text-3xl font-bold">
                     {stat.value}
                   </div>
@@ -978,9 +1057,13 @@ export function HomePage() {
                   <div className="text-gray-400 text-[11px] uppercase tracking-[0.14em] mt-1.5">
                     {stat.label}
                   </div>
+
                 </div>
+
               ))}
+
             </div>
+
           </div>
 
           {/* ── MAGAZINE + LEADERSHIP ── */}
@@ -989,14 +1072,16 @@ export function HomePage() {
 
             {/* MAGAZINE */}
 
-            <div className="bg-black rounded-[2px] flex flex-col sm:flex-row overflow-hidden">
+            <div className="bg-black rounded-md flex flex-col sm:flex-row overflow-hidden">
 
-              <div className="sm:w-2/5 h-[160px] sm:h-auto overflow-hidden">
+              <div className="sm:w-2/5 h-[160px] sm:h-auto overflow-hidden rounded-md">
+
                 <ImageWithFallback
                   src={magazinePreview.image}
                   alt={magazinePreview.title}
                   className="w-full h-full object-cover rounded-md"
                 />
+
               </div>
 
               <div className="flex-1 p-6 flex flex-col justify-center">
@@ -1017,29 +1102,36 @@ export function HomePage() {
                   to="/magazine"
                   className="inline-flex items-center gap-1.5 w-fit text-xs font-bold uppercase tracking-wide text-white border-b border-white/50 pb-0.5 hover:border-white transition-colors"
                 >
+
                   Read Digital Edition
+
                   <ArrowRight
                     size={11}
                     strokeWidth={2.25}
                   />
+
                 </Link>
+
               </div>
+
             </div>
 
             {/* LEADERSHIP */}
 
             {pt30.map((s) => (
+
               <Link
                 key={s.id}
                 to={s.link}
-                className="group flex border border-gray-200 rounded-[2px] overflow-hidden"
+                className="group flex border border-gray-200 rounded-md overflow-hidden"
               >
+
                 <div className="w-[40%] shrink-0 overflow-hidden rounded-md">
 
                   <ImageWithFallback
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-105"
                   />
 
                 </div>
@@ -1059,16 +1151,22 @@ export function HomePage() {
                   </p>
 
                   <span className="mt-3 text-[11px] font-bold text-gray-900 uppercase tracking-wide flex items-center gap-1 group-hover:gap-2 transition-all">
+
                     Read More
+
                     <ArrowRight
                       size={11}
                       strokeWidth={2.25}
                     />
+
                   </span>
 
                 </div>
+
               </Link>
+
             ))}
+
           </div>
 
           {/* ── PRIDE TIMES 30 ── */}
@@ -1085,11 +1183,14 @@ export function HomePage() {
                 to="/billionaires"
                 className="text-[11px] font-semibold text-gray-400 hover:text-red-600 transition-colors flex items-center gap-1"
               >
+
                 Full List
+
                 <ArrowRight
                   size={11}
                   strokeWidth={2.25}
                 />
+
               </Link>
 
             </div>
@@ -1097,6 +1198,7 @@ export function HomePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 divide-gray-200">
 
               {prideTimes30.map((l, i) => (
+
                 <div
                   key={l.rank}
                   className={`flex items-start gap-4 py-4 ${
@@ -1117,11 +1219,14 @@ export function HomePage() {
                   <div className="min-w-0">
 
                     <p className="text-sm font-bold text-gray-900">
+
                       {l.name}
+
                       <span className="font-normal text-gray-400">
                         {" "}
                         · {l.company}
                       </span>
+
                     </p>
 
                     <p className="text-xs text-gray-500 leading-[1.5] mt-1">
@@ -1129,11 +1234,17 @@ export function HomePage() {
                     </p>
 
                   </div>
+
                 </div>
+
               ))}
+
             </div>
+
           </section>
+
         </main>
+
       </div>
 
       <style>{`
@@ -1155,7 +1266,7 @@ export function HomePage() {
           color: inherit;
         }
       `}</style>
+
     </div>
   );
 }
-```
