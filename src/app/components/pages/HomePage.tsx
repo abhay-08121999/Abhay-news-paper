@@ -19,11 +19,14 @@ import Ln1Img from "../../../imports/Ln1.png";
 
 import { getQuotes } from "../../../services/marketApi";
 
-/* ─── DATA ─────────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   DATA
+───────────────────────────────────────────── */
 
 const heroStory = {
   category: "TOP STORY",
-  title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
+  title:
+    "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
   excerpt:
     "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and South Korea, expanding its already well-established relationship with China's Unitree.",
   image: HeroImg,
@@ -36,7 +39,7 @@ const sideStories = [
     title:
       "PwC 2026 Global Digital Trust Insights: Enterprises Escalate Defense Spending",
     excerpt:
-      "PwC's 2026 Global Digital Trust Insights survey, conducted across 3,887 business and technology executives in 72 countries, reveals that cybersecurity has risen to the top tier of board-level concerns across every major industry. The survey found that financial services (21%), industrial manufacturing (21%), and technology, media and telecom (19%) sectors represent the highest concentration of respondents, underscoring the cross-sector urgency of the digital trust imperative. The findings highlight that AI-driven attack methods are prompting accelerated investment in both preventive and detection-oriented security frameworks. Executives report that the attack surface has expanded dramatically with the proliferation of generative AI tools inside enterprises — as every AI integration creates a new potential entry point for adversarial prompt injection, data exfiltration, and credential harvesting.",
+      "PwC's 2026 Global Digital Trust Insights survey, conducted across 3,887 business and technology executives in 72 countries, reveals that cybersecurity has risen to the top tier of board-level concerns across every major industry.",
     time: "25 min ago",
     image:
       "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxzbWFydCUyMGNpdHklMjB1cmJhbiUyMGZ1dHVyZSUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -45,7 +48,8 @@ const sideStories = [
   {
     id: 2,
     tag: "FINANCE INSIGHTS",
-    title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+    title:
+      "U.S. Equity Markets Rally on Strong Manufacturing Data",
     excerpt:
       "U.S. equity markets extended a recovery rally into the first week of June, driven by stronger-than-expected domestic factory data and a continued surge in technology stocks.",
     time: "1 hr ago",
@@ -58,16 +62,19 @@ const pt30 = [
   {
     id: 1,
     tag: "PRIDE TIMES 30 — LEADERSHIP PROFILES",
-    title: "PRIDE TIMES 30 — LEADERS TO WATCH IN 2026",
+    title:
+      "PRIDE TIMES 30 — LEADERS TO WATCH IN 2026",
     excerpt:
-      "The Pride Times 30 recognizes thirty global leaders across business, technology, and innovation who are defining the direction of the global economy this year. This edition highlights ten names at the forefront:",
+      "The Pride Times 30 recognizes thirty global leaders across business, technology, and innovation who are defining the direction of the global economy this year.",
     time: "25 min ago",
     image: Pt30Img,
     link: "/billionaires",
   },
 ];
 
-/* ─── LATEST NEWS ─────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   LATEST NEWS
+───────────────────────────────────────────── */
 
 const latestNewsTabs = [
   "All",
@@ -111,7 +118,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 2,
       hot: false,
-      title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+      title:
+        "U.S. Equity Markets Rally on Strong Manufacturing Data",
       time: "35 min ago",
       image: HeroImg,
       link: "/markets",
@@ -140,7 +148,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 1,
       hot: true,
-      title: "S&P 500 hits all-time high as Fed holds rates steady",
+      title:
+        "S&P 500 hits all-time high as Fed holds rates steady",
       time: "10 min ago",
       image:
         "https://images.unsplash.com/photo-1778406466505-6129d0555557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
@@ -149,7 +158,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 2,
       hot: false,
-      title: "Gold surges to $2,400 amid global uncertainty",
+      title:
+        "Gold surges to $2,400 amid global uncertainty",
       time: "40 min ago",
       image:
         "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
@@ -258,7 +268,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
         "Reliance Industries enters global streaming market",
       time: "3 hr ago",
       image:
-        "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwaGFja2luZyUyMGRhdGElMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
+        "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwaGFja2luZyUyMGRhdGElMjB3aXJlZCUyMGRhdGElMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
       link: "/business-news",
     },
   ],
@@ -402,7 +412,9 @@ const latestNewsData: Record<string, NewsItem[]> = {
   ],
 };
 
-/* ─── EDITOR'S PICKS ──────────────────────────────── */
+/* ─────────────────────────────────────────────
+   EDITOR'S PICKS
+───────────────────────────────────────────── */
 
 const editorsPicks = [
   {
@@ -416,7 +428,9 @@ const editorsPicks = [
   },
 ];
 
-/* ─── MAGAZINE ────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   MAGAZINE
+───────────────────────────────────────────── */
 
 const magazinePreview = {
   title: "The AI Revolution",
@@ -426,7 +440,9 @@ const magazinePreview = {
     "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxidXNpbmVzcyUyMG1hZ2F6aW5lJTIwY292ZXIlMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
 };
 
-/* ─── PRIDE TIMES 30 ──────────────────────────────── */
+/* ─────────────────────────────────────────────
+   PRIDE TIMES 30
+───────────────────────────────────────────── */
 
 const prideTimes30 = [
   {
@@ -501,7 +517,9 @@ const prideTimes30 = [
   },
 ];
 
-/* ─── HELPERS ─────────────────────────────────────── */
+/* ─────────────────────────────────────────────
+   HELPERS
+───────────────────────────────────────────── */
 
 function ChangeChip({
   change,
@@ -527,7 +545,9 @@ function ChangeChip({
   );
 }
 
-/* ─── MAIN COMPONENT ──────────────────────────────── */
+/* ─────────────────────────────────────────────
+   MAIN COMPONENT
+───────────────────────────────────────────── */
 
 export function HomePage() {
   const [activeMarketTab, setActiveMarketTab] =
@@ -575,7 +595,9 @@ export function HomePage() {
     }
   };
 
-  /* ─── NEWS DATA ─────────────────────────────────── */
+  /* ─────────────────────────────────────────────
+     NEWS DATA
+  ───────────────────────────────────────────── */
 
   const allNewsItems = latestNewsData["All"];
 
@@ -592,11 +614,14 @@ export function HomePage() {
 
   return (
     <div className="bg-white min-h-screen font-sans text-gray-900 antialiased">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <main className="pt-8 md:pt-10 pb-14">
 
-          {/* ── THREE COLUMN HERO ── */}
+          {/* ─────────────────────────────────────────
+              THREE COLUMN HERO
+          ───────────────────────────────────────── */}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 pb-10 mb-10 border-b border-gray-200">
 
@@ -606,6 +631,7 @@ export function HomePage() {
               to="/technology"
               className="group relative block overflow-hidden rounded-md"
             >
+
               <ImageWithFallback
                 src={heroStory.image}
                 alt={heroStory.title}
@@ -634,6 +660,7 @@ export function HomePage() {
                 </span>
 
               </div>
+
             </Link>
 
             {/* MAIN ARTICLE */}
@@ -776,7 +803,7 @@ export function HomePage() {
                     <Link
                       key={item.id}
                       to={item.link}
-                      className="group flex flex-col gap-1 py-3 first:pt-3"
+                      className="group flex flex-col gap-1 py-3"
                     >
 
                       <span className="text-[10px] uppercase tracking-wide text-gray-400">
@@ -871,12 +898,10 @@ export function HomePage() {
                   className="mt-2.5 text-[10px] font-bold text-red-600 flex items-center gap-1 hover:gap-2 transition-all uppercase tracking-wide w-fit"
                 >
                   View All Markets
-
                   <ArrowRight
                     size={10}
                     strokeWidth={2.25}
                   />
-
                 </Link>
 
               </div>
@@ -885,7 +910,9 @@ export function HomePage() {
 
           </div>
 
-          {/* ── SECONDARY NEWS ── */}
+          {/* ─────────────────────────────────────────
+              MORE STORIES
+          ───────────────────────────────────────── */}
 
           <div className="mb-14">
 
@@ -920,19 +947,25 @@ export function HomePage() {
 
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-6">
+            {/* 
+              IMPORTANT:
+              Each news item has its own full-width border.
+              The border is attached directly to the Link.
+            */}
 
-              {/* NEWS CARDS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-6">
 
               {secondaryCards.map((card) => (
 
                 <Link
                   key={card.id}
                   to={card.link}
-                  className="group block pb-5 border-b border-gray-200"
+                  className="group block w-full border-b border-gray-300 pb-6 mb-6"
                 >
 
-                  <div className="overflow-hidden rounded-md">
+                  {/* IMAGE */}
+
+                  <div className="w-full overflow-hidden rounded-md">
 
                     <ImageWithFallback
                       src={card.image}
@@ -941,6 +974,8 @@ export function HomePage() {
                     />
 
                   </div>
+
+                  {/* CONTENT */}
 
                   <div className="mt-3">
 
@@ -976,10 +1011,10 @@ export function HomePage() {
                 <Link
                   key={p.id}
                   to="/leadership"
-                  className="group block pb-5 border-b border-gray-200"
+                  className="group block w-full border-b border-gray-300 pb-6 mb-6"
                 >
 
-                  <div className="overflow-hidden rounded-md">
+                  <div className="w-full overflow-hidden rounded-md">
 
                     <ImageWithFallback
                       src={p.image}
@@ -1020,7 +1055,9 @@ export function HomePage() {
 
           </div>
 
-          {/* ── TRUST / STATISTICS ── */}
+          {/* ─────────────────────────────────────────
+              TRUST / STATISTICS
+          ───────────────────────────────────────── */}
 
           <div className="bg-black rounded-md py-8 px-6 mb-14">
 
@@ -1066,7 +1103,9 @@ export function HomePage() {
 
           </div>
 
-          {/* ── MAGAZINE + LEADERSHIP ── */}
+          {/* ─────────────────────────────────────────
+              MAGAZINE + LEADERSHIP
+          ───────────────────────────────────────── */}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-14">
 
@@ -1169,7 +1208,9 @@ export function HomePage() {
 
           </div>
 
-          {/* ── PRIDE TIMES 30 ── */}
+          {/* ─────────────────────────────────────────
+              PRIDE TIMES 30
+          ───────────────────────────────────────── */}
 
           <section>
 
@@ -1247,7 +1288,12 @@ export function HomePage() {
 
       </div>
 
+      {/* ─────────────────────────────────────────
+          GLOBAL STYLES
+      ───────────────────────────────────────── */}
+
       <style>{`
+
         .no-scrollbar::-webkit-scrollbar {
           display: none;
         }
@@ -1265,6 +1311,7 @@ export function HomePage() {
           background: rgba(0, 0, 0, 0.12);
           color: inherit;
         }
+
       `}</style>
 
     </div>
