@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { Search, Menu, X, User, ChevronDown, Crown, LogOut, BookOpen } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { searchIndex } from "../data/searchIndex";
 
 /* Primary nav — consolidates the old two-row category navigation into one
    compact black bar, per the premium editorial redesign spec. */
@@ -28,6 +29,7 @@ export function Header() {
   const navigate = useNavigate();
   const { isSignedIn, user, signOut } = useAuth();
   const isPremium = user?.tier === "premium";
+  const searchBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!editionOpen) return;
@@ -36,6 +38,46 @@ export function Header() {
     }, 5000);
     return () => clearTimeout(timer);
   }, [editionOpen]);
+
+  /* Close the search dropdown on an outside click, so it behaves
+     like the other dropdowns (edition selector, user menu). */
+  useEffect(() => {
+    if (!searchOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (searchBoxRef.current && !searchBoxRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [searchOpen]);
+
+  /* Live results as the user types — matched against title and
+     category, capped to a short list for the dropdown. */
+  const searchResults = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return [];
+    return searchIndex
+      .filter(
+        (item) =>
+          item.title.toLowerCase().includes(q) ||
+          item.category.toLowerCase().includes(q) ||
+          item.excerpt.toLowerCase().includes(q)
+      )
+      .slice(0, 6);
+  }, [searchQuery]);
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+    setSearchQuery("");
+  };
+
+  const runFullSearch = () => {
+    const q = searchQuery.trim();
+    if (!q) return;
+    navigate(`/search?q=${encodeURIComponent(q)}`);
+    closeSearch();
+  };
 
   const handleSignOut = () => {
     signOut();
@@ -138,20 +180,60 @@ export function Header() {
           {/* Right controls */}
           <div className="flex items-center gap-2 flex-shrink-0">
             {searchOpen ? (
-              <div className="pt-search-box flex items-center gap-2 px-3 w-[220px] sm:w-[300px] lg:w-[420px]">
-                <Search size={14} className="text-gray-400 flex-shrink-0" />
-                <input
-                  autoFocus
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search for news, topics, companies..."
-                  className="text-sm outline-none w-full bg-transparent"
-                  onKeyDown={(e) => e.key === "Escape" && setSearchOpen(false)}
-                />
-                <button onClick={() => setSearchOpen(false)} aria-label="Close search">
-                  <X size={14} className="text-gray-400 hover:text-black" />
-                </button>
+              <div className="relative" ref={searchBoxRef}>
+                <div className="pt-search-box flex items-center gap-2 px-3 w-[220px] sm:w-[300px] lg:w-[420px]">
+                  <Search size={14} className="text-gray-400 flex-shrink-0" />
+                  <input
+                    autoFocus
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search for news, topics, companies..."
+                    className="text-sm outline-none w-full bg-transparent"
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") closeSearch();
+                      if (e.key === "Enter") runFullSearch();
+                    }}
+                  />
+                  <button onClick={closeSearch} aria-label="Close search">
+                    <X size={14} className="text-gray-400 hover:text-black" />
+                  </button>
+                </div>
+
+                {/* Live results dropdown */}
+                {searchQuery.trim() && (
+                  <div className="absolute right-0 top-full mt-2 w-[280px] sm:w-[360px] lg:w-[420px] bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-[360px] overflow-y-auto">
+                    {searchResults.length > 0 ? (
+                      <>
+                        {searchResults.map((item) => (
+                          <Link
+                            key={item.id}
+                            to={item.link}
+                            onClick={closeSearch}
+                            className="flex flex-col gap-0.5 px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors"
+                          >
+                            <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.12em]">
+                              {item.category}
+                            </span>
+                            <span className="text-sm font-medium text-gray-900 leading-[1.35] line-clamp-2">
+                              {item.title}
+                            </span>
+                          </Link>
+                        ))}
+                        <button
+                          onClick={runFullSearch}
+                          className="block w-full text-left px-4 py-2.5 text-xs font-semibold text-red-600 uppercase tracking-wide hover:bg-gray-50 transition-colors"
+                        >
+                          See all results for "{searchQuery.trim()}"
+                        </button>
+                      </>
+                    ) : (
+                      <div className="px-4 py-4 text-sm text-gray-500">
+                        No results found for "{searchQuery.trim()}"
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             ) : (
               <button
