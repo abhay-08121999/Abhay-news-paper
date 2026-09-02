@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Crown, Instagram, Youtube, ChevronUp } from "lucide-react";
 import logoImg from "../../imports/logo.png";
 
-const GOLD = "#D4A017";
+const ACCENT = "#DC2626";
 
 /* Brand icons not in lucide (X / Pinterest) as tiny inline marks */
 function XIcon({ size = 18 }: { size?: number }) {
@@ -43,20 +43,20 @@ export function Footer() {
       <div className="max-w-5xl mx-auto px-4">
         {/* Ornamental top rule */}
         <div className="flex items-center justify-center gap-3 mb-10">
-          <span className="h-px flex-1" style={{ background: `linear-gradient(to right, transparent, ${GOLD}99)` }} />
-          <span className="w-1.5 h-1.5 rotate-45" style={{ background: GOLD }} />
-          <Crown size={22} style={{ color: GOLD }} fill={GOLD} />
-          <span className="w-1.5 h-1.5 rotate-45" style={{ background: GOLD }} />
-          <span className="h-px flex-1" style={{ background: `linear-gradient(to left, transparent, ${GOLD}99)` }} />
+          <span className="h-px flex-1" style={{ background: `linear-gradient(to right, transparent, ${ACCENT}99)` }} />
+          <span className="w-1.5 h-1.5 rotate-45" style={{ background: ACCENT }} />
+          <Crown size={22} style={{ color: ACCENT }} fill={ACCENT} />
+          <span className="w-1.5 h-1.5 rotate-45" style={{ background: ACCENT }} />
+          <span className="h-px flex-1" style={{ background: `linear-gradient(to left, transparent, ${ACCENT}99)` }} />
         </div>
 
         {/* Brand */}
         <Link to="/" className="flex items-center justify-center gap-5 mb-2 text-center sm:text-left">
           <img src={logoImg} alt="The Pride Times" className="h-16 w-16 sm:h-20 sm:w-20 object-contain flex-shrink-0" />
-          <span className="hidden sm:block h-16 w-px" style={{ background: `${GOLD}55` }} />
+          <span className="hidden sm:block h-16 w-px" style={{ background: `${ACCENT}55` }} />
           <div>
             <h2 className="font-serif text-3xl sm:text-5xl tracking-tight leading-none">
-              The <span style={{ color: GOLD }}>Pride</span> Times
+              The <span style={{ color: ACCENT }}>Pride</span> Times
             </h2>
             <p className="font-serif italic text-sm sm:text-base text-gray-300 mt-2">
               Voices That Inspire. Stories That Matter.
@@ -66,9 +66,9 @@ export function Footer() {
 
         {/* Ornamental divider */}
         <div className="flex items-center justify-center gap-3 my-8">
-          <span className="h-px w-20 sm:w-28" style={{ background: `${GOLD}66` }} />
-          <span className="w-1.5 h-1.5 rotate-45" style={{ background: GOLD }} />
-          <span className="h-px w-20 sm:w-28" style={{ background: `${GOLD}66` }} />
+          <span className="h-px w-20 sm:w-28" style={{ background: `${ACCENT}66` }} />
+          <span className="w-1.5 h-1.5 rotate-45" style={{ background: ACCENT }} />
+          <span className="h-px w-20 sm:w-28" style={{ background: `${ACCENT}66` }} />
         </div>
 
         {/* Social icons */}
@@ -81,7 +81,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="w-14 h-14 flex items-center justify-center border rounded-md text-white hover:bg-white/5 transition-colors"
-              style={{ borderColor: `${GOLD}88` }}
+              style={{ borderColor: `${ACCENT}88` }}
             >
               {icon(20)}
             </a>
@@ -95,7 +95,7 @@ export function Footer() {
               <Link to={link.path} className="hover:text-white transition-colors">
                 {link.label}
               </Link>
-              {i < bottomLinks.length - 1 && <span style={{ color: `${GOLD}88` }}>|</span>}
+              {i < bottomLinks.length - 1 && <span style={{ color: `${ACCENT}88` }}>|</span>}
             </span>
           ))}
         </div>
@@ -114,7 +114,7 @@ export function Footer() {
               <button
                 onClick={() => setCookieDismissed(true)}
                 className="border rounded-md px-4 py-2 text-white hover:bg-white/5 transition-colors whitespace-nowrap"
-                style={{ borderColor: `${GOLD}88` }}
+                style={{ borderColor: `${ACCENT}88` }}
               >
                 Allow cookies
               </button>
@@ -128,7 +128,7 @@ export function Footer() {
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Back to top"
         className="fixed bottom-6 right-6 w-11 h-11 rounded-md flex items-center justify-center text-black shadow-lg hover:brightness-110 transition"
-        style={{ background: GOLD }}
+        style={{ background: ACCENT }}
       >
         <ChevronUp size={20} />
       </button>
