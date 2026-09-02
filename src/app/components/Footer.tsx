@@ -22,7 +22,7 @@ function PinterestIcon({ size = 18 }: { size?: number }) {
 }
 
 const socialLinks = [
-  { icon: (s: number) => <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.507 17.523 2 12 2S2 6.507 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.878h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z"/></svg>), href: "https://www.facebook.com/thepridetime", label: "Facebook" },
+  { icon: (s: number) => <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor"><path d="M22 12.06C22 6.507 17.523 2 12 2S2 6.507 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.878h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z"/></svg>, href: "https://www.facebook.com/thepridetime", label: "Facebook" },
   { icon: (s: number) => <Instagram size={s} />, href: "https://www.instagram.com/thepridetime/", label: "Instagram" },
   { icon: (s: number) => <XIcon size={s} />, href: "https://x.com/thepridetime", label: "X" },
   { icon: (s: number) => <Youtube size={s} />, href: "https://www.youtube.com/@thepridetime", label: "YouTube" },
