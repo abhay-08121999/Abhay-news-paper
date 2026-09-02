@@ -4,7 +4,6 @@ import { Crown, Instagram, Youtube, ChevronUp } from "lucide-react";
 import logoImg from "../../imports/logo.png";
 
 const GOLD = "#D4A017";
-const HEADLINE_RED = "#DC2626";
 
 /* Brand icons not in lucide (X / Pinterest) as tiny inline marks */
 function XIcon({ size = 18 }: { size?: number }) {
@@ -56,10 +55,10 @@ export function Footer() {
           <img src={logoImg} alt="The Pride Times" className="h-16 w-16 sm:h-20 sm:w-20 object-contain flex-shrink-0" />
           <span className="hidden sm:block h-16 w-px" style={{ background: `${GOLD}55` }} />
           <div>
-            <h2 className="font-serif text-3xl sm:text-5xl tracking-tight leading-none">
-              The <span style={{ color: HEADLINE_RED }}>Pride</span> Times
-            </h2>
-            <p className="font-serif italic text-sm sm:text-base text-gray-300 mt-2">
+            <div className="pt-logo text-2xl sm:text-3xl lg:text-[38px] leading-none">
+              THE <span className="pt-logo-accent">PRIDE</span> TIMES
+            </div>
+            <p className="text-xs sm:text-sm text-gray-400 uppercase tracking-widest mt-2">
               Voices That Inspire. Stories That Matter.
             </p>
           </div>
