@@ -55,7 +55,7 @@ export function Footer() {
           <img src={logoImg} alt="The Pride Times" className="h-16 w-16 sm:h-20 sm:w-20 object-contain flex-shrink-0" />
           <span className="hidden sm:block h-16 w-px" style={{ background: `${GOLD}55` }} />
           <div>
-            <div className="pt-logo text-2xl sm:text-3xl lg:text-[38px] leading-none">
+            <div className="pt-logo text-3xl sm:text-4xl lg:text-5xl leading-none">
               THE <span className="pt-logo-accent">PRIDE</span> TIMES
             </div>
             <p className="text-xs sm:text-sm text-gray-400 uppercase tracking-widest mt-2">
