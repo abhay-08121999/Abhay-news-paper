@@ -47,6 +47,47 @@ const GRID = "#3A3934";
 const MUTE = "#8A887F";
 
 /* =========================================================
+   GLOBAL MARKETS REPORT — editorial wire content
+========================================================= */
+
+const equityRegions = [
+  {
+    wire: "US",
+    region: "United States",
+    points: [
+      "The S&P 500 finished July marginally lower (-0.13%), marking its first losing July since 2014, despite one of the strongest earnings seasons in history.",
+      "The Nasdaq-100 dropped 6.6% as semiconductor and AI-exposed stocks faced significant pressure amid questions about AI monetization and overcapacity.",
+      "Market breadth showed resilience: the equal-weighted S&P 500 advanced 0.78–0.9%, outperforming the cap-weighted index by over 100 basis points.",
+      "The Russell 2000 (small-cap index) gained 22% over the first seven months of 2026 — the best start to a year for small U.S. companies since 1991.",
+    ],
+  },
+  {
+    wire: "EU",
+    region: "Europe",
+    points: [
+      "The STOXX 600 posted a fourth consecutive monthly gain, reaching a new record high despite volatility from U.S.–Iran tensions.",
+      "Oil & Gas was the best-performing sector, benefiting from elevated crude prices.",
+      "Financials delivered strong gains — Santander +1.9%, BNP Paribas +7.4%.",
+    ],
+  },
+  {
+    wire: "ASIA",
+    region: "Asia",
+    points: [
+      "Japan's Nikkei 225 lost 8.1% in July as semiconductor and AI stocks corrected sharply.",
+      "A historic joint U.S.–Japan currency intervention in late July stabilized the yen, which had weakened to multi-decade lows (160–165 per dollar).",
+      "Japan spent approximately ¥8.45 trillion (~$52.8 billion) on July 31 alone.",
+    ],
+  },
+];
+
+const fixedIncomePoints = [
+  "U.S. Treasury yields rose sharply: the 10-year yield climbed from ~4.45% to 4.75%, while the 30-year yield hit ~5.5% — levels not seen in nearly two decades.",
+  "The Federal Reserve, under new Chair Kevin Warsh, held rates steady at 3.75% in late July, though two officials dissented in favor of an immediate hike.",
+  "German Bund yields rose from ~2.95% to 3.20% as investors reassessed the likelihood of further ECB tightening.",
+];
+
+/* =========================================================
    MARKET TABLE
 ========================================================= */
 
@@ -387,17 +428,32 @@ export function MarketsPage() {
             Cryptocurrency
           </button>
 
+
+          <a
+            href="#markets-report"
+            className="
+              text-[11px]
+              font-sans
+              uppercase
+              tracking-[0.12em]
+              leading-none
+              text-[#55534C]
+              hover:text-[#A32F26]
+              transition-colors
+              border-b
+              border-transparent
+              hover:border-[#A32F26]
+              pb-0.5
+            "
+          >
+            Markets Report
+          </a>
+
         </div>
 
 
         {/* =================================================
             GLOBAL MARKETS DASHBOARD / TERMINAL
-
-            UPDATED:
-            - rounded-md
-            - overflow-hidden
-
-            Everything else remains unchanged.
         ================================================= */}
 
         <div
@@ -919,6 +975,71 @@ export function MarketsPage() {
           )}
 
         </div>
+
+
+        {/* =================================================
+            GLOBAL MARKETS REPORT — editorial wire dispatch
+            Matches the column-ruled dispatch pattern used on
+            WorldPage / EnergyPage, on the paper background.
+        ================================================= */}
+
+        <section id="markets-report" className="mt-16 scroll-mt-6">
+
+          <div className="border-b-2 border-[#17140F] pb-2.5 mb-2 flex items-baseline justify-between">
+            <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">
+              Global Markets Report
+            </h2>
+            <span className="font-mono text-[10px] text-[#8A887F]">July 2026 Wrap</span>
+          </div>
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[#8A887F] mb-8">
+            1. Global Markets
+          </p>
+
+          {/* 1.1 Equity Markets */}
+          <div className="mb-12">
+            <h3 className="text-[13px] uppercase tracking-[0.14em] font-semibold text-[#A32F26] mb-5">
+              1.1 &nbsp;Equity Markets
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#D9D4C7]">
+              {equityRegions.map((r) => (
+                <div key={r.region} className="pb-8 md:pb-0 md:px-6 md:first:pl-0 md:last:pr-0">
+                  <div className="flex items-baseline gap-2 mb-4">
+                    <span className="font-mono text-[11px] font-bold text-[#A32F26]">{r.wire}</span>
+                    <span className="text-[11px] text-[#8A887F]">—</span>
+                    <h4 className="uppercase tracking-[0.1em] text-xs font-semibold text-[#17140F]">
+                      {r.region}
+                    </h4>
+                  </div>
+                  <ul className="flex flex-col gap-3">
+                    {r.points.map((p, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-[#A32F26] text-[10px] mt-1.5 shrink-0">▪</span>
+                        <p className="text-[13.5px] leading-relaxed text-[#3A3934]">{p}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 1.2 Fixed Income & Bonds */}
+          <div>
+            <h3 className="text-[13px] uppercase tracking-[0.14em] font-semibold text-[#A32F26] mb-5">
+              1.2 &nbsp;Fixed Income &amp; Bonds
+            </h3>
+            <ul className="flex flex-col gap-3 max-w-3xl border-t border-[#D9D4C7] pt-5">
+              {fixedIncomePoints.map((p, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-[#A32F26] text-[10px] mt-1.5 shrink-0">▪</span>
+                  <p className="text-[13.5px] leading-relaxed text-[#3A3934]">{p}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+        </section>
 
       </div>
 
