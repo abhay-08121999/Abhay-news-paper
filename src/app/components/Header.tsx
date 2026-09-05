@@ -283,10 +283,10 @@ export function Header() {
               </div>
             ) : (
               <>
-                <Link to="/signin" className="pt-account-btn hidden sm:flex items-center justify-center transition-colors hover:bg-gray-50" aria-label="Sign In">
+                <Link to="/login" className="pt-account-btn hidden sm:flex items-center justify-center transition-colors hover:bg-gray-50" aria-label="Sign In">
                   <User size={18} className="text-gray-700" />
                 </Link>
-                <Link to="/signin" className="pt-subscribe-btn hidden md:inline-flex items-center">
+                <Link to="/signup" className="pt-subscribe-btn hidden md:inline-flex items-center">
                   Subscribe
                 </Link>
               </>
@@ -323,7 +323,7 @@ export function Header() {
               </Link>
             ))}
             {!isSignedIn ? (
-              <Link to="/signin" className="mt-3 block text-center pt-subscribe-btn" onClick={() => setMobileOpen(false)}>
+              <Link to="/login" className="mt-3 block text-center pt-subscribe-btn" onClick={() => setMobileOpen(false)}>
                 Sign In / Subscribe
               </Link>
             ) : (
