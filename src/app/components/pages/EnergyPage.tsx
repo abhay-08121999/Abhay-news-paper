@@ -115,13 +115,29 @@ const energyReportGroups = [
       "Henry Hub spot prices are forecast to average $2.87/MMBtu in Q3 2026, down 50 cents from the July STEO, due to reduced LNG feedgas demand and robust production.",
     ],
   },
+  {
+    code: "PWR",
+    title: "Power & Renewables",
+    points: [
+      "Solar, hydropower, and wind generation grew by 21%, 9%, and 6% respectively in H1 2026 vs. H1 2025.",
+      "Natural gas-fired electricity generation increased 2% in H1 2026 and is forecast to rise further in 2027 as gas prices remain relatively low.",
+    ],
+    growth: [
+      { label: "Solar", value: 21 },
+      { label: "Hydropower", value: 9 },
+      { label: "Wind", value: 6 },
+      { label: "Gas-fired", value: 2 },
+    ],
+  },
 ];
 
 const energyReportStats = [
   { value: "13.83M", label: "US crude output, bbl/d (2026F)" },
   { value: "122.5", label: "US gas output, Bcf/d (2026F)" },
   { value: "$2.87", label: "Henry Hub, /MMBtu (Q3 2026F)" },
-  { value: "+3.4%", label: "Gas production growth, YoY" },
+  { value: "+21%", label: "Solar generation growth, H1 YoY" },
+  { value: "+9%", label: "Hydropower growth, H1 YoY" },
+  { value: "+6%", label: "Wind growth, H1 YoY" },
 ];
 
 /** Bolds percentages, currency amounts, and unit figures inline so key
@@ -380,7 +396,7 @@ export function EnergyPage() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {energyReportGroups.map((group) => (
               <div
                 key={group.code}
@@ -393,7 +409,7 @@ export function EnergyPage() {
                     {group.title}
                   </h3>
                 </div>
-                <ul className="flex flex-col gap-3 px-6 py-5">
+                <ul className="flex flex-col gap-3 px-6 pt-5">
                   {group.points.map((p, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="text-[#B8752E] text-[10px] mt-1.5 shrink-0">▪</span>
@@ -403,6 +419,33 @@ export function EnergyPage() {
                     </li>
                   ))}
                 </ul>
+
+                {group.growth && (
+                  <div className="px-6 pb-5 pt-4 mt-1">
+                    <p className="text-[9.5px] uppercase tracking-wider text-[#8A887F] mb-2.5">
+                      Generation growth, H1 2026 vs. H1 2025
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      {group.growth.map((g) => {
+                        const max = Math.max(...group.growth!.map((x) => x.value));
+                        return (
+                          <div key={g.label} className="flex items-center gap-2.5">
+                            <span className="text-[10.5px] text-[#55534C] w-[68px] shrink-0">{g.label}</span>
+                            <div className="flex-1 h-1.5 bg-[#F0EDE5] overflow-hidden">
+                              <div
+                                className="h-full bg-[#B8752E]"
+                                style={{ width: `${(g.value / max) * 100}%` }}
+                              />
+                            </div>
+                            <span className="text-[10.5px] font-mono font-semibold text-[#B8752E] w-7 text-right shrink-0">
+                              +{g.value}%
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
