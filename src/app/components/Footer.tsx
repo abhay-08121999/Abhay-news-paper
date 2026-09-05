@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router";
 import { Crown, Instagram, Youtube, Linkedin, Sparkle, ChevronUp } from "lucide-react";
 import logoImg from "../../imports/logo.png";
@@ -37,8 +36,6 @@ const bottomLinks = [
 ];
 
 export function Footer() {
-  const [cookieDismissed, setCookieDismissed] = useState(false);
-
   return (
     <footer className="bg-black text-white pt-10 pb-6 relative">
       <div className="max-w-5xl mx-auto px-4">
@@ -80,10 +77,40 @@ export function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 flex items-center justify-center border rounded-md text-white hover:bg-white/5 transition-colors"
+                  className="group/icon relative w-11 h-11 flex items-center justify-center border rounded-md text-white transition-all duration-200 ease-out hover:scale-110 hover:-translate-y-0.5 active:scale-95"
                   style={{ borderColor: `${GOLD}88` }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = GOLD;
+                    e.currentTarget.style.color = "#000";
+                    e.currentTarget.style.borderColor = GOLD;
+                    e.currentTarget.style.boxShadow = `0 4px 14px ${GOLD}55`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "#fff";
+                    e.currentTarget.style.borderColor = `${GOLD}88`;
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
                 >
                   {icon(17)}
+                  {/* Tooltip pop */}
+                  <span
+                    className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap
+                               text-[10px] uppercase tracking-wide text-black px-2 py-1 rounded z-10
+                               opacity-0 scale-90 group-hover/icon:opacity-100 group-hover/icon:scale-100
+                               transition-all duration-200"
+                    style={{ background: GOLD }}
+                  >
+                    {label}
+                    <span
+                      className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0"
+                      style={{
+                        borderLeft: "4px solid transparent",
+                        borderRight: "4px solid transparent",
+                        borderTop: `4px solid ${GOLD}`,
+                      }}
+                    />
+                  </span>
                 </a>
               ))}
             </div>
@@ -91,7 +118,13 @@ export function Footer() {
             <div className="flex items-center gap-3 text-sm text-gray-300">
               {bottomLinks.map((link, i) => (
                 <span key={link.label} className="flex items-center gap-3">
-                  <Link to={link.path} className="hover:text-white transition-colors">
+                  <Link
+                    to={link.path}
+                    className="inline-block transition-all duration-200 ease-out hover:scale-110 hover:-translate-y-0.5 hover:text-white active:scale-95"
+                    style={{ transformOrigin: "center" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = GOLD)}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "")}
+                  >
                     {link.label}
                   </Link>
                   {i < bottomLinks.length - 1 && <span style={{ color: `${GOLD}88` }}>|</span>}
@@ -110,25 +143,12 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Bottom bar — copyright + cookie notice */}
+      {/* Bottom bar — copyright only */}
       <div className="border-t border-white/10 mt-8 pt-4">
-        <div className="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-5xl mx-auto px-4 flex items-center justify-center">
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} The Pride Times. All rights reserved.
           </p>
-
-          {!cookieDismissed && (
-            <div className="flex items-center gap-4 text-xs text-gray-400">
-              <span>Your experience on this site will be improved by allowing cookies.</span>
-              <button
-                onClick={() => setCookieDismissed(true)}
-                className="border rounded-md px-4 py-2 text-white hover:bg-white/5 transition-colors whitespace-nowrap"
-                style={{ borderColor: `${GOLD}88` }}
-              >
-                Allow cookies
-              </button>
-            </div>
-          )}
         </div>
       </div>
 
