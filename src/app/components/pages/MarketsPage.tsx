@@ -87,6 +87,38 @@ const fixedIncomePoints = [
   "German Bund yields rose from ~2.95% to 3.20% as investors reassessed the likelihood of further ECB tightening.",
 ];
 
+const reportStats = [
+  { value: "-0.13%", label: "S&P 500 — July close" },
+  { value: "+22%", label: "Russell 2000 — YTD gain" },
+  { value: "-8.1%", label: "Nikkei 225 — July" },
+  { value: "4.75%", label: "US 10Y Treasury yield" },
+  { value: "3.75%", label: "Fed funds rate" },
+];
+
+/** Bolds percentages, currency amounts, and basis-point figures inline
+ *  so key numbers are scannable instead of buried in paragraph text. */
+const STAT_RE =
+  /([$€¥]\s?[\d.,]+(?:\s?(?:billion|trillion|million))?|-?\d+(?:\.\d+)?%|\d+(?:\.\d+)?\s?(?:basis points|bps))/g;
+
+function Emphasize({ text, color = "#A32F26" }: { text: string; color?: string }) {
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+  const re = new RegExp(STAT_RE);
+  while ((match = re.exec(text)) !== null) {
+    if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
+    nodes.push(
+      <strong key={key++} className="font-semibold tabular-nums" style={{ color }}>
+        {match[0]}
+      </strong>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  return <>{nodes}</>;
+}
+
 /* =========================================================
    MARKET TABLE
 ========================================================= */
@@ -991,9 +1023,26 @@ export function MarketsPage() {
             </h2>
             <span className="font-mono text-[10px] text-[#8A887F]">July 2026 Wrap</span>
           </div>
-          <p className="text-[11px] uppercase tracking-[0.14em] text-[#8A887F] mb-8">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[#8A887F] mb-6">
             1. Global Markets
           </p>
+
+          {/* Key figures strip */}
+          <div className="flex items-stretch overflow-x-auto no-scrollbar border border-[#D9D4C7] bg-white mb-10">
+            {reportStats.map((s, i) => (
+              <div
+                key={s.label}
+                className={`flex-1 min-w-[130px] px-5 py-4 ${i > 0 ? "border-l border-[#D9D4C7]" : ""}`}
+              >
+                <p className="text-xl sm:text-2xl font-mono font-semibold tabular-nums text-[#A32F26]">
+                  {s.value}
+                </p>
+                <p className="text-[10px] uppercase tracking-wide text-[#8A887F] mt-1 leading-tight">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
 
           {/* 1.1 Equity Markets */}
           <div className="mb-12">
@@ -1001,21 +1050,26 @@ export function MarketsPage() {
               1.1 &nbsp;Equity Markets
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#D9D4C7]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {equityRegions.map((r) => (
-                <div key={r.region} className="pb-8 md:pb-0 md:px-6 md:first:pl-0 md:last:pr-0">
-                  <div className="flex items-baseline gap-2 mb-4">
+                <div
+                  key={r.region}
+                  className="border border-[#D9D4C7] bg-white hover:shadow-[0_2px_10px_rgba(23,20,15,0.06)] hover:-translate-y-0.5 transition-all duration-200"
+                >
+                  <div className="flex items-baseline gap-2 px-5 pt-4 pb-3 border-b border-[#D9D4C7]">
                     <span className="font-mono text-[11px] font-bold text-[#A32F26]">{r.wire}</span>
                     <span className="text-[11px] text-[#8A887F]">—</span>
                     <h4 className="uppercase tracking-[0.1em] text-xs font-semibold text-[#17140F]">
                       {r.region}
                     </h4>
                   </div>
-                  <ul className="flex flex-col gap-3">
+                  <ul className="flex flex-col gap-3 px-5 py-4">
                     {r.points.map((p, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <span className="text-[#A32F26] text-[10px] mt-1.5 shrink-0">▪</span>
-                        <p className="text-[13.5px] leading-relaxed text-[#3A3934]">{p}</p>
+                        <p className="text-[13px] leading-relaxed text-[#3A3934]">
+                          <Emphasize text={p} />
+                        </p>
                       </li>
                     ))}
                   </ul>
@@ -1029,14 +1083,18 @@ export function MarketsPage() {
             <h3 className="text-[13px] uppercase tracking-[0.14em] font-semibold text-[#A32F26] mb-5">
               1.2 &nbsp;Fixed Income &amp; Bonds
             </h3>
-            <ul className="flex flex-col gap-3 max-w-3xl border-t border-[#D9D4C7] pt-5">
-              {fixedIncomePoints.map((p, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <span className="text-[#A32F26] text-[10px] mt-1.5 shrink-0">▪</span>
-                  <p className="text-[13.5px] leading-relaxed text-[#3A3934]">{p}</p>
-                </li>
-              ))}
-            </ul>
+            <div className="border border-[#D9D4C7] bg-white px-6 py-5">
+              <ul className="flex flex-col gap-3.5 max-w-3xl">
+                {fixedIncomePoints.map((p, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-[#A32F26] text-[10px] mt-1.5 shrink-0">▪</span>
+                    <p className="text-[13.5px] leading-relaxed text-[#3A3934]">
+                      <Emphasize text={p} />
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
         </section>
