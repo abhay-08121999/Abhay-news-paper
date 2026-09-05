@@ -48,7 +48,8 @@ import { ResetPasswordPage } from "./components/pages/ResetPasswordPage";
 // AUTH PAGES
 // ============================================================
 
-import { SignInPage } from "./components/auth/SignInPage";
+import { LoginPage } from "./components/auth/LoginPage";
+import { SignUpPage } from "./components/auth/SignUpPage";
 import { DashboardPage } from "./components/auth/DashboardPage";
 
 // ============================================================
@@ -107,10 +108,14 @@ export default function App() {
           {/* ==================================================
               AUTH / STANDALONE PAGES
               ================================================== */}
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
 
           <Route
-            path="/signin"
-            element={<SignInPage />}
+            path="/signup"
+            element={<SignUpPage />}
           />
 
           <Route
