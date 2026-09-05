@@ -1,6 +1,5 @@
-
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { Clock, Factory, TrendingUp, Cpu, Car, Plane } from "lucide-react";
+import { Clock, Factory, TrendingUp, Cpu, Car, Plane, Globe2 } from "lucide-react";
 
 import Manu1Img from "../../../imports/Manu1.png";
 import Manu2Img from "../../../imports/Manu2.png";
@@ -229,6 +228,34 @@ const semiconductors: Story[] = [
   },
 ];
 
+const supplyChainStories: Story[] = [
+  {
+    id: 1,
+    title:
+      "German industrial data shows tentative signs of stabilization after the cabinet's pension-reform agreement, though the recovery remains fragile.",
+    time: "Just now",
+  },
+  {
+    id: 2,
+    title:
+      "Italy and Spain show relative resilience — Italy's Q2 2026 GDP expands 0.2% quarter-on-quarter as Spain outperforms at 0.7%.",
+    time: "Just now",
+  },
+  {
+    id: 3,
+    title:
+      "Italy's July Services PMI surges to 52.5, its highest reading since January 2026.",
+    time: "Just now",
+  },
+];
+
+const eurozoneSnapshot = [
+  { region: "Germany", label: "Pension Reform Cabinet Deal", value: "Agreed", status: "Fragile Recovery" },
+  { region: "Italy", label: "Q2 2026 GDP (QoQ)", value: "+0.2%", status: "Resilient" },
+  { region: "Spain", label: "Q2 2026 GDP (QoQ)", value: "+0.7%", status: "Outperforming" },
+  { region: "Italy", label: "July Services PMI", value: "52.5", status: "9-Month High" },
+];
+
 const mfgIndex = [
   {
     country: "USA",
@@ -274,7 +301,7 @@ const mfgIndex = [
 
 function StoryCard({ story }: { story: Story }) {
   return (
-    <article className="group py-3 border-b border-gray-200 last:border-b-0 cursor-pointer">
+    <article className="group py-3.5 border-b border-gray-200 last:border-b-0 cursor-pointer transition-colors duration-200 hover:bg-gray-50/70 -mx-2 px-2 rounded-sm">
       <h3 className="text-sm md:text-[15px] leading-snug font-medium text-gray-900 group-hover:text-red-600 transition-colors duration-200">
         {story.title}
       </h3>
@@ -301,7 +328,7 @@ function HeroStoryCard({
   return (
     <article className="group cursor-pointer">
       <div
-        className={`relative overflow-hidden bg-gray-100 rounded-sm ${
+        className={`relative overflow-hidden bg-gray-100 rounded-md shadow-sm group-hover:shadow-lg transition-shadow duration-300 ${
           large ? "h-72 md:h-[430px]" : "h-64 md:h-80"
         }`}
       >
@@ -314,7 +341,7 @@ function HeroStoryCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
         <div className="absolute left-4 bottom-4">
-          <span className="inline-block bg-red-600 text-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em]">
+          <span className="inline-block bg-red-600 text-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] rounded-sm shadow-sm">
             {story.category}
           </span>
         </div>
@@ -322,7 +349,7 @@ function HeroStoryCard({
 
       <div className="pt-4">
         <h2
-          className={`font-serif font-bold leading-tight text-gray-950 group-hover:text-red-600 transition-colors ${
+          className={`font-serif font-bold leading-tight text-gray-950 group-hover:text-red-600 transition-colors duration-200 ${
             large
               ? "text-2xl md:text-4xl"
               : "text-xl md:text-2xl"
@@ -354,7 +381,7 @@ function HeroStoryCard({
 
 function ManufacturingPMI() {
   return (
-    <aside className="border border-gray-200 bg-gray-50 p-5 h-fit">
+    <aside className="border border-gray-200 bg-gray-50 rounded-md p-5 h-fit shadow-sm">
       <div className="flex items-center gap-2 border-b border-gray-300 pb-3 mb-2">
         <TrendingUp size={16} className="text-red-600" />
 
@@ -371,7 +398,7 @@ function ManufacturingPMI() {
           return (
             <div
               key={`${item.country}-${item.value}`}
-              className="flex items-center justify-between py-3 border-b border-gray-200 last:border-0"
+              className="flex items-center justify-between py-3 border-b border-gray-200 last:border-0 transition-colors duration-200 hover:bg-white/70 -mx-2 px-2 rounded-sm"
             >
               <div className="pr-3">
                 <p className="text-sm font-semibold text-gray-900">
@@ -409,6 +436,66 @@ function ManufacturingPMI() {
 }
 
 /* =========================================================
+   EUROZONE SNAPSHOT PANEL
+========================================================= */
+
+function EurozoneSnapshot() {
+  return (
+    <aside className="border border-gray-200 bg-gray-50 rounded-md p-5 h-fit shadow-sm">
+      <div className="flex items-center gap-2 border-b border-gray-300 pb-3 mb-2">
+        <Globe2 size={16} className="text-red-600" />
+
+        <h2 className="text-xs font-bold uppercase tracking-[0.15em]">
+          Eurozone Snapshot
+        </h2>
+      </div>
+
+      <div>
+        {eurozoneSnapshot.map((item, idx) => {
+          const positive =
+            item.value.startsWith("+") || item.value === "52.5" || item.value === "Agreed";
+
+          return (
+            <div
+              key={`${item.region}-${idx}`}
+              className="flex items-center justify-between py-3 border-b border-gray-200 last:border-0 transition-colors duration-200 hover:bg-white/70 -mx-2 px-2 rounded-sm"
+            >
+              <div className="pr-3">
+                <p className="text-sm font-semibold text-gray-900">
+                  {item.region}
+                </p>
+
+                <p className="text-[10px] text-gray-500 uppercase tracking-wide mt-0.5">
+                  {item.label}
+                </p>
+              </div>
+
+              <div className="text-right shrink-0">
+                <p className="font-mono text-sm font-bold">
+                  {item.value}
+                </p>
+
+                <p
+                  className={`text-[10px] font-semibold uppercase ${
+                    positive ? "text-green-600" : "text-red-600"
+                  }`}
+                >
+                  {item.status}
+                </p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <p className="text-[10px] leading-5 text-gray-400 mt-3">
+        Figures referenced: Q2 2026 GDP and July 2026 PMI releases.
+      </p>
+    </aside>
+  );
+}
+
+/* =========================================================
    QUOTE BLOCK
 ========================================================= */
 
@@ -416,7 +503,7 @@ function IndustryQuote() {
   return (
     <div className="border-y-2 border-gray-900 py-5 my-2">
       <div className="flex gap-4">
-        <div className="w-1 bg-red-600 shrink-0" />
+        <div className="w-1 bg-red-600 shrink-0 rounded-full" />
 
         <div>
           <p className="font-serif italic text-lg md:text-xl leading-relaxed text-gray-800">
@@ -441,7 +528,7 @@ function IndustryStatistics() {
     <section>
       <SectionHeader title="Industry Statistics" icon={<Factory size={16} />} />
 
-      <div className="overflow-x-auto border border-gray-300">
+      <div className="overflow-x-auto border border-gray-300 rounded-md shadow-sm">
         <table className="w-full border-collapse text-sm">
           <tbody>
             <tr>
@@ -501,7 +588,7 @@ function IndustryStatistics() {
 
 export function ManufacturingPage() {
   return (
-    <div className="w-full bg-white text-gray-900">
+    <div className="w-full bg-white text-gray-900 antialiased">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
 
         {/* =================================================
@@ -510,7 +597,7 @@ export function ManufacturingPage() {
 
         <header className="border-b-4 border-black pb-4 mb-8">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center shadow-sm">
               <Factory size={19} />
             </div>
 
@@ -519,7 +606,7 @@ export function ManufacturingPage() {
                 Industry & Production
               </p>
 
-              <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-none mt-1">
+              <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold leading-none mt-1 tracking-tight">
                 Manufacturing & Industry
               </h1>
             </div>
@@ -565,6 +652,30 @@ export function ManufacturingPage() {
           <HeroStoryCard story={hero2} />
 
           <IndustryStatistics />
+        </section>
+
+        {/* =================================================
+            GLOBAL TRADE & SUPPLY CHAIN
+        ================================================= */}
+
+        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 border-t-2 border-black pt-8 mb-12">
+          <div className="lg:col-span-2">
+            <SectionHeader
+              title="Global Trade & Supply Chain"
+              icon={<Globe2 size={16} />}
+            />
+
+            <div>
+              {supplyChainStories.map((story) => (
+                <StoryCard
+                  key={`supply-${story.id}`}
+                  story={story}
+                />
+              ))}
+            </div>
+          </div>
+
+          <EurozoneSnapshot />
         </section>
 
         {/* =================================================
@@ -655,4 +766,3 @@ export function ManufacturingPage() {
     </div>
   );
 }
-
