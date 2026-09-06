@@ -165,7 +165,7 @@ export function SignUpPage() {
 
         <Link to="/" className="flex items-center gap-3 relative z-10">
           <img src={logoImg} alt="The Pride Times" className="h-10 w-auto object-contain" />
-          <span className="pt-logo text-xl tracking-wide">
+          <span className="pt-logo text-xl tracking-wide" style={{ color: "#fff" }}>
             THE <span className="pt-logo-accent">PRIDE</span> TIMES
           </span>
         </Link>
@@ -194,7 +194,7 @@ export function SignUpPage() {
         <div className="lg:hidden bg-black py-3 px-6">
           <Link to="/" className="flex items-center gap-3">
             <img src={logoImg} alt="The Pride Times" className="h-9 w-auto object-contain" />
-            <span className="pt-logo text-lg">
+            <span className="pt-logo text-lg" style={{ color: "#fff" }}>
               THE <span className="pt-logo-accent">PRIDE</span> TIMES
             </span>
           </Link>
