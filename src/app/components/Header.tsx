@@ -9,8 +9,8 @@ import { searchIndex } from "../data/searchIndex";
 const primaryNav = [
   { label: "Markets", path: "/markets" },
   { label: "Business News", path: "/business-news" },
-  { label: "International Business", path: "#" }, // no page for this yet
-  { label: "Startup Success", path: "#" }, // no page for this yet
+  { label: "International Business", path: "/international-news" },
+  { label: "Startup Success", path: "/startup-success" },
   { label: "CEO Spotlight", path: "/ceospotlight" },
   { label: "Magazines", path: "/magazine" },
   { label: "Innovation", path: "/innovation" },
@@ -91,7 +91,7 @@ export function Header() {
       <div className="pt-top-nav">
         <div className="pt-container h-full flex items-center justify-between">
           <nav className="hidden lg:flex items-center gap-6 h-full">
-            <a
+            
               href="https://www.youtube.com/@vmpridetimes"
               target="_blank"
               rel="noopener noreferrer"
@@ -304,7 +304,7 @@ export function Header() {
         <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 max-h-[70vh] overflow-y-auto">
           <nav className="flex flex-col gap-0">
             <Link to="/" className="py-2.5 text-sm border-b border-gray-100" onClick={() => setMobileOpen(false)}>Home</Link>
-            <a
+            
               href="https://www.youtube.com/@vmpridetimes"
               target="_blank"
               rel="noopener noreferrer"
