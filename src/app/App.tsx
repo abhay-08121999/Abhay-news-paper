@@ -15,6 +15,7 @@ import { TechnologyPage } from "./components/pages/TechnologyPage";
 import { FinancePage } from "./components/pages/FinancePage";
 import { BillionairesPage } from "./components/pages/BillionairesPage";
 import { WorldPage } from "./components/pages/WorldPage";
+import { InternationalNewsPage } from "./components/pages/InternationalNewsPage";
 
 import { CybersecurityPage } from "./components/pages/CybersecurityPage";
 import { EnergyPage } from "./components/pages/EnergyPage";
@@ -221,6 +222,19 @@ export default function App() {
                 topBanner={false}
               >
                 <WorldPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/international-news"
+            element={
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
+                <InternationalNewsPage />
               </MagazineLayout>
             }
           />
