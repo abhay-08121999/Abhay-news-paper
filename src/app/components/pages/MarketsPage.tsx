@@ -16,8 +16,12 @@ import { getQuotes } from "../../../services/marketApi";
 
 /* Same publication system as WorldPage / EnergyPage / WhiteHouseWatchPage:
    paper #FAFAF7  ink #17140F  ink-soft #55534C  rule #D9D4C7  wire (live) #A32F26
-   Markets gets its own register — a terminal console bolted into the paper page,
-   because live numeric feeds read differently from prose and deserve to look like it. */
+
+   The Markets dashboard used to be styled as a dark "Mac terminal" console
+   (traffic-light dots, near-black background). That's been replaced with a
+   "ticker board" treatment: a white, letterpress-bordered panel that still
+   reads as a live feed — the wire-red accent and a pulsing LIVE mark carry
+   that signal instead of a dark chrome window. */
 
 const spChartData = [
   { time: "9am", value: 5820 },
@@ -41,10 +45,13 @@ const sectorData = [
   { sector: "Industrial", change: 0.9 },
 ];
 
-const UP = "#34D399";
-const DOWN = "#C1523F";
-const GRID = "#3A3934";
+const UP = "#1E7A4C";
+const DOWN = "#A32F26";
+const GRID = "#E3DECF";
 const MUTE = "#8A887F";
+const INK = "#17140F";
+const INK_SOFT = "#55534C";
+const RULE = "#D9D4C7";
 
 /* =========================================================
    GLOBAL MARKETS REPORT — editorial wire content
@@ -120,7 +127,7 @@ function Emphasize({ text, color = "#A32F26" }: { text: string; color?: string }
 }
 
 /* =========================================================
-   MARKET TABLE
+   MARKET TABLE — light "ticker board" register
 ========================================================= */
 
 function MarketTable({
@@ -139,7 +146,7 @@ function MarketTable({
           {visibleCols.map((col) => (
             <th
               key={col}
-              className={`text-left font-normal py-2.5 border-b border-dashed border-[#3A3934] ${
+              className={`text-left font-normal py-2.5 border-b border-[#D9D4C7] ${
                 col === "change" ? "text-right" : ""
               }`}
             >
@@ -153,7 +160,7 @@ function MarketTable({
         {data.map((row, i) => (
           <tr
             key={i}
-            className="border-b border-white/5 last:border-b-0 hover:bg-white/[0.035] transition-colors"
+            className="border-b border-[#EFEBE1] last:border-b-0 hover:bg-[#FAFAF7] transition-colors"
           >
             {visibleCols.map((col) => (
               <td
@@ -164,8 +171,8 @@ function MarketTable({
                     : col === "name" ||
                       col === "pair" ||
                       col === "bond"
-                    ? "font-semibold text-[#EDE9DD]"
-                    : "text-[#B8B4A8] tabular-nums"
+                    ? "font-semibold text-[#17140F]"
+                    : "text-[#55534C] tabular-nums"
                 }`}
                 style={
                   col === "change"
@@ -485,23 +492,27 @@ export function MarketsPage() {
 
 
         {/* =================================================
-            GLOBAL MARKETS DASHBOARD / TERMINAL
+            GLOBAL MARKETS DASHBOARD — "Ticker Board"
+            White letterpress-bordered panel. A thin wire-red
+            rule along the top and a pulsing LIVE mark carry
+            the "live feed" signal instead of a dark console.
         ================================================= */}
 
         <div
           className="
-            bg-[#17140F]
-            text-[#EDE9DD]
+            bg-white
             border
-            border-[#17140F]
-            rounded-md
+            border-[#D9D4C7]
+            border-t-[3px]
+            border-t-[#A32F26]
+            rounded-sm
             overflow-hidden
-            shadow-[0_1px_0_0_#D9D4C7]
+            shadow-[0_10px_30px_-12px_rgba(23,20,15,0.12)]
           "
         >
 
           {/* =================================================
-              CONSOLE CHROME
+              BOARD HEADER
           ================================================= */}
 
           <div
@@ -510,35 +521,30 @@ export function MarketsPage() {
               items-center
               justify-between
               px-4
+              sm:px-5
               py-3.5
               border-b
-              border-dashed
-              border-[#55534C]
+              border-[#D9D4C7]
             "
           >
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
 
-              <span className="flex gap-1.5">
-
-                <span className="w-2 h-2 rounded-full bg-[#C1523F]" />
-
-                <span className="w-2 h-2 rounded-full bg-[#B8752E]" />
-
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-
-              </span>
+              <BarChart2
+                size={15}
+                strokeWidth={2}
+                className="text-[#17140F]"
+              />
 
               <span
                 className="
-                  font-mono
-                  text-[10px]
-                  uppercase
-                  tracking-[0.22em]
-                  text-[#EDE9DD]/80
+                  font-serif
+                  text-[15px]
+                  tracking-tight
+                  text-[#17140F]
                 "
               >
-                Market Terminal
+                Market Ticker
               </span>
 
             </div>
@@ -549,6 +555,7 @@ export function MarketsPage() {
                 font-mono
                 text-[9px]
                 font-semibold
+                tracking-[0.12em]
                 text-[#A32F26]
                 flex
                 items-center
@@ -612,8 +619,8 @@ export function MarketsPage() {
                   overflow-x-auto
                   no-scrollbar
                   border-b
-                  border-dashed
-                  border-[#55534C]
+                  border-[#D9D4C7]
+                  bg-[#FCFBF8]
                 "
               >
 
@@ -626,10 +633,9 @@ export function MarketsPage() {
                         flex-shrink-0
                         px-5
                         py-4
-                        font-mono
                         ${
                           i > 0
-                            ? "border-l border-[#3A3934]"
+                            ? "border-l border-[#E3DECF]"
                             : ""
                         }
                       `}
@@ -637,6 +643,7 @@ export function MarketsPage() {
 
                       <p
                         className="
+                          font-mono
                           text-[10px]
                           uppercase
                           tracking-[0.14em]
@@ -649,11 +656,11 @@ export function MarketsPage() {
 
                       <p
                         className="
-                          text-[15px]
-                          text-[#EDE9DD]
+                          font-serif
+                          text-[19px]
+                          text-[#17140F]
                           mt-1
                           tabular-nums
-                          font-semibold
                         "
                       >
                         {idx.value}
@@ -662,12 +669,14 @@ export function MarketsPage() {
 
                       <span
                         className="
+                          font-mono
                           text-[11px]
                           tabular-nums
                           flex
                           items-center
                           gap-1
                           mt-1
+                          font-semibold
                         "
                         style={{
                           color: idx.up ? UP : DOWN,
@@ -702,8 +711,7 @@ export function MarketsPage() {
                   divide-y
                   md:divide-y-0
                   md:divide-x
-                  divide-dashed
-                  divide-[#3A3934]
+                  divide-[#D9D4C7]
                 "
                 id="sectors"
               >
@@ -737,6 +745,7 @@ export function MarketsPage() {
                       className="
                         text-[10px]
                         font-mono
+                        font-semibold
                         tabular-nums
                       "
                       style={{ color: UP }}
@@ -786,10 +795,9 @@ export function MarketsPage() {
                         contentStyle={{
                           fontSize: 11,
                           borderRadius: 0,
-                          border:
-                            "1px solid #3A3934",
-                          background: "#17140F",
-                          color: "#EDE9DD",
+                          border: `1px solid ${RULE}`,
+                          background: "#FFFFFF",
+                          color: INK,
                         }}
                         labelStyle={{
                           color: MUTE,
@@ -805,7 +813,7 @@ export function MarketsPage() {
                         activeDot={{
                           r: 4,
                           fill: UP,
-                          stroke: "#17140F",
+                          stroke: "#FFFFFF",
                           strokeWidth: 2,
                         }}
                       />
@@ -862,7 +870,7 @@ export function MarketsPage() {
                         type="category"
                         tick={{
                           fontSize: 10,
-                          fill: "#B8B4A8",
+                          fill: INK_SOFT,
                         }}
                         width={58}
                         axisLine={false}
@@ -873,14 +881,12 @@ export function MarketsPage() {
                         contentStyle={{
                           fontSize: 11,
                           borderRadius: 0,
-                          border:
-                            "1px solid #3A3934",
-                          background: "#17140F",
-                          color: "#EDE9DD",
+                          border: `1px solid ${RULE}`,
+                          background: "#FFFFFF",
+                          color: INK,
                         }}
                         cursor={{
-                          fill:
-                            "rgba(255,255,255,0.03)",
+                          fill: "rgba(23,20,15,0.035)",
                         }}
                       />
 
@@ -926,8 +932,7 @@ export function MarketsPage() {
                   px-4
                   pt-3
                   border-t
-                  border-dashed
-                  border-[#55534C]
+                  border-[#D9D4C7]
                 "
               >
 
@@ -949,8 +954,8 @@ export function MarketsPage() {
                       transition-colors
                       ${
                         activeTab === tab
-                          ? "text-[#EDE9DD] border-b-2 border-[#A32F26]"
-                          : "text-[#8A887F] border-b-2 border-transparent hover:text-[#B8B4A8]"
+                          ? "text-[#17140F] border-b-2 border-[#A32F26]"
+                          : "text-[#8A887F] border-b-2 border-transparent hover:text-[#3A3934]"
                       }
                     `}
                   >
