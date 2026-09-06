@@ -165,7 +165,9 @@ export function SignUpPage() {
 
         <Link to="/" className="flex items-center gap-3 relative z-10">
           <img src={logoImg} alt="The Pride Times" className="h-10 w-auto object-contain" />
-          <span className="text-sm tracking-wide">The Pride Times</span>
+          <span className="pt-logo text-xl tracking-wide">
+            THE <span className="pt-logo-accent">PRIDE</span> TIMES
+          </span>
         </Link>
 
         <div className="relative z-10">
@@ -192,7 +194,9 @@ export function SignUpPage() {
         <div className="lg:hidden bg-black py-3 px-6">
           <Link to="/" className="flex items-center gap-3">
             <img src={logoImg} alt="The Pride Times" className="h-9 w-auto object-contain" />
-            <span className="text-white text-sm">The Pride Times</span>
+            <span className="pt-logo text-lg">
+              THE <span className="pt-logo-accent">PRIDE</span> TIMES
+            </span>
           </Link>
         </div>
 
