@@ -1,11 +1,9 @@
 
 import { Link } from "react-router";
 import {
-  Crown,
   Instagram,
   Youtube,
   Linkedin,
-  Sparkle,
   ChevronUp,
 } from "lucide-react";
 
@@ -87,7 +85,7 @@ const socialLinks = [
   },
 ];
 
-/* Footer Navigation Links */
+/* Footer Navigation */
 const bottomLinks = [
   {
     label: "Team",
@@ -105,17 +103,26 @@ const bottomLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white pt-10 pb-6 relative">
-
-      {/* Main Footer Container */}
+    <footer
+      className="bg-black text-white pt-10 pb-6 relative"
+      style={{
+        transform: "none",
+        transition: "none",
+        animation: "none",
+      }}
+    >
+      {/* Main Container */}
       <div className="max-w-5xl mx-auto px-4">
 
-        {/* =========================================
-            ORNAMENTAL TOP RULE
-        ========================================== */}
-        <div className="flex items-center justify-center gap-3 mb-10">
-
-          {/* Left Line */}
+        {/* Top Decorative Line */}
+        <div
+          className="flex items-center justify-center gap-3 mb-10"
+          style={{
+            transform: "none",
+            transition: "none",
+            animation: "none",
+          }}
+        >
           <span
             className="h-px flex-1"
             style={{
@@ -127,32 +134,22 @@ export function Footer() {
             }}
           />
 
-          {/* Left Diamond */}
           <span
             className="w-1.5 h-1.5 rotate-45"
             style={{
               background: GOLD,
+              transform: "rotate(45deg)",
             }}
           />
 
-          {/* Crown */}
-          <Crown
-            size={22}
-            style={{
-              color: GOLD,
-            }}
-            fill={GOLD}
-          />
-
-          {/* Right Diamond */}
           <span
             className="w-1.5 h-1.5 rotate-45"
             style={{
               background: GOLD,
+              transform: "rotate(45deg)",
             }}
           />
 
-          {/* Right Line */}
           <span
             className="h-px flex-1"
             style={{
@@ -165,27 +162,39 @@ export function Footer() {
           />
         </div>
 
-        {/* =========================================
-            MAIN FOOTER CONTENT
-        ========================================== */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 mb-2">
+        {/* Main Content */}
+        <div
+          className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 mb-2"
+          style={{
+            transform: "none",
+            transition: "none",
+            animation: "none",
+          }}
+        >
 
-          {/* =====================================
-              BRAND SECTION
-          ====================================== */}
+          {/* Brand */}
           <Link
             to="/"
             className="flex items-center gap-5 flex-shrink-0"
+            style={{
+              transform: "none",
+              transition: "none",
+              animation: "none",
+            }}
           >
-
             {/* Logo */}
             <img
               src={logoImg}
               alt="The Pride Times"
               className="h-14 w-14 sm:h-16 sm:w-16 object-contain flex-shrink-0"
+              style={{
+                transform: "none",
+                transition: "none",
+                animation: "none",
+              }}
             />
 
-            {/* Gold Divider */}
+            {/* Divider */}
             <span
               className="h-14 sm:h-16 w-px"
               style={{
@@ -193,13 +202,21 @@ export function Footer() {
               }}
             />
 
-            {/* Brand Text */}
-            <div>
-
+            {/* Brand Name */}
+            <div
+              style={{
+                transform: "none",
+                transition: "none",
+                animation: "none",
+              }}
+            >
               <div
                 className="pt-logo leading-none"
                 style={{
                   fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+                  transform: "none",
+                  transition: "none",
+                  animation: "none",
                 }}
               >
                 THE{" "}
@@ -212,13 +229,10 @@ export function Footer() {
               <p className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mt-2">
                 Voices That Inspire. Stories That Matter.
               </p>
-
             </div>
           </Link>
 
-          {/* =====================================
-              VERTICAL DIVIDER
-          ====================================== */}
+          {/* Vertical Divider */}
           <span
             className="hidden lg:block w-px self-stretch"
             style={{
@@ -226,65 +240,80 @@ export function Footer() {
             }}
           />
 
-          {/* =====================================
-              RIGHT SECTION
-          ====================================== */}
-          <div className="relative flex flex-col items-center lg:items-start gap-4">
+          {/* Right Section */}
+          <div
+            className="relative flex flex-col items-center lg:items-start gap-4"
+            style={{
+              transform: "none",
+              transition: "none",
+              animation: "none",
+            }}
+          >
 
-            {/* =================================
-                SOCIAL MEDIA BUTTONS
-            ================================== */}
-            <div className="flex items-center gap-3">
-
-              {socialLinks.map(
-                ({ icon, href, label }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    target="_blank"
-                    rel="noopener noreferrer"
-
-                    /*
-                     * IMPORTANT:
-                     * No hover classes.
-                     * No transition.
-                     * No animation.
-                     * No mouse events.
-                     */
-                    className="w-11 h-11 flex items-center justify-center border rounded-md text-white"
-
-                    style={{
-                      borderColor: `${GOLD}88`,
-                    }}
-                  >
-                    {icon(17)}
-                  </a>
-                )
-              )}
-
+            {/* Social Buttons */}
+            <div
+              className="flex items-center gap-3"
+              style={{
+                transform: "none",
+                transition: "none",
+                animation: "none",
+              }}
+            >
+              {socialLinks.map(({ icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 flex items-center justify-center border rounded-md text-white"
+                  style={{
+                    borderColor: `${GOLD}88`,
+                    background: "transparent",
+                    color: "#ffffff",
+                    transform: "none",
+                    transition: "none",
+                    animation: "none",
+                    boxShadow: "none",
+                  }}
+                >
+                  {icon(17)}
+                </a>
+              ))}
             </div>
 
-            {/* =================================
-                FOOTER NAVIGATION LINKS
-            ================================== */}
-            <div className="flex items-center gap-3 text-sm text-gray-300">
-
+            {/* Navigation Links */}
+            <div
+              className="flex items-center gap-3 text-sm text-gray-300"
+              style={{
+                transform: "none",
+                transition: "none",
+                animation: "none",
+              }}
+            >
               {bottomLinks.map((link, i) => (
-
                 <span
                   key={link.label}
                   className="flex items-center gap-3"
+                  style={{
+                    transform: "none",
+                    transition: "none",
+                    animation: "none",
+                  }}
                 >
-
                   <Link
                     to={link.path}
                     className="inline-block"
+                    style={{
+                      color: "#d1d5db",
+                      transform: "none",
+                      transition: "none",
+                      animation: "none",
+                    }}
                   >
                     {link.label}
                   </Link>
 
-                  {/* Separator */}
                   {i < bottomLinks.length - 1 && (
                     <span
                       style={{
@@ -294,46 +323,32 @@ export function Footer() {
                       |
                     </span>
                   )}
-
                 </span>
               ))}
-
             </div>
-
-            {/* =================================
-                STATIC SPARKLE
-            ================================== */}
-            <Sparkle
-              size={16}
-              className="absolute -bottom-1 -right-6 hidden sm:block"
-              style={{
-                color: `${GOLD}AA`,
-              }}
-              fill={`${GOLD}55`}
-            />
 
           </div>
         </div>
       </div>
 
-      {/* =========================================
-          COPYRIGHT BAR
-      ========================================== */}
-      <div className="border-t border-white/10 mt-8 pt-4">
-
+      {/* Copyright */}
+      <div
+        className="border-t border-white/10 mt-8 pt-4"
+        style={{
+          transform: "none",
+          transition: "none",
+          animation: "none",
+        }}
+      >
         <div className="max-w-5xl mx-auto px-4 flex items-center justify-center">
-
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} The Pride Times.
             All rights reserved.
           </p>
-
         </div>
       </div>
 
-      {/* =========================================
-          BACK TO TOP BUTTON
-      ========================================== */}
+      {/* Back To Top */}
       <button
         onClick={() =>
           window.scrollTo({
@@ -342,22 +357,19 @@ export function Footer() {
           })
         }
         aria-label="Back to top"
-
-        /*
-         * No hover effect.
-         * No transition.
-         * No brightness change.
-         * No scaling.
-         */
         className="fixed bottom-6 right-6 w-11 h-11 rounded-md flex items-center justify-center text-black shadow-lg"
-
         style={{
           background: GOLD,
+          color: "#000000",
+          transform: "none",
+          transition: "none",
+          animation: "none",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
         }}
       >
         <ChevronUp size={20} />
       </button>
-
     </footer>
   );
 }
+
