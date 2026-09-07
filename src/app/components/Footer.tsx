@@ -41,20 +41,25 @@ function PinterestIcon({ size = 18 }: { size?: number }) {
   );
 }
 
+/* Facebook Icon */
+function FacebookIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M22 12.06C22 6.507 17.523 2 12 2S2 6.507 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.878h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z" />
+    </svg>
+  );
+}
+
 /* Social Links */
 const socialLinks = [
   {
-    icon: (s: number) => (
-      <svg
-        width={s}
-        height={s}
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M22 12.06C22 6.507 17.523 2 12 2S2 6.507 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.878h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z" />
-      </svg>
-    ),
+    icon: (s: number) => <FacebookIcon size={s} />,
     href: "https://www.facebook.com/thepridetime",
     label: "Facebook",
   },
@@ -85,7 +90,7 @@ const socialLinks = [
   },
 ];
 
-/* Footer Navigation */
+/* Footer Navigation Links */
 const bottomLinks = [
   {
     label: "Team",
@@ -103,228 +108,109 @@ const bottomLinks = [
 
 export function Footer() {
   return (
-    <footer
-      className="bg-black text-white pt-10 pb-6 relative"
-      style={{
-        transform: "none",
-        transition: "none",
-        animation: "none",
-      }}
-    >
-      {/* Main Container */}
-      <div className="max-w-5xl mx-auto px-4">
+    <footer className="pt-footer">
+
+      {/* Main Footer */}
+      <div className="pt-footer-container">
 
         {/* Top Decorative Line */}
-        <div
-          className="flex items-center justify-center gap-3 mb-10"
-          style={{
-            transform: "none",
-            transition: "none",
-            animation: "none",
-          }}
-        >
-          <span
-            className="h-px flex-1"
-            style={{
-              background: `linear-gradient(
-                to right,
-                transparent,
-                ${GOLD}99
-              )`,
-            }}
-          />
+        <div className="pt-footer-top-line">
 
-          <span
-            className="w-1.5 h-1.5 rotate-45"
-            style={{
-              background: GOLD,
-              transform: "rotate(45deg)",
-            }}
-          />
+          <span className="pt-footer-line pt-footer-line-left" />
 
-          <span
-            className="w-1.5 h-1.5 rotate-45"
-            style={{
-              background: GOLD,
-              transform: "rotate(45deg)",
-            }}
-          />
+          <span className="pt-footer-diamond" />
 
-          <span
-            className="h-px flex-1"
-            style={{
-              background: `linear-gradient(
-                to left,
-                transparent,
-                ${GOLD}99
-              )`,
-            }}
-          />
+          <span className="pt-footer-diamond" />
+
+          <span className="pt-footer-line pt-footer-line-right" />
+
         </div>
 
         {/* Main Content */}
-        <div
-          className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 mb-2"
-          style={{
-            transform: "none",
-            transition: "none",
-            animation: "none",
-          }}
-        >
+        <div className="pt-footer-content">
 
-          {/* Brand */}
+          {/* Brand Section */}
           <Link
             to="/"
-            className="flex items-center gap-5 flex-shrink-0"
-            style={{
-              transform: "none",
-              transition: "none",
-              animation: "none",
-            }}
+            className="pt-footer-brand"
           >
             {/* Logo */}
             <img
               src={logoImg}
               alt="The Pride Times"
-              className="h-14 w-14 sm:h-16 sm:w-16 object-contain flex-shrink-0"
-              style={{
-                transform: "none",
-                transition: "none",
-                animation: "none",
-              }}
+              className="pt-footer-logo"
             />
 
-            {/* Divider */}
-            <span
-              className="h-14 sm:h-16 w-px"
-              style={{
-                background: `${GOLD}55`,
-              }}
-            />
+            {/* Logo Divider */}
+            <span className="pt-footer-logo-divider" />
 
-            {/* Brand Name */}
-            <div
-              style={{
-                transform: "none",
-                transition: "none",
-                animation: "none",
-              }}
-            >
-              <div
-                className="pt-logo leading-none"
-                style={{
-                  fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
-                  transform: "none",
-                  transition: "none",
-                  animation: "none",
-                }}
-              >
+            {/* Brand Text */}
+            <div className="pt-footer-brand-text">
+
+              <div className="pt-footer-title">
                 THE{" "}
-                <span className="pt-logo-accent">
+                <span className="pt-footer-title-accent">
                   PRIDE
                 </span>{" "}
                 TIMES
               </div>
 
-              <p className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mt-2">
+              <p className="pt-footer-tagline">
                 Voices That Inspire. Stories That Matter.
               </p>
+
             </div>
           </Link>
 
           {/* Vertical Divider */}
-          <span
-            className="hidden lg:block w-px self-stretch"
-            style={{
-              background: `${GOLD}40`,
-            }}
-          />
+          <span className="pt-footer-vertical-divider" />
 
           {/* Right Section */}
-          <div
-            className="relative flex flex-col items-center lg:items-start gap-4"
-            style={{
-              transform: "none",
-              transition: "none",
-              animation: "none",
-            }}
-          >
+          <div className="pt-footer-right">
 
             {/* Social Buttons */}
-            <div
-              className="flex items-center gap-3"
-              style={{
-                transform: "none",
-                transition: "none",
-                animation: "none",
-              }}
-            >
-              {socialLinks.map(({ icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-11 h-11 flex items-center justify-center border rounded-md text-white"
-                  style={{
-                    borderColor: `${GOLD}88`,
-                    background: "transparent",
-                    color: "#ffffff",
-                    transform: "none",
-                    transition: "none",
-                    animation: "none",
-                    boxShadow: "none",
-                  }}
-                >
-                  {icon(17)}
-                </a>
-              ))}
+            <div className="pt-footer-socials">
+
+              {socialLinks.map(
+                ({ icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pt-footer-social-button"
+                  >
+                    {icon(17)}
+                  </a>
+                )
+              )}
+
             </div>
 
             {/* Navigation Links */}
-            <div
-              className="flex items-center gap-3 text-sm text-gray-300"
-              style={{
-                transform: "none",
-                transition: "none",
-                animation: "none",
-              }}
-            >
-              {bottomLinks.map((link, i) => (
+            <div className="pt-footer-links">
+
+              {bottomLinks.map((link, index) => (
                 <span
                   key={link.label}
-                  className="flex items-center gap-3"
-                  style={{
-                    transform: "none",
-                    transition: "none",
-                    animation: "none",
-                  }}
+                  className="pt-footer-link-wrapper"
                 >
                   <Link
                     to={link.path}
-                    className="inline-block"
-                    style={{
-                      color: "#d1d5db",
-                      transform: "none",
-                      transition: "none",
-                      animation: "none",
-                    }}
+                    className="pt-footer-link"
                   >
                     {link.label}
                   </Link>
 
-                  {i < bottomLinks.length - 1 && (
-                    <span
-                      style={{
-                        color: `${GOLD}88`,
-                      }}
-                    >
+                  {index < bottomLinks.length - 1 && (
+                    <span className="pt-footer-separator">
                       |
                     </span>
                   )}
                 </span>
               ))}
+
             </div>
 
           </div>
@@ -332,43 +218,30 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div
-        className="border-t border-white/10 mt-8 pt-4"
-        style={{
-          transform: "none",
-          transition: "none",
-          animation: "none",
-        }}
-      >
-        <div className="max-w-5xl mx-auto px-4 flex items-center justify-center">
-          <p className="text-xs text-gray-500">
-            © {new Date().getFullYear()} The Pride Times.
-            All rights reserved.
-          </p>
-        </div>
+      <div className="pt-footer-copyright">
+
+        <p>
+          © {new Date().getFullYear()} The Pride Times.
+          All rights reserved.
+        </p>
+
       </div>
 
       {/* Back To Top */}
       <button
+        type="button"
         onClick={() =>
           window.scrollTo({
             top: 0,
-            behavior: "smooth",
+            behavior: "auto",
           })
         }
         aria-label="Back to top"
-        className="fixed bottom-6 right-6 w-11 h-11 rounded-md flex items-center justify-center text-black shadow-lg"
-        style={{
-          background: GOLD,
-          color: "#000000",
-          transform: "none",
-          transition: "none",
-          animation: "none",
-          boxShadow: "0 4px 10px rgba(0,0,0,0.3)",
-        }}
+        className="pt-footer-back-top"
       >
         <ChevronUp size={20} />
       </button>
+
     </footer>
   );
 }
