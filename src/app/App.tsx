@@ -44,6 +44,7 @@ import { Privacy } from "./components/pages/Privacy";
 import { Terms } from "./components/pages/Terms";
 import { CookiePolicy } from "./components/pages/CookiePolicy";
 import { Accessibility } from "./components/pages/Accessibility";
+import { AboutUs } from "./components/pages/AboutUs";
 import { ResetPasswordPage } from "./components/pages/ResetPasswordPage";
 
 // ============================================================
@@ -152,6 +153,19 @@ export default function App() {
           <Route
             path="/accessibility"
             element={<Accessibility />}
+          />
+
+          <Route
+            path="/about"
+            element={
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
+                <AboutUs />
+              </MagazineLayout>
+            }
           />
 
           {/* ==================================================
