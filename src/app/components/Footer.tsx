@@ -1,9 +1,11 @@
 
 import { Link } from "react-router";
 import {
+  Crown,
   Instagram,
   Youtube,
   Linkedin,
+  Sparkle,
   ChevronUp,
 } from "lucide-react";
 
@@ -41,25 +43,20 @@ function PinterestIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-/* Facebook Icon */
-function FacebookIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M22 12.06C22 6.507 17.523 2 12 2S2 6.507 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.878h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z" />
-    </svg>
-  );
-}
-
 /* Social Links */
 const socialLinks = [
   {
-    icon: (s: number) => <FacebookIcon size={s} />,
+    icon: (s: number) => (
+      <svg
+        width={s}
+        height={s}
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+      >
+        <path d="M22 12.06C22 6.507 17.523 2 12 2S2 6.507 2 12.06c0 5.02 3.657 9.184 8.438 9.94v-7.03H7.898v-2.91h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.459h-1.26c-1.243 0-1.63.771-1.63 1.562v1.878h2.773l-.443 2.91h-2.33V22c4.78-.756 8.437-4.92 8.437-9.94z" />
+      </svg>
+    ),
     href: "https://www.facebook.com/thepridetime",
     label: "Facebook",
   },
@@ -108,68 +105,136 @@ const bottomLinks = [
 
 export function Footer() {
   return (
-    <footer className="pt-footer">
+    <footer className="bg-black text-white pt-10 pb-6 relative">
 
-      {/* Main Footer */}
-      <div className="pt-footer-container">
+      {/* Main Footer Container */}
+      <div className="max-w-5xl mx-auto px-4">
 
-        {/* Top Decorative Line */}
-        <div className="pt-footer-top-line">
+        {/* =========================================
+            ORNAMENTAL TOP RULE
+        ========================================== */}
+        <div className="flex items-center justify-center gap-3 mb-10">
 
-          <span className="pt-footer-line pt-footer-line-left" />
+          {/* Left Line */}
+          <span
+            className="h-px flex-1"
+            style={{
+              background: `linear-gradient(
+                to right,
+                transparent,
+                ${GOLD}99
+              )`,
+            }}
+          />
 
-          <span className="pt-footer-diamond" />
+          {/* Left Diamond */}
+          <span
+            className="w-1.5 h-1.5 rotate-45"
+            style={{
+              background: GOLD,
+            }}
+          />
 
-          <span className="pt-footer-diamond" />
+          {/* Crown */}
+          <Crown
+            size={22}
+            style={{
+              color: GOLD,
+            }}
+            fill={GOLD}
+          />
 
-          <span className="pt-footer-line pt-footer-line-right" />
+          {/* Right Diamond */}
+          <span
+            className="w-1.5 h-1.5 rotate-45"
+            style={{
+              background: GOLD,
+            }}
+          />
 
+          {/* Right Line */}
+          <span
+            className="h-px flex-1"
+            style={{
+              background: `linear-gradient(
+                to left,
+                transparent,
+                ${GOLD}99
+              )`,
+            }}
+          />
         </div>
 
-        {/* Main Content */}
-        <div className="pt-footer-content">
+        {/* =========================================
+            MAIN FOOTER CONTENT
+        ========================================== */}
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 mb-2">
 
-          {/* Brand Section */}
+          {/* =====================================
+              BRAND SECTION
+          ====================================== */}
           <Link
             to="/"
-            className="pt-footer-brand"
+            className="flex items-center gap-5 flex-shrink-0"
           >
+
             {/* Logo */}
             <img
               src={logoImg}
               alt="The Pride Times"
-              className="pt-footer-logo"
+              className="h-14 w-14 sm:h-16 sm:w-16 object-contain flex-shrink-0"
             />
 
-            {/* Logo Divider */}
-            <span className="pt-footer-logo-divider" />
+            {/* Gold Divider */}
+            <span
+              className="h-14 sm:h-16 w-px"
+              style={{
+                background: `${GOLD}55`,
+              }}
+            />
 
             {/* Brand Text */}
-            <div className="pt-footer-brand-text">
+            <div>
 
-              <div className="pt-footer-title">
+              <div
+                className="pt-logo leading-none"
+                style={{
+                  fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
+                }}
+              >
                 THE{" "}
-                <span className="pt-footer-title-accent">
+                <span className="pt-logo-accent">
                   PRIDE
                 </span>{" "}
                 TIMES
               </div>
 
-              <p className="pt-footer-tagline">
+              <p className="text-[10px] sm:text-xs text-gray-400 uppercase tracking-widest mt-2">
                 Voices That Inspire. Stories That Matter.
               </p>
 
             </div>
           </Link>
 
-          {/* Vertical Divider */}
-          <span className="pt-footer-vertical-divider" />
+          {/* =====================================
+              VERTICAL DIVIDER
+          ====================================== */}
+          <span
+            className="hidden lg:block w-px self-stretch"
+            style={{
+              background: `${GOLD}40`,
+            }}
+          />
 
-          {/* Right Section */}
-          <div className="pt-footer-right">
+          {/* =====================================
+              RIGHT SECTION
+          ====================================== */}
+          <div className="relative flex flex-col items-center lg:items-start gap-4">
 
-            {/* Social Buttons */}
-            <div className="pt-footer-socials">
+            {/* =================================
+                SOCIAL MEDIA BUTTONS
+            ================================== */}
+            <div className="flex items-center gap-3">
 
               {socialLinks.map(
                 ({ icon, href, label }) => (
@@ -179,7 +244,19 @@ export function Footer() {
                     aria-label={label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pt-footer-social-button"
+
+                    /*
+                     * IMPORTANT:
+                     * No hover classes.
+                     * No transition.
+                     * No animation.
+                     * No mouse events.
+                     */
+                    className="w-11 h-11 flex items-center justify-center border rounded-md text-white"
+
+                    style={{
+                      borderColor: `${GOLD}88`,
+                    }}
                   >
                     {icon(17)}
                   </a>
@@ -188,56 +265,95 @@ export function Footer() {
 
             </div>
 
-            {/* Navigation Links */}
-            <div className="pt-footer-links">
+            {/* =================================
+                FOOTER NAVIGATION LINKS
+            ================================== */}
+            <div className="flex items-center gap-3 text-sm text-gray-300">
 
-              {bottomLinks.map((link, index) => (
+              {bottomLinks.map((link, i) => (
+
                 <span
                   key={link.label}
-                  className="pt-footer-link-wrapper"
+                  className="flex items-center gap-3"
                 >
+
                   <Link
                     to={link.path}
-                    className="pt-footer-link"
+                    className="inline-block"
                   >
                     {link.label}
                   </Link>
 
-                  {index < bottomLinks.length - 1 && (
-                    <span className="pt-footer-separator">
+                  {/* Separator */}
+                  {i < bottomLinks.length - 1 && (
+                    <span
+                      style={{
+                        color: `${GOLD}88`,
+                      }}
+                    >
                       |
                     </span>
                   )}
+
                 </span>
               ))}
 
             </div>
 
+            {/* =================================
+                STATIC SPARKLE
+            ================================== */}
+            <Sparkle
+              size={16}
+              className="absolute -bottom-1 -right-6 hidden sm:block"
+              style={{
+                color: `${GOLD}AA`,
+              }}
+              fill={`${GOLD}55`}
+            />
+
           </div>
         </div>
       </div>
 
-      {/* Copyright */}
-      <div className="pt-footer-copyright">
+      {/* =========================================
+          COPYRIGHT BAR
+      ========================================== */}
+      <div className="border-t border-white/10 mt-8 pt-4">
 
-        <p>
-          © {new Date().getFullYear()} The Pride Times.
-          All rights reserved.
-        </p>
+        <div className="max-w-5xl mx-auto px-4 flex items-center justify-center">
 
+          <p className="text-xs text-gray-500">
+            © {new Date().getFullYear()} The Pride Times.
+            All rights reserved.
+          </p>
+
+        </div>
       </div>
 
-      {/* Back To Top */}
+      {/* =========================================
+          BACK TO TOP BUTTON
+      ========================================== */}
       <button
-        type="button"
         onClick={() =>
           window.scrollTo({
             top: 0,
-            behavior: "auto",
+            behavior: "smooth",
           })
         }
         aria-label="Back to top"
-        className="pt-footer-back-top"
+
+        /*
+         * No hover effect.
+         * No transition.
+         * No brightness change.
+         * No scaling.
+         */
+        className="fixed bottom-6 right-6 w-11 h-11 rounded-md flex items-center justify-center text-black shadow-lg"
+
+        style={{
+          background: GOLD,
+        }}
       >
         <ChevronUp size={20} />
       </button>
