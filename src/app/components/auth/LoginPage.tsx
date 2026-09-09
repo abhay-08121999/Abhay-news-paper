@@ -37,7 +37,6 @@ export function LoginPage() {
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; password?: string }>({});
   const [resetSent, setResetSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
 
   const validate = () => {
     const next: typeof fieldErrors = {};
@@ -62,22 +61,6 @@ export function LoginPage() {
       navigate(redirectTo, { replace: true });
     } else {
       setError(result.error ?? "Invalid email or password.");
-    }
-  };
-
-  const handleGoogle = async () => {
-    setError("");
-    setGoogleLoading(true);
-    const result = await signInWithGoogle();
-    // On success, Supabase redirects the browser away immediately, so we
-    // only ever reach this line on failure — safe to always clear loading.
-    setGoogleLoading(false);
-    if (!result.success) {
-      setError(
-        result.error?.toLowerCase().includes("provider is not enabled")
-          ? "Google sign-in isn't set up yet for this site. Please use email and password, or contact support."
-          : result.error || "Couldn't connect to Google. Please try again."
-      );
     }
   };
 
@@ -274,21 +257,11 @@ export function LoginPage() {
 
             <button
               type="button"
-              onClick={handleGoogle}
-              disabled={googleLoading}
-              className="flex items-center justify-center gap-2 w-full border border-gray-300 rounded py-2.5 text-sm hover:bg-gray-50 transition-colors disabled:opacity-50"
+              onClick={signInWithGoogle}
+              className="flex items-center justify-center gap-2 w-full border border-gray-300 rounded py-2.5 text-sm hover:bg-gray-50 transition-colors"
             >
-              {googleLoading ? (
-                <span className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
-                  Connecting...
-                </span>
-              ) : (
-                <>
-                  <GoogleIcon />
-                  Continue with Google
-                </>
-              )}
+              <GoogleIcon />
+              Continue with Google
             </button>
           </div>
         </div>
