@@ -208,15 +208,17 @@ export function MarketsPage() {
 
   const [marketData, setMarketData] = useState<{
     indices: any[];
+    stocks: any[];
     crypto: any[];
   }>({
     indices: [],
+    stocks: [],
     crypto: [],
   });
 
   const [loading, setLoading] = useState(true);
 
-  const tabs = ["indices", "crypto"];
+  const tabs = ["indices", "stocks", "crypto"];
 
   /* =======================================================
      LOAD MARKET DATA
@@ -980,6 +982,21 @@ export function MarketsPage() {
 
                   <MarketTable
                     data={marketData.indices as any}
+                    cols={[
+                      "name",
+                      "value",
+                      "change",
+                      "up",
+                    ]}
+                  />
+
+                )}
+
+
+                {activeTab === "stocks" && (
+
+                  <MarketTable
+                    data={marketData.stocks as any}
                     cols={[
                       "name",
                       "value",
