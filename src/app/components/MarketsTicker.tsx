@@ -1,274 +1,452 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
-import { TrendingUp, TrendingDown, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { getQuotes } from "../../services/marketApi";
+const FINNHUB_KEY        = import.meta.env.VITE_FINNHUB_API_KEY;
+const ALPHA_VANTAGE_KEY  = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY;
+const MARKETSTACK_KEY    = import.meta.env.VITE_MARKETSTACK_API_KEY;
+const INDIAN_API_KEY     = import.meta.env.VITE_INDIAN_MARKET_API_KEY;
 
-interface TickerCard {
-  symbol: string;
-  value: string;
-  change: number;
+// ── 1. FINNHUB ─────────────────────────────────────────────────
+async function finnhubQuote(symbol: string) {
+  const res = await fetch(
+    `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`
+  );
+  if (!res.ok) throw new Error(`Finnhub failed: ${symbol}`);
+  const d = await res.json();
+  if (!d || d.c === 0) throw new Error(`No data: ${symbol}`);
+  return d;
 }
 
-/* Bloomberg-style mega-menu columns for "Top Securities".
-   All paths point at routes that already exist in App.tsx. */
-const megaMenuColumns = [
-  {
-    title: "Markets",
-    links: [
-      { label: "Stocks", path: "/markets" },
-      { label: "Indices", path: "/markets" },
-      { label: "Commodities", path: "/markets" },
-      { label: "Forex", path: "/markets" },
-      { label: "Crypto", path: "/markets" },
-      { label: "Mutual Funds", path: "/markets" },
-      { label: "ETFs", path: "/markets" },
-      { label: "Government Bonds", path: "/markets" },
-      { label: "Global Markets", path: "/markets" },
-    ],
-  },
-  {
-    title: "Industries",
-    links: [
-      { label: "Technology", path: "/technology" },
-      { label: "Cybersecurity", path: "/cybersecurity" },
-      { label: "Energy", path: "/energy" },
-      { label: "Healthcare", path: "/healthcare" },
-      { label: "Manufacturing", path: "/manufacturing" },
-      { label: "Smart Cities", path: "/smart-cities" },
-      { label: "Supply Chain", path: "/supply-chain" },
-    ],
-  },
-  {
-    title: "More",
-    links: [
-      { label: "Featured", path: "/featured" },
-      { label: "Breaking News", path: "/breaking-news" },
-      { label: "Business News", path: "/business-news" },
-      { label: "CEO Spotlight", path: "/ceospotlight" },
-      { label: "Innovation", path: "/innovation" },
-      { label: "Cover Stories", path: "/cover-stories" },
-      { label: "White House Watch", path: "/white-house-watch" },
-      { label: "World & Geopolitics", path: "/world" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Us", path: "#" },
-      { label: "Advertise", path: "#" },
-      { label: "Careers", path: "#" },
-      { label: "Contact Us", path: "#" },
-      { label: "Press Room", path: "#" },
-    ],
-  },
+async function finnhubForex(base: string) {
+  const res = await fetch(
+    `https://finnhub.io/api/v1/forex/rates?base=${base}&token=${FINNHUB_KEY}`
+  );
+  if (!res.ok) throw new Error(`Finnhub forex failed`);
+  return res.json();
+}
+
+// ── 2. ALPHA VANTAGE ───────────────────────────────────────────
+async function avQuote(symbol: string) {
+  const res = await fetch(
+    `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_VANTAGE_KEY}`
+  );
+  if (!res.ok) throw new Error(`AV failed: ${symbol}`);
+  const data = await res.json();
+  const q = data["Global Quote"];
+  if (!q || !q["05. price"]) throw new Error(`AV no data: ${symbol}`);
+  return {
+    price:     parseFloat(q["05. price"]),
+    changePct: parseFloat((q["10. change percent"] ?? q["09. % change"] ?? "0").replace("%", "")),
+    changeAbs: parseFloat(q["09. change"] ?? "0"),
+  };
+}
+
+async function avForex(from: string, to: string) {
+  const res = await fetch(
+    `https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=${from}&to_currency=${to}&apikey=${ALPHA_VANTAGE_KEY}`
+  );
+  if (!res.ok) throw new Error(`AV forex failed`);
+  const data = await res.json();
+  const r = data["Realtime Currency Exchange Rate"];
+  if (!r) throw new Error("AV forex no data");
+  return parseFloat(r["5. Exchange Rate"]);
+}
+
+// ── 3. MARKETSTACK ─────────────────────────────────────────────
+// EOD data for Indian + Global stocks
+async function marketstackQuote(symbol: string) {
+  const res = await fetch(
+    `https://api.marketstack.com/v1/eod/latest?access_key=${MARKETSTACK_KEY}&symbols=${symbol}`
+  );
+  if (!res.ok) throw new Error(`Marketstack failed: ${symbol}`);
+  const data = await res.json();
+  const eod = data.data?.[0];
+  if (!eod) throw new Error(`Marketstack no data: ${symbol}`);
+  const changePct = ((eod.close - eod.open) / eod.open) * 100;
+  return {
+    price:     eod.close,
+    changePct,
+    changeAbs: eod.close - eod.open,
+    open:      eod.open,
+    high:      eod.high,
+    low:       eod.low,
+    volume:    eod.volume,
+    date:      eod.date,
+  };
+}
+
+// Fetch multiple Marketstack symbols in one call
+async function marketstackBatch(symbols: string[]) {
+  const joined = symbols.join(",");
+  const res = await fetch(
+    `https://api.marketstack.com/v1/eod/latest?access_key=${MARKETSTACK_KEY}&symbols=${joined}&limit=${symbols.length}`
+  );
+  if (!res.ok) throw new Error(`Marketstack batch failed`);
+  const data = await res.json();
+  return data.data ?? [];
+}
+
+// ── 4. UPSTOX (Indian API) ─────────────────────────────────────
+// Upstox v2 API - LTP (Last Traded Price) for NSE instruments
+async function upstoxLTP(instrumentKey: string) {
+  const res = await fetch(
+    `https://api.upstox.com/v2/market-quote/ltp?instrument_key=${instrumentKey}`,
+    {
+      headers: {
+        "Authorization": `Bearer ${INDIAN_API_KEY}`,
+        "Accept": "application/json",
+      },
+    }
+  );
+  if (!res.ok) throw new Error(`Upstox failed: ${instrumentKey}`);
+  const data = await res.json();
+  return data.data;
+}
+
+// Upstox - Full market quote with OHLC
+async function upstoxQuote(instrumentKey: string) {
+  const res = await fetch(
+    `https://api.upstox.com/v2/market-quote/quotes?instrument_key=${instrumentKey}`,
+    {
+      headers: {
+        "Authorization": `Bearer ${INDIAN_API_KEY}`,
+        "Accept": "application/json",
+      },
+    }
+  );
+  if (!res.ok) throw new Error(`Upstox quote failed: ${instrumentKey}`);
+  const data = await res.json();
+  // Returns { data: { [instrumentKey]: { last_price, ohlc, net_change, ... } } }
+  const quote = data.data?.[instrumentKey];
+  if (!quote) throw new Error(`No Upstox data: ${instrumentKey}`);
+  return quote;
+}
+
+// ── STOCK WATCHLIST (Finnhub real-time quotes) ─────────────────
+// symbol -> display name. Extend this list to track more tickers;
+// each one costs one extra Finnhub call per refresh.
+const STOCK_WATCHLIST: { symbol: string; name: string }[] = [
+  { symbol: "AAPL",  name: "Apple" },
+  { symbol: "MSFT",  name: "Microsoft" },
+  { symbol: "GOOGL", name: "Alphabet" },
+  { symbol: "AMZN",  name: "Amazon" },
+  { symbol: "TSLA",  name: "Tesla" },
+  { symbol: "NVDA",  name: "Nvidia" },
+  { symbol: "META",  name: "Meta" },
+  { symbol: "NFLX",  name: "Netflix" },
 ];
 
-export function MarketsTicker() {
-  const [cards, setCards] = useState<TickerCard[]>([]);
-  const [showSecurities, setShowSecurities] = useState(false);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const offsetRef = useRef(0);
-  const isPausedRef = useRef(false);
-  const rafRef = useRef<number | null>(null);
+// ── FALLBACK DATA ──────────────────────────────────────────────
+const FALLBACK = {
+  stocks: [
+    { name: "Apple",     value: "$232.15", change: "+0.62%", pts: "+1.43",  up: true  },
+    { name: "Microsoft", value: "$421.30", change: "+0.35%", pts: "+1.47",  up: true  },
+    { name: "Alphabet",  value: "$168.44", change: "-0.21%", pts: "-0.36",  up: false },
+    { name: "Amazon",    value: "$186.90", change: "+0.88%", pts: "+1.63",  up: true  },
+    { name: "Tesla",     value: "$248.50", change: "-1.12%", pts: "-2.82",  up: false },
+    { name: "Nvidia",    value: "$134.75", change: "+2.14%", pts: "+2.82",  up: true  },
+    { name: "Meta",      value: "$563.20", change: "+0.47%", pts: "+2.63",  up: true  },
+    { name: "Netflix",   value: "$712.40", change: "-0.18%", pts: "-1.28",  up: false },
+  ],
+  usIndices: [
+    { name: "S&P 500",      value: "5,892.31",  change: "+1.14%", pts: "+66.43",  up: true  },
+    { name: "NASDAQ",       value: "19,245.78", change: "+1.56%", pts: "+296.12", up: true  },
+    { name: "DOW JONES",    value: "42,318.45", change: "+0.82%", pts: "+343.89", up: true  },
+    { name: "RUSSELL 2000", value: "2,134.56",  change: "+0.45%", pts: "+9.56",   up: true  },
+  ],
+  indianIndices: [
+    { name: "NIFTY 50", value: "24,678.90", change: "-0.34%", pts: "-84.21",  up: false },
+    { name: "SENSEX",   value: "81,245.60", change: "-0.21%", pts: "-170.61", up: false },
+    { name: "NIFTY BANK", value: "52,340.15", change: "+0.45%", pts: "+234.50", up: true },
+    { name: "NIFTY IT",   value: "38,920.30", change: "+1.12%", pts: "+431.20", up: true },
+  ],
+  indianStocks: [
+    { name: "Reliance",  value: "₹2,934.50", change: "+0.87%", up: true  },
+    { name: "TCS",       value: "₹3,456.20", change: "+1.23%", up: true  },
+    { name: "HDFC Bank", value: "₹1,678.90", change: "-0.34%", up: false },
+    { name: "Infosys",   value: "₹1,567.30", change: "+0.92%", up: true  },
+  ],
+  crypto: [
+    { name: "Bitcoin (BTC)",  value: "$67,234", change: "+3.45%", up: true },
+    { name: "Ethereum (ETH)", value: "$3,456",  change: "+2.87%", up: true },
+    { name: "Solana (SOL)",   value: "$167",    change: "+4.56%", up: true },
+  ],
+  forex: [
+    { pair: "USD/INR", value: "83.45", change: "—", up: true },
+    { pair: "EUR/USD", value: "1.0876", change: "—", up: true },
+    { pair: "GBP/USD", value: "1.2734", change: "—", up: true },
+  ],
+  commodities: [
+    { name: "Gold",      value: "$2,345.60", change: "+0.89%", up: true  },
+    { name: "Crude Oil", value: "$78.45",    change: "-1.23%", up: false },
+    { name: "Silver",    value: "$29.45",    change: "+0.45%", up: true  },
+  ],
+};
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const data = await getQuotes();
+// ── MAIN EXPORT ────────────────────────────────────────────────
+export async function getQuotes() {
 
-        // Map real API data into Bloomberg-style cards.
-        // No hardcoded values — everything comes from tickerData.
-        const tickerData: TickerCard[] = [
-          ...data.usIndices.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-          ...data.crypto.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-          ...data.commodities.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-          ...data.indianIndices.map((item: any) => ({
-            symbol: item.name,
-            value: item.value,
-            change: Number(String(item.change).replace("%", "")),
-          })),
-        ];
+  // All 4 APIs fire in parallel
+  const [
+    // 1. FINNHUB — US Indices + Crypto + Commodities + Forex + Stocks
+    spyR, qqqR, diaR, iwmR,
+    btcR, ethR, solR,
+    forexR,
+    goldR, oilR,
+    stocksR,
 
-        setCards(tickerData);
-      } catch (error) {
-        console.error(error);
+    // 2. ALPHA VANTAGE — Indian Indices + USD/INR
+    niftyR, sensexR, usdInrR,
+
+    // 3. MARKETSTACK — Indian + Global EOD batch
+    mstackR,
+
+    // 4. UPSTOX — Indian stocks live LTP
+    relR, tcsR, hdfcR, infoR,
+
+  ] = await Promise.allSettled([
+    // Finnhub
+    finnhubQuote("SPY"),
+    finnhubQuote("QQQ"),
+    finnhubQuote("DIA"),
+    finnhubQuote("IWM"),
+    finnhubQuote("BINANCE:BTCUSDT"),
+    finnhubQuote("BINANCE:ETHUSDT"),
+    finnhubQuote("BINANCE:SOLUSDT"),
+    finnhubForex("USD"),
+    finnhubQuote("GLD"),
+    finnhubQuote("USO"),
+
+    // Finnhub — real-time quotes for the stock watchlist, batched into
+    // one Promise.allSettled so one bad/rate-limited symbol can't take
+    // the others down with it.
+    Promise.allSettled(
+      STOCK_WATCHLIST.map((s) => finnhubQuote(s.symbol))
+    ),
+
+    // Alpha Vantage
+    avQuote("NIFTYBEES.BSE"),
+    avQuote("SETFNIF50.BSE"),
+    avForex("USD", "INR"),
+
+    // Marketstack — top Indian stocks EOD batch
+    marketstackBatch(["RELIANCE.XNSE", "TCS.XNSE", "HDFCBANK.XNSE", "INFY.XNSE", "WIPRO.XNSE"]),
+
+    // Upstox — NSE instrument keys for top stocks
+    upstoxQuote("NSE_EQ|INE002A01018"),   // Reliance
+    upstoxQuote("NSE_EQ|INE467B01029"),   // TCS
+    upstoxQuote("NSE_EQ|INE040A01034"),   // HDFC Bank
+    upstoxQuote("NSE_EQ|INE009A01021"),   // Infosys
+  ]);
+
+  // ── US INDICES (Finnhub) ───────────────────────────────────
+  const usRaw = [
+    { r: spyR, name: "S&P 500",      fb: FALLBACK.usIndices[0] },
+    { r: qqqR, name: "NASDAQ",       fb: FALLBACK.usIndices[1] },
+    { r: diaR, name: "DOW JONES",    fb: FALLBACK.usIndices[2] },
+    { r: iwmR, name: "RUSSELL 2000", fb: FALLBACK.usIndices[3] },
+  ];
+
+  const usIndices = usRaw.map(({ r, name, fb }) => {
+    if (r.status === "fulfilled") {
+      const d = r.value;
+      return {
+        name,
+        value:  Number(d.c).toLocaleString("en-US", { maximumFractionDigits: 2 }),
+        change: `${Number(d.dp).toFixed(2)}%`,
+        pts:    Number(d.d).toFixed(2),
+        up:     Number(d.d) >= 0,
+        live:   true,
+        source: "Finnhub",
+      };
+    }
+    return { ...fb, live: false, source: "fallback" };
+  });
+
+  // ── STOCKS (Finnhub real-time quotes) ───────────────────────
+  const stocks: any[] = STOCK_WATCHLIST.map(({ symbol, name }, i) => {
+    const fb = FALLBACK.stocks[i];
+
+    // stocksR is the outer Promise.allSettled result; when it fulfilled,
+    // .value is itself an array of per-symbol allSettled results.
+    if (stocksR.status !== "fulfilled") {
+      return { ...fb, symbol, live: false, source: "fallback" };
+    }
+
+    const r = stocksR.value[i];
+    if (r.status === "fulfilled") {
+      const d = r.value;
+      return {
+        name,
+        symbol,
+        value:  `$${Number(d.c).toLocaleString("en-US", { maximumFractionDigits: 2 })}`,
+        change: `${Number(d.dp).toFixed(2)}%`,
+        pts:    Number(d.d).toFixed(2),
+        up:     Number(d.d) >= 0,
+        live:   true,
+        source: "Finnhub",
+      };
+    }
+
+    return { ...fb, symbol, live: false, source: "fallback" };
+  });
+
+  // ── INDIAN INDICES (Alpha Vantage primary, Marketstack backup) ──
+  const indianIndices: any[] = [];
+
+  if (niftyR.status === "fulfilled") {
+    const d = niftyR.value;
+    indianIndices.push({
+      name: "NIFTY 50",
+      value:  (d.price * 100).toLocaleString("en-IN", { maximumFractionDigits: 2 }),
+      change: `${d.changePct.toFixed(2)}%`,
+      pts:    d.changeAbs.toFixed(2),
+      up:     d.changePct >= 0,
+      live:   true,
+      source: "Alpha Vantage",
+    });
+  } else {
+    indianIndices.push({ ...FALLBACK.indianIndices[0], live: false, source: "fallback" });
+  }
+
+  if (sensexR.status === "fulfilled") {
+    const d = sensexR.value;
+    indianIndices.push({
+      name: "SENSEX",
+      value:  (d.price * 1000).toLocaleString("en-IN", { maximumFractionDigits: 2 }),
+      change: `${d.changePct.toFixed(2)}%`,
+      pts:    d.changeAbs.toFixed(2),
+      up:     d.changePct >= 0,
+      live:   true,
+      source: "Alpha Vantage",
+    });
+  } else {
+    indianIndices.push({ ...FALLBACK.indianIndices[1], live: false, source: "fallback" });
+  }
+
+  // ── INDIAN STOCKS (Upstox primary, Marketstack backup) ────
+  const indianStocks: any[] = [];
+
+  const upstoxRaw = [
+    { r: relR,  name: "Reliance",  mstackSym: "RELIANCE.XNSE",  fb: FALLBACK.indianStocks[0] },
+    { r: tcsR,  name: "TCS",       mstackSym: "TCS.XNSE",        fb: FALLBACK.indianStocks[1] },
+    { r: hdfcR, name: "HDFC Bank", mstackSym: "HDFCBANK.XNSE",   fb: FALLBACK.indianStocks[2] },
+    { r: infoR, name: "Infosys",   mstackSym: "INFY.XNSE",       fb: FALLBACK.indianStocks[3] },
+  ];
+
+  // Marketstack batch results
+  const mstackData: any[] = mstackR.status === "fulfilled" ? mstackR.value : [];
+
+  upstoxRaw.forEach(({ r, name, mstackSym, fb }) => {
+    if (r.status === "fulfilled") {
+      // Upstox live data
+      const q = r.value;
+      const changePct = q.net_change ?? 0;
+      indianStocks.push({
+        name,
+        value:  `₹${Number(q.last_price).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`,
+        change: `${Number(changePct).toFixed(2)}%`,
+        up:     Number(changePct) >= 0,
+        live:   true,
+        source: "Upstox",
+      });
+    } else {
+      // Try Marketstack as backup
+      const ms = mstackData.find((d: any) => d.symbol === mstackSym);
+      if (ms) {
+        const changePct = ((ms.close - ms.open) / ms.open) * 100;
+        indianStocks.push({
+          name,
+          value:  `₹${Number(ms.close).toLocaleString("en-IN", { maximumFractionDigits: 2 })}`,
+          change: `${changePct.toFixed(2)}%`,
+          pts:    (ms.close - ms.open).toFixed(2),
+          up:     changePct >= 0,
+          live:   false,
+          source: "Marketstack",
+        });
+      } else {
+        // Final fallback
+        indianStocks.push({ ...fb, live: false, source: "fallback" });
       }
-    };
+    }
+  });
 
-    loadData();
+  // ── CRYPTO (Finnhub) ────────────────────────────────────────
+  const cryptoRaw = [
+    { r: btcR, name: "Bitcoin (BTC)",  fb: FALLBACK.crypto[0] },
+    { r: ethR, name: "Ethereum (ETH)", fb: FALLBACK.crypto[1] },
+    { r: solR, name: "Solana (SOL)",   fb: FALLBACK.crypto[2] },
+  ];
 
-    const interval = setInterval(loadData, 60000);
+  const crypto = cryptoRaw.map(({ r, name, fb }) => {
+    if (r.status === "fulfilled") {
+      const d = r.value;
+      return {
+        name,
+        value:  `$${Number(d.c).toLocaleString("en-US", { maximumFractionDigits: 2 })}`,
+        change: `${Number(d.dp).toFixed(2)}%`,
+        up:     Number(d.d) >= 0,
+        live:   true,
+        source: "Finnhub",
+      };
+    }
+    return { ...fb, live: false, source: "fallback" };
+  });
 
-    return () => clearInterval(interval);
-  }, []);
+  // ── FOREX (Alpha Vantage + Finnhub) ────────────────────────
+  const forex: any[] = [];
 
-  // Close the mega-menu after a longer pause than the simple nav dropdowns,
-  // since there's more to read/click through here.
-  useEffect(() => {
-    if (!showSecurities) return;
-    const timer = setTimeout(() => setShowSecurities(false), 9000);
-    return () => clearTimeout(timer);
-  }, [showSecurities]);
+  if (usdInrR.status === "fulfilled") {
+    forex.push({ pair: "USD/INR", value: usdInrR.value.toFixed(2), change: "—", up: true, live: true, source: "Alpha Vantage" });
+  } else if (forexR.status === "fulfilled") {
+    const inr = forexR.value?.quote?.INR;
+    if (inr) forex.push({ pair: "USD/INR", value: Number(inr).toFixed(2), change: "—", up: true, live: true, source: "Finnhub" });
+  } else {
+    forex.push({ ...FALLBACK.forex[0], live: false, source: "fallback" });
+  }
 
-  const scrollByAmount = (direction: "left" | "right") => {
-    const el = trackRef.current;
-    if (!el) return;
-    const amount = (172 + 16) * 2; // card width + gap, two cards per click
-    const halfway = el.scrollWidth / 2;
+  if (forexR.status === "fulfilled") {
+    const q = forexR.value?.quote;
+    if (q?.EUR) forex.push({ pair: "EUR/USD", value: (1 / Number(q.EUR)).toFixed(4), change: "—", up: true, live: true, source: "Finnhub" });
+    if (q?.GBP) forex.push({ pair: "GBP/USD", value: (1 / Number(q.GBP)).toFixed(4), change: "—", up: true, live: true, source: "Finnhub" });
+  } else {
+    forex.push(...FALLBACK.forex.slice(1).map(f => ({ ...f, live: false, source: "fallback" })));
+  }
 
-    offsetRef.current += direction === "left" ? -amount : amount;
-    if (offsetRef.current < 0) offsetRef.current += halfway;
-    if (offsetRef.current >= halfway) offsetRef.current -= halfway;
+  // ── COMMODITIES (Finnhub) ───────────────────────────────────
+  const commodities: any[] = [];
 
-    el.style.transition = "transform 0.4s ease";
-    el.style.transform = `translateX(-${offsetRef.current}px)`;
-    window.setTimeout(() => {
-      if (el) el.style.transition = "none";
-    }, 400);
+  if (goldR.status === "fulfilled") {
+    const d = goldR.value;
+    commodities.push({
+      name: "Gold (GLD ETF)", value: `$${Number(d.c).toFixed(2)}`,
+      change: `${Number(d.dp).toFixed(2)}%`, up: Number(d.d) >= 0,
+      live: true, source: "Finnhub",
+    });
+  } else {
+    commodities.push({ ...FALLBACK.commodities[0], live: false, source: "fallback" });
+  }
+
+  if (oilR.status === "fulfilled") {
+    const d = oilR.value;
+    commodities.push({
+      name: "Crude Oil (USO)", value: `$${Number(d.c).toFixed(2)}`,
+      change: `${Number(d.dp).toFixed(2)}%`, up: Number(d.d) >= 0,
+      live: true, source: "Finnhub",
+    });
+  } else {
+    commodities.push({ ...FALLBACK.commodities[1], live: false, source: "fallback" });
+  }
+
+  // Combined for MarketsTicker top bar
+  const indices = [...usIndices, ...indianIndices];
+
+  return {
+    indices,
+    usIndices,
+    indianIndices,
+    indianStocks,
+    stocks,
+    crypto,
+    forex,
+    commodities,
+    bonds: [],
   };
-
-  // ── Continuous auto-scroll (Bloomberg-style moving ticker) ──
-  // Cards are duplicated in the render below so the strip can loop
-  // seamlessly: once we've scrolled past the first copy, we silently
-  // snap back to 0 and keep going, so it never appears to jump or stop.
-  // Driven by a CSS transform (not scrollLeft) so sub-pixel movement is
-  // rendered smoothly by the compositor instead of being rounded to
-  // whole pixels every frame, which is what caused the visible jitter.
-  useEffect(() => {
-    if (cards.length === 0) return;
-
-    const speed = 0.5; // px per frame — slow, readable, Bloomberg-style drift
-
-    const step = () => {
-      const el = trackRef.current;
-      if (el && !isPausedRef.current) {
-        const halfway = el.scrollWidth / 2;
-        offsetRef.current += speed;
-        if (offsetRef.current >= halfway) {
-          offsetRef.current -= halfway;
-        }
-        el.style.transform = `translateX(-${offsetRef.current}px)`;
-      }
-      rafRef.current = requestAnimationFrame(step);
-    };
-
-    rafRef.current = requestAnimationFrame(step);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [cards]);
-
-  const pauseAutoScroll = () => {
-    isPausedRef.current = true;
-  };
-  const resumeAutoScroll = () => {
-    isPausedRef.current = false;
-  };
-
-  return (
-    <div className="pt-securities-bar w-full">
-      <div className="pt-container flex items-stretch">
-        {/* ── Top Securities — Bloomberg-style mega-menu trigger ── */}
-        <div className="relative flex-shrink-0">
-          <button
-            className="pt-securities-btn flex items-center gap-1.5 h-full"
-            onClick={() => setShowSecurities(!showSecurities)}
-            aria-expanded={showSecurities}
-          >
-            Menu
-            <ChevronDown size={14} className={`transition-transform ${showSecurities ? "rotate-180" : ""}`} />
-          </button>
-
-          {showSecurities && (
-            <div className="pt-mega-menu absolute left-0 top-full mt-2 z-50">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6">
-                {megaMenuColumns.map((column) => (
-                  <div key={column.title}>
-                    <h4 className="pt-mega-menu-heading">{column.title}</h4>
-                    <ul className="flex flex-col gap-2.5">
-                      {column.links.map((link) => (
-                        <li key={link.label}>
-                          <Link to={link.path} onClick={() => setShowSecurities(false)}>
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* ── Continuously auto-scrolling market cards, always visible in the navbar ── */}
-        <div
-          className="relative flex items-center flex-1 min-w-0 pl-3 gap-2"
-          onMouseEnter={pauseAutoScroll}
-          onMouseLeave={resumeAutoScroll}
-        >
-          <button
-            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-            onClick={() => {
-              pauseAutoScroll();
-              scrollByAmount("left");
-            }}
-            aria-label="Scroll left"
-          >
-            <ChevronLeft size={16} />
-          </button>
-
-          <div
-            className="overflow-hidden py-2 flex-1"
-            onTouchStart={pauseAutoScroll}
-            onTouchEnd={resumeAutoScroll}
-          >
-            <div ref={trackRef} className="flex items-center gap-4 w-max will-change-transform">
-              {/* Cards are rendered twice back-to-back so the auto-scroll
-                  loop can snap from the end of the first copy to the start
-                  of the second without any visible jump. */}
-              {[...cards, ...cards].map((card, i) => (
-                <div key={`${card.symbol}-${i}`} className="pt-market-card flex items-center gap-2 flex-shrink-0">
-                  <span className="text-xs text-gray-400 font-medium truncate">{card.symbol}</span>
-                  <span className="text-sm font-semibold">{card.value}</span>
-                  <span
-                    className={`flex items-center gap-0.5 text-xs font-medium ${
-                      card.change >= 0 ? "pt-market-card-positive" : "pt-market-card-negative"
-                    }`}
-                  >
-                    {card.change >= 0 ? <TrendingUp size={11} /> : <TrendingDown size={11} />}
-                    {card.change >= 0 ? "+" : ""}
-                    {card.change}%
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button
-            className="pt-securities-scroll-arrow hidden sm:flex items-center justify-center"
-            onClick={() => {
-              pauseAutoScroll();
-              scrollByAmount("right");
-            }}
-            aria-label="Scroll right"
-          >
-            <ChevronRight size={16} />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
 }
