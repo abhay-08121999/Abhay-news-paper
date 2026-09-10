@@ -52,6 +52,37 @@ export function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [searchOpen]);
 
+  /* FIX #1 — close every open menu whenever the route changes, so
+     navigating from the mobile drawer (or anywhere else) doesn't
+     leave the drawer, search box, or user menu stuck open. */
+  useEffect(() => {
+    setMobileOpen(false);
+    setSearchOpen(false);
+    setUserMenuOpen(false);
+    setEditionOpen(false);
+  }, [location.pathname]);
+
+  /* FIX #1 (cont.) — close the mobile drawer as soon as the user
+     scrolls, since the drawer is an in-flow dropdown rather than a
+     fixed overlay and was staying open while the page scrolled
+     behind it. */
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleScroll = () => setMobileOpen(false);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mobileOpen]);
+
+  /* FIX #1 (cont.) — lock body scroll while the drawer is open so it
+     reads as a real overlay instead of a dropdown the page scrolls
+     past. */
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   /* Live results as the user types — matched against title and
      category, capped to a short list for the dropdown. */
   const searchResults = useMemo(() => {
@@ -89,7 +120,13 @@ export function Header() {
     <header className="w-full bg-white z-50">
       {/* ── Black primary navigation ── */}
       <div className="pt-top-nav">
-        <div className="pt-container h-full flex items-center justify-between">
+        {/* FIX #2 — the mobile tagline used to sit inside the same
+            `justify-between` row as the (hidden) desktop nav, so with
+            no sibling to balance against it collapsed to the far left
+            and could wrap/overflow the bar's fixed height. It's now a
+            dedicated full-width row, centered, single line, and sized
+            to fit the smallest phone widths. */}
+        <div className="pt-container h-full flex items-center justify-between lg:justify-between">
           <nav className="hidden lg:flex items-center gap-6 h-full">
             <a
               href="https://www.youtube.com/@vmpridetimes"
@@ -155,8 +192,9 @@ export function Header() {
             </div>
           </div>
 
-          {/* Mobile: brand mini-label */}
-          <span className="lg:hidden text-[11px] text-gray-300 uppercase tracking-widest">
+          {/* Mobile: brand mini-label — full width, centered, single
+              line, so it can never overlap the logo row below it. */}
+          <span className="lg:hidden w-full text-center text-[10px] text-gray-300 uppercase tracking-wide whitespace-nowrap overflow-hidden text-ellipsis px-2">
             The Global Voice of Business
           </span>
         </div>
@@ -178,10 +216,10 @@ export function Header() {
           </Link>
 
           {/* Right controls */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             {searchOpen ? (
               <div className="relative" ref={searchBoxRef}>
-                <div className="pt-search-box flex items-center gap-2 px-3 w-[220px] sm:w-[300px] lg:w-[420px]">
+                <div className="pt-search-box flex items-center gap-2 px-3 w-[180px] xs:w-[220px] sm:w-[300px] lg:w-[420px]">
                   <Search size={14} className="text-gray-400 flex-shrink-0" />
                   <input
                     autoFocus
@@ -202,7 +240,7 @@ export function Header() {
 
                 {/* Live results dropdown */}
                 {searchQuery.trim() && (
-                  <div className="absolute right-0 top-full mt-2 w-[280px] sm:w-[360px] lg:w-[420px] bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-[360px] overflow-y-auto">
+                  <div className="absolute right-0 top-full mt-2 w-[260px] xs:w-[280px] sm:w-[360px] lg:w-[420px] bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-[360px] overflow-y-auto">
                     {searchResults.length > 0 ? (
                       <>
                         {searchResults.map((item) => (
@@ -250,7 +288,7 @@ export function Header() {
               <div className="relative">
                 <button
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
-                  className="pt-account-btn hidden sm:flex items-center justify-center transition-colors hover:bg-gray-50"
+                  className="pt-account-btn hidden md:flex items-center justify-center transition-colors hover:bg-gray-50"
                 >
                   <div className={`w-full h-full rounded-full flex items-center justify-center text-white text-xs ${isPremium ? "bg-black" : "bg-gray-500"}`}>
                     {user?.name[0]}
@@ -282,8 +320,14 @@ export function Header() {
                 )}
               </div>
             ) : (
+              /* FIX #3 — Sign In and Subscribe previously switched on
+                 at different breakpoints (sm vs md), so in between the
+                 two the Sign In icon appeared alone with no Subscribe
+                 button next to it, reading as "disoriented." Both now
+                 switch on together at md, and stay inside the mobile
+                 drawer below md for a consistent mobile layout. */
               <>
-                <Link to="/login" className="pt-account-btn hidden sm:flex items-center justify-center transition-colors hover:bg-gray-50" aria-label="Sign In">
+                <Link to="/login" className="pt-account-btn hidden md:flex items-center justify-center transition-colors hover:bg-gray-50" aria-label="Sign In">
                   <User size={18} className="text-gray-700" />
                 </Link>
                 <Link to="/signup" className="pt-subscribe-btn hidden md:inline-flex items-center">
@@ -301,8 +345,31 @@ export function Header() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200 px-4 py-4 max-h-[70vh] overflow-y-auto">
-          <nav className="flex flex-col gap-0">
+        <div className="lg:hidden fixed inset-x-0 top-[var(--pt-header-height,0px)] bottom-0 z-40 bg-white overflow-y-auto">
+          <nav className="flex flex-col gap-0 px-4 py-4">
+            {/* FIX #3 (cont.) — Sign In / Subscribe moved to the top
+                of the drawer as two clearly separated, evenly sized
+                actions instead of one cramped button, and only shown
+                here (never doubled with the header buttons) below md. */}
+            {!isSignedIn && (
+              <div className="flex items-center gap-2.5 pb-4 mb-2 border-b border-gray-100">
+                <Link
+                  to="/login"
+                  className="flex-1 text-center text-sm font-semibold border border-gray-300 rounded-full py-2.5"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="flex-1 text-center pt-subscribe-btn justify-center"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Subscribe
+                </Link>
+              </div>
+            )}
+
             <Link to="/" className="py-2.5 text-sm border-b border-gray-100" onClick={() => setMobileOpen(false)}>Home</Link>
             <a
               href="https://www.youtube.com/@vmpridetimes"
@@ -322,11 +389,7 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            {!isSignedIn ? (
-              <Link to="/login" className="mt-3 block text-center pt-subscribe-btn" onClick={() => setMobileOpen(false)}>
-                Sign In / Subscribe
-              </Link>
-            ) : (
+            {isSignedIn && (
               <button onClick={() => { handleSignOut(); setMobileOpen(false); }} className="mt-2 text-red-600 text-sm py-2.5 text-left">
                 Sign Out
               </button>
