@@ -458,12 +458,21 @@ footer a {
 
   text-decoration: none;
 
+  margin: 0;
+
+  border: none;
+
+  transform: none;
+
   transition: color 0.2s ease;
 }
 
 
 /* ========================================
    FOOTER LINK HOVER
+   Only `color` changes — nothing that can
+   shift layout (no padding/margin/border/
+   transform/font-weight) is touched here.
 ======================================== */
 
 .pt-footer a:hover,
@@ -534,6 +543,10 @@ footer .pt-footer-social a {
   font-size: 12px;
 
   color: #888888;
+
+  border-width: 1px;
+
+  transform: none;
 }
 
 .pt-footer-social a:hover,
