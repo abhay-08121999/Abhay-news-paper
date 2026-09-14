@@ -36,7 +36,7 @@ import { AboutUsPage } from "./components/pages/AboutUsPage";
 
 // Auth
 import { LoginPage } from "./components/auth/LoginPage";
-import { SignupPage } from "./components/auth/SignUpPage";
+import { SignUpPage } from "./components/auth/SignUpPage";
 import { DashboardPage } from "./components/auth/DashboardPage";
 
 function MagazineLayout({
