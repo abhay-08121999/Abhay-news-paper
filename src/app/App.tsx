@@ -35,7 +35,8 @@ import { CeoSpotlightPage } from "./components/pages/CeoSpotlightPage";
 import { AboutUsPage } from "./components/pages/AboutUsPage";
 
 // Auth
-import { SignInPage } from "./components/auth/SignInPage";
+import { LoginPage } from "./components/auth/LoginPage";
+import { SignupPage } from "./components/auth/SignupPage";
 import { DashboardPage } from "./components/auth/DashboardPage";
 
 function MagazineLayout({
@@ -71,7 +72,8 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           {/* Standalone pages (no mag layout) */}
-          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/privacy" element={<Privacy />} />
