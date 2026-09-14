@@ -26,7 +26,6 @@ import { BusinessNewsPage } from "./components/pages/BusinessNewsPage";
 import { LeadershipPage } from "./components/pages/LeadershipPage";
 import { InnovationPage } from "./components/pages/InnovationPage";
 import { MagazinePage } from "./components/pages/MagazinePage";
-import { AdManagerPage } from "./components/pages/AdManagerPage";
 import { Privacy } from "./components/pages/Privacy";
 import { Terms } from "./components/pages/Terms";
 import { CookiePolicy } from "./components/pages/CookiePolicy";
@@ -75,7 +74,6 @@ export default function App() {
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/ads-manager" element={<AdManagerPage />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/cookiepolicy" element={<CookiePolicy />} />
