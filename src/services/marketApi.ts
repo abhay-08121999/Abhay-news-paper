@@ -10,7 +10,15 @@ async function finnhubQuote(symbol: string) {
   );
   if (!res.ok) throw new Error(`Finnhub failed: ${symbol}`);
   const d = await res.json();
-  if (!d || d.c === 0) throw new Error(`No data: ${symbol}`);
+  if (
+    !d ||
+    !Number.isFinite(Number(d.c)) ||
+    !Number.isFinite(Number(d.d)) ||
+    !Number.isFinite(Number(d.dp)) ||
+    Number(d.c) <= 0
+  ) {
+    throw new Error(`No valid quote data: ${symbol}`);
+  }
   return d;
 }
 
