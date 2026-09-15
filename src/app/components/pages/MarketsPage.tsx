@@ -300,16 +300,16 @@ export function MarketsPage() {
 
             </span>
 
-            Real-Time Data
+            Market Data
 
           </span>
 
           <span className="hidden sm:inline">
-            Terminal Feed &middot; Refreshes every 30s
+            Quotes refresh every 30s &middot; provider timing may vary
           </span>
 
           <span className="sm:hidden">
-            Refreshes / 30s
+            Quotes / 30s
           </span>
         </div>
 
@@ -977,6 +977,9 @@ export function MarketsPage() {
                 className="px-4 pb-5"
                 id="markets-table"
               >
+                <p className="pb-3 text-[10px] uppercase tracking-[0.12em] text-[#8A887F]">
+                  Values are shown only when the configured provider returns a quote. A dash means no verified quote was available.
+                </p>
 
                 {activeTab === "indices" && (
 
