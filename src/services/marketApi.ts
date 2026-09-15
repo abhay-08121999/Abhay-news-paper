@@ -4,6 +4,7 @@ const MARKETSTACK_KEY    = import.meta.env.VITE_MARKETSTACK_API_KEY;
 
 // ── 1. FINNHUB ─────────────────────────────────────────────────
 async function finnhubQuote(symbol: string) {
+  if (!FINNHUB_KEY) throw new Error("VITE_FINNHUB_API_KEY is not configured");
   const res = await fetch(
     `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_KEY}`
   );
@@ -158,6 +159,19 @@ const FALLBACK = {
   ],
 };
 
+function unavailableStock(name: string, symbol: string) {
+  return {
+    name,
+    symbol,
+    value: "—",
+    change: "Unavailable",
+    pts: "—",
+    up: false,
+    live: false,
+    source: "No quote returned",
+  };
+}
+
 // ── MAIN EXPORT ────────────────────────────────────────────────
 export async function getQuotes() {
 
@@ -227,9 +241,8 @@ export async function getQuotes() {
 
   // ── STOCKS (Finnhub real-time quotes) ───────────────────────
   const stocks: any[] = STOCK_WATCHLIST.map(({ symbol, name }, i) => {
-    const fb = FALLBACK.stocks[i];
     if (stocksR.status !== "fulfilled") {
-      return { ...fb, symbol, live: false, source: "fallback" };
+      return unavailableStock(name, symbol);
     }
     const r = stocksR.value[i];
     if (r.status === "fulfilled") {
@@ -245,7 +258,7 @@ export async function getQuotes() {
         source: "Finnhub",
       };
     }
-    return { ...fb, symbol, live: false, source: "fallback" };
+    return unavailableStock(name, symbol);
   });
 
   // ── INDIAN INDICES ───────────────────────────────────────────
