@@ -1,3 +1,4 @@
+
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock } from "lucide-react";
 import Ener1Img from "../../../imports/Energy1.png";
@@ -18,6 +19,7 @@ const hero = {
   briefing: "BRIEFING 041",
   image: Ener1Img,
 };
+
 const hero1 = {
   category: "CLEAN ENERGY TRANSITION",
   title: "JP Morgan: Energy Resiliency Now a National Security Imperative",
@@ -27,6 +29,7 @@ const hero1 = {
   time: "May 2026",
   image: Ener2Img,
 };
+
 const hero2 = {
   category: "CLEAN ENERGY TRANSITION",
   title: "China's Dominant Position in Clean Tech Supply Chains Creates New Risk Calculus",
@@ -38,19 +41,82 @@ const hero2 = {
 };
 
 const energyPrices = [
-  { commodity: "CRUDE OIL (WTI)", price: "$78.45", unit: "/bbl", change: "-1.23%", up: false },
-  { commodity: "BRENT CRUDE", price: "$82.31", unit: "/bbl", change: "-1.05%", up: false },
-  { commodity: "NATURAL GAS (HH)", price: "$2.87", unit: "/MMBtu", change: "+0.78%", up: true },
-  { commodity: "EUROPEAN TTF GAS", price: "€28.40", unit: "/MWh", change: "+1.23%", up: true },
-  { commodity: "COAL (NEWCASTLE)", price: "$124.50", unit: "/t", change: "-2.10%", up: false },
-  { commodity: "EU CARBON CREDITS", price: "€68.20", unit: "/t", change: "+3.40%", up: true },
-  { commodity: "URANIUM", price: "$92.75", unit: "/lb", change: "+0.50%", up: true },
+  {
+    commodity: "CRUDE OIL (WTI)",
+    price: "$78.45",
+    unit: "/bbl",
+    change: "-1.23%",
+    up: false,
+  },
+  {
+    commodity: "BRENT CRUDE",
+    price: "$82.31",
+    unit: "/bbl",
+    change: "-1.05%",
+    up: false,
+  },
+  {
+    commodity: "NATURAL GAS (HH)",
+    price: "$2.87",
+    unit: "/MMBtu",
+    change: "+0.78%",
+    up: true,
+  },
+  {
+    commodity: "EUROPEAN TTF GAS",
+    price: "€28.40",
+    unit: "/MWh",
+    change: "+1.23%",
+    up: true,
+  },
+  {
+    commodity: "COAL (NEWCASTLE)",
+    price: "$124.50",
+    unit: "/t",
+    change: "-2.10%",
+    up: false,
+  },
+  {
+    commodity: "EU CARBON CREDITS",
+    price: "€68.20",
+    unit: "/t",
+    change: "+3.40%",
+    up: true,
+  },
+  {
+    commodity: "URANIUM",
+    price: "$92.75",
+    unit: "/lb",
+    change: "+0.50%",
+    up: true,
+  },
 ];
 
 const renewableStories = [
-  { id: 1, title: "India's Adani Green Commissions World's Largest Single Solar Plant at 10 GW", time: "1 hr ago", image: "https://images.unsplash.com/photo-1760433116983-76021bd32307?w=400&h=250&fit=crop" },
-  { id: 2, title: "Offshore Wind Auction in UK Draws $45B in Investment — Record for Any Energy Sector", time: "3 hrs ago", image: "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?w=400&h=250&fit=crop" },
-  { id: 3, title: "China Completes First Commercial Fusion Power Reactor — 50-Year Dream Becomes Reality", time: "6 hrs ago", image: "https://images.unsplash.com/photo-1760553120312-2821bf54e767?w=400&h=250&fit=crop" },
+  {
+    id: 1,
+    title:
+      "India's Adani Green Commissions World's Largest Single Solar Plant at 10 GW",
+    time: "1 hr ago",
+    image:
+      "https://images.unsplash.com/photo-1760433116983-76021bd32307?w=400&h=250&fit=crop",
+  },
+  {
+    id: 2,
+    title:
+      "Offshore Wind Auction in UK Draws $45B in Investment — Record for Any Energy Sector",
+    time: "3 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?w=400&h=250&fit=crop",
+  },
+  {
+    id: 3,
+    title:
+      "China Completes First Commercial Fusion Power Reactor — 50-Year Dream Becomes Reality",
+    time: "6 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1760553120312-2821bf54e767?w=400&h=250&fit=crop",
+  },
 ];
 
 const dispatchGroups = [
@@ -58,40 +124,115 @@ const dispatchGroups = [
     code: "CRUDE",
     title: "Oil & Gas",
     stories: [
-      { id: 1, title: "Saudi Aramco cuts capex by $12B as peak oil demand moves closer", time: "2 hrs ago" },
-      { id: 2, title: "Chevron and ExxonMobil join forces in $50B Permian Basin megadeal", time: "4 hrs ago" },
-      { id: 3, title: "Russia's Arctic LNG 2 project faces new equipment shortfall after sanctions tighten", time: "6 hrs ago" },
-      { id: 4, title: "OPEC+ compliance rate falls to 87% as Nigeria and Iraq exceed quotas", time: "8 hrs ago" },
+      {
+        id: 1,
+        title:
+          "Saudi Aramco cuts capex by $12B as peak oil demand moves closer",
+        time: "2 hrs ago",
+      },
+      {
+        id: 2,
+        title:
+          "Chevron and ExxonMobil join forces in $50B Permian Basin megadeal",
+        time: "4 hrs ago",
+      },
+      {
+        id: 3,
+        title:
+          "Russia's Arctic LNG 2 project faces new equipment shortfall after sanctions tighten",
+        time: "6 hrs ago",
+      },
+      {
+        id: 4,
+        title:
+          "OPEC+ compliance rate falls to 87% as Nigeria and Iraq exceed quotas",
+        time: "8 hrs ago",
+      },
     ],
   },
   {
     code: "ATOM",
     title: "Nuclear Power",
     stories: [
-      { id: 1, title: "Three new SMR (small modular reactor) designs win NRC approval in the US", time: "3 hrs ago" },
-      { id: 2, title: "UK government approves Wylfa nuclear plant restart with £20B guarantee", time: "5 hrs ago" },
-      { id: 3, title: "India signs agreement with France to build 6 pressurized water reactors", time: "7 hrs ago" },
+      {
+        id: 1,
+        title:
+          "Three new SMR (small modular reactor) designs win NRC approval in the US",
+        time: "3 hrs ago",
+      },
+      {
+        id: 2,
+        title:
+          "UK government approves Wylfa nuclear plant restart with £20B guarantee",
+        time: "5 hrs ago",
+      },
+      {
+        id: 3,
+        title:
+          "India signs agreement with France to build 6 pressurized water reactors",
+        time: "7 hrs ago",
+      },
     ],
   },
   {
     code: "REG",
     title: "Policy & Regulation",
     stories: [
-      { id: 1, title: "Ohio suspends a major data-center tax incentive after AI infrastructure costs surge", time: "Just now" },
-      { id: 2, title: "US IRA clean energy tax credits spur $850B in new investment since 2022", time: "1 hr ago" },
-      { id: 3, title: "EU carbon border tax takes full effect — imports now priced on emissions", time: "3 hrs ago" },
-      { id: 4, title: "G7 energy ministers agree to phase out coal by 2035 in landmark accord", time: "5 hrs ago" },
-      { id: 5, title: "India sets world record: 500 GW renewable capacity target 3 years ahead of schedule", time: "7 hrs ago" },
+      {
+        id: 1,
+        title:
+          "Ohio suspends a major data-center tax incentive after AI infrastructure costs surge",
+        time: "Just now",
+      },
+      {
+        id: 2,
+        title:
+          "US IRA clean energy tax credits spur $850B in new investment since 2022",
+        time: "1 hr ago",
+      },
+      {
+        id: 3,
+        title:
+          "EU carbon border tax takes full effect — imports now priced on emissions",
+        time: "3 hrs ago",
+      },
+      {
+        id: 4,
+        title:
+          "G7 energy ministers agree to phase out coal by 2035 in landmark accord",
+        time: "5 hrs ago",
+      },
+      {
+        id: 5,
+        title:
+          "India sets world record: 500 GW renewable capacity target 3 years ahead of schedule",
+        time: "7 hrs ago",
+      },
     ],
   },
 ];
 
 const snapshot = [
-  { label: "Cleantech Investment Needed (5 Yrs)", value: "USD 5–8 Trillion (AI infrastructure + enabling systems)" },
-  { label: "US IRA Clean Energy Commitments", value: "Over USD 300 Billion catalyzed since 2022" },
-  { label: "EU Net-Zero Industry Act", value: "Accelerating European clean tech manufacturing" },
-  { label: "Power Demand Driver", value: "AI data centers forcing grid policy reversals globally" },
-  { label: "Top Energy Deal Type (2026)", value: "Power generation, storage, and transmission assets" },
+  {
+    label: "Cleantech Investment Needed (5 Yrs)",
+    value: "USD 5–8 Trillion (AI infrastructure + enabling systems)",
+  },
+  {
+    label: "US IRA Clean Energy Commitments",
+    value: "Over USD 300 Billion catalyzed since 2022",
+  },
+  {
+    label: "EU Net-Zero Industry Act",
+    value: "Accelerating European clean tech manufacturing",
+  },
+  {
+    label: "Power Demand Driver",
+    value: "AI data centers forcing grid policy reversals globally",
+  },
+  {
+    label: "Top Energy Deal Type (2026)",
+    value: "Power generation, storage, and transmission assets",
+  },
 ];
 
 /* =========================================================
@@ -141,34 +282,66 @@ const energyReportStats = [
 ];
 
 /** Bolds percentages, currency amounts, and unit figures inline so key
- *  numbers are scannable instead of buried in paragraph text. */
+ * numbers are scannable instead of buried in paragraph text. */
 const STAT_RE =
   /([$€¥]\s?[\d.,]+(?:\s?(?:billion|trillion|million))?|-?\d+(?:\.\d+)?%|\d+(?:\.\d+)?\s?(?:million barrels per day|Bcf\/d|\/MMBtu))/g;
 
-function Emphasize({ text, color = "#B8752E" }: { text: string; color?: string }) {
+function Emphasize({
+  text,
+  color = "#B8752E",
+}: {
+  text: string;
+  color?: string;
+}) {
   const nodes: React.ReactNode[] = [];
   let lastIndex = 0;
   let match: RegExpExecArray | null;
   let key = 0;
   const re = new RegExp(STAT_RE);
+
   while ((match = re.exec(text)) !== null) {
-    if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
+    if (match.index > lastIndex) {
+      nodes.push(text.slice(lastIndex, match.index));
+    }
+
     nodes.push(
-      <strong key={key++} className="font-semibold tabular-nums" style={{ color }}>
+      <strong
+        key={key++}
+        className="font-semibold tabular-nums"
+        style={{ color }}
+      >
         {match[0]}
-      </strong>
+      </strong>,
     );
+
     lastIndex = match.index + match[0].length;
   }
-  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
   return <>{nodes}</>;
 }
 
-function DocketHeader({ title, note }: { title: string; note?: string }) {
+function DocketHeader({
+  title,
+  note,
+}: {
+  title: string;
+  note?: string;
+}) {
   return (
     <div className="flex items-baseline justify-between border-b-2 border-[#17140F] pb-2.5 mb-5">
-      <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">{title}</h2>
-      {note && <span className="font-mono text-[10px] text-[#8A887F] hidden sm:inline">{note}</span>}
+      <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">
+        {title}
+      </h2>
+
+      {note && (
+        <span className="font-mono text-[10px] text-[#8A887F] hidden sm:inline">
+          {note}
+        </span>
+      )}
     </div>
   );
 }
@@ -177,52 +350,82 @@ export function EnergyPage() {
   return (
     <main className="bg-[#FAFAF7] text-[#17140F]">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
+
         {/* ── Masthead ───────────────────────────────────────── */}
         <div className="flex items-baseline justify-between border-t-[3px] border-b border-[#17140F] py-2 mb-1 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#55534C]">
-          <span className="font-semibold text-[#17140F]">Power &amp; Resources Desk</span>
-          <span>Sunday, 30 August 2026 &middot; Edition 118</span>
+          <span className="font-semibold text-[#17140F]">
+            Power &amp; Resources Desk
+          </span>
+
+          <span>
+            Sunday, 30 August 2026 &middot; Edition 118
+          </span>
         </div>
+
         <div className="border-b-4 border-[#17140F] pb-5 mb-10">
-          <h1 className="font-serif text-4xl sm:text-5xl tracking-tight">Energy &amp; Natural Resources</h1>
+          <h1 className="font-serif text-4xl sm:text-5xl tracking-tight">
+            Energy &amp; Natural Resources
+          </h1>
         </div>
 
         {/* ── Lead story + exchange board ───────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 mb-14">
+
           <div className="group cursor-pointer">
-            <div className="overflow-hidden mb-5 border border-[#17140F]/10">
+
+            {/* Increased border radius */}
+            <div className="overflow-hidden mb-5 border border-[#17140F]/10 rounded-2xl">
               <ImageWithFallback
                 src={hero.image}
                 alt={hero.title}
                 className="w-full h-64 sm:h-80 lg:h-[26rem] object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 ease-out"
               />
             </div>
+
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-[#B8752E] font-semibold mb-2">
-              <span className="border border-[#B8752E] px-1.5 py-0.5 font-mono">{hero.briefing}</span>
-              <span className="text-[#55534C]">{hero.category}</span>
+              <span className="border border-[#B8752E] px-1.5 py-0.5 font-mono">
+                {hero.briefing}
+              </span>
+
+              <span className="text-[#55534C]">
+                {hero.category}
+              </span>
             </div>
+
             <h2
               className="font-serif text-3xl sm:text-4xl leading-[1.08] tracking-tight group-hover:text-[#B8752E] transition-colors duration-300
                          first-letter:text-6xl sm:first-letter:text-7xl first-letter:font-bold first-letter:float-left first-letter:leading-[0.8] first-letter:mr-2 first-letter:mt-1"
             >
               {hero.title}
             </h2>
-            <p className="text-[#3A3934] text-sm sm:text-[15px] mt-4 leading-relaxed max-w-2xl">{hero.excerpt}</p>
+
+            <p className="text-[#3A3934] text-sm sm:text-[15px] mt-4 leading-relaxed max-w-2xl">
+              {hero.excerpt}
+            </p>
+
             <div className="flex items-center gap-3 mt-5 text-xs text-[#8A887F] border-t border-[#17140F]/10 pt-3">
-              <span className="uppercase tracking-wide">By {hero.author}</span>
+              <span className="uppercase tracking-wide">
+                By {hero.author}
+              </span>
+
               <span className="w-1 h-1 bg-[#D9D4C7]" />
+
               <span className="flex items-center gap-1">
-                <Clock size={10} /> {hero.time}
+                <Clock size={10} />
+                {hero.time}
               </span>
             </div>
           </div>
 
           <div className="flex flex-col gap-7">
+
             {/* Exchange board — signature element */}
             <div className="bg-[#17140F] text-[#EDE9DD]">
               <div className="px-4 pt-4 pb-2.5 border-b border-dashed border-[#55534C] flex items-center justify-between">
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#EDE9DD]/90">
                   ▮ Commodities Board
                 </span>
+
                 <span className="flex items-center gap-1.5 font-mono text-[9px] text-[#B8752E]">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B8752E] opacity-60" />
@@ -231,18 +434,30 @@ export function EnergyPage() {
                   LIVE
                 </span>
               </div>
+
               <div className="px-4 divide-y divide-dashed divide-[#3A3934]">
                 {energyPrices.map((e) => (
-                  <div key={e.commodity} className="py-2.5 flex items-center justify-between font-mono">
-                    <span className="text-[10.5px] text-[#B8B4A8] tracking-wide">{e.commodity}</span>
+                  <div
+                    key={e.commodity}
+                    className="py-2.5 flex items-center justify-between font-mono"
+                  >
+                    <span className="text-[10.5px] text-[#B8B4A8] tracking-wide">
+                      {e.commodity}
+                    </span>
+
                     <div className="flex items-baseline gap-2">
                       <span className="text-xs text-[#EDE9DD] tabular-nums">
                         {e.price}
-                        <span className="text-[#8A887F]">{e.unit}</span>
+                        <span className="text-[#8A887F]">
+                          {e.unit}
+                        </span>
                       </span>
+
                       <span
                         className={`text-[10px] tabular-nums w-14 text-right ${
-                          e.up ? "text-emerald-400" : "text-[#C1523F]"
+                          e.up
+                            ? "text-emerald-400"
+                            : "text-[#C1523F]"
                         }`}
                       >
                         {e.up ? "▲" : "▼"} {e.change}
@@ -251,6 +466,7 @@ export function EnergyPage() {
                   </div>
                 ))}
               </div>
+
               <div className="h-3" />
             </div>
 
@@ -259,10 +475,11 @@ export function EnergyPage() {
               <span className="absolute left-2.5 top-1 text-4xl leading-none text-[#B8752E]/30 font-serif select-none">
                 &ldquo;
               </span>
+
               <p className="italic text-sm leading-relaxed text-[#17140F] relative">
-                AI-driven load growth, grid bottlenecks, cleantech market fragmentation, and geopolitics are
-                redefining the terms of progress in 2026&rsquo;s energy landscape.
+                AI-driven load growth, grid bottlenecks, cleantech market fragmentation, and geopolitics are redefining the terms of progress in 2026&rsquo;s energy landscape.
               </p>
+
               <p className="mt-3.5 font-semibold text-[#17140F] text-xs uppercase tracking-wide">
                 — S&amp;P Global Energy Horizons Top Trends 2026
               </p>
@@ -272,59 +489,89 @@ export function EnergyPage() {
 
         {/* ── Secondary hero 1 ───────────────────────────────── */}
         <div className="mb-14 group cursor-pointer">
-          <div className="relative overflow-hidden mb-4 border border-[#17140F]/10">
+
+          {/* Increased border radius */}
+          <div className="relative overflow-hidden mb-4 border border-[#17140F]/10 rounded-2xl">
             <ImageWithFallback
               src={hero1.image}
               alt={hero1.title}
               className="w-full h-72 lg:h-96 object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 ease-out"
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+
             <span className="absolute bottom-4 left-4 text-[10px] text-[#17140F] bg-[#EDE9DD] px-2 py-1 uppercase tracking-[0.14em] font-semibold border border-[#17140F]/10">
               {hero1.category}
             </span>
           </div>
+
           <h3 className="mt-2 leading-[1.1] font-serif text-2xl md:text-3xl tracking-tight group-hover:text-[#B8752E] transition-colors duration-300">
             {hero1.title}
           </h3>
-          <p className="text-[#3A3934] text-sm mt-2.5 leading-relaxed max-w-3xl">{hero1.excerpt}</p>
+
+          <p className="text-[#3A3934] text-sm mt-2.5 leading-relaxed max-w-3xl">
+            {hero1.excerpt}
+          </p>
+
           <div className="flex items-center gap-3 mt-3.5 text-xs text-[#8A887F] border-t border-[#17140F]/10 pt-3">
-            <span className="uppercase tracking-wide">By {hero1.author}</span>
+            <span className="uppercase tracking-wide">
+              By {hero1.author}
+            </span>
+
             <span className="w-1 h-1 bg-[#D9D4C7]" />
+
             <span className="flex items-center gap-1">
-              <Clock size={10} /> {hero1.time}
+              <Clock size={10} />
+              {hero1.time}
             </span>
           </div>
         </div>
 
         {/* ── Secondary hero 2 + Industry snapshot ledger ───── */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14 items-start">
+
           <div className="group cursor-pointer">
-            <div className="relative overflow-hidden mb-3.5 border border-[#17140F]/10">
+
+            {/* Increased border radius */}
+            <div className="relative overflow-hidden mb-3.5 border border-[#17140F]/10 rounded-2xl">
               <ImageWithFallback
                 src={hero2.image}
                 alt={hero2.title}
                 className="w-full h-72 lg:h-96 object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 ease-out"
               />
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
+
               <span className="absolute bottom-4 left-4 text-[10px] text-[#17140F] bg-[#EDE9DD] px-2 py-1 uppercase tracking-[0.14em] font-semibold border border-[#17140F]/10">
                 {hero2.category}
               </span>
             </div>
+
             <h3 className="mt-2 leading-[1.1] font-serif text-2xl md:text-3xl tracking-tight group-hover:text-[#B8752E] transition-colors duration-300">
               {hero2.title}
             </h3>
-            <p className="text-[#3A3934] text-sm mt-2.5 leading-relaxed">{hero2.excerpt}</p>
+
+            <p className="text-[#3A3934] text-sm mt-2.5 leading-relaxed">
+              {hero2.excerpt}
+            </p>
+
             <div className="flex items-center gap-3 mt-3.5 text-xs text-[#8A887F] border-t border-[#17140F]/10 pt-3">
-              <span className="uppercase tracking-wide">By {hero2.author}</span>
+              <span className="uppercase tracking-wide">
+                By {hero2.author}
+              </span>
+
               <span className="w-1 h-1 bg-[#D9D4C7]" />
+
               <span className="flex items-center gap-1">
-                <Clock size={10} /> {hero2.time}
+                <Clock size={10} />
+                {hero2.time}
               </span>
             </div>
           </div>
 
           <div>
             <DocketHeader title="Industry Snapshot" />
+
             <div>
               {snapshot.map((row, i) => (
                 <div
@@ -336,7 +583,10 @@ export function EnergyPage() {
                   <span className="text-[11px] font-semibold uppercase tracking-wide text-[#B8752E] sm:w-2/5 shrink-0">
                     {row.label}
                   </span>
-                  <span className="text-sm text-[#17140F] leading-snug">{row.value}</span>
+
+                  <span className="text-sm text-[#17140F] leading-snug">
+                    {row.value}
+                  </span>
                 </div>
               ))}
             </div>
@@ -345,23 +595,32 @@ export function EnergyPage() {
 
         {/* ── Renewables gallery ─────────────────────────────── */}
         <section className="mb-14">
-          <DocketHeader title="Renewable Energy" note="3 STORIES TODAY" />
+          <DocketHeader
+            title="Renewable Energy"
+            note="3 STORIES TODAY"
+          />
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
             {renewableStories.map((s) => (
               <div key={s.id} className="group cursor-pointer">
-                <div className="overflow-hidden mb-3 relative border border-[#17140F]/10">
+
+                {/* Increased border radius */}
+                <div className="overflow-hidden mb-3 relative border border-[#17140F]/10 rounded-xl">
                   <ImageWithFallback
                     src={s.image}
                     alt={s.title}
                     className="w-full h-40 object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 ease-out"
                   />
+
                   <span className="absolute top-2 left-2 font-mono text-[9px] uppercase tracking-wider text-white bg-[#17140F]/70 px-1.5 py-0.5">
                     Renew
                   </span>
                 </div>
+
                 <h3 className="text-sm leading-snug text-[#17140F] group-hover:text-[#B8752E] transition-colors duration-300">
                   {s.title}
                 </h3>
+
                 <span className="text-[11px] text-[#8A887F] flex items-center gap-1 mt-2 tracking-wide uppercase">
                   <Clock size={10} />
                   {s.time}
@@ -371,24 +630,36 @@ export function EnergyPage() {
           </div>
         </section>
 
-        {/* ── Energy Market Report — editorial wire dispatch (2.2 Energy) ── */}
+        {/* ── Energy Market Report — editorial wire dispatch ── */}
         <section className="mb-14">
+
           <div className="border-b-2 border-[#17140F] pb-2.5 mb-2 flex items-baseline justify-between">
-            <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">Energy Market Report</h2>
-            <span className="font-mono text-[10px] text-[#8A887F]">July 2026 Wrap</span>
+            <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">
+              Energy Market Report
+            </h2>
+
+            <span className="font-mono text-[10px] text-[#8A887F]">
+              July 2026 Wrap
+            </span>
           </div>
-          <p className="text-[11px] uppercase tracking-[0.14em] text-[#8A887F] mb-6">2.2 &nbsp;Energy</p>
+
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[#8A887F] mb-6">
+            2.2 &nbsp;Energy
+          </p>
 
           {/* Key figures strip */}
           <div className="flex items-stretch overflow-x-auto no-scrollbar border border-[#D9D4C7] bg-white mb-8">
             {energyReportStats.map((s, i) => (
               <div
                 key={s.label}
-                className={`flex-1 min-w-[140px] px-5 py-4 ${i > 0 ? "border-l border-[#D9D4C7]" : ""}`}
+                className={`flex-1 min-w-[140px] px-5 py-4 ${
+                  i > 0 ? "border-l border-[#D9D4C7]" : ""
+                }`}
               >
                 <p className="text-xl sm:text-2xl font-mono font-semibold tabular-nums text-[#B8752E]">
                   {s.value}
                 </p>
+
                 <p className="text-[10px] uppercase tracking-wide text-[#8A887F] mt-1 leading-tight">
                   {s.label}
                 </p>
@@ -403,16 +674,26 @@ export function EnergyPage() {
                 className="border border-[#D9D4C7] bg-white hover:shadow-[0_2px_10px_rgba(23,20,15,0.06)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div className="flex items-baseline gap-2 px-6 pt-4 pb-3 border-b border-[#D9D4C7]">
-                  <span className="font-mono text-[11px] font-bold text-[#B8752E]">{group.code}</span>
-                  <span className="text-[11px] text-[#8A887F]">—</span>
+                  <span className="font-mono text-[11px] font-bold text-[#B8752E]">
+                    {group.code}
+                  </span>
+
+                  <span className="text-[11px] text-[#8A887F]">
+                    —
+                  </span>
+
                   <h3 className="uppercase tracking-[0.1em] text-xs font-semibold text-[#17140F]">
                     {group.title}
                   </h3>
                 </div>
+
                 <ul className="flex flex-col gap-3 px-6 pt-5">
                   {group.points.map((p, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <span className="text-[#B8752E] text-[10px] mt-1.5 shrink-0">▪</span>
+                      <span className="text-[#B8752E] text-[10px] mt-1.5 shrink-0">
+                        ▪
+                      </span>
+
                       <p className="text-[13.5px] leading-relaxed text-[#3A3934]">
                         <Emphasize text={p} />
                       </p>
@@ -425,18 +706,31 @@ export function EnergyPage() {
                     <p className="text-[9.5px] uppercase tracking-wider text-[#8A887F] mb-2.5">
                       Generation growth, H1 2026 vs. H1 2025
                     </p>
+
                     <div className="flex flex-col gap-2">
                       {group.growth.map((g) => {
-                        const max = Math.max(...group.growth!.map((x) => x.value));
+                        const max = Math.max(
+                          ...group.growth!.map((x) => x.value),
+                        );
+
                         return (
-                          <div key={g.label} className="flex items-center gap-2.5">
-                            <span className="text-[10.5px] text-[#55534C] w-[68px] shrink-0">{g.label}</span>
+                          <div
+                            key={g.label}
+                            className="flex items-center gap-2.5"
+                          >
+                            <span className="text-[10.5px] text-[#55534C] w-[68px] shrink-0">
+                              {g.label}
+                            </span>
+
                             <div className="flex-1 h-1.5 bg-[#F0EDE5] overflow-hidden">
                               <div
                                 className="h-full bg-[#B8752E]"
-                                style={{ width: `${(g.value / max) * 100}%` }}
+                                style={{
+                                  width: `${(g.value / max) * 100}%`,
+                                }}
                               />
                             </div>
+
                             <span className="text-[10.5px] font-mono font-semibold text-[#B8752E] w-7 text-right shrink-0">
                               +{g.value}%
                             </span>
@@ -453,25 +747,43 @@ export function EnergyPage() {
 
         {/* ── Oil/Gas + Nuclear + Policy — column-ruled dispatches ── */}
         <section>
+
           <div className="border-b-2 border-[#17140F] pb-2.5 mb-6">
-            <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">Sector Dispatches</h2>
+            <h2 className="uppercase tracking-[0.16em] text-sm font-semibold">
+              Sector Dispatches
+            </h2>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#D9D4C7]">
             {dispatchGroups.map((group) => (
-              <div key={group.code} className="pb-8 md:pb-0 md:px-6 md:first:pl-0 md:last:pr-0">
+              <div
+                key={group.code}
+                className="pb-8 md:pb-0 md:px-6 md:first:pl-0 md:last:pr-0"
+              >
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="font-mono text-[11px] font-bold text-[#B8752E]">{group.code}</span>
-                  <span className="text-[11px] text-[#8A887F]">—</span>
-                  <h3 className="uppercase tracking-[0.1em] text-xs font-semibold text-[#17140F]">{group.title}</h3>
+                  <span className="font-mono text-[11px] font-bold text-[#B8752E]">
+                    {group.code}
+                  </span>
+
+                  <span className="text-[11px] text-[#8A887F]">
+                    —
+                  </span>
+
+                  <h3 className="uppercase tracking-[0.1em] text-xs font-semibold text-[#17140F]">
+                    {group.title}
+                  </h3>
                 </div>
+
                 <div className="flex flex-col gap-4">
                   {group.stories.map((s) => (
                     <div key={s.id} className="group cursor-pointer">
                       <p className="text-[13.5px] leading-snug text-[#17140F] group-hover:text-[#B8752E] transition-colors">
                         {s.title}
                       </p>
+
                       <span className="text-[10px] text-[#8A887F] flex items-center gap-1 mt-1.5 tracking-wide uppercase">
-                        <Clock size={9} /> {s.time}
+                        <Clock size={9} />
+                        {s.time}
                       </span>
                     </div>
                   ))}
@@ -480,7 +792,9 @@ export function EnergyPage() {
             ))}
           </div>
         </section>
+
       </div>
     </main>
   );
 }
+
