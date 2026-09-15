@@ -9,6 +9,11 @@ interface TickerCard {
   change: number;
 }
 
+function parseChange(value: unknown): number | null {
+  const parsed = Number.parseFloat(String(value ?? "").replace("%", ""));
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 /* Bloomberg-style mega-menu columns for "Top Securities".
    All paths point at routes that already exist in App.tsx. */
 const megaMenuColumns = [
@@ -78,33 +83,33 @@ export function MarketsTicker() {
 
         // Map real API data into Bloomberg-style cards.
         // No hardcoded values — everything comes from tickerData.
-        const tickerData: TickerCard[] = [
+        const tickerData: (TickerCard | null)[] = [
           ...data.usIndices.map((item: any) => ({
             symbol: item.name,
             value: item.value,
-            change: Number(String(item.change).replace("%", "")),
+            change: parseChange(item.change),
           })),
           ...data.stocks.map((item: any) => ({
             symbol: item.symbol ?? item.name,
             value: item.value,
-            change: Number(String(item.change).replace("%", "")),
+            change: parseChange(item.change),
           })),
           ...data.crypto.map((item: any) => ({
             symbol: item.name,
             value: item.value,
-            change: Number(String(item.change).replace("%", "")),
+            change: parseChange(item.change),
           })),
           ...data.commodities.map((item: any) => ({
             symbol: item.name,
             value: item.value,
-            change: Number(String(item.change).replace("%", "")),
+            change: parseChange(item.change),
           })),
           ...data.indianIndices.map((item: any) => ({
             symbol: item.name,
             value: item.value,
-            change: Number(String(item.change).replace("%", "")),
+            change: parseChange(item.change),
           })),
-        ];
+        ].filter((item): item is TickerCard => item !== null && item.change !== null);
 
         setCards(tickerData);
       } catch (error) {
