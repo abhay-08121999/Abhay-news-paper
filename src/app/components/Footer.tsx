@@ -1,4 +1,3 @@
-
 import { Link } from "react-router";
 import {
   Crown,
@@ -177,7 +176,7 @@ export function Footer() {
           ====================================== */}
           <Link
             to="/"
-            className="flex items-center gap-5 flex-shrink-0"
+            className="flex items-center gap-8 flex-shrink-0"
           >
 
             {/* Logo */}
@@ -334,4 +333,3 @@ export function Footer() {
     </footer>
   );
 }
-
