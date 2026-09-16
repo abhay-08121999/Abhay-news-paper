@@ -169,7 +169,7 @@ export function Footer() {
         {/* =========================================
             MAIN FOOTER CONTENT
         ========================================== */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-14 mb-2">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24 mb-2">
 
           {/* =====================================
               BRAND SECTION
