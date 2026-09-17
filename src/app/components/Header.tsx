@@ -216,7 +216,7 @@ export function Header() {
           <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             {searchOpen ? (
               <div className="relative" ref={searchBoxRef}>
-                <div className="pt-search-box flex items-center gap-2 px-3 w-[180px] xs:w-[220px] sm:w-[300px] lg:w-[420px]">
+                <div className="pt-search-box flex items-center gap-2 px-3 w-[220px] xs:w-[280px] sm:w-[420px] lg:w-[600px]">
                   <Search size={14} className="text-gray-400 flex-shrink-0" />
                   <input
                     autoFocus
@@ -237,7 +237,7 @@ export function Header() {
 
                 {/* Live results dropdown */}
                 {searchQuery.trim() && (
-                  <div className="absolute right-0 top-full mt-2 w-[260px] xs:w-[280px] sm:w-[360px] lg:w-[420px] bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-[360px] overflow-y-auto">
+                  <div className="absolute right-0 top-full mt-2 w-[280px] xs:w-[320px] sm:w-[420px] lg:w-[600px] bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-[360px] overflow-y-auto">
                     {searchResults.length > 0 ? (
                       <>
                         {searchResults.map((item) => (
