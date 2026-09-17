@@ -188,7 +188,7 @@ export function MarketsTicker() {
   };
 
   return (
-    <div className="pt-securities-bar w-full">
+    <div className="pt-securities-bar w-full relative">
       <div className="pt-container flex items-stretch">
         {/* ── Top Securities — Bloomberg-style mega-menu trigger ── */}
         <div className="relative flex-shrink-0">
@@ -202,22 +202,34 @@ export function MarketsTicker() {
           </button>
 
           {showSecurities && (
-            <div className="pt-mega-menu absolute left-0 top-full mt-2 z-50">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6">
-                {megaMenuColumns.map((column) => (
-                  <div key={column.title}>
-                    <h4 className="pt-mega-menu-heading">{column.title}</h4>
-                    <ul className="flex flex-col gap-2.5">
-                      {column.links.map((link) => (
-                        <li key={link.label}>
-                          <Link to={link.path} onClick={() => setShowSecurities(false)}>
-                            {link.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+            /* Full-bleed panel: anchored to the securities bar (not the
+               trigger button) and stretched edge-to-edge with left-1/2
+               + -translate-x-1/2, since its parent isn't full width. */
+            <div className="pt-mega-menu absolute left-1/2 -translate-x-1/2 top-full z-50">
+              <div className="pt-container">
+                <div className="pt-mega-menu-inner">
+                  {megaMenuColumns.map((column) => (
+                    <div key={column.title}>
+                      <h4 className="pt-mega-menu-heading">{column.title}</h4>
+                      <ul className="flex flex-col gap-3">
+                        {column.links.map((link) => (
+                          <li key={link.label}>
+                            <Link to={link.path} onClick={() => setShowSecurities(false)}>
+                              {link.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-mega-menu-utility">
+                  <Link to="/signup" onClick={() => setShowSecurities(false)}>Sign Up</Link>
+                  <Link to="/magazine" onClick={() => setShowSecurities(false)}>Digital Edition</Link>
+                  <Link to="/Privacy" onClick={() => setShowSecurities(false)}>Privacy Policy</Link>
+                  <Link to="/terms" onClick={() => setShowSecurities(false)}>Terms of Use</Link>
+                </div>
               </div>
             </div>
           )}
