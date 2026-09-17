@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router";
 import {
-  Clock,
   ArrowRight,
-  TrendingUp,
+  Bell,
+  ChevronRight,
+  Clock,
+  Search,
   TrendingDown,
-  Play,
+  TrendingUp,
+  User,
 } from "lucide-react";
+import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 import HeroImg from "../../../imports/heroimage.png";
 import InsImg from "../../../imports/Insightimage.png";
@@ -16,2082 +19,1684 @@ import LN4Img from "../../../imports/LN4image.png";
 import EdipickImg from "../../../imports/Edipickimage.png";
 import Pt30Img from "../../../imports/pt30image.png";
 import Ln1Img from "../../../imports/Ln1.png";
-
 import { getQuotes } from "../../../services/marketApi";
 
 /* =========================================================
-   HERO STORY
+   DATA — existing Pride Times content/images
 ========================================================= */
+
+const navItems = [
+  { label: "Home", to: "/" },
+  { label: "Markets", to: "/markets" },
+  { label: "Business News", to: "/business-news" },
+  { label: "International Business", to: "/international-business" },
+  { label: "Startup Success", to: "/startup-success" },
+  { label: "CEO Spotlight", to: "/ceospotlight" },
+  { label: "Magazines", to: "/magazine" },
+  { label: "Innovation", to: "/technology" },
+];
+
+const secondaryNav = [
+  { label: "Technology", to: "/technology" },
+  { label: "Finance", to: "/finance" },
+  { label: "Cybersecurity", to: "/cybersecurity" },
+  { label: "Energy", to: "/energy" },
+  { label: "Healthcare", to: "/healthcare" },
+  { label: "Manufacturing", to: "/manufacturing" },
+  { label: "Smart Cities", to: "/smart-cities" },
+  { label: "Supply Chain", to: "/supply-chain" },
+  { label: "Magazine", to: "/magazine" },
+  { label: "More", to: "/more" },
+];
 
 const heroStory = {
   category: "TOP STORY",
-  title:
-    "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
+  title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
   excerpt:
     "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and South Korea, expanding its already well-established relationship with China's Unitree.",
   image: HeroImg,
+  link: "/technology",
 };
 
-/* =========================================================
-   SIDE STORIES
-========================================================= */
+const marketStory = {
+  category: "FINANCE",
+  title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+  excerpt:
+    "U.S. equity markets extended a recovery rally into the first week of June, driven by stronger-than-expected domestic factory data and a continued surge in technology stocks.",
+  image: InsImg,
+  link: "/markets",
+};
 
-const sideStories = [
+const latestStories = [
   {
-    id: 1,
-    tag: "CYBERSECURITY INSIGHTS",
+    category: "TECHNOLOGY",
+    title:
+      "Quantum Computing: The Next Leap in Human Innovation",
+    time: "4 hrs ago",
+    image: LN3Img,
+    link: "/technology",
+  },
+  {
+    category: "FINANCE",
+    title:
+      "U.S. Equity Markets Rally on Strong Manufacturing Data",
+    time: "35 min ago",
+    image: InsImg,
+    link: "/markets",
+  },
+  {
+    category: "ENERGY",
+    title:
+      "Data Centers and AI Workloads Force Energy Policy Reversals Globally",
+    time: "2 hrs ago",
+    image: LN4Img,
+    link: "/energy",
+  },
+  {
+    category: "LEADERSHIP",
+    title:
+      "The Intelligence Age: How CEOs Are Navigating Transformation",
+    time: "3 hrs ago",
+    image: EdipickImg,
+    link: "/leadership",
+  },
+];
+
+const editorPicks = [
+  {
+    category: "TECHNOLOGY",
+    title:
+      "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
+    time: "12 min ago",
+    image: Ln1Img,
+    link: "/technology",
+  },
+  {
+    category: "FINANCE",
+    title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+    time: "35 min ago",
+    image: InsImg,
+    link: "/markets",
+  },
+  {
+    category: "TECHNOLOGY",
+    title: "Nvidia's Blackwell Ultra GPU Delivers 40x Speed Boost for LLM Training",
+    time: "2 hrs ago",
+    image: LN3Img,
+    link: "/technology",
+  },
+];
+
+const worldSecurityStories = [
+  {
+    category: "CYBERSECURITY",
     title:
       "PwC 2026 Global Digital Trust Insights: Enterprises Escalate Defense Spending",
-    excerpt:
-      "PwC's 2026 Global Digital Trust Insights survey, conducted across 3,887 business and technology executives in 72 countries, reveals that cybersecurity has risen to the top tier of board-level concerns across every major industry.",
     time: "25 min ago",
     image:
-      "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxzbWFydCUyMGNpdHklMjB1cmJhbiUyMGZ1dHVyZSUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=85",
     link: "/cybersecurity",
   },
   {
-    id: 2,
-    tag: "FINANCE INSIGHTS",
-    title:
-      "U.S. Equity Markets Rally on Strong Manufacturing Data",
-    excerpt:
-      "U.S. equity markets extended a recovery rally into the first week of June, driven by stronger-than-expected domestic factory data and a continued surge in technology stocks.",
+    category: "CYBERSECURITY",
+    title: "Zero-Day Vulnerability Raises Global Banking Protocol Concerns",
     time: "1 hr ago",
-    image: InsImg,
-    link: "/finance",
+    image:
+      "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=85",
+    link: "/cybersecurity",
   },
-];
-
-/* =========================================================
-   PRIDE TIMES 30 FEATURE
-========================================================= */
-
-const pt30 = [
   {
-    id: 1,
-    tag: "PRIDE TIMES 30 — LEADERSHIP PROFILES",
+    category: "WORLD & GEOPOLITICS",
     title:
-      "PRIDE TIMES 30 — LEADERS TO WATCH IN 2026",
-    excerpt:
-      "The Pride Times 30 recognizes thirty global leaders across business, technology, and innovation who are defining the direction of the global economy this year.",
-    time: "25 min ago",
-    image: Pt30Img,
-    link: "/billionaires",
+      "Global Trade Corridors Face New Pressure as Supply Chains Rebalance",
+    time: "3 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1521292270410-a8c4d716d518?auto=format&fit=crop&w=1200&q=85",
+    link: "/international-business",
   },
-];
-
-/* =========================================================
-   LATEST NEWS TABS
-========================================================= */
-
-const latestNewsTabs = [
-  "All",
-  "Markets",
-  "Finance",
-  "Business",
-  "Technology",
-  "Energy",
-  "More",
-];
-
-/* =========================================================
-   NEWS TYPE
-========================================================= */
-
-type NewsItem = {
-  id: number;
-  hot: boolean;
-  title: string;
-  time: string;
-  image: string;
-  link: string;
-};
-
-/* =========================================================
-   LATEST NEWS DATA
-========================================================= */
-
-const latestNewsData: Record<string, NewsItem[]> = {
-  All: [
-    {
-      id: 5,
-      hot: true,
-      title:
-        "Technology & AI Infrastructure: Alphabet plans $80B stock offering to fund AI data-center expansion as hyperscaler capex tops $700B while grid, water and community pushback intensify.",
-      time: "Just now",
-      image: Ln1Img,
-      link: "/technology",
-    },
-    {
-      id: 1,
-      hot: true,
-      title:
-        "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
-      time: "12 min ago",
-      image: Ln1Img,
-      link: "/technology",
-    },
-    {
-      id: 2,
-      hot: false,
-      title:
-        "U.S. Equity Markets Rally on Strong Manufacturing Data",
-      time: "35 min ago",
-      image: HeroImg,
-      link: "/markets",
-    },
-    {
-      id: 3,
-      hot: false,
-      title:
-        "PwC 2026 Global Digital Trust Insights: Enterprises Escalate Defense Spending",
-      time: "1 hr ago",
-      image: LN3Img,
-      link: "/economy",
-    },
-    {
-      id: 4,
-      hot: false,
-      title:
-        "Data Centers and AI Workloads Force Energy Policy Reversals Globally",
-      time: "2 hr ago",
-      image: LN4Img,
-      link: "/energy",
-    },
-  ],
-
-  Markets: [
-    {
-      id: 1,
-      hot: true,
-      title:
-        "S&P 500 hits all-time high as Fed holds rates steady",
-      time: "10 min ago",
-      image:
-        "https://images.unsplash.com/photo-1778406466505-6129d0555557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGZpbmFuY2UlMjB3YWxsJTIwc3RyZWV0fGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/markets",
-    },
-    {
-      id: 2,
-      hot: false,
-      title:
-        "Gold surges to $2,400 amid global uncertainty",
-      time: "40 min ago",
-      image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/markets",
-    },
-    {
-      id: 3,
-      hot: false,
-      title:
-        "Asian markets rally on strong China manufacturing data",
-      time: "1 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxidXNpbmVzcyUyMG1hZ2F6aW5lJTIwY292ZXIlMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/markets",
-    },
-    {
-      id: 4,
-      hot: false,
-      title:
-        "Bitcoin crosses $70,000 as ETF inflows hit record",
-      time: "2 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwaGFja2luZyUyMGRhdGElMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/markets",
-    },
-  ],
-
-  Finance: [
-    {
-      id: 1,
-      hot: true,
-      title:
-        "Global markets rally as investors digest latest economic data",
-      time: "20 min ago",
-      image: HeroImg,
-      link: "/finance",
-    },
-    {
-      id: 2,
-      hot: false,
-      title:
-        "Central banks signal cautious approach to interest rates",
-      time: "45 min ago",
-      image: InsImg,
-      link: "/finance",
-    },
-    {
-      id: 3,
-      hot: false,
-      title:
-        "Banking sector posts stronger-than-expected quarterly results",
-      time: "2 hr ago",
-      image: LN3Img,
-      link: "/finance",
-    },
-    {
-      id: 4,
-      hot: false,
-      title:
-        "Global investors increase exposure to emerging markets",
-      time: "3 hr ago",
-      image: LN4Img,
-      link: "/finance",
-    },
-  ],
-
-  Business: [
-    {
-      id: 1,
-      hot: true,
-      title:
-        "Apple unveils Vision Pro 2 with 40% thinner design",
-      time: "15 min ago",
-      image:
-        "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwaW5ub3ZhdGlvbiUyMGRpZ2l0YWwlMjBmdXR1cmV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/business-news",
-    },
-    {
-      id: 2,
-      hot: false,
-      title:
-        "Amazon acquires Indian logistics firm for $1.2 billion",
-      time: "1 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxidXNpbmVzcyUyMG1hZ2F6aW5lJTIwY292ZXIlMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/business-news",
-    },
-    {
-      id: 3,
-      hot: false,
-      title:
-        "Goldman Sachs raises S&P 500 year-end target to 6,500",
-      time: "2 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/business-news",
-    },
-    {
-      id: 4,
-      hot: false,
-      title:
-        "Reliance Industries enters global streaming market",
-      time: "3 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwaGFja2luZyUyMGRhdGElMjB3aXJlZCUyMGRhdGElMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/business-news",
-    },
-  ],
-
-  Technology: [
-    {
-      id: 5,
-      hot: true,
-      title:
-        "Alphabet plans $80B AI infrastructure stock offering as hyperscaler capex tops $700B and data-center delays mount",
-      time: "Just now",
-      image: Ln1Img,
-      link: "/technology",
-    },
-    {
-      id: 1,
-      hot: true,
-      title:
-        "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
-      time: "5 min ago",
-      image:
-        "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwaW5ub3ZhdGlvbiUyMGRpZ2l0YWwlMjBmdXR1cmV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/technology",
-    },
-    {
-      id: 2,
-      hot: false,
-      title:
-        "Intel Attempts Inference-Chip Comeback as AI Compute Wars Intensify",
-      time: "30 min ago",
-      image:
-        "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxidXNpbmVzcyUyMG1hZ2F6aW5lJTIwY292ZXIlMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/technology",
-    },
-    {
-      id: 3,
-      hot: false,
-      title:
-        "SoftBank Bets Big on European Data Centers",
-      time: "1 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwaGFja2luZyUyMGRhdGElMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/technology",
-    },
-    {
-      id: 4,
-      hot: false,
-      title:
-        "Quantum computing startup achieves 1,000-qubit milestone",
-      time: "2 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/technology",
-    },
-  ],
-
-  Energy: [
-    {
-      id: 1,
-      hot: true,
-      title:
-        "Data Centers and AI Workloads Force Energy Policy Reversals Globally",
-      time: "25 min ago",
-      image:
-        "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxzbWFydCUyMGNpdHklMjB1cmJhbiUyMGZ1dHVyZSUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/energy",
-    },
-    {
-      id: 2,
-      hot: false,
-      title:
-        "China's Dominant Position in Clean Tech Supply Chains Creates New Risk Calculus",
-      time: "1 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1778406466505-6129d0555557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/energy",
-    },
-    {
-      id: 3,
-      hot: false,
-      title:
-        "JP Morgan: Energy Resiliency Now a National Security Imperative",
-      time: "2 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1766315746079-215ff5115e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwbWVkaWNpbmUlMjBob3NwaXRhbCUyMGlubm92YXRpb258ZW58MXx8fHwxNzc5Mzg1OTg1fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/energy",
-    },
-    {
-      id: 4,
-      hot: false,
-      title:
-        "Shell posts record profits as LNG demand surges in Asia",
-      time: "3 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxzdG9jayUyMG1hcmtheXQlMjBmaW5hbmNlJTIwd2FsbCUyMHN0cmVldHxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/energy",
-    },
-  ],
-
-  More: [
-    {
-      id: 1,
-      hot: false,
-      title:
-        "FDA approves breakthrough gene therapy for rare childhood disease",
-      time: "1 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1766315746079-215ff5115e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwbWVkaWNpbmUlMjBob3NwaXRhbCUyMGlubm92YXRpb258ZW58MXx8fHwxNzc5Mzg1OTg1fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/more",
-    },
-    {
-      id: 2,
-      hot: false,
-      title:
-        "Singapore's Smart Nation 2.0 plan sets global benchmark",
-      time: "2 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxzbWFydCUyMGNpdHklMjB1cmJhbiUyMGZ1dHVyZSUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/more",
-    },
-    {
-      id: 3,
-      hot: false,
-      title:
-        "Panama Canal expansion cuts Asia-US shipping time by 18 days",
-      time: "3 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxidXNpbmVzcyUyMG1hZ2F6aW5lJTIwY292ZXIlMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/more",
-    },
-    {
-      id: 4,
-      hot: false,
-      title:
-        "EU passes landmark AI Governance Act with sweeping regulations",
-      time: "4 hr ago",
-      image:
-        "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjeWJlcnNlY3VyaXR5JTIwaGFja2luZyUyMGRhdGElMjBwcm90ZWN0aW9ufGVufDF8fHx8MTc3OTM4NTk4NHww&ixlib=rb-4.1.0&q=80&w=400",
-      link: "/more",
-    },
-  ],
-};
-
-/* =========================================================
-   EDITOR'S PICKS
-========================================================= */
-
-const editorsPicks = [
   {
-    id: 1,
+    category: "CYBERSECURITY",
     title:
-      "The Intelligence Age: How CEOs Are Navigating Transformation.",
-    subtitle:
-      "Their collective perspectives reveal a leadership class grappling with the most consequential technology transition in corporate history.",
-    time: "3 hr ago",
-    image: EdipickImg,
+      "AI-Powered Deception Forces Financial Institutions to Rethink Digital Trust",
+    time: "4 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85",
+    link: "/cybersecurity",
+  },
+  {
+    category: "WORLD & GEOPOLITICS",
+    title:
+      "Zero-Day Vulnerability in Global Banking Protocol Exposes New Risks",
+    time: "6 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
+    link: "/international-business",
+  },
+  {
+    category: "WORLD & GEOPOLITICS",
+    title:
+      "NATO Deploys 50,000 Additional Troops Along Eastern Flank",
+    time: "45 min ago",
+    image:
+      "https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=1200&q=85",
+    link: "/international-business",
   },
 ];
 
-/* =========================================================
-   MAGAZINE
-========================================================= */
+const prideTimes30 = [
+  { rank: 1, name: "Jensen Huang", company: "Nvidia", role: "AI infrastructure" },
+  { rank: 2, name: "Sam Altman", company: "OpenAI", role: "Frontier AI" },
+];
 
 const magazinePreview = {
   title: "The AI Revolution",
-  subtitle:
-    "Reshaping business, economies, and the future of work.",
-  image:
-    "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHw1fHxidXNpbmVzcyUyMG1hZ2F6aW5lJTIwY292ZXIlMjBjb3Jwb3JhdGV8ZW58MXx8fHwxNzc5Mzg1OTc3fDA&ixlib=rb-4.1.0&q=80&w=400",
+  subtitle: "Reshaping business, economies, and the future of work.",
+  image: Pt30Img,
+};
+
+const videoPreview = {
+  title: "The latest edition of The Pride Times is live",
+  subtitle: "Leadership, technology and the forces reshaping global business.",
+  image: Pt30Img,
+};
+
+type Market = {
+  label?: string;
+  value?: string;
+  change?: string;
+  up?: boolean;
 };
 
 /* =========================================================
-   PRIDE TIMES 30
+   HELPERS
 ========================================================= */
 
-const prideTimes30 = [
-  {
-    rank: 1,
-    name: "Jensen Huang",
-    company: "Nvidia",
-    sector:
-      "Defining the AI infrastructure era at COMPUTEX 2026.",
-  },
-  {
-    rank: 2,
-    name: "Satya Nadella",
-    company: "Microsoft",
-    sector:
-      "Leading ethical AI adoption and enterprise digital transformation.",
-  },
-  {
-    rank: 3,
-    name: "Sundar Pichai",
-    company: "Alphabet / Google",
-    sector:
-      "Driving AI integration across search, cloud, and automotive tech.",
-  },
-  {
-    rank: 4,
-    name: "Elon Musk",
-    company: "Tesla / SpaceX / X",
-    sector:
-      "Disrupting energy, space, and AI; SpaceX IPO on the horizon.",
-  },
-  {
-    rank: 5,
-    name: "Sam Altman",
-    company: "OpenAI",
-    sector:
-      "Shaping the frontier of large language models and AGI research.",
-  },
-  {
-    rank: 6,
-    name: "Andy Jassy",
-    company: "Amazon",
-    sector:
-      "Scaling AWS as AI's preferred cloud infrastructure partner.",
-  },
-  {
-    rank: 7,
-    name: "Lisa Su",
-    company: "AMD",
-    sector:
-      "Challenging Nvidia's AI chip dominance with competitive GPU roadmap.",
-  },
-  {
-    rank: 8,
-    name: "CC Wei",
-    company: "TSMC",
-    sector:
-      "Controlling the world's most advanced semiconductor manufacturing.",
-  },
-  {
-    rank: 9,
-    name: "Alex Karp",
-    company: "Palantir",
-    sector:
-      "Surging 6 places in IMD rankings on AI and defense demand.",
-  },
-  {
-    rank: 10,
-    name: "Mary Barra",
-    company: "General Motors",
-    sector:
-      "Navigating EV transition amid battery supply chain pressures.",
-  },
-];
-
-/* =========================================================
-   CHANGE CHIP
-========================================================= */
-
-function ChangeChip({
-  change,
-  up,
+function SectionHeader({
+  title,
+  action,
+  to = "#",
 }: {
-  change: string;
-  up: boolean;
+  title: string;
+  action?: string;
+  to?: string;
 }) {
   return (
-    <span
-      className={`text-xs font-semibold tabular-nums flex items-center gap-1 ${
-        up ? "text-green-700" : "text-red-600"
-      }`}
-    >
-      {up ? (
-        <TrendingUp size={11} strokeWidth={2.25} />
-      ) : (
-        <TrendingDown size={11} strokeWidth={2.25} />
+    <div className="home-section-header">
+      <h2>{title}</h2>
+      {action && (
+        <Link to={to} className="home-see-all">
+          {action} <ChevronRight size={12} />
+        </Link>
       )}
+    </div>
+  );
+}
 
-      {change}
-    </span>
+function AdBanner({ children = "Advertisement Space" }: { children?: string }) {
+  return (
+    <div className="home-ad-banner">
+      <span className="home-ad-label">GOOGLE ADSENSE</span>
+      <strong>{children}</strong>
+      <small>728 × 90 • Leaderboard</small>
+    </div>
+  );
+}
+
+function StoryCard({
+  item,
+  compact = false,
+}: {
+  item: {
+    category: string;
+    title: string;
+    time: string;
+    image: string;
+    link: string;
+  };
+  compact?: boolean;
+}) {
+  return (
+    <Link to={item.link} className={`home-story-card ${compact ? "compact" : ""}`}>
+      <div className="home-story-image">
+        <ImageWithFallback src={item.image} alt={item.title} />
+      </div>
+      <div className="home-story-body">
+        <span className="home-category">{item.category}</span>
+        <h3>{item.title}</h3>
+        <span className="home-meta">
+          <Clock size={10} /> {item.time}
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function SmallList({
+  items,
+}: {
+  items: { category: string; title: string; time: string; link: string }[];
+}) {
+  return (
+    <div className="home-small-list">
+      {items.map((item, index) => (
+        <Link to={item.link} key={`${item.title}-${index}`} className="home-small-item">
+          <span className="home-small-time">{item.time}</span>
+          <div>
+            <span className="home-category">{item.category}</span>
+            <h3>{item.title}</h3>
+          </div>
+        </Link>
+      ))}
+    </div>
   );
 }
 
 /* =========================================================
-   HOME PAGE
+   HOMEPAGE
 ========================================================= */
 
 export function HomePage() {
-  const [activeMarketTab, setActiveMarketTab] =
-    useState("Indices");
-
-  const [activeNewsTab, setActiveNewsTab] =
-    useState("All");
-
-  const [marketSnapshotData, setMarketSnapshotData] =
-    useState<any>({
-      Indices: [],
-      Commodities: [],
-      Currencies: [],
-      Crypto: [],
-    });
-
-  /* =======================================================
-     MARKET DATA
-  ======================================================= */
+  const location = useLocation();
+  const [tickerData, setTickerData] = useState<Market[]>([]);
 
   useEffect(() => {
-    loadMarketData();
+    let mounted = true;
+
+    const loadMarkets = async () => {
+      try {
+        const data = await getQuotes();
+
+        const ticker: Market[] = [
+          data.indices?.[0],
+          data.indices?.[1],
+          data.indices?.[2],
+          data.crypto?.[0]
+            ? {
+                name: "BTC",
+                value: data.crypto[0].value,
+                change: data.crypto[0].change,
+                up: data.crypto[0].up,
+              }
+            : null,
+          data.crypto?.[1]
+            ? {
+                name: "ETH",
+                value: data.crypto[1].value,
+                change: data.crypto[1].change,
+                up: data.crypto[1].up,
+              }
+            : null,
+        ]
+          .filter(Boolean)
+          .map((m: any) => ({
+            label: m.name,
+            value: m.value,
+            change: m.change,
+            up: m.up,
+          }));
+
+        if (mounted) setTickerData(ticker);
+      } catch (error) {
+        console.error("Market API Error:", error);
+      }
+    };
+
+    loadMarkets();
+    const timer = window.setInterval(loadMarkets, 45000);
+
+    return () => {
+      mounted = false;
+      window.clearInterval(timer);
+    };
   }, []);
 
-  const loadMarketData = async () => {
-    try {
-      const data = await getQuotes();
-
-      setMarketSnapshotData({
-        Indices: data.indices.map((item) => ({
-          symbol: item.name,
-          value: item.value,
-          change: item.change,
-          up: item.up,
-        })),
-
-        Crypto: data.crypto.map((item) => ({
-          symbol: item.name,
-          value: item.value,
-          change: item.change,
-          up: item.up,
-        })),
-
-        Commodities: [],
-        Currencies: [],
-      });
-    } catch (error) {
-      console.error("Market API Error:", error);
-    }
-  };
-
-  /* =======================================================
-     NEWS
-  ======================================================= */
-
-  const selectedNews =
-    latestNewsData[activeNewsTab] ||
-    latestNewsData["All"];
-
-  const videoFeature = selectedNews[0];
-
-  const latestRest = selectedNews.slice(1, 4);
-
-  const secondaryCards = selectedNews
-    .slice(0, 5)
-    .map((item, index) => ({
-      ...item,
-      category:
-        index === 0
-          ? "Technology"
-          : index === 1
-          ? "Markets"
-          : index === 2
-          ? "Cybersecurity"
-          : index === 3
-          ? "Energy"
-          : "Business",
-    }));
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans antialiased">
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <main className="pt-8 md:pt-10 pb-14">
-
-          {/* =================================================
-              HERO SECTION
-          ================================================= */}
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 pb-10 mb-10 border-b border-gray-200">
-
-            {/* ================= TOP STORY ================= */}
-
-            <Link
-              to="/technology"
-              className="group relative block overflow-hidden rounded-lg border border-gray-200"
-            >
-
-              <ImageWithFallback
-                src={heroStory.image}
-                alt={heroStory.title}
-                className="
-                  w-full
-                  h-72
-                  lg:h-[520px]
-                  object-cover
-                  rounded-lg
-                  transition-transform
-                  duration-700
-                  ease-out
-                  group-hover:scale-[1.03]
-                "
-              />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent rounded-lg" />
-
-              <span
-                className="
-                  absolute
-                  top-4
-                  left-4
-                  bg-red-600
-                  text-white
-                  px-3
-                  py-1
-                  text-[10px]
-                  font-bold
-                  tracking-[0.16em]
-                  uppercase
-                  rounded-[3px]
-                "
-              >
-                {heroStory.category}
-              </span>
-
-              <div className="absolute inset-x-0 bottom-0 p-5">
-
-                <h1
-                  className="
-                    font-serif
-                    text-2xl
-                    md:text-[28px]
-                    font-bold
-                    leading-[1.15]
-                    text-white
-                  "
-                >
-                  {heroStory.title}
-                </h1>
-
-                <p
-                  className="
-                    text-sm
-                    text-gray-200
-                    leading-[1.6]
-                    mt-2.5
-                    line-clamp-3
-                  "
-                >
-                  {heroStory.excerpt}
-                </p>
-
-                <span
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    text-xs
-                    font-bold
-                    text-white
-                    uppercase
-                    tracking-wide
-                    mt-3.5
-                    border-b
-                    border-white/60
-                    pb-0.5
-                  "
-                >
-                  Read Full Story
-                  <ArrowRight size={13} strokeWidth={2.25} />
-                </span>
-
-              </div>
-
-            </Link>
-
-
-            {/* ================= CENTER STORY ================= */}
-
-            <div className="min-w-0">
-
-              <Link
-                to={sideStories[0].link}
-                className="group block p-4 border border-gray-200 rounded-md"
-              >
-
-                <div className="overflow-hidden rounded-md">
-
-                  <ImageWithFallback
-                    src={sideStories[0].image}
-                    alt={sideStories[0].title}
-                    className="
-                      w-full
-                      h-52
-                      object-cover
-                      rounded-md
-                      transition-transform
-                      duration-700
-                      ease-out
-                      group-hover:scale-[1.03]
-                    "
-                  />
-
-                </div>
-
-                <span
-                  className="
-                    block
-                    mt-3.5
-                    text-[11px]
-                    font-bold
-                    text-red-600
-                    uppercase
-                    tracking-[0.14em]
-                  "
-                >
-                  {sideStories[0].tag}
-                </span>
-
-                <h2
-                  className="
-                    font-serif
-                    text-xl
-                    font-bold
-                    leading-[1.25]
-                    mt-1.5
-                    text-gray-950
-                    group-hover:text-red-600
-                    transition-colors
-                  "
-                >
-                  {sideStories[0].title}
-                </h2>
-
-                <p
-                  className="
-                    text-sm
-                    text-gray-600
-                    mt-2
-                    leading-[1.65]
-                    line-clamp-3
-                  "
-                >
-                  {sideStories[0].excerpt}
-                </p>
-
-                <span
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    text-xs
-                    font-bold
-                    text-gray-900
-                    uppercase
-                    tracking-wide
-                    mt-3
-                    border-b
-                    border-gray-900
-                    pb-0.5
-                  "
-                >
-                  Read More
-                  <ArrowRight size={11} strokeWidth={2.25} />
-                </span>
-
-              </Link>
-
-
-              {/* RELATED STORY */}
-
-              <Link
-                to={sideStories[1].link}
-                className="
-                  group
-                  flex
-                  gap-3.5
-                  mt-4
-                  p-4
-                  border
-                  border-gray-200
-                  rounded-md
-                "
-              >
-
-                <div
-                  className="
-                    shrink-0
-                    w-[110px]
-                    h-[80px]
-                    overflow-hidden
-                    rounded-md
-                  "
-                >
-
-                  <ImageWithFallback
-                    src={sideStories[1].image}
-                    alt={sideStories[1].title}
-                    className="
-                      w-full
-                      h-full
-                      object-cover
-                      rounded-md
-                      transition-transform
-                      duration-500
-                      group-hover:scale-105
-                    "
-                  />
-
-                </div>
-
-                <div className="min-w-0 flex-1">
-
-                  <span
-                    className="
-                      text-[10px]
-                      font-bold
-                      text-red-600
-                      uppercase
-                      tracking-[0.14em]
-                    "
-                  >
-                    {sideStories[1].tag}
-                  </span>
-
-                  <h3
-                    className="
-                      text-sm
-                      font-bold
-                      leading-[1.35]
-                      mt-1
-                      text-gray-900
-                      group-hover:text-red-600
-                      transition-colors
-                      line-clamp-2
-                    "
-                  >
-                    {sideStories[1].title}
-                  </h3>
-
-                  <span
-                    className="
-                      flex
-                      items-center
-                      gap-1
-                      text-[11px]
-                      text-gray-400
-                      mt-1.5
-                    "
-                  >
-                    <Clock size={9} strokeWidth={2.25} />
-                    {sideStories[1].time}
-                  </span>
-
-                </div>
-
-              </Link>
-
-            </div>
-
-
-            {/* ================= RIGHT COLUMN ================= */}
-
-            <div className="min-w-0 flex flex-col gap-7">
-
-              {/* TODAY'S VIDEOS */}
-
-              <div className="pb-6 border-b border-gray-200">
-
-                <div className="flex items-center justify-between mb-3.5">
-
-                  <h2 className="font-serif text-lg font-bold">
-                    Today's Videos
-                  </h2>
-
-                  <button
-                    type="button"
-                    className="
-                      border
-                      border-gray-300
-                      rounded-full
-                      px-4
-                      py-1
-                      text-xs
-                      font-medium
-                      hover:border-gray-500
-                      transition-colors
-                    "
-                  >
-                    Explore More
-                  </button>
-
-                </div>
-
-                <Link
-                  to={videoFeature.link}
-                  className="group block p-3 border border-gray-200 rounded-md"
-                >
-
-                  <div className="relative overflow-hidden rounded-md">
-
-                    <ImageWithFallback
-                      src={videoFeature.image}
-                      alt={videoFeature.title}
-                      className="
-                        w-full
-                        h-40
-                        object-cover
-                        rounded-md
-                        transition-transform
-                        duration-700
-                        ease-out
-                        group-hover:scale-[1.03]
-                      "
-                    />
-
-                    <div
-                      className="
-                        absolute
-                        inset-0
-                        flex
-                        items-center
-                        justify-center
-                        bg-black/15
-                        group-hover:bg-black/25
-                        transition-colors
-                        rounded-md
-                      "
-                    >
-
-                      <div
-                        className="
-                          w-11
-                          h-11
-                          rounded-full
-                          bg-white/95
-                          flex
-                          items-center
-                          justify-center
-                          shadow-md
-                        "
-                      >
-
-                        <Play
-                          size={16}
-                          fill="black"
-                          className="text-black ml-0.5"
-                        />
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <h3
-                    className="
-                      text-sm
-                      font-semibold
-                      leading-[1.4]
-                      mt-2.5
-                      text-gray-900
-                      group-hover:text-red-600
-                      transition-colors
-                      line-clamp-2
-                    "
-                  >
-                    {videoFeature.title}
-                  </h3>
-
-                </Link>
-
-              </div>
-
-
-              {/* LATEST */}
-
-              <div className="pb-6 border-b border-gray-200">
-
-                <h2
-                  className="
-                    text-[13px]
-                    font-bold
-                    uppercase
-                    tracking-[0.16em]
-                    text-red-600
-                    border-b
-                    border-gray-200
-                    pb-2.5
-                    mb-1
-                  "
-                >
-                  Latest
-                </h2>
-
-                <div className="flex flex-col gap-2.5">
-
-                  {latestRest.map((item) => (
-
-                    <Link
-                      key={item.id}
-                      to={item.link}
-                      className="
-                        group
-                        flex
-                        flex-col
-                        gap-1
-                        p-3
-                        border
-                        border-gray-200
-                        rounded-md
-                      "
-                    >
-
-                      <span
-                        className="
-                          text-[10px]
-                          uppercase
-                          tracking-wide
-                          text-red-600
-                        "
-                      >
-                        {item.time}
-                      </span>
-
-                      <span
-                        className="
-                          text-sm
-                          font-medium
-                          leading-[1.4]
-                          text-gray-800
-                          group-hover:text-red-600
-                          transition-colors
-                        "
-                      >
-                        {item.title}
-                      </span>
-
-                    </Link>
-
-                  ))}
-
-                </div>
-
-              </div>
-
-
-              {/* MARKET SNAPSHOT */}
-
-              <div
-                className="
-                  border
-                  border-gray-200
-                  rounded-md
-                  p-4
-                  bg-white
-                "
-              >
-
-                <div className="flex items-center justify-between mb-2.5">
-
-                  <h3
-                    className="
-                      text-[11px]
-                      font-bold
-                      uppercase
-                      tracking-[0.14em]
-                      text-gray-900
-                    "
-                  >
-                    Market Snapshot
-                  </h3>
-
-                  <div className="flex gap-3">
-
-                    {["Indices", "Crypto"].map((tab) => (
-
-                      <button
-                        key={tab}
-                        type="button"
-                        onClick={() =>
-                          setActiveMarketTab(tab)
-                        }
-                        className={`
-                          text-[10px]
-                          font-semibold
-                          uppercase
-                          tracking-wide
-                          transition-colors
-                          ${
-                            activeMarketTab === tab
-                              ? "text-red-600"
-                              : "text-gray-400 hover:text-gray-700"
-                          }
-                        `}
-                      >
-                        {tab}
-                      </button>
-
-                    ))}
-
-                  </div>
-
-                </div>
-
-                <div className="divide-y divide-gray-100">
-
-                  {(marketSnapshotData[
-                    activeMarketTab
-                  ] || [])
-                    .slice(0, 3)
-                    .map((market: any) => (
-
-                      <div
-                        key={market.symbol}
-                        className="
-                          py-1.5
-                          flex
-                          items-center
-                          justify-between
-                        "
-                      >
-
-                        <span
-                          className="
-                            text-[11px]
-                            font-semibold
-                            text-gray-800
-                          "
-                        >
-                          {market.symbol}
-                        </span>
-
-                        <div
-                          className="
-                            flex
-                            items-center
-                            gap-2.5
-                          "
-                        >
-
-                          <span
-                            className="
-                              text-[11px]
-                              text-gray-500
-                              tabular-nums
-                            "
-                          >
-                            {market.value}
-                          </span>
-
-                          <ChangeChip
-                            change={market.change}
-                            up={market.up}
-                          />
-
-                        </div>
-
-                      </div>
-
-                    ))}
-
-                </div>
-
-                <Link
-                  to="/markets"
-                  className="
-                    mt-2.5
-                    text-[10px]
-                    font-bold
-                    text-red-600
-                    flex
-                    items-center
-                    gap-1
-                    hover:gap-2
-                    transition-all
-                    uppercase
-                    tracking-wide
-                    w-fit
-                  "
-                >
-                  View All Markets
-
-                  <ArrowRight
-                    size={10}
-                    strokeWidth={2.25}
-                  />
-
-                </Link>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          {/* =================================================
-              MORE STORIES
-          ================================================= */}
-
-          <div className="mb-14">
-
-            {/* SECTION HEADER */}
-
-            <div
-              className="
-                flex
-                items-center
-                justify-between
-                gap-4
-                border-b-2
-                border-black
-                pb-2.5
-                mb-6
-              "
-            >
-
-              <h2
-                className="
-                  text-[13px]
-                  font-bold
-                  uppercase
-                  tracking-[0.16em]
-                  text-gray-900
-                  shrink-0
-                "
-              >
-                More Stories
-              </h2>
-
-              <div
-                className="
-                  flex
-                  items-center
-                  gap-5
-                  overflow-x-auto
-                  no-scrollbar
-                "
-              >
-
-                {latestNewsTabs.map((tab) => (
-
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() =>
-                      setActiveNewsTab(tab)
-                    }
-                    className={`
-                      text-[11px]
-                      font-semibold
-                      whitespace-nowrap
-                      uppercase
-                      tracking-wide
-                      transition-colors
-                      ${
-                        activeNewsTab === tab
-                          ? "text-red-600"
-                          : "text-gray-400 hover:text-gray-700"
-                      }
-                    `}
-                  >
-                    {tab}
-                  </button>
-
-                ))}
-
-              </div>
-
-            </div>
-
-
-            {/* =================================================
-                NEWS CARDS
-
-                SUBTLE BORDER:
-                border-gray-200
-                rounded-md
-                No heavy bottom line
-            ================================================= */}
-
-            <div
-              className="
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                lg:grid-cols-5
-                gap-x-5
-                gap-y-5
-              "
-            >
-
-              {secondaryCards.map((card) => (
-
-                <Link
-                  key={card.id}
-                  to={card.link}
-                  className="
-                    group
-                    block
-                    w-full
-                    overflow-hidden
-                    rounded-md
-                    border
-                    border-gray-200
-                    bg-white
-                    transition-all
-                    duration-300
-                    hover:border-gray-300
-                    hover:shadow-[0_2px_10px_rgba(0,0,0,0.04)]
-                  "
-                >
-
-                  {/* IMAGE */}
-
-                  <div
-                    className="
-                      w-full
-                      overflow-hidden
-                      rounded-t-md
-                    "
-                  >
-
-                    <ImageWithFallback
-                      src={card.image}
-                      alt={card.title}
-                      className="
-                        w-full
-                        h-[145px]
-                        object-cover
-                        rounded-t-md
-                        transition-transform
-                        duration-700
-                        ease-out
-                        group-hover:scale-[1.04]
-                      "
-                    />
-
-                  </div>
-
-
-                  {/* CONTENT */}
-
-                  <div className="px-3 py-3">
-
-                    <span
-                      className="
-                        block
-                        text-[9px]
-                        font-bold
-                        text-red-600
-                        uppercase
-                        tracking-[0.14em]
-                        mb-1
-                      "
-                    >
-                      {card.category}
-                    </span>
-
-                    <h3
-                      className="
-                        text-[13px]
-                        font-semibold
-                        leading-[1.35]
-                        text-gray-900
-                        group-hover:text-red-600
-                        transition-colors
-                        line-clamp-3
-                      "
-                    >
-                      {card.title}
-                    </h3>
-
-                    <span
-                      className="
-                        flex
-                        items-center
-                        gap-1
-                        text-[10px]
-                        text-gray-400
-                        mt-2.5
-                      "
-                    >
-
-                      <Clock
-                        size={9}
-                        strokeWidth={2}
-                      />
-
-                      {card.time}
-
-                    </span>
-
-                  </div>
-
-                </Link>
-
-              ))}
-
-
-              {/* =================================================
-                  EDITOR'S PICK CARD
-              ================================================= */}
-
-              {editorsPicks.map((pick) => (
-
-                <Link
-                  key={pick.id}
-                  to="/leadership"
-                  className="
-                    group
-                    block
-                    w-full
-                    overflow-hidden
-                    rounded-md
-                    border
-                    border-gray-200
-                    bg-white
-                    transition-all
-                    duration-300
-                    hover:border-gray-300
-                    hover:shadow-[0_2px_10px_rgba(0,0,0,0.04)]
-                  "
-                >
-
-                  <div
-                    className="
-                      w-full
-                      overflow-hidden
-                      rounded-t-md
-                    "
-                  >
-
-                    <ImageWithFallback
-                      src={pick.image}
-                      alt={pick.title}
-                      className="
-                        w-full
-                        h-[145px]
-                        object-cover
-                        rounded-t-md
-                        transition-transform
-                        duration-700
-                        ease-out
-                        group-hover:scale-[1.04]
-                      "
-                    />
-
-                  </div>
-
-                  <div className="px-3 py-3">
-
-                    <span
-                      className="
-                        block
-                        text-[9px]
-                        font-bold
-                        text-red-600
-                        uppercase
-                        tracking-[0.14em]
-                        mb-1
-                      "
-                    >
-                      Editor's Pick
-                    </span>
-
-                    <h3
-                      className="
-                        text-[13px]
-                        font-semibold
-                        leading-[1.35]
-                        text-gray-900
-                        group-hover:text-red-600
-                        transition-colors
-                        line-clamp-3
-                      "
-                    >
-                      {pick.title}
-                    </h3>
-
-                    <span
-                      className="
-                        flex
-                        items-center
-                        gap-1
-                        text-[10px]
-                        text-gray-400
-                        mt-2.5
-                      "
-                    >
-
-                      <Clock
-                        size={9}
-                        strokeWidth={2}
-                      />
-
-                      {pick.time}
-
-                    </span>
-
-                  </div>
-
-                </Link>
-
-              ))}
-
-            </div>
-
-          </div>
-
-          {/* =================================================
-              SECTION SEPARATOR
-          ================================================= */}
-
-          <div className="w-full h-px bg-gray-200 mb-14" />
-
-
-          {/* =================================================
-              TRUST / STATISTICS
-          ================================================= */}
-
-          <div
-            className="
-              bg-black
-              rounded-md
-              py-8
-              px-6
-              mb-14
-            "
-          >
-
-            <div
-              className="
-                grid
-                grid-cols-2
-                md:grid-cols-4
-                gap-6
-              "
-            >
-
-              {[
-                {
-                  label: "Global Readers",
-                  value: "2M+",
-                },
-                {
-                  label: "Countries Covered",
-                  value: "120+",
-                },
-                {
-                  label: "Trusted by Leaders",
-                  value: "Worldwide",
-                },
-                {
-                  label: "In-Depth",
-                  value: "Impartial",
-                },
-              ].map((stat) => (
-
-                <div
-                  key={stat.label}
-                  className="text-center"
-                >
-
-                  <div
-                    className="
-                      font-serif
-                      text-white
-                      text-2xl
-                      sm:text-3xl
-                      font-bold
-                    "
-                  >
-                    {stat.value}
-                  </div>
-
-                  <div
-                    className="
-                      text-gray-400
-                      text-[11px]
-                      uppercase
-                      tracking-[0.14em]
-                      mt-1.5
-                    "
-                  >
-                    {stat.label}
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          </div>
-
-
-          {/* =================================================
-              MAGAZINE + PRIDE TIMES 30
-          ================================================= */}
-
-          <div
-            className="
-              grid
-              grid-cols-1
-              lg:grid-cols-2
-              gap-6
-              mb-14
-            "
-          >
-
-            {/* MAGAZINE */}
-
-            <div
-              className="
-                bg-black
-                rounded-md
-                flex
-                flex-col
-                sm:flex-row
-                overflow-hidden
-              "
-            >
-
-              <div
-                className="
-                  sm:w-2/5
-                  h-[160px]
-                  sm:h-auto
-                  overflow-hidden
-                  rounded-md
-                "
-              >
-
-                <ImageWithFallback
-                  src={magazinePreview.image}
-                  alt={magazinePreview.title}
-                  className="
-                    w-full
-                    h-full
-                    object-cover
-                    rounded-md
-                  "
-                />
-
-              </div>
-
-              <div
-                className="
-                  flex-1
-                  p-6
-                  flex
-                  flex-col
-                  justify-center
-                "
-              >
-
-                <p
-                  className="
-                    text-[10px]
-                    font-bold
-                    uppercase
-                    tracking-[0.18em]
-                    mb-2
-                    text-gray-500
-                  "
-                >
-                  Pride Times Magazine
-                </p>
-
-                <h3
-                  className="
-                    font-serif
-                    text-xl
-                    font-bold
-                    text-white
-                    leading-tight
-                  "
-                >
-                  {magazinePreview.title}
-                </h3>
-
-                <p
-                  className="
-                    text-[13px]
-                    text-gray-400
-                    mt-2
-                    mb-4
-                    leading-[1.5]
-                  "
-                >
-                  {magazinePreview.subtitle}
-                </p>
-
-                <Link
-                  to="/magazine"
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    w-fit
-                    text-xs
-                    font-bold
-                    uppercase
-                    tracking-wide
-                    text-white
-                    border-b
-                    border-white/50
-                    pb-0.5
-                    hover:border-white
-                    transition-colors
-                  "
-                >
-                  Read Digital Edition
-
-                  <ArrowRight
-                    size={11}
-                    strokeWidth={2.25}
-                  />
-
-                </Link>
-
-              </div>
-
-            </div>
-
-
-            {/* PRIDE TIMES FEATURE */}
-
-            {pt30.map((story) => (
-
-              <Link
-                key={story.id}
-                to={story.link}
-                className="
-                  group
-                  flex
-                  border
-                  border-gray-200
-                  rounded-md
-                  overflow-hidden
-                  bg-white
-                  hover:border-gray-300
-                  transition-all
-                  duration-300
-                "
-              >
-
-                <div
-                  className="
-                    w-[40%]
-                    shrink-0
-                    overflow-hidden
-                    rounded-md
-                  "
-                >
-
-                  <ImageWithFallback
-                    src={story.image}
-                    alt={story.title}
-                    className="
-                      w-full
-                      h-full
-                      object-cover
-                      rounded-md
-                      transition-transform
-                      duration-500
-                      group-hover:scale-105
-                    "
-                  />
-
-                </div>
-
-                <div
-                  className="
-                    flex-1
-                    p-6
-                    flex
-                    flex-col
-                    justify-center
-                    min-w-0
-                  "
-                >
-
-                  <span
-                    className="
-                      text-[10px]
-                      font-bold
-                      text-red-600
-                      uppercase
-                      tracking-[0.14em]
-                    "
-                  >
-                    {story.tag}
-                  </span>
-
-                  <h3
-                    className="
-                      font-serif
-                      text-lg
-                      font-bold
-                      leading-[1.2]
-                      mt-1.5
-                      text-gray-950
-                      group-hover:text-red-600
-                      transition-colors
-                    "
-                  >
-                    {story.title}
-                  </h3>
-
-                  <p
-                    className="
-                      text-xs
-                      text-gray-500
-                      leading-[1.5]
-                      mt-1.5
-                      line-clamp-2
-                    "
-                  >
-                    {story.excerpt}
-                  </p>
-
-                  <span
-                    className="
-                      mt-3
-                      text-[11px]
-                      font-bold
-                      text-gray-900
-                      uppercase
-                      tracking-wide
-                      flex
-                      items-center
-                      gap-1
-                      group-hover:gap-2
-                      transition-all
-                    "
-                  >
-                    Read More
-
-                    <ArrowRight
-                      size={11}
-                      strokeWidth={2.25}
-                    />
-
-                  </span>
-
-                </div>
-
-              </Link>
-
-            ))}
-
-          </div>
-
-
-          {/* =================================================
-              PRIDE TIMES 30
-          ================================================= */}
-
-          <section>
-
-            <div
-              className="
-                flex
-                items-center
-                justify-between
-                border-b-2
-                border-black
-                pb-2.5
-                mb-5
-              "
-            >
-
-              <h2
-                className="
-                  text-[13px]
-                  font-bold
-                  uppercase
-                  tracking-[0.16em]
-                  text-gray-900
-                "
-              >
-                Pride Times 30 — Leaders to Watch in 2026
-              </h2>
-
-              <Link
-                to="/billionaires"
-                className="
-                  text-[11px]
-                  font-semibold
-                  text-gray-400
-                  hover:text-red-600
-                  transition-colors
-                  flex
-                  items-center
-                  gap-1
-                "
-              >
-                Full List
-
-                <ArrowRight
-                  size={11}
-                  strokeWidth={2.25}
-                />
-
-              </Link>
-
-            </div>
-
-
-            <div
-              className="
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                gap-3
-              "
-            >
-
-              {prideTimes30.map((leader) => (
-
-                <div
-                  key={leader.rank}
-                  className="
-                    flex
-                    items-start
-                    gap-4
-                    p-4
-                    border
-                    border-gray-200
-                    rounded-md
-                  "
-                >
-
-                  <span
-                    className="
-                      font-serif
-                      text-2xl
-                      font-bold
-                      text-gray-200
-                      tabular-nums
-                      shrink-0
-                      w-9
-                    "
-                  >
-                    {String(leader.rank).padStart(2, "0")}
-                  </span>
-
-                  <div className="min-w-0">
-
-                    <p
-                      className="
-                        text-sm
-                        font-bold
-                        text-gray-900
-                      "
-                    >
-
-                      {leader.name}
-
-                      <span className="font-normal text-gray-400">
-                        {" "}
-                        · {leader.company}
-                      </span>
-
-                    </p>
-
-                    <p
-                      className="
-                        text-xs
-                        text-gray-500
-                        leading-[1.5]
-                        mt-1
-                      "
-                    >
-                      {leader.sector}
-                    </p>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-          </section>
-
-        </main>
-
+    <div className="home-page">
+      {/* TOP BREAKING BAR */}
+      <div className="home-breaking-wrap">
+        <div className="home-container home-breaking">
+          <span className="breaking-badge">BREAKING</span>
+          <p>
+            U.S. stocks open June at all-time highs. Nasdaq +8% since April end.
+            S&P 500 consolidating. Oil retreating on Iran peace hopes.
+          </p>
+          <span className="breaking-time">12 min ago</span>
+        </div>
       </div>
 
+      {/* BRAND HEADER */}
+      <header className="home-header">
+        <div className="home-container">
+          <div className="home-header-top">
+            <span>{today}</span>
+            <span>Jaipur Edition</span>
+            <div className="home-header-actions">
+              <button aria-label="Search">
+                <Search size={14} /> <span>Search</span>
+              </button>
+              <button aria-label="Notifications">
+                <Bell size={14} />
+              </button>
+              <button aria-label="Sign in">
+                <User size={14} /> <span>Sign in</span>
+              </button>
+              <button className="home-subscribe">Subscribe</button>
+            </div>
+          </div>
 
-      {/* =====================================================
-          GLOBAL STYLES
-      ===================================================== */}
+          <Link to="/" className="home-masthead">
+            <h1>
+              THE <span>PRIDE</span> TIMES
+            </h1>
+            <p>THE GLOBAL VOICE OF INNOVATION, LEADERSHIP & SUCCESS</p>
+          </Link>
+        </div>
+      </header>
+
+      {/* PRIMARY NAV */}
+      <nav className="home-primary-nav">
+        <div className="home-container nav-scroll">
+          {navItems.map((item) => {
+            const active =
+              item.to === "/"
+                ? location.pathname === "/"
+                : location.pathname.startsWith(item.to);
+
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={active ? "active" : ""}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* LIVE MARKET TICKER */}
+      <div className="home-ticker">
+        <div className="home-container home-ticker-inner">
+          <span className="ticker-menu">Menu⌄</span>
+          {tickerData.length > 0
+            ? tickerData.map((item, index) => (
+                <div className="ticker-item" key={`${item.label}-${index}`}>
+                  <b>{item.label}</b>
+                  <span>{item.value}</span>
+                  <em className={item.up ? "up" : "down"}>
+                    {item.up ? "▲" : "▼"} {item.change}
+                  </em>
+                </div>
+              ))
+            : ["S&P 500", "NASDAQ", "DOW JONES", "BTC", "ETH"].map((label) => (
+                <div className="ticker-item" key={label}>
+                  <b>{label}</b>
+                  <span>—</span>
+                  <em>Live</em>
+                </div>
+              ))}
+        </div>
+      </div>
+
+      {/* SECONDARY NAV */}
+      <div className="home-secondary-nav">
+        <div className="home-container nav-scroll">
+          {secondaryNav.map((item) => (
+            <Link key={item.to} to={item.to}>
+              {item.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <main className="home-container home-main">
+        {/* AD */}
+        <AdBanner />
+
+        {/* HERO THREE-COLUMN AREA */}
+        <section className="home-hero-grid">
+          {/* LEFT — TOP STORY */}
+          <Link to="/markets" className="home-top-story">
+            <div className="home-top-story-image">
+              <ImageWithFallback
+                src={marketStory.image}
+                alt={marketStory.title}
+              />
+              <span>TOP STORY</span>
+            </div>
+            <div className="home-top-story-content">
+              <span className="home-category">{marketStory.category}</span>
+              <h2>{marketStory.title}</h2>
+              <p>{marketStory.excerpt}</p>
+              <span className="home-read-button">
+                Read Full Story <ArrowRight size={12} />
+              </span>
+            </div>
+          </Link>
+
+          {/* CENTER — FEATURE */}
+          <Link to={heroStory.link} className="home-feature-story">
+            <div className="home-feature-image">
+              <ImageWithFallback src={heroStory.image} alt={heroStory.title} />
+            </div>
+            <span className="home-category">{heroStory.category}</span>
+            <h2>{heroStory.title}</h2>
+            <p>{heroStory.excerpt}</p>
+            <div className="home-related">
+              <b>Related</b>
+              <span>
+                Nvidia and the next phase of AI infrastructure investment
+              </span>
+            </div>
+          </Link>
+
+          {/* RIGHT — VIDEOS + LATEST */}
+          <aside className="home-right-rail">
+            <div className="home-rail-title">
+              <h2>Today's Videos</h2>
+              <button>Explore More</button>
+            </div>
+
+            <Link to="/magazine" className="home-video-card">
+              <ImageWithFallback src={videoPreview.image} alt={videoPreview.title} />
+              <span className="home-video-duration">2:10</span>
+              <div>
+                <b>{videoPreview.title}</b>
+                <small>{videoPreview.subtitle}</small>
+              </div>
+            </Link>
+
+            <div className="home-latest-title">Latest</div>
+            <SmallList
+              items={[
+                {
+                  category: "TECHNOLOGY",
+                  title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
+                  time: "12 min ago",
+                  link: "/technology",
+                },
+                {
+                  category: "TECHNOLOGY",
+                  title: "Alphabet Plans $80B Stock Offering to Fund AI Data-Center Expansion",
+                  time: "35 min ago",
+                  link: "/technology",
+                },
+                {
+                  category: "TECHNOLOGY",
+                  title: "Quantum Computing Reaches Commercial Milestone",
+                  time: "2 hr ago",
+                  link: "/technology",
+                },
+                {
+                  category: "BUSINESS",
+                  title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+                  time: "3 hr ago",
+                  link: "/markets",
+                },
+                {
+                  category: "ENERGY",
+                  title: "Data Centers and AI Workloads Force Energy Policy Reversals Globally",
+                  time: "4 hr ago",
+                  link: "/energy",
+                },
+              ]}
+            />
+          </aside>
+        </section>
+
+        {/* LATEST STORIES */}
+        <section className="home-section">
+          <SectionHeader title="Latest Stories" action="View All" to="/more" />
+          <div className="home-four-grid">
+            {latestStories.map((item) => (
+              <StoryCard key={item.title} item={item} />
+            ))}
+          </div>
+        </section>
+
+        <AdBanner>Invest Smarter — The Pride Times Premium</AdBanner>
+
+        {/* EDITOR'S PICKS + MAGAZINE + LEADERS */}
+        <section className="home-editor-layout">
+          <div className="home-editors">
+            <SectionHeader title="Editor's Picks" action="View All" to="/ceospotlight" />
+            <div className="home-editor-list">
+              {editorPicks.map((item) => (
+                <StoryCard key={item.title} item={item} compact />
+              ))}
+            </div>
+          </div>
+
+          <aside className="home-side-column">
+            <SectionHeader title="Magazine" action="View All" to="/magazine" />
+            <Link to="/magazine" className="home-magazine-card">
+              <ImageWithFallback
+                src={magazinePreview.image}
+                alt={magazinePreview.title}
+              />
+              <div>
+                <span className="home-category">PRIDE TIMES MAGAZINE</span>
+                <h3>{magazinePreview.title}</h3>
+                <p>{magazinePreview.subtitle}</p>
+                <span className="home-red-button">Read Digital Edition →</span>
+              </div>
+            </Link>
+
+            <SectionHeader title="Leader Spotlight" action="View All" to="/ceospotlight" />
+            <div className="home-leader-list">
+              {prideTimes30.map((leader) => (
+                <Link to="/ceospotlight" key={leader.rank} className="home-leader">
+                  <span>{String(leader.rank).padStart(2, "0")}</span>
+                  <div>
+                    <strong>{leader.name}</strong>
+                    <small>{leader.company} · {leader.role}</small>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </aside>
+        </section>
+
+        {/* WORLD SECURITY & GEOPOLITICS */}
+        <section className="home-section world-section">
+          <SectionHeader
+            title="World Security & Geopolitics"
+            action="View All"
+            to="/international-business"
+          />
+
+          <div className="home-three-grid">
+            {worldSecurityStories.map((item) => (
+              <StoryCard key={item.title} item={item} />
+            ))}
+          </div>
+        </section>
+
+        {/* NEWSLETTER */}
+        <section className="home-newsletter">
+          <div>
+            <h2>Stay Ahead with The Pride Times</h2>
+            <p>Get daily briefings from the world's top business magazine.</p>
+          </div>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <input type="email" placeholder="Enter your email" aria-label="Email address" />
+            <button>Subscribe Free</button>
+          </form>
+        </section>
+
+        <AdBanner>The Pride Times Premium — Deeper Analysis, Exclusive Access</AdBanner>
+      </main>
+
+      {/* FOOTER */}
+      <footer className="home-footer">
+        <div className="home-container">
+          <div className="home-footer-main">
+            <div className="home-footer-brand">
+              <h2>
+                THE <span>PRIDE TIMES</span>
+              </h2>
+              <p>THE GLOBAL VOICE OF INNOVATION, LEADERSHIP & SUCCESS</p>
+            </div>
+
+            <div>
+              <h3>Explore</h3>
+              <Link to="/markets">Markets</Link>
+              <Link to="/technology">Technology</Link>
+              <Link to="/business-news">Business News</Link>
+              <Link to="/energy">Energy</Link>
+            </div>
+
+            <div>
+              <h3>Company</h3>
+              <Link to="/about">About</Link>
+              <Link to="/contact">Contact</Link>
+              <Link to="/careers">Careers</Link>
+              <Link to="/privacy">Privacy</Link>
+            </div>
+
+            <div>
+              <h3>Follow Us</h3>
+              <span>Facebook · X · LinkedIn · Instagram · YouTube</span>
+            </div>
+          </div>
+
+          <div className="home-footer-bottom">
+            <span>© 2026 The Pride Times. All rights reserved.</span>
+            <span>Privacy Policy · Terms of Use · Cookie Settings · Accessibility</span>
+          </div>
+        </div>
+      </footer>
 
       <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
 
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
+        :root {
+          --home-black: #050505;
+          --home-red: #e31e24;
+          --home-ink: #151515;
+          --home-muted: #707070;
+          --home-border: #dddddd;
+          --home-soft: #f5f6f7;
+          --home-green: #16a34a;
         }
 
-        .no-scrollbar {
-          -ms-overflow-style: none;
+        .home-page {
+          width: 100%;
+          min-height: 100vh;
+          background: #fff;
+          color: var(--home-ink);
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .home-page *,
+        .home-page *::before,
+        .home-page *::after {
+          box-sizing: border-box;
+        }
+
+        .home-container {
+          width: min(1180px, calc(100% - 32px));
+          margin: 0 auto;
+        }
+
+        .nav-scroll {
+          display: flex;
+          align-items: center;
+          overflow-x: auto;
           scrollbar-width: none;
         }
 
-        html {
-          scroll-behavior: smooth;
+        .nav-scroll::-webkit-scrollbar { display: none; }
+
+        /* BREAKING */
+        .home-breaking-wrap {
+          padding-top: 18px;
+          background: #fff;
         }
 
-        ::selection {
-          background: rgba(0, 0, 0, 0.12);
+        .home-breaking {
+          min-height: 30px;
+          background: #080808;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 7px 10px;
+          border-radius: 3px;
+          font-size: 9px;
+        }
+
+        .breaking-badge {
+          background: var(--home-red);
+          padding: 4px 7px;
+          font-size: 7px;
+          font-weight: 800;
+          letter-spacing: .08em;
+          flex: 0 0 auto;
+        }
+
+        .home-breaking p {
+          margin: 0;
+          flex: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #eee;
+        }
+
+        .breaking-time {
+          color: #888;
+          white-space: nowrap;
+          font-size: 7px;
+        }
+
+        /* HEADER */
+        .home-header {
+          background: #fff;
+          border-bottom: 1px solid #eee;
+        }
+
+        .home-header-top {
+          min-height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 15px;
+          font-size: 8px;
+          color: #666;
+          text-transform: uppercase;
+          letter-spacing: .06em;
+        }
+
+        .home-header-actions {
+          display: flex;
+          align-items: center;
+          gap: 13px;
+        }
+
+        .home-header-actions button {
+          border: 0;
+          background: transparent;
+          font: inherit;
+          color: inherit;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .home-header-actions button:hover { color: var(--home-red); }
+
+        .home-header-actions .home-subscribe {
+          background: var(--home-red);
+          color: #fff;
+          padding: 8px 14px;
+          border-radius: 4px;
+          font-weight: 800;
+        }
+
+        .home-masthead {
+          display: block;
+          text-align: left;
+          text-decoration: none;
+          padding: 8px 0 11px;
+        }
+
+        .home-masthead h1 {
+          margin: 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: clamp(34px, 5vw, 48px);
+          line-height: .9;
+          letter-spacing: -.055em;
+          color: #111;
+          font-weight: 900;
+        }
+
+        .home-masthead h1 span,
+        .home-footer-brand h2 span {
+          color: var(--home-red);
+        }
+
+        .home-masthead p {
+          margin: 6px 0 0;
+          font-size: 7px;
+          color: #777;
+          letter-spacing: .22em;
+        }
+
+        /* NAVIGATION */
+        .home-primary-nav {
+          background: var(--home-black);
+          border-bottom: 1px solid #222;
+        }
+
+        .home-primary-nav .home-container {
+          width: min(1180px, calc(100% - 32px));
+        }
+
+        .home-primary-nav a {
+          position: relative;
+          color: #f2f2f2;
+          text-decoration: none;
+          font-size: 9px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: .04em;
+          padding: 9px 12px;
+          white-space: nowrap;
+        }
+
+        .home-primary-nav a::after {
+          content: "";
+          position: absolute;
+          left: 10px;
+          right: 10px;
+          bottom: 0;
+          height: 2px;
+          background: var(--home-red);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform .25s ease;
+        }
+
+        .home-primary-nav a:hover::after,
+        .home-primary-nav a.active::after {
+          transform: scaleX(1);
+        }
+
+        /* TICKER */
+        .home-ticker {
+          background: #fff;
+          border-bottom: 1px solid var(--home-border);
+        }
+
+        .home-ticker-inner {
+          min-height: 38px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          overflow-x: auto;
+          scrollbar-width: none;
+        }
+
+        .home-ticker-inner::-webkit-scrollbar { display: none; }
+
+        .ticker-menu {
+          border: 1px solid #ddd;
+          padding: 6px 10px;
+          font-size: 8px;
+          white-space: nowrap;
+        }
+
+        .ticker-item {
+          min-width: 145px;
+          height: 27px;
+          display: flex;
+          align-items: center;
+          gap: 7px;
+          background: #070707;
+          color: #fff;
+          padding: 0 9px;
+          border-radius: 3px;
+          white-space: nowrap;
+          font-size: 8px;
+        }
+
+        .ticker-item b {
+          color: #bbb;
+          font-size: 7px;
+          letter-spacing: .03em;
+        }
+
+        .ticker-item em {
+          font-style: normal;
+          font-size: 7px;
+          font-weight: 700;
+        }
+
+        .ticker-item em.up { color: #2fd17c; }
+        .ticker-item em.down { color: #ff5c66; }
+
+        /* SECONDARY NAV */
+        .home-secondary-nav {
+          border-bottom: 1px solid #e3e3e3;
+          background: #fff;
+        }
+
+        .home-secondary-nav a {
+          color: #222;
+          text-decoration: none;
+          font-size: 8px;
+          font-weight: 700;
+          padding: 8px 13px;
+          white-space: nowrap;
+        }
+
+        .home-secondary-nav a:hover { color: var(--home-red); }
+
+        /* MAIN */
+        .home-main {
+          padding: 16px 0 45px;
+        }
+
+        /* ADS */
+        .home-ad-banner {
+          height: 70px;
+          background: linear-gradient(90deg, #0b2028, #28576a);
+          color: #fff;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 14px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .home-ad-banner::after {
+          content: "Advertisement";
+          position: absolute;
+          top: 3px;
+          right: 6px;
+          color: #999;
+          background: #fff;
+          font-size: 5px;
+          padding: 2px 4px;
+        }
+
+        .home-ad-banner span {
+          color: #67c5df;
+          font-size: 6px;
+          font-weight: 800;
+          letter-spacing: .14em;
+        }
+
+        .home-ad-banner strong {
+          font-size: 10px;
+          margin-top: 2px;
+        }
+
+        .home-ad-banner small {
+          color: #9db8c4;
+          font-size: 6px;
+          margin-top: 3px;
+        }
+
+        /* HERO */
+        .home-hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.5fr .9fr;
+          gap: 14px;
+          align-items: start;
+          border-bottom: 1px solid #111;
+          padding-bottom: 20px;
+        }
+
+        .home-top-story,
+        .home-feature-story,
+        .home-video-card,
+        .home-story-card,
+        .home-magazine-card,
+        .home-leader {
+          text-decoration: none;
           color: inherit;
         }
 
-      `}</style>
+        .home-top-story {
+          background: #080808;
+          color: #fff;
+          border-radius: 6px;
+          overflow: hidden;
+          display: block;
+        }
 
+        .home-top-story-image {
+          height: 245px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .home-top-story-image img,
+        .home-feature-image img,
+        .home-story-image img,
+        .home-video-card img,
+        .home-magazine-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform .5s ease;
+        }
+
+        .home-top-story:hover img,
+        .home-feature-story:hover img,
+        .home-story-card:hover img,
+        .home-video-card:hover img,
+        .home-magazine-card:hover img {
+          transform: scale(1.035);
+        }
+
+        .home-top-story-image::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0,0,0,.78), transparent 55%);
+        }
+
+        .home-top-story-image span {
+          position: absolute;
+          z-index: 1;
+          left: 12px;
+          bottom: 12px;
+          background: var(--home-red);
+          color: #fff;
+          font-size: 7px;
+          font-weight: 800;
+          padding: 5px 7px;
+          letter-spacing: .08em;
+        }
+
+        .home-top-story-content {
+          padding: 11px 12px 13px;
+        }
+
+        .home-category {
+          display: inline-block;
+          color: var(--home-red);
+          font-size: 7px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: .09em;
+        }
+
+        .home-top-story .home-category { color: #ff5a62; }
+
+        .home-top-story h2 {
+          margin: 5px 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 21px;
+          line-height: 1.02;
+        }
+
+        .home-top-story p {
+          margin: 8px 0 12px;
+          color: #bbb;
+          font-size: 8px;
+          line-height: 1.45;
+        }
+
+        .home-read-button {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          color: #111;
+          background: #fff;
+          padding: 6px 8px;
+          border-radius: 3px;
+          font-size: 7px;
+          font-weight: 800;
+        }
+
+        .home-feature-story {
+          min-width: 0;
+          display: block;
+        }
+
+        .home-feature-image {
+          height: 245px;
+          overflow: hidden;
+          margin-bottom: 8px;
+        }
+
+        .home-feature-story h2 {
+          margin: 5px 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 26px;
+          line-height: 1.02;
+          letter-spacing: -.025em;
+        }
+
+        .home-feature-story p {
+          color: #666;
+          font-size: 9px;
+          line-height: 1.5;
+          margin: 8px 0;
+        }
+
+        .home-related {
+          border: 1px solid #ddd;
+          padding: 7px 9px;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          font-size: 8px;
+        }
+
+        .home-related b {
+          color: #777;
+          text-transform: uppercase;
+          font-size: 6px;
+          letter-spacing: .1em;
+        }
+
+        .home-right-rail {
+          min-width: 0;
+          border-left: 1px solid #ddd;
+          padding-left: 12px;
+        }
+
+        .home-rail-title,
+        .home-section-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-top: 2px solid #111;
+          border-bottom: 1px solid #111;
+          padding: 6px 0;
+          margin-bottom: 9px;
+        }
+
+        .home-rail-title h2,
+        .home-section-header h2 {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 10px;
+          font-weight: 800;
+        }
+
+        .home-rail-title button {
+          border: 1px solid #ddd;
+          border-radius: 12px;
+          background: #fff;
+          padding: 4px 7px;
+          font-size: 6px;
+          cursor: pointer;
+        }
+
+        .home-video-card {
+          display: block;
+          position: relative;
+          border-bottom: 1px solid #ddd;
+          padding-bottom: 9px;
+        }
+
+        .home-video-card > div:first-of-type {
+          height: 100px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .home-video-card img { position: absolute; inset: 0; }
+
+        .home-video-duration {
+          position: absolute;
+          right: 6px;
+          top: 78px;
+          background: #111;
+          color: #fff;
+          padding: 3px 5px;
+          font-size: 6px;
+          z-index: 2;
+        }
+
+        .home-video-card > div:last-child {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          margin-top: 5px;
+        }
+
+        .home-video-card b {
+          font-size: 8px;
+          line-height: 1.2;
+        }
+
+        .home-video-card small {
+          color: #777;
+          font-size: 6px;
+          line-height: 1.3;
+        }
+
+        .home-latest-title {
+          color: var(--home-red);
+          font-weight: 900;
+          font-size: 10px;
+          margin: 9px 0 2px;
+        }
+
+        .home-small-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .home-small-item {
+          display: grid;
+          grid-template-columns: 42px 1fr;
+          gap: 6px;
+          padding: 6px 0;
+          border-bottom: 1px solid #eee;
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .home-small-time {
+          color: var(--home-red);
+          font-size: 6px;
+          font-weight: 800;
+          padding-top: 2px;
+        }
+
+        .home-small-item .home-category {
+          font-size: 5px;
+        }
+
+        .home-small-item h3 {
+          margin: 2px 0 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 8px;
+          line-height: 1.18;
+        }
+
+        /* SECTIONS */
+        .home-section {
+          margin-top: 20px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #111;
+        }
+
+        .home-see-all {
+          display: inline-flex;
+          align-items: center;
+          gap: 2px;
+          color: var(--home-red);
+          text-decoration: none;
+          font-size: 7px;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        .home-four-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 10px;
+        }
+
+        .home-three-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+        }
+
+        .home-story-card {
+          display: block;
+          border: 1px solid #ddd;
+          background: #fff;
+          border-radius: 4px;
+          overflow: hidden;
+        }
+
+        .home-story-image {
+          height: 115px;
+          overflow: hidden;
+        }
+
+        .home-story-body {
+          padding: 8px;
+        }
+
+        .home-story-card h3 {
+          margin: 4px 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 11px;
+          line-height: 1.13;
+        }
+
+        .home-meta {
+          color: #888;
+          font-size: 6px;
+          display: flex;
+          align-items: center;
+          gap: 3px;
+        }
+
+        /* EDITORS */
+        .home-editor-layout {
+          display: grid;
+          grid-template-columns: 1.75fr .85fr;
+          gap: 15px;
+          margin-top: 20px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #111;
+        }
+
+        .home-editor-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .home-story-card.compact {
+          display: grid;
+          grid-template-columns: 120px 1fr;
+          border: 0;
+          border-bottom: 1px solid #ddd;
+          border-radius: 0;
+          padding: 8px 0;
+        }
+
+        .home-story-card.compact:first-child { padding-top: 0; }
+
+        .home-story-card.compact .home-story-image {
+          height: 72px;
+        }
+
+        .home-story-card.compact h3 {
+          font-size: 10px;
+          margin-top: 3px;
+        }
+
+        .home-story-card.compact .home-story-body {
+          padding: 0 0 0 9px;
+        }
+
+        .home-side-column {
+          border-left: 1px solid #ddd;
+          padding-left: 14px;
+        }
+
+        .home-magazine-card {
+          display: block;
+          background: #080808;
+          color: #fff;
+          border-radius: 5px;
+          overflow: hidden;
+          margin-bottom: 17px;
+        }
+
+        .home-magazine-card > img {
+          height: 115px;
+        }
+
+        .home-magazine-card > div {
+          padding: 9px;
+        }
+
+        .home-magazine-card .home-category { color: #ff5a62; }
+
+        .home-magazine-card h3 {
+          margin: 4px 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 16px;
+        }
+
+        .home-magazine-card p {
+          margin: 0 0 8px;
+          color: #aaa;
+          font-size: 7px;
+          line-height: 1.35;
+        }
+
+        .home-red-button {
+          display: inline-block;
+          background: var(--home-red);
+          padding: 5px 7px;
+          color: #fff;
+          font-size: 6px;
+          font-weight: 800;
+        }
+
+        .home-leader-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .home-leader {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          border-bottom: 1px solid #eee;
+          padding: 7px 0;
+        }
+
+        .home-leader > span {
+          font-family: Georgia, "Times New Roman", serif;
+          color: var(--home-red);
+          font-weight: 800;
+          font-size: 15px;
+        }
+
+        .home-leader strong {
+          display: block;
+          font-size: 8px;
+        }
+
+        .home-leader small {
+          color: #777;
+          font-size: 6px;
+        }
+
+        /* WORLD */
+        .world-section .home-story-image { height: 135px; }
+
+        /* NEWSLETTER */
+        .home-newsletter {
+          margin: 24px 0;
+          background: #071b2d;
+          color: #fff;
+          padding: 25px 28px;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+        }
+
+        .home-newsletter h2 {
+          margin: 0 0 5px;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 20px;
+        }
+
+        .home-newsletter p {
+          margin: 0;
+          color: #aebdca;
+          font-size: 8px;
+        }
+
+        .home-newsletter form {
+          display: flex;
+          gap: 6px;
+        }
+
+        .home-newsletter input {
+          width: 220px;
+          background: #19344b;
+          color: #fff;
+          border: 1px solid #38536a;
+          border-radius: 4px;
+          padding: 9px 10px;
+          font-size: 8px;
+          outline: none;
+        }
+
+        .home-newsletter button {
+          border: 0;
+          background: var(--home-red);
+          color: #fff;
+          border-radius: 4px;
+          padding: 9px 12px;
+          font-size: 8px;
+          font-weight: 800;
+          cursor: pointer;
+        }
+
+        /* FOOTER */
+        .home-footer {
+          background: #050505;
+          color: #fff;
+          padding: 28px 0 14px;
+        }
+
+        .home-footer-main {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr 1.3fr;
+          gap: 35px;
+          padding-bottom: 25px;
+          border-bottom: 1px solid #222;
+        }
+
+        .home-footer-brand h2 {
+          margin: 0;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 24px;
+          letter-spacing: -.04em;
+        }
+
+        .home-footer-brand p {
+          color: #777;
+          font-size: 6px;
+          letter-spacing: .18em;
+          margin-top: 4px;
+        }
+
+        .home-footer h3 {
+          margin: 0 0 8px;
+          font-size: 8px;
+          text-transform: uppercase;
+          letter-spacing: .1em;
+        }
+
+        .home-footer a,
+        .home-footer span {
+          display: block;
+          color: #999;
+          text-decoration: none;
+          font-size: 7px;
+          line-height: 1.8;
+        }
+
+        .home-footer a:hover { color: #fff; }
+
+        .home-footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          padding-top: 12px;
+          color: #666;
+          font-size: 6px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+          .home-hero-grid {
+            grid-template-columns: 1fr 1.3fr;
+          }
+
+          .home-right-rail {
+            grid-column: 1 / -1;
+            border-left: 0;
+            border-top: 1px solid #ddd;
+            padding: 14px 0 0;
+          }
+
+          .home-right-rail .home-small-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 15px;
+          }
+
+          .home-four-grid { grid-template-columns: repeat(2, 1fr); }
+          .home-editor-layout { grid-template-columns: 1fr; }
+          .home-side-column {
+            border-left: 0;
+            border-top: 1px solid #ddd;
+            padding-left: 0;
+            padding-top: 14px;
+          }
+        }
+
+        @media (max-width: 700px) {
+          .home-container {
+            width: min(100% - 20px, 1180px);
+          }
+
+          .home-header-top > span:first-child {
+            display: none;
+          }
+
+          .home-header-top {
+            justify-content: flex-end;
+          }
+
+          .home-header-actions span {
+            display: none;
+          }
+
+          .home-masthead {
+            text-align: center;
+          }
+
+          .home-masthead h1 {
+            font-size: 36px;
+          }
+
+          .home-hero-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .home-right-rail {
+            grid-column: auto;
+          }
+
+          .home-feature-story h2 { font-size: 23px; }
+
+          .home-four-grid,
+          .home-three-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+
+          .home-newsletter {
+            flex-direction: column;
+            align-items: stretch;
+          }
+
+          .home-newsletter form {
+            width: 100%;
+          }
+
+          .home-newsletter input {
+            flex: 1;
+            width: auto;
+          }
+
+          .home-footer-main {
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+          }
+
+          .home-footer-bottom {
+            flex-direction: column;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .home-breaking {
+            font-size: 7px;
+          }
+
+          .breaking-time {
+            display: none;
+          }
+
+          .home-four-grid,
+          .home-three-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .home-story-image {
+            height: 175px;
+          }
+
+          .world-section .home-story-image {
+            height: 190px;
+          }
+
+          .home-story-card.compact {
+            grid-template-columns: 92px 1fr;
+          }
+
+          .home-story-card.compact .home-story-image {
+            height: 62px;
+          }
+
+          .home-right-rail .home-small-list {
+            grid-template-columns: 1fr;
+          }
+
+          .home-footer-main {
+            grid-template-columns: 1fr;
+          }
+
+          .home-newsletter form {
+            flex-direction: column;
+          }
+
+          .home-newsletter input {
+            width: 100%;
+          }
+
+          .home-ad-banner {
+            height: 62px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
