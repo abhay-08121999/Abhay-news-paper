@@ -891,8 +891,12 @@ footer .pt-logo-accent {
 ======================================== */
 
 .pt-mega-menu {
-  width: 100vw;
-
+  /* No explicit width: it's a direct child of the full-width,
+     position:relative .pt-securities-bar, and inset-x-0 in the
+     component already stretches it edge-to-edge against that
+     ancestor's real box — safer than width:100vw, which is measured
+     against the viewport and overflows horizontally by the
+     scrollbar's width in most desktop browsers. */
   background: #0b0b0b;
 
   border-top: 2px solid var(--pt-red);
