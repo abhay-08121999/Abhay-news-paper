@@ -1,406 +1,271 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { BookOpen, Download, Crown, ChevronRight, Play } from "lucide-react";
+import {
+  Instagram,
+  User,
+} from "lucide-react";
 import { Link } from "react-router";
-import { useAuth } from "../../context/AuthContext";
-import { useState } from "react";
-import AxisImg from "../../../imports/Axis03.png";
-import ErikaImg from "../../../imports/Erika.png";
-import ErikaImg1 from "../../../imports/Erika01.png";
-import ErikaImg2 from "../../../imports/Erika02.png";
-import EyeslImg1 from "../../../imports/Eyesl01.png";
-import EyeslImg2 from "../../../imports/Eyesl02.png";
-import EddieImg from "../../../imports/Eddie.png";
-import TribeImg from "../../../imports/TribePay.png";
-import TribePayImg from "../../../imports/TribePay04.png";
-import TribeImg1 from "../../../imports/TribePay01.png";
-import TribeImg2 from "../../../imports/TribePay02.png";
 
-/* Section header — hairline rule + uppercase eyebrow, consistent site-wide */
-function SH({ title, icon: Icon }: { title: string; icon?: React.ComponentType<{ size?: number; className?: string }> }) {
+/* X Icon (Twitter) */
+function XIcon({ size = 16 }: { size?: number }) {
   return (
-    <div className="flex items-center justify-between border-b-2 border-black pb-2 mb-5">
-      <div className="flex items-center gap-2">
-        {Icon && <Icon size={14} className="text-gray-400" />}
-        <h2 className="font-serif text-2xl leading-snug">{title}</h2>
-      </div>
-      <span className="hidden sm:block w-6 h-[2px] bg-red-600" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+}
+
+/* Section header — serif title + gray subtitle */
+function SH({ title, subtitle }: { title: string; subtitle?: string }) {
+  return (
+    <div className="mb-6">
+      <h2 className="font-serif text-2xl md:text-[28px] leading-snug text-gray-950">{title}</h2>
+      {subtitle && <p className="text-sm text-gray-500 mt-1">{subtitle}</p>}
     </div>
   );
 }
 
-const banner2Images = [
-  TribeImg1,
-  TribeImg2
-];
+/* Simple ad placeholder, matching the site's inline ad units */
+function AdSlot({ label = "728 × 90 · Leaderboard" }: { label?: string }) {
+  return (
+    <div className="relative bg-gradient-to-br from-slate-800 to-teal-900 text-white text-center py-8 px-4 mb-12 rounded-[2px]">
+      <span className="absolute top-2 right-3 text-[10px] text-gray-400 uppercase tracking-wide">Advertisement</span>
+      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-sky-400 mb-1">Google AdSense</p>
+      <p className="font-semibold">Advertisement Space</p>
+      <p className="text-xs text-sky-300/80 mt-1">{label}</p>
+    </div>
+  );
+}
 
-const Articles = [
+/* =========================================================
+   DATA
+========================================================= */
+
+const currentEdition = {
+  issue: "Latest Issue — Q3 2026",
+  eyebrow: "Current Edition",
+  title: "The AI Revolution",
+  subtitle: "Reshaping Business, Economies & the Future of Work",
+  image:
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=85",
+};
+
+const allEditions = [
   {
-    id: 1,
-    month: "March 4, 2026",
-    headline: "India Rising: The New Superpower Transforming Global Business",
-    image: AxisImg,
-    premium: false,
-    category: "Economy",
-    author: "The Pride Times Team",
-    readTime: "5 min read",
-    content: `
-      India is rapidly emerging as one of the world's most influential economies...
-
-      The country's digital infrastructure has expanded dramatically...
-
-      Experts believe India could become a $10 trillion economy...
-    `
+    quarter: "Q3 2026",
+    title: "The AI Revolution",
+    desc: "Reshaping Business, Economies & the Future of Work",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
   },
   {
-    id: 2,
-    month: "February 28, 2026",
-    headline: "Healthcare 2030: The Biotech Revolution Saving Millions of Lives",
-    image: ErikaImg,
-    images: [
-      ErikaImg,
-      ErikaImg1,
-      ErikaImg2
-    ],
-    premium: false,
-    category: "Healthcare",
-    author: "Sarah Johnson",
-    readTime: "6 min read",
-    content: `
-      Biotechnology is changing modern medicine...
-
-      Gene editing technologies are becoming mainstream...
-    `
+    quarter: "Q2 2026",
+    title: "Leading the Future",
+    desc: "Global Business Transformation in the Digital Age",
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=80",
   },
-  { id: 3,
-    month: "March 3, 2026",
-    headline: "The Electric Future: How EVs Are Rewriting the Rules of Mobility", 
-    image: EyeslImg1, 
-    images: [
-      EyeslImg1,
-      EyeslImg2
-    ],
-    premium: false 
+  {
+    quarter: "Q1 2026",
+    title: "Green Economy",
+    desc: "The $50 Trillion Energy Transition Opportunity",
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80",
   },
-  { id: 4,
-     month: "March 4, 2026",
-     headline: "Person of the Year: The Leaders Who Shaped 2025", 
-     image: EddieImg, 
-     images: [
-      EddieImg,
-      TribeImg,
-      TribePayImg
-     ],
-     premium: false 
-    },
+  {
+    quarter: "Q4 2025",
+    title: "Asia Rising",
+    desc: "The New Centers of Global Economic Power",
+    image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    quarter: "Q3 2025",
+    title: "Fintech Disruption",
+    desc: "How Digital Finance is Rewriting Every Rule",
+    image: "https://images.unsplash.com/photo-1679583721525-658d164e609b?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    quarter: "Q2 2025",
+    title: "Healthcare 2030",
+    desc: "The Biotech Innovations That Will Define Our Lifespan",
+    image: "https://images.unsplash.com/photo-1766315746079-215ff5115e9f?auto=format&fit=crop&w=600&q=80",
+  },
 ];
 
-const specialReports = [
-  { title: "Global AI Readiness Index 2026", pages: 48, format: "PDF", category: "Technology" },
-  { title: "World's 100 Best-Managed Companies", pages: 72, format: "PDF", category: "Rankings" },
-  { title: "India Economic Outlook 2026–2030", pages: 56, format: "PDF", category: "Economy" },
-  { title: "Clean Energy Investment Report Q1 2026", pages: 34, format: "PDF", category: "Energy" },
-  { title: "Global Cybersecurity Threat Report 2026", pages: 62, format: "PDF", category: "Security" },
+const leaderProfiles = [
+  { rank: 1, name: "Jensen Huang", company: "NVIDIA Corporation", edition: "Q3 2026 — AI Infrastructure Edition", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=80" },
+  { rank: 2, name: "Sam Altman", company: "OpenAI", edition: "Q2 2026 — AGI Edition", image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&w=500&q=80" },
+  { rank: 3, name: "Mukesh Ambani", company: "Reliance Industries", edition: "Q1 2026 — Green Energy Edition", image: "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=500&q=80" },
+  { rank: 4, name: "Sundar Pichai", company: "Alphabet / Google", edition: "Q2 2026 — Search & AI Edition", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80" },
+  { rank: 5, name: "Satya Nadella", company: "Microsoft", edition: "Q1 2026 — Cloud & Copilot Edition", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=500&q=80" },
+  { rank: 6, name: "Elon Musk", company: "Tesla / SpaceX / xAI", edition: "Q3 2026 — Space & EV Edition", image: "https://images.unsplash.com/photo-1517976547714-720226b864c1?auto=format&fit=crop&w=500&q=80" },
+  { rank: 7, name: "Tim Cook", company: "Apple Inc.", edition: "Q2 2026 — Apple Intelligence Edition", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=500&q=80" },
+  { rank: 8, name: "Larry Fink", company: "BlackRock", edition: "Q1 2026 — Asset Management Edition", image: "https://images.unsplash.com/photo-1679583721525-658d164e609b?auto=format&fit=crop&w=500&q=80" },
 ];
 
-const premiumContent = [
-  { title: "The Full Jensen Huang Interview: 2 Hours with the Most Important CEO in Tech", duration: "2 hr read", type: "Interview", category: "Technology" },
-  { title: "Pride Times Annual Investor Conference: All 40 Speaker Sessions", duration: "16 hrs", type: "Video", category: "Finance" },
-  { title: "Deep Dive: India's Unicorn Ecosystem — 200 Startups Analyzed", duration: "90 min read", type: "Research", category: "India" },
-  { title: "Quarterly Market Analysis: Professional-Grade Data for Every Sector", duration: "45 min read", type: "Markets", category: "Finance" },
-];
+/* =========================================================
+   MAIN PAGE
+========================================================= */
 
 export function MagazinePage() {
-  const { isSignedIn, user } = useAuth();
-  const isPremium = user?.tier === "premium";
-  const [selectedArticle, setSelectedArticle] = useState<any>(null);
-  const [currentImage, setCurrentImage] = useState(0);
-  const [zoom, setZoom] = useState(1);
-  const [showBanner, setShowBanner] = useState(false);
-  const [bannerImages, setBannerImages] = useState<string[]>([]);
-
   return (
-    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8">
-      <div className="border-b-4 border-black mb-10 pb-3 flex items-center gap-3">
-        <BookOpen size={22} />
-        <div>
-          <span className="text-xs text-gray-500 uppercase tracking-[0.25em]">Digital &amp; Print</span>
-          <h1 className="font-serif text-3xl md:text-4xl mt-0.5">The Pride Times Magazine</h1>
-        </div>
-      </div>
+    <div className="w-full bg-white text-gray-900 antialiased">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
-      <div
-        onClick={() => {
-          setBannerImages(banner2Images);
-          setShowBanner(true);
-          setCurrentImage(0);
-          setZoom(1);
-        }}
-        className="mb-10 cursor-pointer overflow-hidden shadow-lg"
-      >
-        <img
-          src={banner2Images[0]}
-          alt="Banner"
-          className="w-full h-[160px] sm:h-[200px] object-cover hover:scale-[1.02] transition-transform duration-500"
-        />
-      </div>
+        {/* ===================================
+            PAGE HEADER
+        ==================================== */}
+        <header className="border-b-2 border-red-600 pb-5 mb-10">
+          <h1 className="font-serif text-3xl md:text-[40px] leading-tight">The Pride Times Magazine</h1>
+          <p className="text-gray-500 text-sm md:text-[15px] mt-1.5">
+            Authoritative journalism and deep analysis from the world's leading business publication.
+          </p>
+        </header>
 
-      {/* Articles — 4-column grid on desktop */}
-      <div className="mb-12">
-        <SH title="Articles" icon={BookOpen} />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-8">
-          {Articles.map((issue) => (
-            <div
-              key={issue.id}
-              className="group cursor-pointer flex flex-col"
-              onClick={() => {
-                setSelectedArticle(issue);
-                setCurrentImage(0);
-                setZoom(1);
-              }}
-            >
-              <div className="relative overflow-hidden shadow-md mb-3 aspect-[3/4] transition-transform duration-300 group-hover:-translate-y-0.5">
-                <ImageWithFallback
-                  src={issue.image}
-                  alt={issue.month}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                {issue.premium && !isPremium && (
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <Crown size={20} className="text-yellow-400" />
+        {/* ===================================
+            AD SLOT
+        ==================================== */}
+        <AdSlot />
+
+        {/* ===================================
+            CURRENT EDITION HERO
+        ==================================== */}
+        <Link
+          to="/magazine/current"
+          className="group grid grid-cols-1 md:grid-cols-2 mb-16 border border-gray-900 overflow-hidden rounded-[2px]"
+        >
+          <div className="relative overflow-hidden bg-black">
+            <span className="absolute top-3 left-3 z-10 bg-red-600 text-white text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-[2px]">
+              {currentEdition.issue}
+            </span>
+            <ImageWithFallback
+              src={currentEdition.image}
+              alt={currentEdition.title}
+              className="w-full h-64 md:h-[420px] object-cover opacity-90 transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+            />
+          </div>
+
+          <div className="bg-black text-white p-8 md:p-10 flex flex-col justify-center relative">
+            <div className="absolute top-6 right-6 hidden md:flex items-center gap-3 text-gray-400">
+              <XIcon size={16} />
+              <Instagram size={16} />
+            </div>
+
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 mb-3">
+              {currentEdition.eyebrow}
+            </p>
+            <h2 className="font-serif text-3xl md:text-[42px] leading-[1.1] mb-3">{currentEdition.title}</h2>
+            <p className="text-gray-400 text-sm md:text-base mb-7 max-w-md">{currentEdition.subtitle}</p>
+
+            <div className="flex flex-wrap gap-3">
+              <span className="bg-red-600 group-hover:bg-red-700 text-white px-5 py-2.5 text-sm font-semibold transition-colors rounded-[2px]">
+                Read Digital Edition →
+              </span>
+              <span className="border border-gray-600 group-hover:border-gray-400 text-white px-5 py-2.5 text-sm font-semibold transition-colors rounded-[2px]">
+                Subscribe for Print
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        {/* ===================================
+            ALL EDITIONS
+        ==================================== */}
+        <section className="mb-16">
+          <SH title="All Editions" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5">
+            {allEditions.map((ed) => (
+              <div key={ed.quarter} className="group cursor-pointer">
+                <div className="relative overflow-hidden rounded-[2px] mb-3 aspect-[3/4]">
+                  <ImageWithFallback
+                    src={ed.image}
+                    alt={ed.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                </div>
+                <p className="text-[11px] font-bold text-red-600 uppercase tracking-[0.12em]">{ed.quarter}</p>
+                <p className="text-sm font-semibold mt-0.5 group-hover:text-red-600 transition-colors">{ed.title}</p>
+                <p className="text-xs text-gray-500 mt-1 leading-snug">{ed.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ===================================
+            LEADER COVER PROFILES
+        ==================================== */}
+        <section className="mb-14">
+          <SH
+            title="Leader Cover Profiles"
+            subtitle="Exclusive magazine cover features on global business leaders"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {leaderProfiles.map((p) => (
+              <div key={p.rank} className="group cursor-pointer">
+                <div className="relative overflow-hidden rounded-[2px] aspect-[4/5] bg-black">
+                  <ImageWithFallback
+                    src={p.image}
+                    alt={p.name}
+                    className="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-black/40" />
+
+                  <span className="absolute top-2.5 left-2.5 bg-black/60 text-white text-[9px] font-bold uppercase tracking-[0.14em] px-2 py-1 rounded-[2px]">
+                    Pride Times Magazine
+                  </span>
+                  <span className="absolute top-2.5 right-2.5 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-[2px]">
+                    #{p.rank}
+                  </span>
+
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-full bg-gray-700 border border-white/30 flex items-center justify-center flex-shrink-0">
+                      <User size={16} className="text-gray-300" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-white text-sm font-semibold truncate">{p.name}</p>
+                      <p className="text-gray-300 text-xs truncate">{p.company}</p>
+                    </div>
                   </div>
-                )}
+                </div>
+                <p className="text-[11px] text-gray-500 mt-2 uppercase tracking-wide">{p.edition}</p>
               </div>
-              <p className="text-[11px] text-gray-500 uppercase tracking-wider">{issue.month}</p>
-              <p className="font-serif text-sm leading-snug mt-1 group-hover:text-red-600 transition-colors line-clamp-3">{issue.headline}</p>
-              <ChevronRight
-                size={12}
-                className="text-red-600 mt-1.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+            ))}
+          </div>
+        </section>
 
-      {/* Special Reports */}
-      <div className="mb-10">
-        <SH title="Special Reports &amp; Research" icon={BookOpen} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {specialReports.map((r) => (
-            <div key={r.title} className="flex items-center justify-between border border-gray-200 hover:border-black p-4 transition-colors duration-300 group cursor-pointer">
-              <div className="flex items-start gap-3">
-                <div className="w-9 h-9 bg-gray-100 flex items-center justify-center flex-shrink-0">
-                  <BookOpen size={14} className="text-gray-400" />
-                </div>
-                <div>
-                  <p className="text-sm group-hover:text-red-600 transition-colors">{r.title}</p>
-                  <p className="text-xs text-gray-400 mt-0.5">{r.pages} pages · {r.format} · {r.category}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                {!isPremium && <Crown size={14} className="text-yellow-500" />}
-                <Download size={14} className="text-gray-400" />
-              </div>
-            </div>
-          ))}
+        {/* ===================================
+            AD SLOT 2
+        ==================================== */}
+        <div className="bg-amber-50 border border-amber-200 text-center py-6 px-4 mb-10 rounded-[2px] relative">
+          <span className="absolute top-2 right-3 text-[10px] text-gray-400 uppercase tracking-wide">Ad</span>
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-700 mb-1">
+            The Pride Times Digital — Full Archive Access
+          </p>
+          <p className="font-semibold text-gray-900">Your Ad Here</p>
+          <p className="text-xs text-gray-500 mt-1">Reach 2M+ business readers</p>
         </div>
-      </div>
 
-      {/* Premium content */}
-      <div className="mb-10">
-        <div className="flex items-center gap-2 border-b-2 border-black pb-2 mb-5">
-          <Crown size={14} className="text-yellow-500" />
-          <h2 className="font-serif text-2xl leading-snug">Premium Exclusive Content</h2>
-          {!isPremium && <span className="text-[11px] bg-yellow-100 text-yellow-700 px-2 py-0.5 ml-auto uppercase tracking-wide">Premium Only</span>}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {premiumContent.map((c) => (
-            <div key={c.title} className={`border border-gray-200 hover:border-black p-4 group cursor-pointer transition-colors duration-300 ${!isPremium ? "opacity-60" : ""}`}>
-              <div className="flex items-start gap-3">
-                <div className={`w-9 h-9 flex items-center justify-center flex-shrink-0 ${c.type === "Video" ? "bg-red-100" : "bg-blue-50"}`}>
-                  {c.type === "Video" ? <Play size={14} className="text-red-600" /> : <BookOpen size={14} className="text-blue-600" />}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-xs text-red-600 uppercase tracking-wider">{c.category}</span>
-                    <span className="text-xs text-gray-400">· {c.type}</span>
-                  </div>
-                  <p className="text-sm group-hover:text-red-600 transition-colors leading-snug">{c.title}</p>
-                  <p className="text-xs text-gray-400 mt-1">{c.duration}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Subscribe CTA */}
-      {!isPremium && (
-        <div className="bg-gradient-to-br from-black to-zinc-900 text-white p-8 md:p-10 text-center">
-          <Crown size={24} className="text-yellow-400 mx-auto mb-3" />
-          <h2 className="font-serif text-2xl text-white mb-2">Unlock the Complete Pride Times Experience</h2>
-          <p className="text-gray-400 text-sm mb-6 max-w-lg mx-auto leading-relaxed">
-            Get unlimited access to every article, every issue, all special reports, exclusive interviews, and premium newsletters. Ad-free. Starting at $4.99/month.
+        {/* ===================================
+            SUBSCRIBE CTA
+        ==================================== */}
+        <section className="bg-[#0b1a30] text-white text-center p-8 md:p-12 rounded-[2px]">
+          <h2 className="font-serif text-2xl md:text-[32px] mb-3">Subscribe to The Pride Times</h2>
+          <p className="text-gray-400 text-sm md:text-base mb-7 max-w-xl mx-auto">
+            Get unlimited access to every edition, exclusive leader profiles, and in-depth analysis.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link to={isSignedIn ? "/dashboard" : "/login"} className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 transition-colors text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">
-              Start Free 30-Day Trial
+            <Link
+              to="/login"
+              className="bg-red-600 hover:bg-red-700 text-white px-7 py-3 text-sm font-semibold transition-colors rounded-[2px]"
+            >
+              Subscribe — Free Trial
             </Link>
-            <button className="border border-gray-600 hover:border-gray-400 text-white px-8 py-3 transition-colors text-sm">
-              Compare Plans
-            </button>
+            <Link
+              to="/magazine"
+              className="border border-gray-500 hover:border-gray-300 text-white px-7 py-3 text-sm font-semibold transition-colors rounded-[2px]"
+            >
+              Browse Digital Edition
+            </Link>
           </div>
-        </div>
-      )}
-     {selectedArticle && (
-  <div className="fixed inset-0 z-[9999] bg-black/70 overflow-y-auto">
-    <div className="max-w-5xl mx-auto bg-white min-h-screen relative">
-
-      <button
-        onClick={() => setSelectedArticle(null)}
-        className="absolute top-4 right-4 z-20 bg-white hover:bg-gray-100 rounded-full w-10 h-10 shadow transition-colors"
-      >
-        ✕
-      </button>
-
-      <div
-  className="relative bg-black overflow-auto"
-  onWheel={(e) => {
-    e.preventDefault();
-
-    if (e.deltaY < 0) {
-      setZoom((z) => Math.min(z + 0.1, 5));
-    } else {
-      setZoom((z) => Math.max(z - 0.1, 1));
-    }
-  }}
->
-
- <img
-  src={
-    selectedArticle.images
-      ? selectedArticle.images[currentImage]
-      : selectedArticle.image
-  }
-  alt={selectedArticle.headline}
-  className="w-full max-h-[700px] object-contain transition-transform duration-200"
-  style={{
-    transform: `scale(${zoom})`,
-    transformOrigin: "center center"
-  }}
-/>
-
-  {selectedArticle.images && selectedArticle.images.length > 1 && (
-    <>
-      <button
-      onClick={() => {
-  setCurrentImage((prev) =>
-    prev === 0
-      ? selectedArticle.images.length - 1
-      : prev - 1
-  );
-
-  setZoom(1);
-}}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 shadow-lg text-2xl transition-colors"
-      >
-        ←
-      </button>
-
-      <button
-       onClick={() => {
-  setCurrentImage((prev) =>
-    prev === selectedArticle.images.length - 1
-      ? 0
-      : prev + 1
-  );
-
-  setZoom(1);
-}}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 shadow-lg text-2xl transition-colors"
-      >
-        →
-      </button>
-    </>
-  )}
-</div>
-
-      <div className="px-12 py-10">
-
-        <p className="text-red-600 uppercase text-xs tracking-wider font-semibold">
-          {selectedArticle.category}
-        </p>
-
-        <h1 className="font-serif text-2xl font-normal mt-3 leading-tight">
-          {selectedArticle.headline}
-        </h1>
-
-        <div className="flex gap-3 text-gray-500 mt-5 text-sm">
-          <span>{selectedArticle.author}</span>
-          <span>•</span>
-          <span>4 min read</span>
-          <span>•</span>
-          <span>{selectedArticle.month}</span>
-        </div>
-
-        <div className="mt-2 whitespace-pre-line text-3sm leading-10 text-gray-700">
-          {selectedArticle.content}
-        </div>
+        </section>
 
       </div>
-    </div>
-  </div>
-)}
-{showBanner && (
-  <div className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center">
-
-    <button
-      onClick={() => setShowBanner(false)}
-      className="absolute top-5 right-5 bg-white hover:bg-gray-100 rounded-full w-10 h-10 z-50 transition-colors"
-    >
-      ✕
-    </button>
-
-    <div className="relative w-full max-w-6xl px-4">
-      
-
-      <img
-        src={bannerImages[currentImage]}
-        alt="Banner"
-        className="w-full max-h-[90vh] object-contain"
-      />
-
-      {bannerImages.length > 1 && (
-        <>
-          <button
-            onClick={() =>
-              setCurrentImage((prev) =>
-                prev === 0
-                  ? bannerImages.length - 1
-                  : prev - 1
-              )
-            }
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 text-2xl transition-colors"
-          >
-            ←
-          </button>
-
-          <button
-            onClick={() =>
-              setCurrentImage((prev) =>
-                prev === bannerImages.length - 1
-                  ? 0
-                  : prev + 1
-              )
-            }
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white hover:bg-gray-100 rounded-full w-12 h-12 text-2xl transition-colors"
-          >
-            →
-          </button>
-        </>
-      )}
-    </div>
-  </div>
-)}
     </div>
   );
 }
