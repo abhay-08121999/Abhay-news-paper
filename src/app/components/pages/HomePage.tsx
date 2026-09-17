@@ -40,12 +40,104 @@ type MarketItem = {
 };
 
 /* =========================================================
+   AD SPACE
+========================================================= */
+
+function AdSpace({
+  title = "The Pride Times Premium",
+}: {
+  title?: string;
+}) {
+  return (
+    <div
+      className="
+        w-full
+        h-[92px]
+        sm:h-[100px]
+        md:h-[110px]
+        bg-gradient-to-r
+        from-[#071a2d]
+        via-[#12384a]
+        to-[#28586a]
+        rounded-md
+        flex
+        items-center
+        justify-center
+        relative
+        overflow-hidden
+        my-8
+      "
+    >
+      {/* Advertisement Label */}
+
+      <span
+        className="
+          absolute
+          top-1.5
+          right-2
+          text-[7px]
+          sm:text-[8px]
+          text-white/50
+          uppercase
+          tracking-wide
+        "
+      >
+        Advertisement
+      </span>
+
+      {/* Ad Content */}
+
+      <div className="text-center px-4">
+        <span
+          className="
+            block
+            text-[7px]
+            sm:text-[8px]
+            font-bold
+            uppercase
+            tracking-[0.2em]
+            text-sky-300
+            mb-1
+          "
+        >
+          Google Adsense
+        </span>
+
+        <h3
+          className="
+            text-[11px]
+            sm:text-sm
+            md:text-base
+            font-semibold
+            text-white
+          "
+        >
+          {title}
+        </h3>
+
+        <p
+          className="
+            text-[7px]
+            sm:text-[8px]
+            text-white/60
+            mt-1
+          "
+        >
+          728 × 90 • Leaderboard
+        </p>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================
    HERO STORY
 ========================================================= */
 
 const heroStory = {
   category: "TOP STORY",
-  title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
+  title:
+    "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
   excerpt:
     "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and South Korea, expanding its already well-established relationship with China's Unitree.",
   image: HeroImg,
@@ -71,7 +163,8 @@ const centerStories = [
   {
     id: 2,
     tag: "FINANCE",
-    title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+    title:
+      "U.S. Equity Markets Rally on Strong Manufacturing Data",
     excerpt:
       "U.S. equity markets extended a recovery rally into the first week of June, driven by stronger-than-expected domestic factory data.",
     time: "1 hr ago",
@@ -106,7 +199,7 @@ const latestNewsTabs = [
 ];
 
 /* =========================================================
-   LATEST NEWS
+   LATEST NEWS DATA
 ========================================================= */
 
 const latestNewsData: Record<string, NewsItem[]> = {
@@ -123,7 +216,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 2,
       hot: false,
-      title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+      title:
+        "U.S. Equity Markets Rally on Strong Manufacturing Data",
       time: "35 min ago",
       image: HeroImg,
       link: "/markets",
@@ -161,7 +255,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 1,
       hot: true,
-      title: "S&P 500 Hits All-Time High as Markets Digest Fresh Data",
+      title:
+        "S&P 500 Hits All-Time High as Markets Digest Fresh Data",
       time: "10 min ago",
       image: HeroImg,
       link: "/markets",
@@ -169,7 +264,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 2,
       hot: false,
-      title: "Global Investors Reassess Risk Across Major Asset Classes",
+      title:
+        "Global Investors Reassess Risk Across Major Asset Classes",
       time: "40 min ago",
       image: InsImg,
       link: "/markets",
@@ -177,7 +273,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 3,
       hot: false,
-      title: "Asian Markets Respond to New Manufacturing Signals",
+      title:
+        "Asian Markets Respond to New Manufacturing Signals",
       time: "1 hr ago",
       image: LN3Img,
       link: "/markets",
@@ -185,7 +282,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 4,
       hot: false,
-      title: "Digital Assets Continue to Attract Institutional Interest",
+      title:
+        "Digital Assets Continue to Attract Institutional Interest",
       time: "2 hr ago",
       image: LN4Img,
       link: "/markets",
@@ -196,7 +294,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 1,
       hot: true,
-      title: "Global Markets Rally as Investors Digest Latest Economic Data",
+      title:
+        "Global Markets Rally as Investors Digest Latest Economic Data",
       time: "20 min ago",
       image: HeroImg,
       link: "/finance",
@@ -204,7 +303,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 2,
       hot: false,
-      title: "Central Banks Signal Cautious Approach to Interest Rates",
+      title:
+        "Central Banks Signal Cautious Approach to Interest Rates",
       time: "45 min ago",
       image: InsImg,
       link: "/finance",
@@ -212,7 +312,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 3,
       hot: false,
-      title: "Banking Sector Posts Stronger Quarterly Results",
+      title:
+        "Banking Sector Posts Stronger Quarterly Results",
       time: "2 hr ago",
       image: LN3Img,
       link: "/finance",
@@ -220,7 +321,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 4,
       hot: false,
-      title: "Global Investors Increase Exposure to Emerging Markets",
+      title:
+        "Global Investors Increase Exposure to Emerging Markets",
       time: "3 hr ago",
       image: LN4Img,
       link: "/finance",
@@ -231,7 +333,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 1,
       hot: true,
-      title: "Technology Leaders Accelerate Global Expansion Plans",
+      title:
+        "Technology Leaders Accelerate Global Expansion Plans",
       time: "15 min ago",
       image: HeroImg,
       link: "/business-news",
@@ -239,7 +342,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 2,
       hot: false,
-      title: "Global Logistics Industry Enters a New Investment Cycle",
+      title:
+        "Global Logistics Industry Enters a New Investment Cycle",
       time: "1 hr ago",
       image: InsImg,
       link: "/business-news",
@@ -247,7 +351,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 3,
       hot: false,
-      title: "Major Companies Increase Spending on AI Infrastructure",
+      title:
+        "Major Companies Increase Spending on AI Infrastructure",
       time: "2 hr ago",
       image: LN3Img,
       link: "/business-news",
@@ -255,7 +360,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 4,
       hot: false,
-      title: "Indian Businesses Expand Their Global Technology Footprint",
+      title:
+        "Indian Businesses Expand Their Global Technology Footprint",
       time: "3 hr ago",
       image: LN4Img,
       link: "/business-news",
@@ -293,7 +399,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 4,
       hot: false,
-      title: "SoftBank Bets Big on European Data Centers",
+      title:
+        "SoftBank Bets Big on European Data Centers",
       time: "1 hr ago",
       image: LN3Img,
       link: "/technology",
@@ -301,7 +408,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 5,
       hot: false,
-      title: "Quantum Computing Startup Reaches New Qubit Milestone",
+      title:
+        "Quantum Computing Startup Reaches New Qubit Milestone",
       time: "2 hr ago",
       image: LN4Img,
       link: "/technology",
@@ -330,7 +438,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 3,
       hot: false,
-      title: "Energy Resiliency Becomes a Strategic Priority for Businesses",
+      title:
+        "Energy Resiliency Becomes a Strategic Priority for Businesses",
       time: "2 hr ago",
       image: InsImg,
       link: "/energy",
@@ -338,7 +447,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 4,
       hot: false,
-      title: "Asia's LNG Demand Reshapes Global Energy Markets",
+      title:
+        "Asia's LNG Demand Reshapes Global Energy Markets",
       time: "3 hr ago",
       image: LN3Img,
       link: "/energy",
@@ -349,7 +459,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 1,
       hot: false,
-      title: "Healthcare Innovation Continues to Transform Patient Care",
+      title:
+        "Healthcare Innovation Continues to Transform Patient Care",
       time: "1 hr ago",
       image: LN3Img,
       link: "/healthcare",
@@ -357,7 +468,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 2,
       hot: false,
-      title: "Smart Cities Move Toward More Connected Infrastructure",
+      title:
+        "Smart Cities Move Toward More Connected Infrastructure",
       time: "2 hr ago",
       image: HeroImg,
       link: "/smart-cities",
@@ -365,7 +477,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 3,
       hot: false,
-      title: "Global Supply Chains Adapt to a Changing Business Environment",
+      title:
+        "Global Supply Chains Adapt to a Changing Business Environment",
       time: "3 hr ago",
       image: InsImg,
       link: "/supply-chain",
@@ -373,7 +486,8 @@ const latestNewsData: Record<string, NewsItem[]> = {
     {
       id: 4,
       hot: false,
-      title: "AI Governance Becomes a Major Corporate Priority",
+      title:
+        "AI Governance Becomes a Major Corporate Priority",
       time: "4 hr ago",
       image: LN4Img,
       link: "/technology",
@@ -411,7 +525,8 @@ const editorsPicks = [
   {
     id: 3,
     category: "FINANCE",
-    title: "U.S. Equity Markets Rally on Strong Manufacturing Data",
+    title:
+      "U.S. Equity Markets Rally on Strong Manufacturing Data",
     excerpt:
       "Stronger manufacturing activity provides fresh momentum for U.S. equity markets.",
     time: "35 min ago",
@@ -586,7 +701,7 @@ export function HomePage() {
   }, []);
 
   /* =======================================================
-     NEWS
+     SELECTED NEWS
   ======================================================= */
 
   const selectedNews =
@@ -596,11 +711,19 @@ export function HomePage() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans antialiased">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <main className="pt-6 md:pt-8 pb-16">
+
+        <main className="pt-4 md:pt-6 pb-16">
 
           {/* =================================================
-              HERO
+              TOP ADVERTISEMENT
+          ================================================= */}
+
+          <AdSpace title="The Pride Times Premium — Deep Analysis, Exclusive Access" />
+
+          {/* =================================================
+              HERO SECTION
           ================================================= */}
 
           <section
@@ -617,7 +740,9 @@ export function HomePage() {
             "
           >
 
-            {/* ================= TOP STORY ================= */}
+            {/* =================================================
+                TOP STORY
+            ================================================= */}
 
             <Link
               to={heroStory.link}
@@ -680,6 +805,7 @@ export function HomePage() {
               </span>
 
               <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+
                 <h1
                   className="
                     font-serif
@@ -726,10 +852,13 @@ export function HomePage() {
                   Read Full Story
                   <ArrowRight size={12} />
                 </span>
+
               </div>
             </Link>
 
-            {/* ================= CENTER ================= */}
+            {/* =================================================
+                CENTER STORY
+            ================================================= */}
 
             <div className="min-w-0">
 
@@ -738,6 +867,7 @@ export function HomePage() {
                 className="group block"
               >
                 <div className="overflow-hidden rounded-lg">
+
                   <ImageWithFallback
                     src={centerStories[0].image}
                     alt={centerStories[0].title}
@@ -753,6 +883,7 @@ export function HomePage() {
                       group-hover:scale-[1.03]
                     "
                   />
+
                 </div>
 
                 <span
@@ -796,9 +927,10 @@ export function HomePage() {
                 >
                   {centerStories[0].excerpt}
                 </p>
+
               </Link>
 
-              {/* RELATED */}
+              {/* RELATED STORY */}
 
               <Link
                 to={centerStories[1].link}
@@ -812,6 +944,7 @@ export function HomePage() {
                   border-gray-200
                 "
               >
+
                 <div
                   className="
                     shrink-0
@@ -837,6 +970,7 @@ export function HomePage() {
                 </div>
 
                 <div className="min-w-0 flex-1">
+
                   <span
                     className="
                       text-[9px]
@@ -877,13 +1011,17 @@ export function HomePage() {
                     <Clock size={9} />
                     {centerStories[1].time}
                   </span>
+
                 </div>
+
               </Link>
 
               {/* MARKET SNAPSHOT */}
 
               <div className="mt-5 border-t border-gray-200 pt-4">
+
                 <div className="flex items-center justify-between mb-2">
+
                   <h3
                     className="
                       text-[10px]
@@ -896,7 +1034,9 @@ export function HomePage() {
                   </h3>
 
                   <div className="flex gap-3">
+
                     {(["Indices", "Crypto"] as const).map((tab) => (
+
                       <button
                         key={tab}
                         type="button"
@@ -915,14 +1055,19 @@ export function HomePage() {
                       >
                         {tab}
                       </button>
+
                     ))}
+
                   </div>
+
                 </div>
 
                 <div className="divide-y divide-gray-100">
+
                   {(marketSnapshotData[activeMarketTab] || [])
                     .slice(0, 4)
                     .map((market) => (
+
                       <div
                         key={market.symbol}
                         className="
@@ -932,6 +1077,7 @@ export function HomePage() {
                           justify-between
                         "
                       >
+
                         <span
                           className="
                             text-[10px]
@@ -943,6 +1089,7 @@ export function HomePage() {
                         </span>
 
                         <div className="flex items-center gap-3">
+
                           <span
                             className="
                               text-[10px]
@@ -957,9 +1104,13 @@ export function HomePage() {
                             change={market.change}
                             up={market.up}
                           />
+
                         </div>
+
                       </div>
+
                     ))}
+
                 </div>
 
                 <Link
@@ -980,17 +1131,23 @@ export function HomePage() {
                   View All Markets
                   <ArrowRight size={9} />
                 </Link>
+
               </div>
+
             </div>
 
-            {/* ================= RIGHT COLUMN ================= */}
+            {/* =================================================
+                RIGHT COLUMN
+            ================================================= */}
 
             <aside className="min-w-0">
 
-              {/* VIDEOS */}
+              {/* TODAY'S VIDEOS */}
 
               <div className="pb-5 border-b border-gray-200">
+
                 <div className="flex items-center justify-between mb-3">
+
                   <h2 className="font-serif text-lg font-bold">
                     Today's Videos
                   </h2>
@@ -1011,13 +1168,16 @@ export function HomePage() {
                   >
                     Explore More
                   </button>
+
                 </div>
 
                 <Link
                   to={videoFeature.link}
                   className="group block"
                 >
+
                   <div className="relative overflow-hidden rounded-lg">
+
                     <ImageWithFallback
                       src={videoFeature.image}
                       alt={videoFeature.title}
@@ -1044,6 +1204,7 @@ export function HomePage() {
                         transition-colors
                       "
                     >
+
                       <div
                         className="
                           w-11
@@ -1056,13 +1217,17 @@ export function HomePage() {
                           shadow-md
                         "
                       >
+
                         <Play
                           size={16}
                           fill="black"
                           className="text-black ml-0.5"
                         />
+
                       </div>
+
                     </div>
+
                   </div>
 
                   <h3
@@ -1078,12 +1243,15 @@ export function HomePage() {
                   >
                     {videoFeature.title}
                   </h3>
+
                 </Link>
+
               </div>
 
               {/* LATEST */}
 
               <div className="pt-5">
+
                 <h2
                   className="
                     text-[11px]
@@ -1101,7 +1269,9 @@ export function HomePage() {
                 </h2>
 
                 <div className="divide-y divide-gray-100">
+
                   {selectedNews.slice(0, 5).map((item) => (
+
                     <Link
                       key={item.id}
                       to={item.link}
@@ -1111,7 +1281,9 @@ export function HomePage() {
                         py-3
                       "
                     >
+
                       <div className="flex gap-2">
+
                         <span
                           className="
                             shrink-0
@@ -1136,19 +1308,27 @@ export function HomePage() {
                         >
                           {item.title}
                         </span>
+
                       </div>
+
                     </Link>
+
                   ))}
+
                 </div>
+
               </div>
+
             </aside>
+
           </section>
 
           {/* =================================================
               MORE STORIES
           ================================================= */}
 
-          <section className="mb-12">
+          <section className="mb-10">
+
             <div
               className="
                 flex
@@ -1163,6 +1343,7 @@ export function HomePage() {
                 mb-5
               "
             >
+
               <h2
                 className="
                   text-[12px]
@@ -1183,7 +1364,9 @@ export function HomePage() {
                   no-scrollbar
                 "
               >
+
                 {latestNewsTabs.map((tab) => (
+
                   <button
                     key={tab}
                     type="button"
@@ -1204,8 +1387,11 @@ export function HomePage() {
                   >
                     {tab}
                   </button>
+
                 ))}
+
               </div>
+
             </div>
 
             <div
@@ -1217,7 +1403,9 @@ export function HomePage() {
                 gap-4
               "
             >
+
               {latestStories.map((story) => (
+
                 <Link
                   key={story.id}
                   to={story.link}
@@ -1234,7 +1422,9 @@ export function HomePage() {
                     transition-all
                   "
                 >
+
                   <div className="overflow-hidden">
+
                     <ImageWithFallback
                       src={story.image}
                       alt={story.title}
@@ -1247,9 +1437,11 @@ export function HomePage() {
                         group-hover:scale-[1.04]
                       "
                     />
+
                   </div>
 
                   <div className="px-3 py-3">
+
                     <span
                       className="
                         block
@@ -1291,11 +1483,22 @@ export function HomePage() {
                       <Clock size={9} />
                       {story.time}
                     </span>
+
                   </div>
+
                 </Link>
+
               ))}
+
             </div>
+
           </section>
+
+          {/* =================================================
+              MID PAGE ADVERTISEMENT
+          ================================================= */}
+
+          <AdSpace title="Invest Smarter — The Pride Times Premium" />
 
           {/* =================================================
               EDITOR'S PICKS + MAGAZINE
@@ -1314,6 +1517,7 @@ export function HomePage() {
             {/* EDITOR'S PICKS */}
 
             <div>
+
               <div
                 className="
                   flex
@@ -1325,6 +1529,7 @@ export function HomePage() {
                   mb-4
                 "
               >
+
                 <h2
                   className="
                     text-[12px]
@@ -1350,10 +1555,13 @@ export function HomePage() {
                   View All
                   <ArrowRight size={9} />
                 </Link>
+
               </div>
 
               <div className="divide-y divide-gray-200">
+
                 {editorsPicks.map((pick) => (
+
                   <Link
                     key={pick.id}
                     to={pick.link}
@@ -1364,6 +1572,7 @@ export function HomePage() {
                       py-3.5
                     "
                   >
+
                     <div
                       className="
                         shrink-0
@@ -1375,6 +1584,7 @@ export function HomePage() {
                         rounded-md
                       "
                     >
+
                       <ImageWithFallback
                         src={pick.image}
                         alt={pick.title}
@@ -1388,9 +1598,11 @@ export function HomePage() {
                           group-hover:scale-105
                         "
                       />
+
                     </div>
 
                     <div className="min-w-0">
+
                       <span
                         className="
                           text-[8px]
@@ -1446,15 +1658,21 @@ export function HomePage() {
                         <Clock size={8} />
                         {pick.time}
                       </span>
+
                     </div>
+
                   </Link>
+
                 ))}
+
               </div>
+
             </div>
 
             {/* MAGAZINE */}
 
             <div>
+
               <div
                 className="
                   flex
@@ -1466,6 +1684,7 @@ export function HomePage() {
                   mb-4
                 "
               >
+
                 <h2
                   className="
                     text-[12px]
@@ -1487,6 +1706,7 @@ export function HomePage() {
                 >
                   View All
                 </Link>
+
               </div>
 
               <Link
@@ -1499,7 +1719,9 @@ export function HomePage() {
                   bg-black
                 "
               >
+
                 <div className="overflow-hidden">
+
                   <ImageWithFallback
                     src={magazinePreview.image}
                     alt={magazinePreview.title}
@@ -1512,9 +1734,11 @@ export function HomePage() {
                       group-hover:scale-[1.04]
                     "
                   />
+
                 </div>
 
                 <div className="p-4">
+
                   <span
                     className="
                       text-[8px]
@@ -1569,9 +1793,13 @@ export function HomePage() {
                     Read Digital Edition
                     <ArrowRight size={10} />
                   </span>
+
                 </div>
+
               </Link>
+
             </div>
+
           </section>
 
           {/* =================================================
@@ -1579,6 +1807,7 @@ export function HomePage() {
           ================================================= */}
 
           <section>
+
             <div
               className="
                 flex
@@ -1590,6 +1819,7 @@ export function HomePage() {
                 mb-5
               "
             >
+
               <h2
                 className="
                   text-[12px]
@@ -1615,6 +1845,7 @@ export function HomePage() {
                 Full List
                 <ArrowRight size={9} />
               </Link>
+
             </div>
 
             <div
@@ -1625,7 +1856,9 @@ export function HomePage() {
                 gap-3
               "
             >
+
               {prideTimes30.map((leader) => (
+
                 <div
                   key={leader.rank}
                   className="
@@ -1640,6 +1873,7 @@ export function HomePage() {
                     transition-colors
                   "
                 >
+
                   <span
                     className="
                       font-serif
@@ -1655,6 +1889,7 @@ export function HomePage() {
                   </span>
 
                   <div className="min-w-0">
+
                     <p
                       className="
                         text-[13px]
@@ -1680,11 +1915,23 @@ export function HomePage() {
                     >
                       {leader.sector}
                     </p>
+
                   </div>
+
                 </div>
+
               ))}
+
             </div>
+
           </section>
+
+          {/* =================================================
+              BOTTOM PREMIUM ADVERTISEMENT
+          ================================================= */}
+
+          <AdSpace title="The Pride Times Premium — Deep Analysis, Exclusive Access" />
+
         </main>
       </div>
 
@@ -1711,6 +1958,7 @@ export function HomePage() {
           color: inherit;
         }
       `}</style>
+
     </div>
   );
 }
