@@ -169,7 +169,7 @@ export function Footer() {
         {/* =========================================
             MAIN FOOTER CONTENT
         ========================================== */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24 mb-2">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-24 mb-10">
 
           {/* =====================================
               BRAND SECTION
@@ -299,7 +299,7 @@ export function Footer() {
       {/* =========================================
           COPYRIGHT BAR
       ========================================== */}
-      <div className="border-t border-white/10 mt-8 pt-4">
+      <div className="border-t border-white/10 mt-4 pt-6">
 
         <div className="max-w-5xl mx-auto px-4 flex items-center justify-center">
 
