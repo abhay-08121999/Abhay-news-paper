@@ -428,499 +428,364 @@ function SmallStoryList({
   );
 }
 
+
 /* =========================================================
    TECHNOLOGY PAGE
+   Layout inspired by the supplied editorial reference image.
+   Existing Technology content and image sources are preserved.
 ========================================================= */
 
 export function TechnologyPage() {
+  const latestStories = aiStories.slice(0, 6);
+
   return (
-    <main className="bg-[#f7f7f5] text-[#111] min-h-screen">
+    <main className="min-h-screen bg-[#f7f7f5] text-[#111]">
+      <div className="mx-auto w-full max-w-[1180px] px-4 sm:px-6 lg:px-8">
 
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* =================================================
-            HEADER
-        ================================================= */}
-
-        <header className="pt-8 md:pt-12 pb-5 border-b-[3px] border-black">
-
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-
-            <div>
-
-              <p className="text-[9px] md:text-[10px] uppercase tracking-[0.25em] font-bold text-red-700 mb-2">
-                The Future of Business & Innovation
-              </p>
-
-              <h1 className="font-serif text-[42px] md:text-[54px] lg:text-[64px] font-black leading-[0.9] tracking-[-0.04em]">
-                Technology
-              </h1>
-
-            </div>
-
-            <p className="max-w-[380px] text-[11px] md:text-[12px] leading-[1.7] text-gray-500">
-              Artificial intelligence, cybersecurity, robotics,
-              biotechnology and the technologies reshaping the global economy.
+        {/* PAGE HEADER */}
+        <header className="border-t-[3px] border-red-600 pt-5 sm:pt-6 pb-4">
+          <div className="flex flex-col gap-2">
+            <h1 className="font-serif text-[28px] sm:text-[34px] md:text-[40px] font-black leading-none tracking-[-0.03em]">
+              Technology
+            </h1>
+            <p className="text-[10px] sm:text-[11px] text-gray-500">
+              Artificial intelligence, cybersecurity, robotics, biotechnology and the technologies reshaping the global economy.
             </p>
-
           </div>
-
         </header>
 
-        {/* =================================================
-            CATEGORY NAV
-        ================================================= */}
-
-        <nav className="border-b border-gray-300 py-3 mb-8">
-
-          <div className="flex items-center gap-4 md:gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
-
-            {techCategories.map(({ icon: Icon, label }) => (
-              <button
-                key={label}
-                className="flex items-center gap-2 text-[9px] md:text-[10px] uppercase tracking-[0.12em] font-semibold text-gray-600 hover:text-red-700 transition-colors whitespace-nowrap"
-              >
-
-                <span className="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center">
-                  <Icon size={11} />
-                </span>
-
-                {label}
-
-              </button>
-            ))}
-
+        {/* TOP ADVERTISEMENT */}
+        <div className="mb-5 flex h-[74px] sm:h-[82px] items-center justify-center border border-gray-200 bg-[#102a33] text-center">
+          <div>
+            <p className="text-[7px] font-bold uppercase tracking-[0.22em] text-sky-300">
+              Google Adsense
+            </p>
+            <p className="mt-1 text-[12px] font-bold text-white sm:text-[13px]">
+              Advertisement Space
+            </p>
+            <p className="text-[7px] text-sky-200">
+              728 × 90 • Leaderboard
+            </p>
           </div>
+        </div>
 
-        </nav>
+        {/* HERO + SIDEBAR */}
+        <section className="grid grid-cols-1 gap-4 border-b-2 border-black pb-6 lg:grid-cols-[minmax(0,1fr)_270px]">
 
-        {/* =================================================
-            OPENING NEWS AREA
-            ONLY 2 STORIES
-        ================================================= */}
-
-        <section className="grid grid-cols-1 lg:grid-cols-[1.65fr_1fr] gap-0 border-b-2 border-black pb-8">
-
-          {/* MAIN NEWS */}
-
-          <article className="group lg:pr-8">
-
-            <div className="relative overflow-hidden mb-5">
-
+          {/* LEAD STORY */}
+          <article className="group min-w-0">
+            <div className="relative overflow-hidden rounded-md bg-gray-200">
               <ImageWithFallback
                 src={leadStory.image}
                 alt={leadStory.title}
-                className="w-full h-[300px] sm:h-[380px] md:h-[440px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                className="h-[250px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02] sm:h-[330px] md:h-[390px] lg:h-[390px]"
               />
+              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent" />
+            </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-
-              <span className="absolute bottom-4 left-4 bg-red-700 text-white px-3 py-1.5 text-[8px] font-bold uppercase tracking-[0.15em]">
+            <div className="pt-3">
+              <span className="text-[7px] font-bold uppercase tracking-[0.18em] text-red-700">
                 {leadStory.category}
               </span>
 
+              <h2 className="mt-1 font-serif text-[23px] font-black leading-[1.03] tracking-[-0.02em] sm:text-[28px] md:text-[34px] lg:text-[36px]">
+                {leadStory.title}
+              </h2>
+
+              <p className="mt-2 max-w-[900px] text-[10px] leading-[1.55] text-gray-600 sm:text-[11px]">
+                {leadStory.excerpt}
+              </p>
+
+              <div className="mt-2 flex flex-wrap items-center gap-3 text-[7px] uppercase tracking-wider text-gray-500 sm:text-[8px]">
+                <span className="font-bold text-gray-800">
+                  By {leadStory.author}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Clock size={9} />
+                  {leadStory.time}
+                </span>
+              </div>
             </div>
-
-            <h2 className="font-serif text-[28px] sm:text-[32px] md:text-[38px] lg:text-[44px] font-black leading-[0.98] tracking-[-0.025em] group-hover:underline decoration-2 underline-offset-4">
-              {leadStory.title}
-            </h2>
-
-            <p className="text-[12px] md:text-[13px] leading-[1.75] text-gray-600 mt-4 max-w-[850px]">
-              {leadStory.excerpt}
-            </p>
-
-            <div className="flex items-center gap-4 mt-4 text-[9px] uppercase tracking-wider text-gray-500">
-
-              <span className="font-bold text-black">
-                By {leadStory.author}
-              </span>
-
-              <span className="flex items-center gap-1">
-                <Clock size={10} />
-                {leadStory.time}
-              </span>
-
-            </div>
-
           </article>
 
-          {/* SECOND NEWS */}
+          {/* RIGHT RAIL */}
+          <aside className="border-t border-gray-300 pt-3 lg:border-l lg:border-t-0 lg:pl-4 lg:pt-0">
+            <div className="mb-3 overflow-hidden border border-gray-200 bg-white">
+              <div className="flex items-center justify-between border-b border-gray-200 px-2 py-1">
+                <span className="text-[6px] font-semibold uppercase tracking-wider text-gray-500">
+                  Sponsored Content
+                </span>
+                <span className="text-[6px] text-gray-400">Ad</span>
+              </div>
+              <div className="flex h-[145px] items-center justify-center bg-[#171b38] px-4 text-center sm:h-[160px]">
+                <div>
+                  <p className="text-[7px] font-bold uppercase tracking-[0.18em] text-yellow-300">
+                    Featured Partner
+                  </p>
+                  <p className="mt-2 text-[12px] font-bold text-white">
+                    Your Ad Here
+                  </p>
+                  <p className="mt-1 text-[7px] text-gray-300">
+                    Reach 2M+ business readers
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <article className="group lg:pl-8 mt-8 lg:mt-0 lg:border-l border-gray-300">
+            <div className="border-b border-black pb-1">
+              <h3 className="text-[9px] font-black uppercase tracking-[0.1em]">
+                More Stories
+              </h3>
+            </div>
 
-            <div className="overflow-hidden mb-5">
+            <div>
+              {aiStories.slice(0, 2).map((story, index) => (
+                <article
+                  key={`rail-${story.id}`}
+                  className="group flex gap-2 border-b border-gray-200 py-2.5"
+                >
+                  <div className="h-[52px] w-[72px] shrink-0 overflow-hidden rounded-sm">
+                    <ImageWithFallback
+                      src={story.image}
+                      alt={story.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[6px] font-bold uppercase tracking-wider text-red-700">
+                      Technology
+                    </span>
+                    <h4 className="mt-0.5 font-serif text-[10px] font-bold leading-[1.15] group-hover:underline">
+                      {index === 0 ? leadStory.title : story.title}
+                    </h4>
+                    <p className="mt-1 text-[6px] text-gray-400">
+                      {story.time}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </aside>
+        </section>
 
+        {/* SECONDARY HERO STORY */}
+        <section className="grid grid-cols-1 gap-5 border-b border-gray-300 py-5 md:grid-cols-[1.3fr_1fr]">
+          <article className="group">
+            <div className="overflow-hidden rounded-md">
               <ImageWithFallback
                 src={secondaryStory.image}
                 alt={secondaryStory.title}
-                className="w-full h-[250px] sm:h-[300px] lg:h-[330px] object-cover transition-transform duration-600 group-hover:scale-[1.035]"
+                className="h-[190px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] sm:h-[240px] md:h-[255px]"
               />
-
             </div>
-
-            <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-red-700">
-              {secondaryStory.category}
-            </span>
-
-            <h2 className="font-serif text-[24px] md:text-[29px] lg:text-[32px] font-black leading-[1.02] mt-2 group-hover:underline">
-              {secondaryStory.title}
-            </h2>
-
-            <p className="text-[11px] md:text-[12px] leading-[1.7] text-gray-600 mt-4">
-              {secondaryStory.excerpt}
-            </p>
-
-            <div className="mt-5 pt-4 border-t border-gray-200 text-[9px] text-gray-500">
-              By {secondaryStory.author} · {secondaryStory.time}
-            </div>
-
           </article>
 
+          <article className="flex flex-col justify-center">
+            <span className="text-[7px] font-bold uppercase tracking-[0.18em] text-red-700">
+              {secondaryStory.category}
+            </span>
+            <h2 className="mt-1 font-serif text-[21px] font-black leading-[1.05] sm:text-[25px] md:text-[29px]">
+              {secondaryStory.title}
+            </h2>
+            <p className="mt-2 text-[10px] leading-[1.55] text-gray-600 sm:text-[11px]">
+              {secondaryStory.excerpt}
+            </p>
+            <div className="mt-3 flex items-center gap-2 text-[7px] uppercase tracking-wider text-gray-500">
+              <span className="font-bold text-gray-800">
+                By {secondaryStory.author}
+              </span>
+              <span>•</span>
+              <span>{secondaryStory.time}</span>
+            </div>
+          </article>
         </section>
 
-        {/* =================================================
-            MARKET / TECHNOLOGY NUMBERS
-        ================================================= */}
-
-        <section className="border-b border-black py-5">
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
-
-            <div className="pr-4 md:border-r border-gray-200">
-              <p className="text-[8px] uppercase tracking-wider text-gray-500">
-                AI Infrastructure
-              </p>
-
-              <p className="font-serif text-[24px] font-bold mt-1">
-                +27.4%
-              </p>
-
-              <span className="text-[9px] text-green-700">
-                ▲ Global investment
-              </span>
-            </div>
-
-            <div className="pl-4 md:pl-5 pr-4 md:border-r border-gray-200">
-              <p className="text-[8px] uppercase tracking-wider text-gray-500">
-                Cybersecurity
-              </p>
-
-              <p className="font-serif text-[24px] font-bold mt-1">
-                $214B
-              </p>
-
-              <span className="text-[9px] text-gray-500">
-                Market estimate
-              </span>
-            </div>
-
-            <div className="mt-4 md:mt-0 pr-4 md:pl-5 md:border-r border-gray-200">
-              <p className="text-[8px] uppercase tracking-wider text-gray-500">
-                Semiconductor
-              </p>
-
-              <p className="font-serif text-[24px] font-bold mt-1">
-                +18.2%
-              </p>
-
-              <span className="text-[9px] text-green-700">
-                ▲ Annual growth
-              </span>
-            </div>
-
-            <div className="mt-4 md:mt-0 pl-4 md:pl-5">
-              <p className="text-[8px] uppercase tracking-wider text-gray-500">
-                Robotics
-              </p>
-
-              <p className="font-serif text-[24px] font-bold mt-1">
-                4.8M
-              </p>
-
-              <span className="text-[9px] text-gray-500">
-                Units deployed
-              </span>
-            </div>
-
+        {/* LATEST TECHNOLOGY NEWS */}
+        <section className="py-6 sm:py-7">
+          <div className="mb-4 flex items-center justify-between border-t-2 border-black pt-2">
+            <h2 className="text-[13px] font-black sm:text-[15px]">
+              Latest Technology News
+            </h2>
+            <span className="hidden text-[7px] uppercase tracking-[0.14em] text-gray-500 sm:block">
+              Artificial Intelligence • Innovation • Industry
+            </span>
           </div>
 
-        </section>
-
-        {/* =================================================
-            AI & MACHINE LEARNING
-            2 COLUMN NEWS GRID
-        ================================================= */}
-
-        <section className="py-10" id="innovation">
-
-          <SectionHeader title="AI & Machine Learning" />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
-
-            {aiStories.map((story, index) => (
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {latestStories.map((story, index) => (
               <article
-                key={`${story.id}-${index}`}
-                className="group cursor-pointer"
+                key={`latest-${story.id}`}
+                className="group overflow-hidden rounded-md border border-gray-200 bg-white"
               >
-
-                <div className="relative overflow-hidden mb-4">
-
+                <div className="overflow-hidden">
                   <ImageWithFallback
                     src={story.image}
                     alt={story.title}
-                    className={`w-full object-cover transition-transform duration-500 group-hover:scale-[1.035] ${
-                      index === 0
-                        ? "h-[300px] md:h-[390px]"
-                        : "h-[240px] md:h-[300px]"
-                    }`}
+                    className="h-[165px] w-full object-cover transition-transform duration-500 group-hover:scale-[1.035] sm:h-[150px] lg:h-[155px]"
                   />
+                </div>
 
-                  {index === 0 && (
-                    <span className="absolute bottom-3 left-3 bg-black text-white px-2.5 py-1 text-[8px] font-bold uppercase tracking-wider">
-                      Featured
+                <div className="p-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[6px] font-bold uppercase tracking-[0.14em] text-red-700">
+                      {index < 4 ? "Technology" : "AI"}
                     </span>
-                  )}
+                    {index < 4 && (
+                      <span className="bg-red-600 px-1.5 py-0.5 text-[5px] font-bold uppercase tracking-wider text-white">
+                        Hot
+                      </span>
+                    )}
+                  </div>
 
+                  <h3 className="mt-1 font-serif text-[13px] font-bold leading-[1.12] sm:text-[14px]">
+                    {story.title}
+                  </h3>
+
+                  <p className="mt-1.5 line-clamp-2 text-[8px] leading-[1.45] text-gray-500 sm:text-[9px]">
+                    {story.excerpt}
+                  </p>
+
+                  <div className="mt-2 flex items-center gap-1 text-[6px] text-gray-400">
+                    <Clock size={8} />
+                    {story.time}
+                  </div>
                 </div>
-
-                <span className="text-[8px] uppercase tracking-[0.15em] text-red-700 font-bold">
-                  AI & Machine Learning
-                </span>
-
-                <h3
-                  className={`font-serif font-bold leading-[1.05] mt-1 group-hover:underline ${
-                    index === 0
-                      ? "text-[24px] md:text-[29px]"
-                      : "text-[19px] md:text-[22px]"
-                  }`}
-                >
-                  {story.title}
-                </h3>
-
-                <p className="text-[11px] md:text-[12px] leading-[1.65] text-gray-500 mt-2">
-                  {story.excerpt}
-                </p>
-
-                <div className="flex items-center gap-1 text-[9px] text-gray-400 mt-3">
-                  <Clock size={8} />
-                  {story.time}
-                </div>
-
               </article>
             ))}
-
           </div>
-
         </section>
 
-        {/* =================================================
-            CYBERSECURITY + ENERGY
-        ================================================= */}
+        {/* MID-PAGE AD */}
+        <div className="mb-7 flex h-[72px] items-center justify-center border border-gray-200 bg-[#102a33] text-center">
+          <div>
+            <p className="text-[7px] font-bold uppercase tracking-[0.22em] text-sky-300">
+              Google Adsense
+            </p>
+            <p className="mt-1 text-[11px] font-bold text-white">
+              Technology & Innovation • Powered by The Pride Times
+            </p>
+            <p className="text-[7px] text-sky-200">
+              Advertisement
+            </p>
+          </div>
+        </div>
 
-        <section className="grid grid-cols-1 lg:grid-cols-2 border-t-2 border-black">
+        {/* CATEGORY SECTIONS */}
+        <section className="grid grid-cols-1 gap-0 border-t-2 border-black lg:grid-cols-2">
 
-          <div
-            id="cybersecurity"
-            className="lg:pr-8 py-8 lg:border-r border-gray-300"
-          >
-
+          <div className="py-6 lg:pr-6 lg:border-r lg:border-gray-300">
             <SectionHeader title="Cybersecurity" />
-
-            <div className="group overflow-hidden mb-5">
-
+            <div className="mb-4 overflow-hidden rounded-md">
               <ImageWithFallback
                 src={sectionImages.cybersecurity}
                 alt="Cybersecurity technology"
-                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="h-[190px] w-full object-cover transition-transform duration-500 hover:scale-[1.02] sm:h-[230px]"
               />
-
             </div>
-
-            <SmallStoryList stories={cyberStories} />
-
+            <SmallStoryList stories={cyberStories.slice(0, 4)} />
           </div>
 
-          <div
-            id="energy"
-            className="lg:pl-8 py-8"
-          >
-
+          <div className="py-6 lg:pl-6">
             <SectionHeader title="Energy Technology" />
-
-            <div className="group overflow-hidden mb-5">
-
+            <div className="mb-4 overflow-hidden rounded-md">
               <ImageWithFallback
                 src={sectionImages.energy}
                 alt="Energy technology"
-                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="h-[190px] w-full object-cover transition-transform duration-500 hover:scale-[1.02] sm:h-[230px]"
               />
-
             </div>
-
-            <SmallStoryList stories={energyStories} />
-
+            <SmallStoryList stories={energyStories.slice(0, 4)} />
           </div>
-
         </section>
 
-        {/* =================================================
-            HEALTHCARE
-        ================================================= */}
-
-        <section
-          className="py-9 border-t-2 border-black"
-          id="healthcare"
-        >
-
+        <section className="border-t-2 border-black py-7" id="healthcare">
           <SectionHeader title="Healthcare & BioTech" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
-            <article className="group">
-
-              <div className="relative overflow-hidden">
-
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.25fr_1fr]">
+            <article className="group overflow-hidden rounded-md">
+              <div className="relative">
                 <ImageWithFallback
                   src={sectionImages.healthcare}
                   alt="Healthcare and biotechnology"
-                  className="w-full h-[290px] md:h-[390px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                  className="h-[240px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02] sm:h-[320px]"
                 />
-
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-5 pt-24">
-
-                  <span className="text-[8px] uppercase tracking-[0.15em] text-white font-bold">
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-4 pt-20">
+                  <span className="text-[7px] font-bold uppercase tracking-[0.15em] text-white">
                     Healthcare Innovation
                   </span>
-
-                  <h3 className="font-serif text-white text-[22px] md:text-[28px] font-bold leading-tight mt-1">
+                  <h3 className="mt-1 font-serif text-[18px] font-bold leading-tight text-white sm:text-[23px]">
                     {healthcareStories[0].title}
                   </h3>
-
                 </div>
-
               </div>
-
             </article>
 
             <div>
-
               <SmallStoryList stories={healthcareStories.slice(1)} />
-
-              <div className="mt-6 bg-black text-white p-6">
-
-                <span className="text-[8px] uppercase tracking-[0.15em] text-gray-400">
+              <div className="mt-5 bg-black p-5 text-white">
+                <span className="text-[7px] uppercase tracking-[0.15em] text-gray-400">
                   Market Insight
                 </span>
-
-                <p className="font-serif text-[19px] leading-tight mt-2">
-                  Global healthcare AI market projected to reach $187B by
-                  2030, growing at 37% CAGR.
+                <p className="mt-2 font-serif text-[16px] leading-tight">
+                  Global healthcare AI market projected to reach $187B by 2030, growing at 37% CAGR.
                 </p>
-
               </div>
-
             </div>
-
           </div>
-
         </section>
 
-        {/* =================================================
-            MANUFACTURING + SMART CITIES
-        ================================================= */}
-
-        <section className="grid grid-cols-1 lg:grid-cols-2 border-t-2 border-black">
-
-          <div
-            id="manufacturing"
-            className="py-8 lg:pr-8 lg:border-r border-gray-300"
-          >
-
+        <section className="grid grid-cols-1 border-t-2 border-black lg:grid-cols-2">
+          <div className="py-6 lg:pr-6 lg:border-r lg:border-gray-300">
             <SectionHeader title="Manufacturing & Industry 4.0" />
-
-            <div className="group overflow-hidden mb-5">
-
+            <div className="mb-4 overflow-hidden rounded-md">
               <ImageWithFallback
                 src={sectionImages.manufacturing}
                 alt="Advanced manufacturing"
-                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="h-[190px] w-full object-cover transition-transform duration-500 hover:scale-[1.02] sm:h-[230px]"
               />
-
             </div>
-
             <SmallStoryList stories={manufacturingStories} />
-
           </div>
 
-          <div
-            id="smart-cities"
-            className="py-8 lg:pl-8"
-          >
-
+          <div className="py-6 lg:pl-6">
             <SectionHeader title="Smart Cities" />
-
-            <div className="group overflow-hidden mb-5">
-
+            <div className="mb-4 overflow-hidden rounded-md">
               <ImageWithFallback
                 src={sectionImages.smartCities}
                 alt="Smart city technology"
-                className="w-full h-[250px] md:h-[300px] object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="h-[190px] w-full object-cover transition-transform duration-500 hover:scale-[1.02] sm:h-[230px]"
               />
-
             </div>
-
             <SmallStoryList stories={smartCityStories} />
-
           </div>
-
         </section>
 
-        {/* =================================================
-            SUPPLY CHAIN
-        ================================================= */}
-
-        <section
-          className="py-9 border-t-2 border-black pb-14"
-          id="supply-chain"
-        >
-
+        <section className="border-t-2 border-black py-7 pb-12" id="supply-chain">
           <SectionHeader title="Supply Chain & Logistics" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_1fr]">
             <div className="group overflow-hidden">
-
               <ImageWithFallback
                 src={sectionImages.supplyChain}
                 alt="Supply chain and logistics"
-                className="w-full h-[300px] md:h-[400px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                className="h-[250px] w-full rounded-md object-cover transition-transform duration-700 group-hover:scale-[1.02] sm:h-[330px]"
               />
-
-              <div className="border-x border-b border-gray-300 p-5">
-
-                <span className="text-[8px] uppercase tracking-[0.15em] text-red-700 font-bold">
+              <div className="border-x border-b border-gray-300 bg-white p-4">
+                <span className="text-[7px] font-bold uppercase tracking-[0.15em] text-red-700">
                   Logistics & Trade
                 </span>
-
-                <h3 className="font-serif text-[21px] md:text-[26px] font-bold leading-tight mt-1">
-                  The global supply chain is being rebuilt around data,
-                  automation and artificial intelligence.
+                <h3 className="mt-1 font-serif text-[18px] font-bold leading-tight sm:text-[22px]">
+                  The global supply chain is being rebuilt around data, automation and artificial intelligence.
                 </h3>
-
               </div>
-
             </div>
 
             <div>
               <SmallStoryList stories={supplyChainStories} />
             </div>
-
           </div>
-
         </section>
-
       </div>
-
     </main>
   );
 }
