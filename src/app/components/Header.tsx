@@ -78,8 +78,6 @@ export function Header() {
         !searchBoxRef.current.contains(e.target as Node)
       ) {
         // Search remains visible.
-        // Only the results area disappears naturally
-        // when the query is cleared.
       }
     };
 
@@ -204,7 +202,7 @@ export function Header() {
               Live TV
             </a>
 
-            {/* Primary navigation */}
+            {/* Primary Navigation */}
 
             {primaryNav.map((item) => (
               <Link
@@ -234,7 +232,7 @@ export function Header() {
               Digital Edition
             </Link>
 
-            {/* Signed in user */}
+            {/* Signed In User */}
 
             {isSignedIn && (
               <Link
@@ -438,8 +436,15 @@ export function Header() {
 
             {/* =================================================
                 MENU BUTTON
-                Matches the provided screenshot.
-                Mobile/tablet only.
+
+                Designed to match the provided screenshot:
+                - White background
+                - Thin gray border
+                - 95px width
+                - 40px height
+                - Bold black "Menu"
+                - Small black downward triangle
+                - Rounded corners
             ================================================= */}
 
             <button
@@ -447,51 +452,45 @@ export function Header() {
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
-              className="
-                lg:hidden
-                inline-flex
-                items-center
-                justify-center
-                gap-1.5
-                h-10
-                min-w-[94px]
-                px-4
-                bg-white
-                border
-                border-gray-300
-                rounded-md
-                text-black
-                text-sm
-                font-bold
-                whitespace-nowrap
-                shadow-none
-                hover:bg-gray-50
-                hover:border-gray-400
-                active:bg-gray-100
-                transition-colors
-                flex-shrink-0
-              "
+              style={{
+                width: "95px",
+                height: "40px",
+                backgroundColor: "#ffffff",
+                border: "1px solid #d9d9d9",
+                borderRadius: "6px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "7px",
+                padding: "0",
+                margin: "0",
+                color: "#000000",
+                fontSize: "16px",
+                fontWeight: 700,
+                lineHeight: "1",
+                fontFamily:
+                  "Arial, Helvetica, sans-serif",
+                cursor: "pointer",
+                flexShrink: 0,
+                boxSizing: "border-box",
+              }}
             >
               <span>Menu</span>
 
               <span
-                className="
-                  inline-block
-                  w-0
-                  h-0
-                  border-l-[4px]
-                  border-r-[4px]
-                  border-t-[5px]
-                  border-l-transparent
-                  border-r-transparent
-                  border-t-black
-                  transition-transform
-                  duration-200
-                "
                 style={{
+                  width: 0,
+                  height: 0,
+                  borderLeft: "4px solid transparent",
+                  borderRight: "4px solid transparent",
+                  borderTop: "5px solid #000000",
+                  display: "inline-block",
+                  marginTop: "2px",
                   transform: mobileOpen
                     ? "rotate(180deg)"
-                    : "rotate(0deg)",
+                    : "none",
+                  transition:
+                    "transform 0.15s ease",
                 }}
               />
             </button>
@@ -500,17 +499,15 @@ export function Header() {
       </div>
 
       {/* =====================================================
-          FULL-WIDTH SEARCH ROW
+          FULL WIDTH SEARCH ROW
 
-          Search is intentionally separated from the brand row.
-          This prevents it from overlapping:
+          Search is completely separated from:
           - Logo
-          - Account button
-          - Subscribe button
-          - Menu button
-          
-          The search input always occupies 100% of the
-          available container width.
+          - Account
+          - Subscribe
+          - Menu
+
+          It occupies 100% of the available container width.
       ===================================================== */}
 
       <div className="w-full border-t border-gray-100 border-b border-gray-200 bg-white">
@@ -543,6 +540,7 @@ export function Header() {
                 focus-within:ring-gray-200
                 transition-all
                 overflow-hidden
+                box-border
               "
             >
               <Search
@@ -605,8 +603,7 @@ export function Header() {
             {/* =================================================
                 SEARCH RESULTS
 
-                Same width as the search input.
-                Never extends into another header element.
+                Same width as the search box.
             ================================================= */}
 
             {searchQuery.trim() && (
@@ -739,10 +736,12 @@ export function Header() {
             </button>
           </div>
 
+          {/* =================================================
+              MOBILE NAVIGATION
+          ================================================= */}
+
           <nav className="flex flex-col gap-0 px-4 py-4">
-            {/* =================================================
-                SIGN IN / SUBSCRIBE
-            ================================================= */}
+            {/* Sign In / Subscribe */}
 
             {!isSignedIn && (
               <div className="flex items-center gap-2.5 pb-4 mb-2 border-b border-gray-100">
@@ -790,21 +789,19 @@ export function Header() {
               </div>
             )}
 
-            {/* =================================================
-                HOME
-            ================================================= */}
+            {/* Home */}
 
             <Link
               to="/"
               className="py-3 text-sm border-b border-gray-100"
-              onClick={() => setMobileOpen(false)}
+              onClick={() =>
+                setMobileOpen(false)
+              }
             >
               Home
             </Link>
 
-            {/* =================================================
-                LIVE TV
-            ================================================= */}
+            {/* Live TV */}
 
             <a
               href="https://www.youtube.com/@vmpridetimes"
@@ -820,7 +817,9 @@ export function Header() {
                 gap-2
                 text-red-600
               "
-              onClick={() => setMobileOpen(false)}
+              onClick={() =>
+                setMobileOpen(false)
+              }
             >
               <span className="relative flex h-2 w-2 flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
@@ -831,24 +830,27 @@ export function Header() {
               Live TV
             </a>
 
-            {/* =================================================
-                PRIMARY NAVIGATION
-            ================================================= */}
+            {/* Primary Navigation */}
 
             {primaryNav.map((item) => (
               <Link
                 key={item.label}
                 to={item.path}
-                className="py-3 text-sm border-b border-gray-100"
-                onClick={() => setMobileOpen(false)}
+                className="
+                  py-3
+                  text-sm
+                  border-b
+                  border-gray-100
+                "
+                onClick={() =>
+                  setMobileOpen(false)
+                }
               >
                 {item.label}
               </Link>
             ))}
 
-            {/* =================================================
-                SIGNED IN USER
-            ================================================= */}
+            {/* Signed In User */}
 
             {isSignedIn && (
               <>
