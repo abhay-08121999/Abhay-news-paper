@@ -35,6 +35,7 @@ import { LeadershipPage } from "./components/pages/LeadershipPage";
 import { InnovationPage } from "./components/pages/InnovationPage";
 import { MagazinePage } from "./components/pages/MagazinePage";
 import { CeoSpotlightPage } from "./components/pages/CeoSpotlightPage";
+import { AboutUsPage } from "./components/pages/AboutUsPage";
 
 // ============================================================
 // LEGAL / SYSTEM PAGES
@@ -110,6 +111,7 @@ export default function App() {
           {/* ==================================================
               AUTH / STANDALONE PAGES
               ================================================== */}
+
           <Route
             path="/login"
             element={<LoginPage />}
@@ -466,6 +468,31 @@ export default function App() {
               >
                 <CeoSpotlightPage />
               </MagazineLayout>
+            }
+          />
+
+          {/* ==================================================
+              ABOUT US
+              Standalone site-shell route.
+              Does NOT use PageLayout.
+              ================================================== */}
+
+          <Route
+            path="/about-us"
+            element={
+              <div className="min-h-screen bg-white flex flex-col">
+
+                <Header />
+
+                <MarketsTicker />
+
+                <main className="flex-1">
+                  <AboutUsPage />
+                </main>
+
+                <Footer />
+
+              </div>
             }
           />
 
