@@ -39,6 +39,7 @@ const editions = [
 
 export function Header() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [editionOpen, setEditionOpen] = useState(false);
   const [edition, setEdition] = useState("Asia Edition");
@@ -95,8 +96,19 @@ export function Header() {
   useEffect(() => {
     setUserMenuOpen(false);
     setEditionOpen(false);
+    setSearchOpen(false);
     setSearchQuery("");
   }, [location.pathname]);
+
+  /* =========================================================
+     FOCUS SEARCH INPUT WHEN THE SEARCH BAR OPENS
+  ========================================================= */
+
+  useEffect(() => {
+    if (searchOpen) {
+      searchInputRef.current?.focus();
+    }
+  }, [searchOpen]);
 
   /* =========================================================
      SEARCH RESULTS
@@ -289,6 +301,24 @@ export function Header() {
 
           <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
             {/* =================================================
+                SEARCH TOGGLE
+
+                Circular icon button matching the account button.
+                Clicking it opens/closes the full-width (100%)
+                search bar directly below the header.
+            ================================================= */}
+
+            <button
+              type="button"
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="pt-account-btn flex items-center justify-center transition-colors hover:bg-gray-50"
+              aria-label="Search"
+              aria-expanded={searchOpen}
+            >
+              <Search size={18} className="text-gray-700" />
+            </button>
+
+            {/* =================================================
                 USER MENU
             ================================================= */}
 
@@ -417,92 +447,94 @@ export function Header() {
           It occupies 100% of the available container width.
       ===================================================== */}
 
-      <div className="w-full border-t border-gray-100 border-b border-gray-200 bg-white relative">
-        <div className="pt-container w-full py-2.5 sm:py-3">
-          <div
-            ref={searchBoxRef}
-            className="relative w-full min-w-0"
-          >
-            {/* =================================================
-                SEARCH INPUT
-            ================================================= */}
-
+      {searchOpen && (
+        <div className="w-full border-t border-gray-100 border-b border-gray-200 bg-white relative">
+          <div className="pt-container w-full py-2.5 sm:py-3">
             <div
-              className="
-                w-full
-                h-10
-                sm:h-11
-                border
-                border-gray-200
-                rounded-md
-                bg-white
-                flex
-                items-center
-                px-3
-                sm:px-4
-                gap-2
-                shadow-sm
-                focus-within:border-gray-400
-                focus-within:ring-1
-                focus-within:ring-gray-200
-                transition-all
-                overflow-hidden
-                box-border
-              "
+              ref={searchBoxRef}
+              className="relative w-full min-w-0"
             >
-              <button
-                type="button"
-                onClick={() => {
-                  if (searchQuery.trim()) {
-                    runFullSearch();
-                  } else {
-                    searchInputRef.current?.focus();
-                  }
-                }}
-                aria-label="Search"
-                className="flex-shrink-0"
-              >
-                <Search
-                  size={16}
-                  className="text-gray-400 hover:text-black transition-colors"
-                />
-              </button>
+              {/* =================================================
+                  SEARCH INPUT
+              ================================================= */}
 
-              <input
-                ref={searchInputRef}
-                type="text"
-                value={searchQuery}
-                onChange={(e) =>
-                  setSearchQuery(e.target.value)
-                }
-                placeholder="Search for news, topics, companies..."
+              <div
                 className="
                   w-full
-                  min-w-0
-                  h-full
-                  flex-1
-                  bg-transparent
-                  outline-none
-                  border-none
-                  text-sm
-                  text-gray-800
-                  placeholder:text-gray-400
+                  h-10
+                  sm:h-11
+                  border
+                  border-gray-200
+                  rounded-md
+                  bg-white
+                  flex
+                  items-center
+                  px-3
+                  sm:px-4
+                  gap-2
+                  shadow-sm
+                  focus-within:border-gray-400
+                  focus-within:ring-1
+                  focus-within:ring-gray-200
+                  transition-all
+                  overflow-hidden
+                  box-border
                 "
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    runFullSearch();
-                  }
-
-                  if (e.key === "Escape") {
-                    setSearchQuery("");
-                  }
-                }}
-                aria-label="Search"
-              />
-
-              {searchQuery && (
+              >
                 <button
                   type="button"
+                  onClick={() => {
+                    if (searchQuery.trim()) {
+                      runFullSearch();
+                    } else {
+                      searchInputRef.current?.focus();
+                    }
+                  }}
+                  aria-label="Search"
+                  className="flex-shrink-0"
+                >
+                  <Search
+                    size={16}
+                    className="text-gray-400 hover:text-black transition-colors"
+                  />
+                </button>
+
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) =>
+                    setSearchQuery(e.target.value)
+                  }
+                  placeholder="Search for news, topics, companies..."
+                  className="
+                    w-full
+                    min-w-0
+                    h-full
+                    flex-1
+                    bg-transparent
+                    outline-none
+                    border-none
+                    text-sm
+                    text-gray-800
+                    placeholder:text-gray-400
+                  "
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      runFullSearch();
+                    }
+
+                    if (e.key === "Escape") {
+                      setSearchQuery("");
+                      setSearchOpen(false);
+                    }
+                  }}
+                  aria-label="Search"
+                />
+
+                {searchQuery && (
+                  <button
+                    type="button"
                   onClick={() => setSearchQuery("")}
                   className="
                     flex-shrink-0
@@ -611,7 +643,8 @@ export function Header() {
             </div>
           </div>
         )}
-      </div>
+        </div>
+      )}
     </header>
   );
 }
