@@ -51,6 +51,7 @@ export function Header() {
   const isPremium = user?.tier === "premium";
 
   const searchBoxRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   /* =========================================================
      CLOSE EDITION DROPDOWN AUTOMATICALLY
@@ -416,7 +417,7 @@ export function Header() {
           It occupies 100% of the available container width.
       ===================================================== */}
 
-      <div className="w-full border-t border-gray-100 border-b border-gray-200 bg-white">
+      <div className="w-full border-t border-gray-100 border-b border-gray-200 bg-white relative">
         <div className="pt-container w-full py-2.5 sm:py-3">
           <div
             ref={searchBoxRef}
@@ -449,12 +450,26 @@ export function Header() {
                 box-border
               "
             >
-              <Search
-                size={16}
-                className="text-gray-400 flex-shrink-0"
-              />
+              <button
+                type="button"
+                onClick={() => {
+                  if (searchQuery.trim()) {
+                    runFullSearch();
+                  } else {
+                    searchInputRef.current?.focus();
+                  }
+                }}
+                aria-label="Search"
+                className="flex-shrink-0"
+              >
+                <Search
+                  size={16}
+                  className="text-gray-400 hover:text-black transition-colors"
+                />
+              </button>
 
               <input
+                ref={searchInputRef}
                 type="text"
                 value={searchQuery}
                 onChange={(e) =>
@@ -505,95 +520,97 @@ export function Header() {
                 </button>
               )}
             </div>
+          </div>
+        </div>
 
-            {/* =================================================
-                SEARCH RESULTS
+        {/* =================================================
+            SEARCH RESULTS
 
-                Same width as the search box.
-            ================================================= */}
+            Rendered outside `pt-container` so it spans the
+            full width of the page (100%), edge to edge,
+            directly below the search bar — not just the
+            width of the search input.
+        ================================================= */}
 
-            {searchQuery.trim() && (
-              <div
-                className="
-                  absolute
-                  left-0
-                  right-0
-                  top-full
-                  mt-1
-                  w-full
-                  bg-white
-                  border
-                  border-gray-200
-                  rounded-md
-                  shadow-xl
-                  z-[200]
-                  overflow-hidden
-                "
-              >
-                {searchResults.length > 0 ? (
-                  <>
-                    {searchResults.map((item) => (
-                      <Link
-                        key={item.id}
-                        to={item.link}
-                        onClick={() =>
-                          setSearchQuery("")
-                        }
-                        className="
-                          flex
-                          flex-col
-                          gap-1
-                          px-4
-                          py-3
-                          border-b
-                          border-gray-100
-                          last:border-b-0
-                          hover:bg-gray-50
-                          transition-colors
-                        "
-                      >
-                        <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.12em]">
-                          {item.category}
-                        </span>
-
-                        <span className="text-sm font-medium text-gray-900 leading-[1.35] line-clamp-2">
-                          {item.title}
-                        </span>
-                      </Link>
-                    ))}
-
-                    <button
-                      type="button"
-                      onClick={runFullSearch}
+        {searchQuery.trim() && (
+          <div
+            className="
+              absolute
+              inset-x-0
+              top-full
+              w-full
+              bg-white
+              border-t
+              border-gray-200
+              shadow-xl
+              z-[200]
+              overflow-hidden
+            "
+          >
+            <div className="pt-container w-full">
+              {searchResults.length > 0 ? (
+                <>
+                  {searchResults.map((item) => (
+                    <Link
+                      key={item.id}
+                      to={item.link}
+                      onClick={() =>
+                        setSearchQuery("")
+                      }
                       className="
-                        block
-                        w-full
-                        text-left
+                        flex
+                        flex-col
+                        gap-1
                         px-4
                         py-3
-                        text-xs
-                        font-semibold
-                        text-red-600
-                        uppercase
-                        tracking-wide
+                        border-b
+                        border-gray-100
+                        last:border-b-0
                         hover:bg-gray-50
                         transition-colors
                       "
                     >
-                      See all results for "
-                      {searchQuery.trim()}"
-                    </button>
-                  </>
-                ) : (
-                  <div className="px-4 py-4 text-sm text-gray-500">
-                    No results found for "
+                      <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.12em]">
+                        {item.category}
+                      </span>
+
+                      <span className="text-sm font-medium text-gray-900 leading-[1.35] line-clamp-2">
+                        {item.title}
+                      </span>
+                    </Link>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={runFullSearch}
+                    className="
+                      block
+                      w-full
+                      text-left
+                      px-4
+                      py-3
+                      text-xs
+                      font-semibold
+                      text-red-600
+                      uppercase
+                      tracking-wide
+                      hover:bg-gray-50
+                      transition-colors
+                    "
+                  >
+                    See all results for "
                     {searchQuery.trim()}"
-                  </div>
-                )}
-              </div>
-            )}
+                  </button>
+                </>
+              ) : (
+                <div className="px-4 py-4 text-sm text-gray-500">
+                  No results found for "
+                  {searchQuery.trim()}"
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   );
