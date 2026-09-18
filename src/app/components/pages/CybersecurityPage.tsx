@@ -4,7 +4,6 @@ import {
   Shield,
   AlertTriangle,
   ChevronRight,
-  Cpu,
   Bot,
   KeyRound,
 } from "lucide-react";
@@ -17,9 +16,13 @@ import CS3Img from "../../../imports/CS3.png";
 
 function SH({ title, id }: { title: string; id?: string }) {
   return (
-    <div id={id} className="flex items-center justify-between border-b-2 border-black pb-2.5 mb-5">
+    <div
+      id={id}
+      className="flex items-center justify-between border-b-2 border-black pb-2.5 mb-5"
+    >
       <div className="flex items-center gap-2.5">
         <span className="h-1.5 w-1.5 rounded-full bg-red-600 shrink-0" />
+
         <h2 className="text-[13px] md:text-sm font-bold uppercase tracking-[0.16em] text-gray-900">
           {title}
         </h2>
@@ -76,11 +79,41 @@ const hero2 = {
 ========================================================= */
 
 const threatAlerts = [
-  { id: 1, severity: "CRITICAL", title: "CVE-2026-1247: Zero-Day in OpenSSL Affects 400M Servers Worldwide", time: "2 hrs ago" },
-  { id: 2, severity: "HIGH", title: "BlackCat Ransomware Group Targets Healthcare Organizations in 12 Countries", time: "4 hrs ago" },
-  { id: 3, severity: "HIGH", title: "Lazarus Group Steals $340M from Crypto Exchange Using Novel Smart Contract Exploit", time: "6 hrs ago" },
-  { id: 4, severity: "MEDIUM", title: "Phishing Campaign Impersonating IMF Emails Targets G20 Finance Ministries", time: "8 hrs ago" },
-  { id: 5, severity: "MEDIUM", title: "New Android Spyware Found in 230 Apps on Google Play Store", time: "10 hrs ago" },
+  {
+    id: 1,
+    severity: "CRITICAL",
+    title:
+      "CVE-2026-1247: Zero-Day in OpenSSL Affects 400M Servers Worldwide",
+    time: "2 hrs ago",
+  },
+  {
+    id: 2,
+    severity: "HIGH",
+    title:
+      "BlackCat Ransomware Group Targets Healthcare Organizations in 12 Countries",
+    time: "4 hrs ago",
+  },
+  {
+    id: 3,
+    severity: "HIGH",
+    title:
+      "Lazarus Group Steals $340M from Crypto Exchange Using Novel Smart Contract Exploit",
+    time: "6 hrs ago",
+  },
+  {
+    id: 4,
+    severity: "MEDIUM",
+    title:
+      "Phishing Campaign Impersonating IMF Emails Targets G20 Finance Ministries",
+    time: "8 hrs ago",
+  },
+  {
+    id: 5,
+    severity: "MEDIUM",
+    title:
+      "New Android Spyware Found in 230 Apps on Google Play Store",
+    time: "10 hrs ago",
+  },
 ];
 
 const threatColor: Record<string, string> = {
@@ -95,10 +128,42 @@ const threatColor: Record<string, string> = {
 ========================================================= */
 
 const stories = [
-  { id: 1, category: "RANSOMWARE", title: "LockBit 4.0 Launches Unprecedented Attack on UK National Health Service Systems", time: "3 hrs ago", image: "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" },
-  { id: 2, category: "AI SECURITY", title: "GPT-7 Used to Generate Undetectable Phishing Emails at Scale — New Research", time: "5 hrs ago", image: "https://images.unsplash.com/photo-1767972464040-8bfee42d7bed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" },
-  { id: 3, category: "DATA BREACH", title: "1.4 Billion User Records Exposed in Major Social Media Platform Breach", time: "7 hrs ago", image: "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" },
-  { id: 4, category: "AI SYSTEMS", title: "Hackers exploit AI-powered customer support systems and breach Amazon's One Medical, exposing sensitive healthcare records.", time: "Just now", image: "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" },
+  {
+    id: 1,
+    category: "RANSOMWARE",
+    title:
+      "LockBit 4.0 Launches Unprecedented Attack on UK National Health Service Systems",
+    time: "3 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 2,
+    category: "AI SECURITY",
+    title:
+      "GPT-7 Used to Generate Undetectable Phishing Emails at Scale — New Research",
+    time: "5 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1767972464040-8bfee42d7bed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 3,
+    category: "DATA BREACH",
+    title:
+      "1.4 Billion User Records Exposed in Major Social Media Platform Breach",
+    time: "7 hrs ago",
+    image:
+      "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
+  {
+    id: 4,
+    category: "AI SYSTEMS",
+    title:
+      "Hackers exploit AI-powered customer support systems and breach Amazon's One Medical, exposing sensitive healthcare records.",
+    time: "Just now",
+    image:
+      "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
+  },
 ];
 
 /* =========================================================
@@ -138,6 +203,10 @@ const aiInfraStories = [
   },
 ];
 
+/* =========================================================
+   ZERO TRUST
+========================================================= */
+
 const zeroTrustNote = {
   title: "Zero-Trust Implication: Identity Becomes the Control Plane",
   body:
@@ -149,11 +218,36 @@ const zeroTrustNote = {
 ========================================================= */
 
 const responseMatrix = [
-  { threat: "AI-Assisted Phishing", control: "MFA Enforcement", risk: "Data Breach / Ransom", cadence: "Immediate" },
-  { threat: "SaaS Credential Theft", control: "Access Privilege Review", risk: "IP / Client Data Loss", cadence: "24–48 Hours" },
-  { threat: "Ransomware-as-a-Service", control: "Endpoint Protection + Backup", risk: "Business Continuity", cadence: "Ongoing" },
-  { threat: "Vendor/Supply Chain Attack", control: "Third-Party Risk Audits", risk: "Regulatory Exposure", cadence: "Quarterly" },
-  { threat: "Prompt Injection (AI Models)", control: "AI Security Layer / WAF", risk: "Data Manipulation", cadence: "Emerging Priority" },
+  {
+    threat: "AI-Assisted Phishing",
+    control: "MFA Enforcement",
+    risk: "Data Breach / Ransom",
+    cadence: "Immediate",
+  },
+  {
+    threat: "SaaS Credential Theft",
+    control: "Access Privilege Review",
+    risk: "IP / Client Data Loss",
+    cadence: "24–48 Hours",
+  },
+  {
+    threat: "Ransomware-as-a-Service",
+    control: "Endpoint Protection + Backup",
+    risk: "Business Continuity",
+    cadence: "Ongoing",
+  },
+  {
+    threat: "Vendor/Supply Chain Attack",
+    control: "Third-Party Risk Audits",
+    risk: "Regulatory Exposure",
+    cadence: "Quarterly",
+  },
+  {
+    threat: "Prompt Injection (AI Models)",
+    control: "AI Security Layer / WAF",
+    risk: "Data Manipulation",
+    cadence: "Emerging Priority",
+  },
 ];
 
 /* =========================================================
@@ -161,11 +255,35 @@ const responseMatrix = [
 ========================================================= */
 
 const defenseNews = [
-  { id: 1, title: "Pentagon's Cyber Command Gets $8.7B Budget Increase for FY2027", time: "2 hrs ago" },
-  { id: 2, title: "EU's Cyber Solidarity Act Creates €1.1B Emergency Cyber Response Fund", time: "4 hrs ago" },
-  { id: 3, title: "India's CERT-In Mandates 6-Hour Breach Notification for All Critical Infrastructure", time: "6 hrs ago" },
-  { id: 4, title: "NATO Activates Article 5 Cyber Defense Clause for First Time in History", time: "8 hrs ago" },
-  { id: 5, title: "Australia Bans All Chinese Technology from Government Networks by 2027", time: "10 hrs ago" },
+  {
+    id: 1,
+    title: "Pentagon's Cyber Command Gets $8.7B Budget Increase for FY2027",
+    time: "2 hrs ago",
+  },
+  {
+    id: 2,
+    title:
+      "EU's Cyber Solidarity Act Creates €1.1B Emergency Cyber Response Fund",
+    time: "4 hrs ago",
+  },
+  {
+    id: 3,
+    title:
+      "India's CERT-In Mandates 6-Hour Breach Notification for All Critical Infrastructure",
+    time: "6 hrs ago",
+  },
+  {
+    id: 4,
+    title:
+      "NATO Activates Article 5 Cyber Defense Clause for First Time in History",
+    time: "8 hrs ago",
+  },
+  {
+    id: 5,
+    title:
+      "Australia Bans All Chinese Technology from Government Networks by 2027",
+    time: "10 hrs ago",
+  },
 ];
 
 /* =========================================================
@@ -173,25 +291,55 @@ const defenseNews = [
 ========================================================= */
 
 const marketData = [
-  { company: "CrowdStrike", ticker: "CRWD", price: "$342.50", change: "+4.2%", up: true },
-  { company: "Palo Alto Networks", ticker: "PANW", price: "$287.30", change: "+2.8%", up: true },
-  { company: "Fortinet", ticker: "FTNT", price: "$76.90", change: "+1.9%", up: true },
-  { company: "Zscaler", ticker: "ZS", price: "$198.40", change: "+3.5%", up: true },
-  { company: "SentinelOne", ticker: "S", price: "$29.80", change: "-0.8%", up: false },
+  {
+    company: "CrowdStrike",
+    ticker: "CRWD",
+    price: "$342.50",
+    change: "+4.2%",
+    up: true,
+  },
+  {
+    company: "Palo Alto Networks",
+    ticker: "PANW",
+    price: "$287.30",
+    change: "+2.8%",
+    up: true,
+  },
+  {
+    company: "Fortinet",
+    ticker: "FTNT",
+    price: "$76.90",
+    change: "+1.9%",
+    up: true,
+  },
+  {
+    company: "Zscaler",
+    ticker: "ZS",
+    price: "$198.40",
+    change: "+3.5%",
+    up: true,
+  },
+  {
+    company: "SentinelOne",
+    ticker: "S",
+    price: "$29.80",
+    change: "-0.8%",
+    up: false,
+  },
 ];
 
 /* =========================================================
-   ARTICLE BLOCK (reusable — used for hero1 / hero2)
+   SPLIT ARTICLE
 ========================================================= */
 
 function SplitArticle({ data }: { data: typeof hero1 }) {
   return (
     <article className="group cursor-pointer">
-      <div className="overflow-hidden rounded-xl mb-3 bg-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+      <div className="overflow-hidden rounded-lg mb-3 bg-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-300">
         <ImageWithFallback
           src={data.image}
           alt={data.title}
-          className="w-full h-[210px] md:h-[240px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          className="w-full h-[210px] sm:h-[230px] lg:h-[270px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
       </div>
 
@@ -199,7 +347,7 @@ function SplitArticle({ data }: { data: typeof hero1 }) {
         {data.category}
       </span>
 
-      <h2 className="mt-1.5 font-serif text-xl md:text-[24px] font-bold leading-[1.15] text-gray-950 transition-colors duration-200 group-hover:text-red-600">
+      <h2 className="mt-1.5 font-serif text-xl md:text-[25px] font-bold leading-[1.15] text-gray-950 transition-colors duration-200 group-hover:text-red-600">
         {data.title}
       </h2>
 
@@ -207,9 +355,13 @@ function SplitArticle({ data }: { data: typeof hero1 }) {
         {data.excerpt}
       </p>
 
-      <div className="flex items-center gap-3 mt-3 text-[11px] text-gray-400">
-        <span className="font-medium text-gray-500">By {data.author}</span>
-        <span className="h-3 w-px bg-gray-300" />
+      <div className="flex flex-wrap items-center gap-3 mt-3 text-[11px] text-gray-400">
+        <span className="font-medium text-gray-500">
+          By {data.author}
+        </span>
+
+        <span className="hidden sm:block h-3 w-px bg-gray-300" />
+
         <span className="flex items-center gap-1.5">
           <Clock size={10} strokeWidth={2.25} />
           {data.time}
@@ -225,23 +377,29 @@ function SplitArticle({ data }: { data: typeof hero1 }) {
 
 export function CybersecurityPage() {
   return (
-    <main className="bg-white text-gray-900 antialiased min-h-screen">
-      <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <main className="w-full min-h-screen bg-white text-gray-900 antialiased">
+      {/* =====================================================
+          FULL WIDTH CONTENT WRAPPER
+      ===================================================== */}
+
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-7 md:py-9 lg:py-10">
 
         {/* =================================================
             PAGE HEADER
         ================================================= */}
 
-        <header className="border-b-4 border-black pb-5 mb-10">
-          <div className="flex items-center gap-3.5">
-            <div className="flex items-center justify-center w-11 h-11 rounded-full bg-black text-white shrink-0 shadow-sm">
-              <Shield size={19} strokeWidth={1.75} />
+        <header className="border-t-[3px] border-red-600 pt-4 pb-5 mb-8">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-full bg-black text-white shrink-0">
+              <Shield size={19} strokeWidth={1.8} />
             </div>
+
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-red-600">
+              <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.22em] text-red-600">
                 Security Intelligence
               </p>
-              <h1 className="mt-1 font-serif text-3xl md:text-[42px] font-bold tracking-tight leading-tight">
+
+              <h1 className="mt-0.5 font-serif text-3xl md:text-[40px] lg:text-[44px] font-bold tracking-tight leading-tight">
                 Cybersecurity
               </h1>
             </div>
@@ -249,57 +407,76 @@ export function CybersecurityPage() {
         </header>
 
         {/* =================================================
-            HERO + LIVE THREAT ALERTS
+            HERO + THREAT ALERTS
         ================================================= */}
 
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-14 pb-14 border-b border-gray-200">
+        <section className="grid grid-cols-1 xl:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)] gap-7 lg:gap-9 mb-12 pb-12 border-b border-gray-300">
 
-          <article className="lg:col-span-2 group cursor-pointer">
-            <div className="overflow-hidden rounded-xl mb-4 bg-gray-100 shadow-sm group-hover:shadow-lg transition-shadow duration-300">
+          {/* HERO */}
+
+          <article className="group cursor-pointer">
+            <div className="overflow-hidden rounded-lg bg-gray-100 mb-4">
               <ImageWithFallback
                 src={hero.image}
                 alt={hero.title}
-                className="w-full h-[230px] md:h-[340px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="w-full h-[270px] sm:h-[350px] md:h-[430px] lg:h-[470px] xl:h-[510px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
               />
             </div>
 
-            <span className="text-[11px] font-bold text-red-600 uppercase tracking-[0.16em]">
+            <span className="text-[10px] md:text-[11px] font-bold text-red-600 uppercase tracking-[0.16em]">
               {hero.category}
             </span>
 
-            <h1 className="font-serif text-2xl md:text-[34px] font-bold leading-[1.1] tracking-tight mt-2.5 text-gray-950 transition-colors duration-200 group-hover:text-red-600">
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-[35px] lg:text-[39px] xl:text-[42px] font-bold leading-[1.08] tracking-tight mt-2 text-gray-950 transition-colors duration-200 group-hover:text-red-600">
               {hero.title}
             </h1>
 
-            <p className="text-sm md:text-[15px] text-gray-600 leading-[1.75] mt-4 max-w-3xl">
+            <p className="text-sm md:text-[14px] lg:text-[15px] text-gray-600 leading-[1.7] mt-3.5 max-w-6xl">
               {hero.excerpt}
             </p>
 
-            <div className="flex flex-wrap items-center gap-4 mt-4 pt-3 border-t border-gray-200 text-xs text-gray-400">
-              <span className="font-medium text-gray-500">By {hero.author}</span>
+            <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-4 pt-3 border-t border-gray-200 text-[11px] text-gray-400">
+              <span className="font-medium text-gray-500">
+                By {hero.author}
+              </span>
+
+              <span className="hidden sm:block h-3 w-px bg-gray-300" />
+
               <span className="flex items-center gap-1.5">
-                <Clock size={11} strokeWidth={2.25} />
+                <Clock size={10} strokeWidth={2.25} />
                 {hero.time}
               </span>
             </div>
           </article>
 
-          <aside className="lg:border-l lg:border-gray-200 lg:pl-8">
+          {/* THREAT SIDEBAR */}
+
+          <aside className="xl:border-l xl:border-gray-300 xl:pl-7">
             <div className="flex items-center gap-2.5 border-b-2 border-black pb-2.5 mb-1">
-              <AlertTriangle size={14} strokeWidth={2} className="text-red-600" />
-              <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-gray-900">
+              <AlertTriangle
+                size={14}
+                strokeWidth={2}
+                className="text-red-600"
+              />
+
+              <h2 className="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-900">
                 Live Threat Alerts
               </h2>
             </div>
 
             <div className="divide-y divide-gray-200">
               {threatAlerts.map((a) => (
-                <div key={a.id} className="py-3.5 first:pt-0 group cursor-pointer transition-colors duration-200 hover:bg-gray-50/70 -mx-2 px-2 rounded-md">
-                  <span className={`inline-block text-[10px] font-bold tracking-wide px-2 py-0.5 rounded-md ${threatColor[a.severity]}`}>
+                <div
+                  key={a.id}
+                  className="py-4 first:pt-3 group cursor-pointer transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
+                >
+                  <span
+                    className={`inline-block text-[9px] font-bold tracking-wide px-2 py-0.5 rounded-sm ${threatColor[a.severity]}`}
+                  >
                     {a.severity}
                   </span>
 
-                  <p className="text-[13px] leading-[1.35] mt-2 font-semibold text-gray-900 transition-colors duration-200 group-hover:text-red-600">
+                  <p className="text-[13px] leading-[1.4] mt-2 font-semibold text-gray-900 transition-colors duration-200 group-hover:text-red-600">
                     {a.title}
                   </p>
 
@@ -314,10 +491,10 @@ export function CybersecurityPage() {
         </section>
 
         {/* =================================================
-            SECOND ROW OF HEROES
+            SECOND HERO ROW
         ================================================= */}
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-14 pb-14 border-b border-gray-200">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-9 mb-12 pb-12 border-b border-gray-300">
           <SplitArticle data={hero1} />
           <SplitArticle data={hero2} />
         </section>
@@ -326,16 +503,21 @@ export function CybersecurityPage() {
             AI & NATIONAL INFRASTRUCTURE
         ================================================= */}
 
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-14 pb-14 border-b border-gray-200">
-          <div className="lg:col-span-2">
+        <section className="grid grid-cols-1 xl:grid-cols-[minmax(0,2.2fr)_minmax(300px,1fr)] gap-8 lg:gap-10 mb-12 pb-12 border-b border-gray-300">
+
+          <div>
             <SH title="AI & National Infrastructure" />
 
             <div className="divide-y divide-gray-200">
               {aiInfraStories.map((s) => (
-                <div key={s.id} className="py-3.5 first:pt-0 group cursor-pointer transition-colors duration-200 hover:bg-gray-50/70 -mx-2 px-2 rounded-md">
-                  <p className="text-[14px] leading-[1.5] font-semibold text-gray-900 transition-colors duration-200 group-hover:text-red-600">
+                <div
+                  key={s.id}
+                  className="py-4 first:pt-0 group cursor-pointer transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
+                >
+                  <p className="text-[14px] md:text-[15px] leading-[1.5] font-semibold text-gray-900 transition-colors duration-200 group-hover:text-red-600">
                     {s.title}
                   </p>
+
                   <span className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-1.5">
                     <Clock size={9} strokeWidth={2.25} />
                     {s.time}
@@ -345,22 +527,35 @@ export function CybersecurityPage() {
             </div>
           </div>
 
-          <aside className="lg:border-l lg:border-gray-200 lg:pl-8">
+          {/* ZERO TRUST */}
+
+          <aside className="xl:border-l xl:border-gray-300 xl:pl-8">
             <div className="flex items-center gap-2.5 border-b-2 border-black pb-2.5 mb-3">
-              <KeyRound size={14} strokeWidth={2} className="text-red-600" />
-              <h2 className="text-[13px] font-bold uppercase tracking-[0.16em] text-gray-900">
+              <KeyRound
+                size={14}
+                strokeWidth={2}
+                className="text-red-600"
+              />
+
+              <h2 className="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-900">
                 Zero-Trust Watch
               </h2>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-4 shadow-sm">
-              <div className="flex items-center gap-2 mb-2">
-                <Bot size={14} className="text-red-600" strokeWidth={2} />
+            <div className="bg-gray-50 rounded-lg p-5 border border-gray-100">
+              <div className="flex items-center gap-2 mb-2.5">
+                <Bot
+                  size={14}
+                  className="text-red-600"
+                  strokeWidth={2}
+                />
+
                 <p className="text-[12px] font-bold uppercase tracking-wide text-gray-900">
                   {zeroTrustNote.title}
                 </p>
               </div>
-              <p className="text-[13px] leading-[1.6] text-gray-600">
+
+              <p className="text-[13px] leading-[1.65] text-gray-600">
                 {zeroTrustNote.body}
               </p>
             </div>
@@ -371,25 +566,49 @@ export function CybersecurityPage() {
             SECURITY RESPONSE MATRIX
         ================================================= */}
 
-        <section className="mb-14">
+        <section className="mb-12">
           <SH title="Security Response" />
 
-          <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
-            <table className="w-full text-sm border-collapse">
+          <div className="overflow-x-auto border border-gray-200 rounded-lg">
+            <table className="w-full text-sm border-collapse min-w-[700px]">
               <thead>
                 <tr className="border-b-2 border-gray-900">
-                  <th className="py-3 pl-4 pr-4 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">Threat</th>
-                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">Control</th>
-                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400 hidden sm:table-cell">Risk</th>
-                  <th className="pl-3 pr-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">Cadence</th>
+                  <th className="py-3 pl-4 pr-4 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+                    Threat
+                  </th>
+
+                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+                    Control
+                  </th>
+
+                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+                    Risk
+                  </th>
+
+                  <th className="pl-3 pr-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+                    Cadence
+                  </th>
                 </tr>
               </thead>
+
               <tbody className="divide-y divide-gray-100">
                 {responseMatrix.map((r) => (
-                  <tr key={r.threat} className="hover:bg-gray-50 transition-colors duration-200">
-                    <td className="py-3.5 pl-4 pr-4 font-semibold text-gray-900">{r.threat}</td>
-                    <td className="px-3 py-3.5 text-gray-600">{r.control}</td>
-                    <td className="px-3 py-3.5 text-gray-500 text-xs hidden sm:table-cell">{r.risk}</td>
+                  <tr
+                    key={r.threat}
+                    className="hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <td className="py-3.5 pl-4 pr-4 font-semibold text-gray-900">
+                      {r.threat}
+                    </td>
+
+                    <td className="px-3 py-3.5 text-gray-600">
+                      {r.control}
+                    </td>
+
+                    <td className="px-3 py-3.5 text-gray-500 text-xs">
+                      {r.risk}
+                    </td>
+
                     <td className="pl-3 pr-4 py-3.5 text-right">
                       <span className="inline-flex text-[10px] font-bold uppercase tracking-wide text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md">
                         {r.cadence}
@@ -406,25 +625,25 @@ export function CybersecurityPage() {
             LATEST CYBER INCIDENTS
         ================================================= */}
 
-        <section className="mb-14">
+        <section className="mb-12">
           <SH title="Latest Cyber Incidents" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 lg:gap-x-6 gap-y-8">
             {stories.map((s) => (
               <article key={s.id} className="group cursor-pointer">
-                <div className="overflow-hidden rounded-xl mb-3 bg-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+                <div className="overflow-hidden rounded-lg mb-3 bg-gray-100">
                   <ImageWithFallback
                     src={s.image}
                     alt={s.title}
-                    className="w-full h-[140px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                    className="w-full h-[170px] sm:h-[165px] lg:h-[180px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   />
                 </div>
 
-                <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.14em]">
+                <span className="text-[9px] font-bold text-red-600 uppercase tracking-[0.14em]">
                   {s.category}
                 </span>
 
-                <h3 className="text-sm font-bold leading-[1.3] mt-1.5 text-gray-950 transition-colors duration-200 group-hover:text-red-600">
+                <h3 className="text-[14px] md:text-[15px] font-bold leading-[1.3] mt-1.5 text-gray-950 transition-colors duration-200 group-hover:text-red-600">
                   {s.title}
                 </h3>
 
@@ -438,20 +657,26 @@ export function CybersecurityPage() {
         </section>
 
         {/* =================================================
-            POLICY + STOCKS
+            POLICY + CYBER STOCKS
         ================================================= */}
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t-2 border-black pt-10">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 border-t-2 border-black pt-9">
 
           {/* POLICY */}
+
           <div>
             <SH title="Policy & Defense" />
+
             <div className="divide-y divide-gray-200">
               {defenseNews.map((n) => (
-                <div key={n.id} className="py-3.5 first:pt-0 group cursor-pointer transition-colors duration-200 hover:bg-gray-50/70 -mx-2 px-2 rounded-md">
-                  <p className="text-sm font-semibold leading-[1.5] text-gray-900 transition-colors duration-200 group-hover:text-red-600">
+                <div
+                  key={n.id}
+                  className="py-4 first:pt-0 group cursor-pointer transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
+                >
+                  <p className="text-sm md:text-[15px] font-semibold leading-[1.5] text-gray-900 transition-colors duration-200 group-hover:text-red-600">
                     {n.title}
                   </p>
+
                   <span className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-1.5">
                     <Clock size={9} strokeWidth={2.25} />
                     {n.time}
@@ -462,19 +687,36 @@ export function CybersecurityPage() {
           </div>
 
           {/* STOCKS */}
+
           <div>
             <SH title="Cyber Stocks" />
+
             <div className="divide-y divide-gray-200">
               {marketData.map((m) => (
-                <div key={m.ticker} className="py-3.5 first:pt-0 flex items-center justify-between transition-colors duration-200 hover:bg-gray-50/70 -mx-2 px-2 rounded-md">
+                <div
+                  key={m.ticker}
+                  className="py-4 first:pt-0 flex items-center justify-between transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
+                >
                   <div>
-                    <p className="text-sm font-semibold text-gray-900">{m.company}</p>
-                    <p className="text-[10px] text-gray-400 uppercase tracking-wide mt-0.5">{m.ticker}</p>
+                    <p className="text-sm md:text-[15px] font-semibold text-gray-900">
+                      {m.company}
+                    </p>
+
+                    <p className="text-[10px] text-gray-400 uppercase tracking-wide mt-0.5">
+                      {m.ticker}
+                    </p>
                   </div>
 
                   <div className="text-right">
-                    <p className="text-sm font-semibold tabular-nums text-gray-900">{m.price}</p>
-                    <p className={`text-[11px] font-bold tabular-nums mt-0.5 ${m.up ? "text-green-700" : "text-red-600"}`}>
+                    <p className="text-sm font-semibold tabular-nums text-gray-900">
+                      {m.price}
+                    </p>
+
+                    <p
+                      className={`text-[11px] font-bold tabular-nums mt-0.5 ${
+                        m.up ? "text-green-700" : "text-red-600"
+                      }`}
+                    >
                       {m.change}
                     </p>
                   </div>
@@ -483,7 +725,6 @@ export function CybersecurityPage() {
             </div>
           </div>
         </section>
-
       </div>
     </main>
   );
