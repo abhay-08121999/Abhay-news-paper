@@ -1,12 +1,5 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import {
-  Clock,
-  Shield,
-  AlertTriangle,
-  ChevronRight,
-  Bot,
-  KeyRound,
-} from "lucide-react";
+import { Clock, ChevronRight } from "lucide-react";
 import CS2Img from "../../../imports/CS2.png";
 import CS3Img from "../../../imports/CS3.png";
 
@@ -14,23 +7,25 @@ import CS3Img from "../../../imports/CS3.png";
    SECTION HEADER
 ========================================================= */
 
-function SH({ title, id }: { title: string; id?: string }) {
+function SectionHeader({
+  title,
+  id,
+}: {
+  title: string;
+  id?: string;
+}) {
   return (
     <div
       id={id}
-      className="flex items-center justify-between border-b-2 border-black pb-2.5 mb-5"
+      className="flex items-center justify-between border-b-2 border-[#17140F] pb-2.5 mb-5"
     >
-      <div className="flex items-center gap-2.5">
-        <span className="h-1.5 w-1.5 rounded-full bg-red-600 shrink-0" />
+      <h2 className="font-serif text-[21px] md:text-[24px] font-bold text-[#17140F]">
+        {title}
+      </h2>
 
-        <h2 className="text-[13px] md:text-sm font-bold uppercase tracking-[0.16em] text-gray-900">
-          {title}
-        </h2>
-      </div>
-
-      <button className="text-[11px] font-semibold text-gray-400 hover:text-red-600 transition-colors duration-200 flex items-center gap-1">
+      <button className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-gray-500 hover:text-red-600 transition-colors">
         See All
-        <ChevronRight size={12} strokeWidth={2.25} />
+        <ChevronRight size={12} />
       </button>
     </div>
   );
@@ -115,13 +110,6 @@ const threatAlerts = [
     time: "10 hrs ago",
   },
 ];
-
-const threatColor: Record<string, string> = {
-  CRITICAL: "bg-red-600 text-white",
-  HIGH: "bg-orange-500 text-white",
-  MEDIUM: "bg-amber-400 text-black",
-  LOW: "bg-blue-500 text-white",
-};
 
 /* =========================================================
    LATEST STORIES
@@ -257,7 +245,8 @@ const responseMatrix = [
 const defenseNews = [
   {
     id: 1,
-    title: "Pentagon's Cyber Command Gets $8.7B Budget Increase for FY2027",
+    title:
+      "Pentagon's Cyber Command Gets $8.7B Budget Increase for FY2027",
     time: "2 hrs ago",
   },
   {
@@ -329,41 +318,45 @@ const marketData = [
 ];
 
 /* =========================================================
-   SPLIT ARTICLE
+   SECONDARY ARTICLE
 ========================================================= */
 
-function SplitArticle({ data }: { data: typeof hero1 }) {
+function SecondaryArticle({
+  data,
+}: {
+  data: typeof hero1;
+}) {
   return (
     <article className="group cursor-pointer">
-      <div className="overflow-hidden rounded-lg mb-3 bg-gray-100 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+      <div className="overflow-hidden rounded-md bg-gray-100 mb-3">
         <ImageWithFallback
           src={data.image}
           alt={data.title}
-          className="w-full h-[210px] sm:h-[230px] lg:h-[270px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          className="w-full h-[220px] md:h-[260px] lg:h-[300px] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
         />
       </div>
 
-      <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.14em]">
+      <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-red-600">
         {data.category}
       </span>
 
-      <h2 className="mt-1.5 font-serif text-xl md:text-[25px] font-bold leading-[1.15] text-gray-950 transition-colors duration-200 group-hover:text-red-600">
+      <h2 className="mt-1.5 font-serif text-[20px] md:text-[24px] lg:text-[26px] font-bold leading-[1.12] text-[#17140F] group-hover:text-red-600 transition-colors">
         {data.title}
       </h2>
 
-      <p className="text-[13px] text-gray-600 leading-[1.65] mt-2.5">
+      <p className="mt-2.5 text-[12px] md:text-[13px] leading-[1.6] text-[#55534C]">
         {data.excerpt}
       </p>
 
-      <div className="flex flex-wrap items-center gap-3 mt-3 text-[11px] text-gray-400">
+      <div className="flex items-center gap-3 mt-3 text-[10px] text-gray-400">
         <span className="font-medium text-gray-500">
           By {data.author}
         </span>
 
-        <span className="hidden sm:block h-3 w-px bg-gray-300" />
+        <span className="h-3 w-px bg-gray-300" />
 
         <span className="flex items-center gap-1.5">
-          <Clock size={10} strokeWidth={2.25} />
+          <Clock size={9} />
           {data.time}
         </span>
       </div>
@@ -372,359 +365,585 @@ function SplitArticle({ data }: { data: typeof hero1 }) {
 }
 
 /* =========================================================
+   SPONSORSHIP CARDS
+========================================================= */
+
+const sponsorships = [
+  "Global Finance Summit 2026",
+  "Tech Leaders Forum",
+  "Energy Transition Conference",
+  "AI & Business World",
+];
+
+/* =========================================================
    PAGE
 ========================================================= */
 
 export function CybersecurityPage() {
   return (
-    <main className="w-full min-h-screen bg-white text-gray-900 antialiased">
+    <main className="w-full bg-white text-[#17140F] antialiased">
+
       {/* =====================================================
-          FULL WIDTH CONTENT WRAPPER
+          MAIN FULL WIDTH CONTAINER
       ===================================================== */}
 
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-7 md:py-9 lg:py-10">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14">
 
         {/* =================================================
-            PAGE HEADER
+            PAGE TITLE
         ================================================= */}
 
-        <header className="border-t-[3px] border-red-600 pt-4 pb-5 mb-8">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-full bg-black text-white shrink-0">
-              <Shield size={19} strokeWidth={1.8} />
-            </div>
+        <header className="pt-5 md:pt-7 pb-4">
+          <div className="border-t-[3px] border-red-600 pt-4">
 
-            <div>
-              <p className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.22em] text-red-600">
-                Security Intelligence
-              </p>
+            <h1 className="font-serif text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-bold leading-none">
+              Cybersecurity
+            </h1>
 
-              <h1 className="mt-0.5 font-serif text-3xl md:text-[40px] lg:text-[44px] font-bold tracking-tight leading-tight">
-                Cybersecurity
-              </h1>
-            </div>
+            <p className="mt-2 text-[12px] md:text-[13px] text-[#77736D]">
+              Digital threats, enterprise security, nation-state actors, and data protection.
+            </p>
+
           </div>
         </header>
 
         {/* =================================================
-            HERO + THREAT ALERTS
+            TOP ADVERTISEMENT
         ================================================= */}
 
-        <section className="grid grid-cols-1 xl:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)] gap-7 lg:gap-9 mb-12 pb-12 border-b border-gray-300">
+        <div className="w-full h-[70px] md:h-[78px] bg-[#17313A] flex items-center justify-center my-4 md:my-5 relative overflow-hidden">
 
-          {/* HERO */}
+          <div className="text-center text-white">
+            <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.22em] text-cyan-300">
+              GOOGLE ADSENSE
+            </p>
+
+            <p className="mt-1 text-[13px] md:text-[15px] font-semibold">
+              Advertisement Space
+            </p>
+
+            <p className="mt-0.5 text-[8px] text-cyan-200">
+              728 × 90 • Leaderboard
+            </p>
+          </div>
+
+          <span className="absolute top-1 right-1 text-[7px] bg-white/80 text-gray-500 px-1.5 py-0.5">
+            Advertisement
+          </span>
+
+        </div>
+
+        {/* =================================================
+            MAIN HERO + MORE STORIES
+        ================================================= */}
+
+        <section className="grid grid-cols-1 xl:grid-cols-[minmax(0,3.25fr)_minmax(280px,1fr)] gap-5 lg:gap-7 mt-4 md:mt-6">
+
+          {/* =================================================
+              MAIN HERO
+          ================================================= */}
 
           <article className="group cursor-pointer">
-            <div className="overflow-hidden rounded-lg bg-gray-100 mb-4">
+
+            <div className="overflow-hidden rounded-lg bg-gray-100">
               <ImageWithFallback
                 src={hero.image}
                 alt={hero.title}
-                className="w-full h-[270px] sm:h-[350px] md:h-[430px] lg:h-[470px] xl:h-[510px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                className="w-full h-[260px] sm:h-[350px] md:h-[440px] lg:h-[500px] xl:h-[520px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
               />
             </div>
 
-            <span className="text-[10px] md:text-[11px] font-bold text-red-600 uppercase tracking-[0.16em]">
-              {hero.category}
-            </span>
+            <div className="pt-3">
 
-            <h1 className="font-serif text-2xl sm:text-3xl md:text-[35px] lg:text-[39px] xl:text-[42px] font-bold leading-[1.08] tracking-tight mt-2 text-gray-950 transition-colors duration-200 group-hover:text-red-600">
-              {hero.title}
-            </h1>
-
-            <p className="text-sm md:text-[14px] lg:text-[15px] text-gray-600 leading-[1.7] mt-3.5 max-w-6xl">
-              {hero.excerpt}
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-4 pt-3 border-t border-gray-200 text-[11px] text-gray-400">
-              <span className="font-medium text-gray-500">
-                By {hero.author}
+              <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.14em] text-red-600">
+                {hero.category}
               </span>
 
-              <span className="hidden sm:block h-3 w-px bg-gray-300" />
+              <h2 className="mt-1.5 font-serif text-[25px] sm:text-[29px] md:text-[33px] lg:text-[36px] xl:text-[38px] font-bold leading-[1.08] tracking-tight text-[#17140F] group-hover:text-red-600 transition-colors">
+                {hero.title}
+              </h2>
 
-              <span className="flex items-center gap-1.5">
-                <Clock size={10} strokeWidth={2.25} />
-                {hero.time}
-              </span>
+              <p className="mt-2.5 text-[12px] md:text-[13px] lg:text-[14px] leading-[1.6] text-[#66625D] max-w-[1100px]">
+                {hero.excerpt}
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 mt-3 text-[10px] text-gray-400">
+                <span className="font-medium text-gray-500">
+                  By {hero.author}
+                </span>
+
+                <span className="h-3 w-px bg-gray-300" />
+
+                <span className="flex items-center gap-1.5">
+                  <Clock size={9} />
+                  {hero.time}
+                </span>
+              </div>
+
             </div>
           </article>
 
-          {/* THREAT SIDEBAR */}
+          {/* =================================================
+              RIGHT SIDEBAR
+          ================================================= */}
 
-          <aside className="xl:border-l xl:border-gray-300 xl:pl-7">
-            <div className="flex items-center gap-2.5 border-b-2 border-black pb-2.5 mb-1">
-              <AlertTriangle
-                size={14}
-                strokeWidth={2}
-                className="text-red-600"
-              />
+          <aside className="xl:border-l xl:border-gray-300 xl:pl-6">
 
-              <h2 className="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-900">
-                Live Threat Alerts
-              </h2>
+            {/* SPONSORED BOX */}
+
+            <div className="border border-gray-200 rounded-md overflow-hidden mb-5">
+
+              <div className="px-3 py-2 bg-[#F7F4EC]">
+                <span className="text-[8px] font-bold uppercase tracking-[0.14em] text-gray-500">
+                  Sponsored Content
+                </span>
+              </div>
+
+              <div className="h-[150px] md:h-[170px] bg-[#101731] flex items-center justify-center text-center px-4">
+
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-yellow-400">
+                    Featured Partner
+                  </p>
+
+                  <p className="text-white text-[14px] font-semibold mt-2">
+                    Your Ad Here
+                  </p>
+
+                  <p className="text-gray-300 text-[9px] mt-1">
+                    Reach 2M+ business readers
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* MORE STORIES */}
+
+            <div className="border-b-2 border-[#17140F] pb-2 mb-1">
+              <h3 className="font-bold text-[14px] uppercase tracking-wide">
+                More Stories
+              </h3>
             </div>
 
             <div className="divide-y divide-gray-200">
-              {threatAlerts.map((a) => (
-                <div
-                  key={a.id}
-                  className="py-4 first:pt-3 group cursor-pointer transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
+
+              {threatAlerts.slice(0, 4).map((story) => (
+                <article
+                  key={story.id}
+                  className="py-3 group cursor-pointer"
                 >
+
                   <span
-                    className={`inline-block text-[9px] font-bold tracking-wide px-2 py-0.5 rounded-sm ${threatColor[a.severity]}`}
+                    className={`inline-block text-[7px] font-bold uppercase tracking-wider px-1.5 py-0.5 ${
+                      story.severity === "CRITICAL"
+                        ? "bg-red-600 text-white"
+                        : story.severity === "HIGH"
+                        ? "bg-orange-500 text-white"
+                        : "bg-amber-400 text-black"
+                    }`}
                   >
-                    {a.severity}
+                    {story.severity}
                   </span>
 
-                  <p className="text-[13px] leading-[1.4] mt-2 font-semibold text-gray-900 transition-colors duration-200 group-hover:text-red-600">
-                    {a.title}
-                  </p>
+                  <h4 className="mt-1.5 text-[11px] md:text-[12px] font-bold leading-[1.35] text-gray-900 group-hover:text-red-600 transition-colors">
+                    {story.title}
+                  </h4>
 
-                  <span className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-1.5">
-                    <Clock size={9} strokeWidth={2.25} />
-                    {a.time}
+                  <span className="flex items-center gap-1 mt-1 text-[8px] text-gray-400">
+                    <Clock size={8} />
+                    {story.time}
                   </span>
-                </div>
+
+                </article>
               ))}
+
             </div>
+
           </aside>
+
         </section>
 
         {/* =================================================
-            SECOND HERO ROW
+            LATEST CYBERSECURITY NEWS
         ================================================= */}
 
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-9 mb-12 pb-12 border-b border-gray-300">
-          <SplitArticle data={hero1} />
-          <SplitArticle data={hero2} />
+        <section className="mt-12 md:mt-14">
+
+          <SectionHeader title="Latest Cybersecurity News" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 lg:gap-x-7 gap-y-8">
+
+            {stories.map((story) => (
+              <article
+                key={story.id}
+                className="group cursor-pointer"
+              >
+
+                <div className="overflow-hidden rounded-md bg-gray-100">
+                  <ImageWithFallback
+                    src={story.image}
+                    alt={story.title}
+                    className="w-full h-[180px] sm:h-[190px] md:h-[205px] lg:h-[215px] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                </div>
+
+                <div className="pt-2.5">
+
+                  <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-red-600">
+                    {story.category}
+                  </span>
+
+                  <h3 className="mt-1.5 font-serif text-[17px] md:text-[18px] font-bold leading-[1.18] text-[#17140F] group-hover:text-red-600 transition-colors">
+                    {story.title}
+                  </h3>
+
+                  <div className="flex items-center gap-1.5 mt-2 text-[9px] text-gray-400">
+                    <Clock size={8} />
+                    {story.time}
+                  </div>
+
+                </div>
+
+              </article>
+            ))}
+
+          </div>
+
+        </section>
+
+        {/* =================================================
+            SECOND ADVERTISEMENT
+        ================================================= */}
+
+        <div className="w-full h-[68px] md:h-[76px] bg-[#17313A] flex items-center justify-center my-10 md:my-12 relative">
+
+          <div className="text-center text-white">
+
+            <p className="text-[8px] font-bold uppercase tracking-[0.22em] text-cyan-300">
+              GOOGLE ADSENSE
+            </p>
+
+            <p className="mt-1 text-[12px] md:text-[14px] font-semibold">
+              Business Solutions | Powered by The Pride Times
+            </p>
+
+            <p className="text-[8px] text-cyan-200 mt-0.5">
+              728 × 90 • Leaderboard
+            </p>
+
+          </div>
+
+          <span className="absolute top-1 right-1 text-[7px] bg-white/80 text-gray-500 px-1.5 py-0.5">
+            Advertisement
+          </span>
+
+        </div>
+
+        {/* =================================================
+            SPONSORSHIP
+        ================================================= */}
+
+        <section className="bg-[#F7F7F5] rounded-lg border border-gray-100 p-4 md:p-5 mb-10">
+
+          <div className="mb-4">
+
+            <span className="text-[8px] font-bold uppercase tracking-[0.15em] text-gray-500 border border-gray-200 bg-white px-2 py-1 rounded-sm">
+              Sponsorship
+            </span>
+
+            <span className="ml-2 text-[9px] text-gray-400">
+              Presented by our partners
+            </span>
+
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+
+            {sponsorships.map((item) => (
+              <div
+                key={item}
+                className="bg-white border border-gray-200 rounded-md min-h-[90px] flex flex-col items-center justify-center text-center px-3"
+              >
+
+                <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center mb-2">
+                  <span className="text-red-500 text-sm font-bold">
+                    ✦
+                  </span>
+                </div>
+
+                <p className="text-[10px] md:text-[11px] font-bold text-gray-900">
+                  {item}
+                </p>
+
+                <p className="text-[8px] text-gray-400 mt-1">
+                  Sponsored Event
+                </p>
+
+              </div>
+            ))}
+
+          </div>
+
         </section>
 
         {/* =================================================
             AI & NATIONAL INFRASTRUCTURE
         ================================================= */}
 
-        <section className="grid grid-cols-1 xl:grid-cols-[minmax(0,2.2fr)_minmax(300px,1fr)] gap-8 lg:gap-10 mb-12 pb-12 border-b border-gray-300">
+        <section className="grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-8 md:gap-10 border-t-2 border-black pt-8 mb-12">
 
           <div>
-            <SH title="AI & National Infrastructure" />
+
+            <SectionHeader title="AI & National Infrastructure" />
 
             <div className="divide-y divide-gray-200">
-              {aiInfraStories.map((s) => (
-                <div
-                  key={s.id}
-                  className="py-4 first:pt-0 group cursor-pointer transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
+
+              {aiInfraStories.map((story) => (
+                <article
+                  key={story.id}
+                  className="py-4 first:pt-0 group cursor-pointer"
                 >
-                  <p className="text-[14px] md:text-[15px] leading-[1.5] font-semibold text-gray-900 transition-colors duration-200 group-hover:text-red-600">
-                    {s.title}
+
+                  <p className="text-[13px] md:text-[14px] font-semibold leading-[1.5] text-gray-900 group-hover:text-red-600 transition-colors">
+                    {story.title}
                   </p>
 
-                  <span className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-1.5">
-                    <Clock size={9} strokeWidth={2.25} />
-                    {s.time}
+                  <span className="flex items-center gap-1.5 mt-1.5 text-[9px] text-gray-400">
+                    <Clock size={8} />
+                    {story.time}
                   </span>
-                </div>
+
+                </article>
               ))}
+
             </div>
+
           </div>
 
           {/* ZERO TRUST */}
 
-          <aside className="xl:border-l xl:border-gray-300 xl:pl-8">
-            <div className="flex items-center gap-2.5 border-b-2 border-black pb-2.5 mb-3">
-              <KeyRound
-                size={14}
-                strokeWidth={2}
-                className="text-red-600"
-              />
+          <aside className="lg:border-l lg:border-gray-300 lg:pl-7">
 
-              <h2 className="text-[12px] font-bold uppercase tracking-[0.15em] text-gray-900">
+            <div className="border-b-2 border-black pb-2 mb-4">
+
+              <h3 className="font-bold text-[13px] uppercase tracking-wide">
                 Zero-Trust Watch
-              </h2>
+              </h3>
+
             </div>
 
-            <div className="bg-gray-50 rounded-lg p-5 border border-gray-100">
-              <div className="flex items-center gap-2 mb-2.5">
-                <Bot
-                  size={14}
-                  className="text-red-600"
-                  strokeWidth={2}
-                />
+            <div className="bg-gray-50 border border-gray-100 rounded-md p-5">
 
-                <p className="text-[12px] font-bold uppercase tracking-wide text-gray-900">
-                  {zeroTrustNote.title}
-                </p>
-              </div>
+              <h4 className="font-bold text-[13px] leading-[1.35]">
+                {zeroTrustNote.title}
+              </h4>
 
-              <p className="text-[13px] leading-[1.65] text-gray-600">
+              <p className="text-[12px] leading-[1.65] text-gray-600 mt-3">
                 {zeroTrustNote.body}
               </p>
+
             </div>
+
           </aside>
+
         </section>
 
         {/* =================================================
-            SECURITY RESPONSE MATRIX
+            SECURITY RESPONSE
         ================================================= */}
 
         <section className="mb-12">
-          <SH title="Security Response" />
 
-          <div className="overflow-x-auto border border-gray-200 rounded-lg">
-            <table className="w-full text-sm border-collapse min-w-[700px]">
+          <SectionHeader title="Security Response" />
+
+          <div className="overflow-x-auto border border-gray-200 rounded-md">
+
+            <table className="w-full min-w-[720px] border-collapse">
+
               <thead>
-                <tr className="border-b-2 border-gray-900">
-                  <th className="py-3 pl-4 pr-4 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+
+                <tr className="border-b-2 border-black">
+
+                  <th className="text-left px-4 py-3 text-[9px] uppercase tracking-wider text-gray-400">
                     Threat
                   </th>
 
-                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+                  <th className="text-left px-3 py-3 text-[9px] uppercase tracking-wider text-gray-400">
                     Control
                   </th>
 
-                  <th className="px-3 py-3 text-left text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+                  <th className="text-left px-3 py-3 text-[9px] uppercase tracking-wider text-gray-400">
                     Risk
                   </th>
 
-                  <th className="pl-3 pr-4 py-3 text-right text-[10px] font-bold uppercase tracking-[0.14em] text-gray-400">
+                  <th className="text-right px-4 py-3 text-[9px] uppercase tracking-wider text-gray-400">
                     Cadence
                   </th>
+
                 </tr>
+
               </thead>
 
               <tbody className="divide-y divide-gray-100">
-                {responseMatrix.map((r) => (
+
+                {responseMatrix.map((item) => (
                   <tr
-                    key={r.threat}
-                    className="hover:bg-gray-50 transition-colors duration-200"
+                    key={item.threat}
+                    className="hover:bg-gray-50 transition-colors"
                   >
-                    <td className="py-3.5 pl-4 pr-4 font-semibold text-gray-900">
-                      {r.threat}
+
+                    <td className="px-4 py-3.5 text-[12px] font-semibold">
+                      {item.threat}
                     </td>
 
-                    <td className="px-3 py-3.5 text-gray-600">
-                      {r.control}
+                    <td className="px-3 py-3.5 text-[12px] text-gray-600">
+                      {item.control}
                     </td>
 
-                    <td className="px-3 py-3.5 text-gray-500 text-xs">
-                      {r.risk}
+                    <td className="px-3 py-3.5 text-[11px] text-gray-500">
+                      {item.risk}
                     </td>
 
-                    <td className="pl-3 pr-4 py-3.5 text-right">
-                      <span className="inline-flex text-[10px] font-bold uppercase tracking-wide text-gray-500 bg-gray-100 px-2.5 py-1 rounded-md">
-                        {r.cadence}
+                    <td className="px-4 py-3.5 text-right">
+
+                      <span className="inline-block bg-gray-100 rounded px-2 py-1 text-[9px] font-bold uppercase text-gray-500">
+                        {item.cadence}
                       </span>
+
                     </td>
+
                   </tr>
                 ))}
+
               </tbody>
+
             </table>
+
           </div>
+
         </section>
 
         {/* =================================================
-            LATEST CYBER INCIDENTS
+            POLICY + STOCKS
         ================================================= */}
 
-        <section className="mb-12">
-          <SH title="Latest Cyber Incidents" />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 lg:gap-x-6 gap-y-8">
-            {stories.map((s) => (
-              <article key={s.id} className="group cursor-pointer">
-                <div className="overflow-hidden rounded-lg mb-3 bg-gray-100">
-                  <ImageWithFallback
-                    src={s.image}
-                    alt={s.title}
-                    className="w-full h-[170px] sm:h-[165px] lg:h-[180px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
-                  />
-                </div>
-
-                <span className="text-[9px] font-bold text-red-600 uppercase tracking-[0.14em]">
-                  {s.category}
-                </span>
-
-                <h3 className="text-[14px] md:text-[15px] font-bold leading-[1.3] mt-1.5 text-gray-950 transition-colors duration-200 group-hover:text-red-600">
-                  {s.title}
-                </h3>
-
-                <span className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-2">
-                  <Clock size={9} strokeWidth={2.25} />
-                  {s.time}
-                </span>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* =================================================
-            POLICY + CYBER STOCKS
-        ================================================= */}
-
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 border-t-2 border-black pt-9">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 border-t-2 border-black pt-8 mb-12">
 
           {/* POLICY */}
 
           <div>
-            <SH title="Policy & Defense" />
+
+            <SectionHeader title="Policy & Defense" />
 
             <div className="divide-y divide-gray-200">
-              {defenseNews.map((n) => (
-                <div
-                  key={n.id}
-                  className="py-4 first:pt-0 group cursor-pointer transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
-                >
-                  <p className="text-sm md:text-[15px] font-semibold leading-[1.5] text-gray-900 transition-colors duration-200 group-hover:text-red-600">
-                    {n.title}
-                  </p>
 
-                  <span className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-1.5">
-                    <Clock size={9} strokeWidth={2.25} />
-                    {n.time}
+              {defenseNews.map((item) => (
+                <article
+                  key={item.id}
+                  className="py-4 first:pt-0 group cursor-pointer"
+                >
+
+                  <h3 className="text-[13px] md:text-[14px] font-semibold leading-[1.45] group-hover:text-red-600 transition-colors">
+                    {item.title}
+                  </h3>
+
+                  <span className="flex items-center gap-1.5 mt-1.5 text-[9px] text-gray-400">
+                    <Clock size={8} />
+                    {item.time}
                   </span>
-                </div>
+
+                </article>
               ))}
+
             </div>
+
           </div>
 
           {/* STOCKS */}
 
           <div>
-            <SH title="Cyber Stocks" />
+
+            <SectionHeader title="Cyber Stocks" />
 
             <div className="divide-y divide-gray-200">
-              {marketData.map((m) => (
+
+              {marketData.map((stock) => (
                 <div
-                  key={m.ticker}
-                  className="py-4 first:pt-0 flex items-center justify-between transition-colors duration-200 hover:bg-gray-50 -mx-2 px-2 rounded-md"
+                  key={stock.ticker}
+                  className="py-4 first:pt-0 flex items-center justify-between"
                 >
+
                   <div>
-                    <p className="text-sm md:text-[15px] font-semibold text-gray-900">
-                      {m.company}
+
+                    <p className="text-[13px] md:text-[14px] font-semibold">
+                      {stock.company}
                     </p>
 
-                    <p className="text-[10px] text-gray-400 uppercase tracking-wide mt-0.5">
-                      {m.ticker}
+                    <p className="text-[9px] text-gray-400 uppercase tracking-wider mt-0.5">
+                      {stock.ticker}
                     </p>
+
                   </div>
 
                   <div className="text-right">
-                    <p className="text-sm font-semibold tabular-nums text-gray-900">
-                      {m.price}
+
+                    <p className="text-[13px] font-semibold">
+                      {stock.price}
                     </p>
 
                     <p
-                      className={`text-[11px] font-bold tabular-nums mt-0.5 ${
-                        m.up ? "text-green-700" : "text-red-600"
+                      className={`text-[10px] font-bold mt-0.5 ${
+                        stock.up
+                          ? "text-green-700"
+                          : "text-red-600"
                       }`}
                     >
-                      {m.change}
+                      {stock.change}
                     </p>
+
                   </div>
+
                 </div>
               ))}
+
             </div>
+
           </div>
+
         </section>
+
+        {/* =================================================
+            NEWSLETTER
+        ================================================= */}
+
+        <section className="bg-[#071A2D] rounded-lg px-5 sm:px-8 md:px-12 py-9 md:py-10 text-center mb-14">
+
+          <h2 className="font-serif text-[24px] md:text-[28px] font-bold text-white">
+            Stay Ahead with The Pride Times
+          </h2>
+
+          <p className="text-[11px] md:text-[12px] text-gray-300 mt-2">
+            Daily briefings on Cybersecurity delivered to your inbox.
+          </p>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-2 mt-5 max-w-[520px] mx-auto">
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="h-10 flex-1 rounded-md border border-white/10 bg-white/10 px-3 text-[11px] text-white placeholder:text-gray-400 outline-none focus:border-red-500"
+            />
+
+            <button className="h-10 px-5 rounded-md bg-red-600 hover:bg-red-700 text-white text-[11px] font-bold transition-colors">
+              Subscribe Free
+            </button>
+
+          </div>
+
+        </section>
+
       </div>
     </main>
   );
