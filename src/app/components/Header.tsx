@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import {
   Search,
-  Menu,
   X,
   User,
   ChevronDown,
@@ -69,7 +68,7 @@ export function Header() {
   }, [editionOpen]);
 
   /* =========================================================
-     CLOSE SEARCH DROPDOWN WHEN CLICKING OUTSIDE
+     SEARCH OUTSIDE CLICK HANDLER
   ========================================================= */
 
   useEffect(() => {
@@ -78,8 +77,7 @@ export function Header() {
         searchBoxRef.current &&
         !searchBoxRef.current.contains(e.target as Node)
       ) {
-        /* Search input remains visible.
-           Only the result dropdown closes naturally. */
+        // Search input intentionally remains visible.
       }
     };
 
@@ -180,13 +178,16 @@ export function Header() {
 
   return (
     <header className="w-full bg-white z-50 relative">
+
       {/* =====================================================
           BLACK PRIMARY NAVIGATION
       ===================================================== */}
 
       <div className="pt-top-nav hidden lg:block">
         <div className="pt-container h-full flex items-center justify-between">
+
           <nav className="flex items-center gap-6 h-full">
+
             {/* Live TV */}
 
             <a
@@ -219,17 +220,23 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Right side */}
+          {/* =================================================
+              RIGHT SIDE
+          ================================================= */}
 
           <div className="hidden lg:flex items-center gap-4">
+
+            {/* Digital Edition */}
+
             <Link
               to="/magazine"
               className="pt-focusable flex items-center gap-1"
             >
               <BookOpen size={12} />
-
               Digital Edition
             </Link>
+
+            {/* Signed in user */}
 
             {isSignedIn && (
               <Link
@@ -247,9 +254,12 @@ export function Header() {
               </Link>
             )}
 
-            {/* Edition */}
+            {/* =================================================
+                EDITION SELECTOR
+            ================================================= */}
 
             <div className="relative">
+
               <button
                 className="pt-edition-btn flex items-center gap-1"
                 onClick={() => setEditionOpen(!editionOpen)}
@@ -262,6 +272,7 @@ export function Header() {
 
               {editionOpen && (
                 <div className="absolute right-0 top-full mt-0 w-44 bg-black border border-gray-800 shadow-lg z-[100] py-1">
+
                   {editions.map((item) => (
                     <button
                       key={item}
@@ -274,9 +285,12 @@ export function Header() {
                       {item}
                     </button>
                   ))}
+
                 </div>
               )}
+
             </div>
+
           </div>
         </div>
       </div>
@@ -286,7 +300,9 @@ export function Header() {
       ===================================================== */}
 
       <div className="pt-brand-header">
+
         <div className="pt-container min-w-0 flex items-center justify-between gap-3 py-5 sm:py-6">
+
           {/* =================================================
               LOGO
           ================================================= */}
@@ -296,6 +312,7 @@ export function Header() {
             className="flex items-center min-w-0 flex-shrink"
           >
             <div className="block min-w-0">
+
               <div className="pt-logo text-3xl sm:text-[38px] lg:text-[46px] xl:text-[52px] whitespace-nowrap">
                 THE{" "}
                 <span className="pt-logo-accent">
@@ -308,6 +325,7 @@ export function Header() {
                 The Global Voice of Innovation, Leadership &amp;
                 Success
               </div>
+
             </div>
           </Link>
 
@@ -316,10 +334,14 @@ export function Header() {
           ================================================= */}
 
           <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-            {/* User menu */}
+
+            {/* =================================================
+                USER MENU
+            ================================================= */}
 
             {isSignedIn ? (
               <div className="relative">
+
                 <button
                   onClick={() =>
                     setUserMenuOpen(!userMenuOpen)
@@ -340,7 +362,9 @@ export function Header() {
 
                 {userMenuOpen && (
                   <div className="absolute right-0 top-full mt-1 w-52 bg-white border border-gray-200 rounded shadow-lg z-[100]">
+
                     <div className="px-4 py-3 border-b border-gray-100">
+
                       <p className="text-sm">
                         {user?.name}
                       </p>
@@ -352,13 +376,14 @@ export function Header() {
                       {isPremium && (
                         <span className="inline-flex items-center gap-1 text-xs text-yellow-700 bg-yellow-100 px-1.5 py-0.5 rounded mt-1">
                           <Crown size={10} />
-
                           Premium
                         </span>
                       )}
+
                     </div>
 
                     <div className="py-1">
+
                       <Link
                         to="/dashboard"
                         className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition-colors"
@@ -397,12 +422,16 @@ export function Header() {
 
                         Sign Out
                       </button>
+
                     </div>
                   </div>
                 )}
+
               </div>
             ) : (
               <>
+                {/* Sign In */}
+
                 <Link
                   to="/login"
                   className="pt-account-btn hidden md:flex items-center justify-center transition-colors hover:bg-gray-50"
@@ -414,6 +443,8 @@ export function Header() {
                   />
                 </Link>
 
+                {/* Subscribe */}
+
                 <Link
                   to="/signup"
                   className="pt-subscribe-btn hidden md:inline-flex items-center"
@@ -423,41 +454,77 @@ export function Header() {
               </>
             )}
 
-            {/* Mobile menu button */}
+            {/* =================================================
+                MOBILE MENU BUTTON
+
+                Designed to match the provided screenshot:
+                - White background
+                - Gray border
+                - Rounded corners
+                - Bold "Menu"
+                - Dropdown arrow
+            ================================================= */}
 
             <button
-              className="lg:hidden p-2 flex-shrink-0"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
+              className="
+                lg:hidden
+                flex
+                items-center
+                justify-center
+                gap-1.5
+                h-10
+                px-4
+                bg-white
+                border
+                border-gray-300
+                rounded-md
+                text-black
+                text-sm
+                font-bold
+                whitespace-nowrap
+                hover:bg-gray-50
+                transition-colors
+                flex-shrink-0
+              "
             >
-              {mobileOpen ? (
-                <X size={20} />
-              ) : (
-                <Menu size={20} />
-              )}
+              <span>Menu</span>
+
+              <ChevronDown
+                size={14}
+                strokeWidth={2}
+                className={`transition-transform duration-200 ${
+                  mobileOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
+
           </div>
         </div>
       </div>
 
       {/* =====================================================
           FULL WIDTH SEARCH ROW
-          
-          IMPORTANT:
-          Search is now completely separated from the logo
-          and right-side controls. This prevents overlap.
+
+          Search is completely separated from the logo
+          and controls so it cannot overlap with them.
       ===================================================== */}
 
       <div className="w-full border-t border-gray-100 border-b border-gray-200 bg-white">
+
         <div className="pt-container py-2.5 sm:py-3">
+
           <div
             ref={searchBoxRef}
             className="relative w-full"
           >
+
             {/* Search input */}
 
             <div className="w-full h-10 sm:h-11 border border-gray-200 rounded-md bg-white flex items-center px-3 sm:px-4 gap-2 shadow-sm focus-within:border-gray-400 focus-within:ring-1 focus-within:ring-gray-200 transition-all">
+
               <Search
                 size={16}
                 className="text-gray-400 flex-shrink-0"
@@ -495,14 +562,16 @@ export function Header() {
                   />
                 </button>
               )}
+
             </div>
 
             {/* =================================================
-                FULL WIDTH SEARCH RESULTS
+                SEARCH RESULTS
             ================================================= */}
 
             {searchQuery.trim() && (
               <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-xl z-[200] overflow-hidden">
+
                 {searchResults.length > 0 ? (
                   <>
                     {searchResults.map((item) => (
@@ -514,6 +583,7 @@ export function Header() {
                         }
                         className="flex flex-col gap-1 px-4 py-3 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-colors"
                       >
+
                         <span className="text-[10px] font-bold text-red-600 uppercase tracking-[0.12em]">
                           {item.category}
                         </span>
@@ -521,6 +591,7 @@ export function Header() {
                         <span className="text-sm font-medium text-gray-900 leading-[1.35] line-clamp-2">
                           {item.title}
                         </span>
+
                       </Link>
                     ))}
 
@@ -538,8 +609,10 @@ export function Header() {
                     {searchQuery.trim()}"
                   </div>
                 )}
+
               </div>
             )}
+
           </div>
         </div>
       </div>
@@ -550,9 +623,11 @@ export function Header() {
 
       {mobileOpen && (
         <div className="lg:hidden fixed inset-x-0 top-0 bottom-0 z-[150] bg-white overflow-y-auto">
+
           {/* Mobile menu header */}
 
           <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+
             <Link
               to="/"
               onClick={() => setMobileOpen(false)}
@@ -574,13 +649,18 @@ export function Header() {
             >
               <X size={22} />
             </button>
+
           </div>
 
           <nav className="flex flex-col gap-0 px-4 py-4">
-            {/* Sign In / Subscribe */}
+
+            {/* =================================================
+                SIGN IN / SUBSCRIBE
+            ================================================= */}
 
             {!isSignedIn && (
               <div className="flex items-center gap-2.5 pb-4 mb-2 border-b border-gray-100">
+
                 <Link
                   to="/login"
                   className="flex-1 text-center text-sm font-semibold border border-gray-300 rounded-full py-2.5"
@@ -600,6 +680,7 @@ export function Header() {
                 >
                   Subscribe
                 </Link>
+
               </div>
             )}
 
@@ -623,9 +704,11 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
             >
               <span className="relative flex h-2 w-2 flex-shrink-0">
+
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75" />
 
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600" />
+
               </span>
 
               Live TV
@@ -671,6 +754,7 @@ export function Header() {
                 </button>
               </>
             )}
+
           </nav>
         </div>
       )}
