@@ -7,7 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { getQuotes } from "../../services/marketApi";
+import { getQuotes } from "../../../services/marketApi";
 
 interface TickerCard {
   symbol: string;
