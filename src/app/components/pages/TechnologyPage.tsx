@@ -422,7 +422,7 @@ function SecondaryArticle({
    PAGE
 ========================================================= */
 
-export function CybersecurityPage() {
+export function TechnologyPage() {
   return (
     <main className="w-full bg-white text-[#17140F] antialiased">
 
