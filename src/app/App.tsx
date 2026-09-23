@@ -28,6 +28,8 @@ import { SupplyChainPage } from "./components/pages/SupplyChainPage";
 import { FeaturedPage } from "./components/pages/FeaturedPage";
 import { BreakingNewsPage } from "./components/pages/BreakingNewsPage";
 import { MarketsPage } from "./components/pages/MarketsPage";
+import { EconomicsPage } from "./components/pages/EconomicsPage";
+import { EditorialDeskPage } from "./components/pages/EditorialDeskPage";
 import { CoverStoriesPage } from "./components/pages/CoverStoriesPage";
 import { WhiteHouseWatchPage } from "./components/pages/WhiteHouseWatchPage";
 import { BusinessNewsPage } from "./components/pages/BusinessNewsPage";
@@ -185,7 +187,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <TechnologyPage />
+                <EditorialDeskPage section="Technology" />
               </MagazineLayout>
             }
           />
@@ -198,7 +200,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <FinancePage />
+                <EditorialDeskPage section="Finance" />
               </MagazineLayout>
             }
           />
@@ -211,7 +213,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <BillionairesPage />
+                <EditorialDeskPage section="Billionaires" />
               </MagazineLayout>
             }
           />
@@ -224,7 +226,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <WorldPage />
+                <EditorialDeskPage section="World" />
               </MagazineLayout>
             }
           />
@@ -237,7 +239,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <InternationalNewsPage />
+                <EditorialDeskPage section="International" />
               </MagazineLayout>
             }
           />
@@ -250,7 +252,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <StartupSuccessPage />
+                <EditorialDeskPage section="Startups" />
               </MagazineLayout>
             }
           />
@@ -267,7 +269,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <CybersecurityPage />
+                <EditorialDeskPage section="Cybersecurity" />
               </MagazineLayout>
             }
           />
@@ -280,7 +282,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <EnergyPage />
+                <EditorialDeskPage section="Energy" />
               </MagazineLayout>
             }
           />
@@ -293,7 +295,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <HealthcarePage />
+                <EditorialDeskPage section="Healthcare" />
               </MagazineLayout>
             }
           />
@@ -306,7 +308,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <ManufacturingPage />
+                <EditorialDeskPage section="Manufacturing" />
               </MagazineLayout>
             }
           />
@@ -319,7 +321,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <SmartCitiesPage />
+                <EditorialDeskPage section="Smart Cities" />
               </MagazineLayout>
             }
           />
@@ -332,7 +334,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <SupplyChainPage />
+                <EditorialDeskPage section="Supply Chain" />
               </MagazineLayout>
             }
           />
@@ -362,7 +364,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <FeaturedPage />
+                <EditorialDeskPage section="Featured" />
               </MagazineLayout>
             }
           />
@@ -375,7 +377,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <BreakingNewsPage />
+                <EditorialDeskPage section="Breaking News" />
               </MagazineLayout>
             }
           />
@@ -388,7 +390,20 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <MarketsPage />
+                <EditorialDeskPage section="Markets" />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/economics"
+            element={
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
+                <EconomicsPage />
               </MagazineLayout>
             }
           />
@@ -401,7 +416,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <CoverStoriesPage />
+                <EditorialDeskPage section="Cover Stories" />
               </MagazineLayout>
             }
           />
@@ -427,7 +442,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <BusinessNewsPage />
+                <EditorialDeskPage section="Business" />
               </MagazineLayout>
             }
           />
@@ -440,7 +455,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <LeadershipPage />
+                <EditorialDeskPage section="Leadership" />
               </MagazineLayout>
             }
           />
@@ -453,7 +468,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <InnovationPage />
+                <EditorialDeskPage section="Innovation" />
               </MagazineLayout>
             }
           />
@@ -466,7 +481,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <CeoSpotlightPage />
+                <EditorialDeskPage section="CEO Spotlight" />
               </MagazineLayout>
             }
           />
@@ -508,7 +523,7 @@ export default function App() {
                 showRightSidebar={false}
                 topBanner={false}
               >
-                <FeaturedPage />
+                <EditorialDeskPage section="Featured" />
               </MagazineLayout>
             }
           />
