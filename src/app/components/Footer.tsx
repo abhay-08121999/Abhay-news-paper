@@ -4,6 +4,7 @@ import {
   Youtube,
   Linkedin,
 } from "lucide-react";
+import logoImg from "../../imports/logo.png";
 
 /* =========================================================
    X ICON
@@ -120,6 +121,12 @@ export function Footer() {
             to="/"
             className="flex flex-col items-center md:items-start flex-shrink-0"
           >
+            <img
+              src={logoImg}
+              alt="The Pride Times logo"
+              className="mb-3 h-8 w-auto object-contain opacity-90"
+            />
+
             {/* Main Logo Text */}
 
             <div
