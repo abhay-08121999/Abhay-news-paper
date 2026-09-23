@@ -314,7 +314,10 @@ export function Header() {
 
             <button
               type="button"
-              onClick={() => setSearchOpen(!searchOpen)}
+              onClick={() => {
+                setSearchOpen((open) => !open);
+                setMobileMenuOpen(false);
+              }}
               className="pt-account-btn flex items-center justify-center transition-colors hover:bg-gray-50"
               aria-label="Search"
               aria-expanded={searchOpen}
@@ -324,7 +327,10 @@ export function Header() {
 
             <button
               type="button"
-              onClick={() => setMobileMenuOpen((open) => !open)}
+              onClick={() => {
+                setMobileMenuOpen((open) => !open);
+                setSearchOpen(false);
+              }}
               className="pt-mobile-menu-btn flex items-center justify-center transition-colors hover:bg-gray-50 lg:hidden"
               aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
               aria-expanded={mobileMenuOpen}
