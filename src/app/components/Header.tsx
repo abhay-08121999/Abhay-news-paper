@@ -8,6 +8,7 @@ import {
   Crown,
   LogOut,
   BookOpen,
+  Menu,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { searchIndex } from "../data/searchIndex";
@@ -18,6 +19,7 @@ import { searchIndex } from "../data/searchIndex";
 
 const primaryNav = [
   { label: "Markets", path: "/markets" },
+  { label: "Economics", path: "/economics" },
   { label: "Business News", path: "/business-news" },
   { label: "International Business", path: "/international-news" },
   { label: "Startup Success", path: "/startup-success" },
@@ -42,6 +44,7 @@ export function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [editionOpen, setEditionOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [edition, setEdition] = useState("Asia Edition");
 
   const location = useLocation();
@@ -96,6 +99,7 @@ export function Header() {
   useEffect(() => {
     setUserMenuOpen(false);
     setEditionOpen(false);
+    setMobileMenuOpen(false);
     setSearchOpen(false);
     setSearchQuery("");
   }, [location.pathname]);
@@ -318,6 +322,16 @@ export function Header() {
               <Search size={18} className="text-gray-700" />
             </button>
 
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              className="pt-mobile-menu-btn flex items-center justify-center transition-colors hover:bg-gray-50 lg:hidden"
+              aria-label={mobileMenuOpen ? "Close navigation" : "Open navigation"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X size={19} className="text-gray-700" /> : <Menu size={19} className="text-gray-700" />}
+            </button>
+
             {/* =================================================
                 USER MENU
             ================================================= */}
@@ -434,6 +448,24 @@ export function Header() {
           </div>
         </div>
       </div>
+
+      {mobileMenuOpen && (
+        <div className="pt-mobile-menu border-b border-gray-200 bg-[#111111] lg:hidden">
+          <nav className="pt-container grid grid-cols-2 gap-x-5 gap-y-0 py-3" aria-label="Mobile navigation">
+            {primaryNav.map((item) => (
+              <Link
+                key={item.label}
+                to={item.path}
+                className={`border-b border-white/10 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-white/85 transition-colors hover:text-white ${location.pathname === item.path ? "text-[#ff5a60]" : ""}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <Link to="/magazine" className="border-b border-white/10 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-white/85">Digital Edition</Link>
+            {!isSignedIn && <Link to="/signup" className="border-b border-white/10 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[#ff5a60]">Subscribe</Link>}
+          </nav>
+        </div>
+      )}
 
       {/* =====================================================
           FULL WIDTH SEARCH ROW
