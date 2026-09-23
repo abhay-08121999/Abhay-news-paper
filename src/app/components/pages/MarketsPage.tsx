@@ -407,3 +407,31 @@ export function MarketsTicker() {
     </div>
   );
 }
+
+export function MarketsPage() {
+  const marketSections = [
+    ["Indian equities", "Nifty 50, Sensex and sector breadth"],
+    ["Global markets", "US, Europe and Asia market signals"],
+    ["Commodities", "Energy, metals and agricultural benchmarks"],
+    ["Currencies", "Rupee, dollar and emerging-market FX"],
+  ];
+
+  return (
+    <main className="pt-container py-10 sm:py-16">
+      <div className="border-b-4 border-black pb-6">
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-600">The Pride Times / Data Desk</p>
+        <h1 className="mt-3 font-serif text-5xl font-bold leading-none sm:text-7xl">Markets</h1>
+        <p className="mt-4 max-w-xl text-sm leading-6 text-gray-600">The numbers behind the news, with the context investors need to understand what moves next.</p>
+      </div>
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {marketSections.map(([title, description]) => (
+          <Link key={title} to={`/markets?tab=${encodeURIComponent(title)}`} className="border border-gray-200 bg-white p-5 transition hover:border-black">
+            <h2 className="font-serif text-2xl font-bold">{title}</h2>
+            <p className="mt-3 text-sm leading-5 text-gray-600">{description}</p>
+            <span className="mt-6 block text-[10px] font-bold uppercase tracking-[0.16em] text-red-600">Explore data →</span>
+          </Link>
+        ))}
+      </div>
+    </main>
+  );
+}
