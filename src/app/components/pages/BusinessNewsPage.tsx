@@ -1,5 +1,13 @@
 import { Clock, Briefcase, ChevronRight } from "lucide-react";
+import { Link } from "react-router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import {
+  hero,
+  maDeals,
+  earningsNews,
+  corporateNews,
+  startupNews,
+} from "../../data/businessNewsData";
 
 /* =========================================================
    SECTION HEADER
@@ -93,6 +101,7 @@ function MoreStories({
   stories,
 }: {
   stories: {
+    id: string;
     title: string;
     time: string;
     category?: string;
@@ -107,10 +116,11 @@ function MoreStories({
       </div>
 
       <div className="divide-y divide-gray-200">
-        {stories.slice(0, 3).map((story, index) => (
-          <article
-            key={`${story.title}-${index}`}
-            className="group cursor-pointer py-3"
+        {stories.slice(0, 3).map((story) => (
+          <Link
+            key={story.id}
+            to={`/article/${story.id}`}
+            className="group block py-3"
           >
             <div className="flex gap-3">
               <div className="flex h-[48px] w-[68px] shrink-0 items-center justify-center rounded-sm bg-gray-100">
@@ -136,200 +146,12 @@ function MoreStories({
                 </span>
               </div>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </div>
   );
 }
-
-/* =========================================================
-   DATA
-========================================================= */
-
-const hero = {
-  category: "CORPORATE STRATEGY",
-  title:
-    "The Great Corporate AI Arms Race: How Fortune 500 Companies Are Spending $2.3 Trillion to Win the Intelligence Economy",
-  excerpt:
-    "Microsoft, Google, Amazon, Meta and Apple have collectively committed $2.3 trillion in AI investment through 2030. Every sector — from banking to retail, healthcare to manufacturing — is being redrawn. The companies that win this race will dominate the 21st century economy.",
-  author: "Sagar Kumar",
-  time: "2 hours ago",
-  image:
-    "https://images.unsplash.com/photo-1554774853-aae0a22c8aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-};
-
-const maDeals = [
-  {
-    id: 1,
-    acquirer: "Amazon",
-    target: "NuScale Power",
-    value: "$12B",
-    sector: "Nuclear Energy",
-    status: "Announced",
-  },
-  {
-    id: 2,
-    acquirer: "Microsoft",
-    target: "IonQ",
-    value: "$8.7B",
-    sector: "Quantum Computing",
-    status: "Pending",
-  },
-  {
-    id: 3,
-    acquirer: "BlackRock",
-    target: "Global Infrastructure Partners",
-    value: "$12.5B",
-    sector: "Infrastructure",
-    status: "Closed",
-  },
-  {
-    id: 4,
-    acquirer: "JPMorgan",
-    target: "First Republic (Assets)",
-    value: "$10.6B",
-    sector: "Banking",
-    status: "Closed",
-  },
-  {
-    id: 5,
-    acquirer: "Reliance",
-    target: "Disney India",
-    value: "$8.5B",
-    sector: "Media / Streaming",
-    status: "Closed",
-  },
-];
-
-const earningsNews = [
-  {
-    id: 1,
-    company: "Apple",
-    ticker: "AAPL",
-    eps: "$2.45",
-    beat: "+12%",
-    revenue: "$98.3B",
-    status: "BEAT",
-  },
-  {
-    id: 2,
-    company: "Microsoft",
-    ticker: "MSFT",
-    eps: "$3.12",
-    beat: "+8%",
-    revenue: "$71.2B",
-    status: "BEAT",
-  },
-  {
-    id: 3,
-    company: "Alphabet",
-    ticker: "GOOGL",
-    eps: "$2.89",
-    beat: "+15%",
-    revenue: "$88.3B",
-    status: "BEAT",
-  },
-  {
-    id: 4,
-    company: "Meta",
-    ticker: "META",
-    eps: "$6.43",
-    beat: "+23%",
-    revenue: "$41.5B",
-    status: "BEAT",
-  },
-  {
-    id: 5,
-    company: "Amazon",
-    ticker: "AMZN",
-    eps: "$1.91",
-    beat: "+5%",
-    revenue: "$187.8B",
-    status: "BEAT",
-  },
-  {
-    id: 6,
-    company: "Intel",
-    ticker: "INTC",
-    eps: "$0.18",
-    beat: "-8%",
-    revenue: "$12.4B",
-    status: "MISS",
-  },
-];
-
-const corporateNews = [
-  {
-    id: 1,
-    title:
-      "LVMH Posts €21B Revenue — Luxury Demand Defies Global Economic Uncertainty",
-    time: "1 hr ago",
-    category: "LUXURY",
-  },
-  {
-    id: 2,
-    title:
-      "Walmart Launches AI-Powered Supply Chain Platform — 50,000 Suppliers Enrolled",
-    time: "2 hrs ago",
-    category: "RETAIL",
-  },
-  {
-    id: 3,
-    title:
-      "Saudi Aramco Overtakes Apple as World's Most Profitable Company in Q1 2026",
-    time: "3 hrs ago",
-    category: "ENERGY",
-  },
-  {
-    id: 4,
-    title:
-      "Boeing's 737 MAX Returns to Full Delivery Schedule After 18-Month Production Fix",
-    time: "4 hrs ago",
-    category: "AEROSPACE",
-  },
-  {
-    id: 5,
-    title:
-      "Reliance Jio Surpasses 500 Million Subscribers — World's Largest Telecom by Users",
-    time: "5 hrs ago",
-    category: "TELECOM",
-  },
-  {
-    id: 6,
-    title:
-      "Goldman Sachs CEO David Solomon Takes Personal Pay Cut After Criticism of $30B Losses",
-    time: "6 hrs ago",
-    category: "BANKING",
-  },
-];
-
-const startupNews = [
-  {
-    id: 1,
-    title:
-      "Anthropic Raises $4B Series E at $40B Valuation — AI Safety Startup Now Among World's Most Valuable",
-    time: "2 hrs ago",
-  },
-  {
-    id: 2,
-    title:
-      "Indian SaaS Startup Freshworks Acquires Two US Companies in $1.2B Deal",
-    time: "4 hrs ago",
-  },
-  {
-    id: 3,
-    title:
-      "Rapido Raises $250M as India's Bike-Taxi Market Explodes to 50M Monthly Rides",
-    time: "6 hrs ago",
-  },
-  {
-    id: 4,
-    title:
-      "SpaceX Valuation Hits $350B — Overtakes Boeing and Airbus Combined",
-    time: "8 hrs ago",
-  },
-];
 
 /* =========================================================
    STATUS BADGES
@@ -421,7 +243,7 @@ export function BusinessNewsPage() {
               HERO STORY
           ================================================= */}
 
-          <article className="group cursor-pointer">
+          <Link to={`/article/${hero.id}`} className="group block">
 
             <div className="relative overflow-hidden rounded-md">
               <ImageWithFallback
@@ -463,7 +285,7 @@ export function BusinessNewsPage() {
               </div>
 
             </div>
-          </article>
+          </Link>
 
 
           {/* =================================================
@@ -659,11 +481,12 @@ export function BusinessNewsPage() {
 
               {corporateNews.slice(0, 3).map((n) => (
 
-                <article
+                <Link
                   key={n.id}
+                  to={`/article/${n.id}`}
                   className="
                     group
-                    cursor-pointer
+                    block
                     rounded-md
                     border
                     border-gray-200
@@ -712,7 +535,7 @@ export function BusinessNewsPage() {
                     {n.time}
                   </span>
 
-                </article>
+                </Link>
 
               ))}
 
@@ -733,11 +556,12 @@ export function BusinessNewsPage() {
 
               {startupNews.map((n) => (
 
-                <article
+                <Link
                   key={n.id}
+                  to={`/article/${n.id}`}
                   className="
                     group
-                    cursor-pointer
+                    block
                     rounded-md
                     border
                     border-gray-200
@@ -781,7 +605,7 @@ export function BusinessNewsPage() {
                     {n.time}
                   </span>
 
-                </article>
+                </Link>
 
               ))}
 
