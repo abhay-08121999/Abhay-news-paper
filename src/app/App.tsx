@@ -28,7 +28,6 @@ import { SupplyChainPage } from "./components/pages/SupplyChainPage";
 import { FeaturedPage } from "./components/pages/FeaturedPage";
 import { BreakingNewsPage } from "./components/pages/BreakingNewsPage";
 import { MarketsPage } from "./components/pages/MarketsPage";
-import { EconomicsPage } from "./components/pages/EconomicsPage";
 import { CoverStoriesPage } from "./components/pages/CoverStoriesPage";
 import { WhiteHouseWatchPage } from "./components/pages/WhiteHouseWatchPage";
 import { BusinessNewsPage } from "./components/pages/BusinessNewsPage";
@@ -390,19 +389,6 @@ export default function App() {
                 topBanner={false}
               >
                 <MarketsPage />
-              </MagazineLayout>
-            }
-          />
-
-          <Route
-            path="/economics"
-            element={
-              <MagazineLayout
-                showLeftSidebar={false}
-                showRightSidebar={false}
-                topBanner={false}
-              >
-                <EconomicsPage />
               </MagazineLayout>
             }
           />
