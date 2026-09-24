@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
@@ -64,11 +63,11 @@ const centerStories = [
     id: 1,
     tag: "MARKETS",
     title:
-      "Derivatives Trading in India Sinks Most Since 2024 as Taxes Bite",
+      "Indian Small-Caps Rally 21% From March Lows to Enter Bull Market",
     excerpt:
-      "Bloomberg reports that India's derivatives trading activity has dropped sharply as higher trading taxes weigh on market participation.",
-    publishedAt: "2026-09-22T10:00:00Z",
-    image: LN3Img,
+      "Indian small-cap stocks have climbed 21% from their March lows, pushing the segment into a bull market as domestic investor risk appetite improves.",
+    publishedAt: "2026-09-22T06:00:00Z",
+    image: LN4Img,
     link: "/markets",
   },
   {
@@ -415,34 +414,34 @@ const editorsPicks = [
     id: 1,
     category: "MARKETS",
     title:
-      "Derivatives Trading in India Sinks Most Since 2024 as Taxes Bite",
+      "Sebi Taps AI in Growing Fight Against Market Manipulation and Fraud",
     excerpt:
-      "Bloomberg reports that derivatives trading activity in India has fallen sharply as taxes weigh on the market.",
-    publishedAt: "2026-09-22T10:00:00Z",
+      "India's markets regulator is expanding its use of artificial intelligence to detect manipulation and fraud as trading volumes and data complexity rise across exchanges.",
+    publishedAt: "2026-09-22T09:24:00Z",
     image: EdipickImg,
     link: "/markets",
   },
   {
     id: 2,
-    category: "TECHNOLOGY",
+    category: "WORLD",
     title:
-      "Alibaba Unveils AI Chip to Drive Global Data Centre Buildout",
+      "Modi, Lam Meet as India and Vietnam Deepen AI, Defense Ties",
     excerpt:
-      "Alibaba introduced a new AI accelerator and outlined plans to expand global data-centre capacity as AI demand grows.",
-    publishedAt: "2026-09-22T09:08:00Z",
-    image: Ln1Img,
-    link: "/technology",
+      "Indian and Vietnamese leaders met to deepen cooperation on artificial intelligence and defense as the two countries expand their strategic partnership.",
+    publishedAt: "2026-09-22T07:00:00Z",
+    image: LN3Img,
+    link: "/business-news",
   },
   {
     id: 3,
-    category: "BUSINESS",
+    category: "FINANCE",
     title:
-      "India's Prospects Bright but Tax Rules a Worry, JPMorgan CEO Dimon Says",
+      "JPMorgan's Dimon Backs Chandrasekaran, Warns Tata Rift Could Hit Investment",
     excerpt:
-      "Jamie Dimon said India's long-term prospects are strong while highlighting tax rules, regulation and policy uncertainty.",
-    publishedAt: "2026-09-22T11:26:00Z",
-    image: HeroImg,
-    link: "/business-news",
+      "JPMorgan CEO Jamie Dimon voiced support for Tata Sons chairman N. Chandrasekaran while warning that boardroom tensions at the conglomerate could weigh on investor confidence.",
+    publishedAt: "2026-09-22T08:36:00Z",
+    image: Ln1Img,
+    link: "/finance",
   },
 ];
 
@@ -675,6 +674,32 @@ export function HomePage() {
     latestNewsData[activeNewsTab] || latestNewsData.All;
 
   const latestStories = selectedNews.slice(0, 5);
+
+  // Sidebar ticker: sitewide reverse-chron feed, de-duplicated across
+  // tabs by title and filtered to exclude whatever is already shown
+  // as the Hero/Major/Video stories above, so the same headline
+  // doesn't render twice on the page.
+  const featuredTitles = new Set([
+    heroStory.title,
+    centerStories[0].title,
+    centerStories[1].title,
+    videoFeature.title,
+  ]);
+
+  const sidebarNews = Array.from(
+    new Map(
+      Object.values(latestNewsData)
+        .flat()
+        .map((item) => [item.title, item])
+    ).values()
+  )
+    .filter((item) => !featuredTitles.has(item.title))
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() -
+        new Date(a.publishedAt).getTime()
+    )
+    .slice(0, 5);
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans antialiased">
@@ -1204,7 +1229,7 @@ export function HomePage() {
                   </div>
 
                   <div className="divide-y divide-gray-100">
-                    {selectedNews.slice(0, 5).map((item) => (
+                    {sidebarNews.map((item) => (
                       <Link
                         key={item.id}
                         to={item.link}
@@ -1729,4 +1754,3 @@ export function HomePage() {
     </div>
   );
 }
-
