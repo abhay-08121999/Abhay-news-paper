@@ -119,34 +119,34 @@ export function Footer() {
 
           <Link
             to="/"
-            className="flex flex-col items-center md:items-start flex-shrink-0"
+            className="flex items-center gap-3 flex-shrink-0"
           >
             <img
               src={logoImg}
               alt="The Pride Times logo"
-              className="mb-3 h-8 w-auto object-contain opacity-90"
+              className="h-16 w-16 flex-shrink-0 object-contain opacity-90"
             />
 
-            {/* Main Logo Text */}
+            <div className="flex flex-col items-start">
+              {/* Main Logo Text */}
+              <div
+                className="pt-logo leading-none whitespace-nowrap"
+                style={{
+                  fontSize: "clamp(1.8rem, 2.6vw, 2.25rem)",
+                }}
+              >
+                THE{" "}
+                <span className="pt-logo-accent">
+                  PRIDE
+                </span>{" "}
+                TIMES
+              </div>
 
-            <div
-              className="pt-logo leading-none whitespace-nowrap"
-              style={{
-                fontSize: "clamp(1.8rem, 2.6vw, 2.25rem)",
-              }}
-            >
-              THE{" "}
-              <span className="pt-logo-accent">
-                PRIDE
-              </span>{" "}
-              TIMES
+              {/* Tagline */}
+              <p className="mt-2 text-[9px] sm:text-[10px] text-gray-500 uppercase tracking-[0.18em]">
+                THE GLOBAL VOICE OF INNOVATION, LEADERSHIP &amp; SUCCESS
+              </p>
             </div>
-
-            {/* Tagline */}
-
-            <p className="mt-2 text-[9px] sm:text-[10px] text-gray-500 uppercase tracking-[0.18em]">
-              THE GLOBAL VOICE OF INNOVATION, LEADERSHIP &amp; SUCCESS
-            </p>
           </Link>
 
           {/* =================================================
