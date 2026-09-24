@@ -19,7 +19,6 @@ import { searchIndex } from "../data/searchIndex";
 
 const primaryNav = [
   { label: "Markets", path: "/markets" },
-  { label: "Economics", path: "/economics" },
   { label: "Business News", path: "/business-news" },
   { label: "International Business", path: "/international-news" },
   { label: "Startup Success", path: "/startup-success" },
