@@ -52,7 +52,8 @@ const moreStories: Story[] = [
   {
     id: 2,
     category: "INTERNATIONAL BUSINESS",
-    title: "EU-US Digital Trade Agreement Unlocks $800B in Annual Commerce",
+    title:
+      "EU-US Digital Trade Agreement Unlocks $800B in Annual Commerce",
     time: "3 hr ago",
     image:
       "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&h=250&fit=crop",
@@ -281,7 +282,7 @@ function AdBanner({ bottom = false }: { bottom?: boolean }) {
         bottom ? "mt-8 mb-8" : "mb-5 md:mb-6"
       }`}
     >
-      <div className="h-[88px] md:h-[90px] w-full bg-[#102a32] flex flex-col items-center justify-center text-center">
+      <div className="h-[88px] md:h-[90px] w-full bg-[#102a32] flex flex-col items-center justify-center text-center px-4">
         <span className="text-[8px] md:text-[9px] font-bold tracking-[0.18em] text-cyan-400 uppercase">
           GOOGLE ADSENSE
         </span>
@@ -320,7 +321,7 @@ function SponsoredContent() {
           <span className="text-[8px] text-gray-400">Ad</span>
         </div>
 
-        <div className="h-[160px] md:h-[168px] bg-[#171d3d] flex flex-col items-center justify-center text-center">
+        <div className="h-[160px] md:h-[168px] bg-[#171d3d] flex flex-col items-center justify-center text-center px-3">
           <span className="text-[8px] font-bold tracking-widest text-yellow-400 uppercase">
             Featured Partner
           </span>
@@ -348,7 +349,7 @@ function SponsoredContent() {
               key={story.id}
               className="flex gap-3 py-3 border-b border-gray-200 group cursor-pointer"
             >
-              <div className="w-[72px] h-[48px] shrink-0 overflow-hidden rounded-sm">
+              <div className="w-[72px] h-[48px] shrink-0 overflow-hidden rounded-sm bg-gray-100">
                 <ImageWithFallback
                   src={story.image || ""}
                   alt={story.title}
@@ -361,7 +362,7 @@ function SponsoredContent() {
                   {story.category}
                 </span>
 
-                <h4 className="text-[10px] md:text-[11px] font-semibold leading-tight mt-1 text-gray-900 group-hover:text-red-600 transition-colors">
+                <h4 className="text-[10px] md:text-[11px] font-semibold leading-tight mt-1 text-gray-900 group-hover:text-red-600 transition-colors line-clamp-3">
                   {story.title}
                 </h4>
 
@@ -378,13 +379,13 @@ function SponsoredContent() {
 }
 
 /* =========================================================
-   HERO
+   HERO STORY
 ========================================================= */
 
 function HeroStoryCard({ story }: { story: HeroStory }) {
   return (
     <article className="group">
-      <div className="overflow-hidden rounded-[6px]">
+      <div className="overflow-hidden rounded-[6px] bg-gray-100">
         <ImageWithFallback
           src={story.image}
           alt={story.title}
@@ -425,7 +426,7 @@ function HeroStoryCard({ story }: { story: HeroStory }) {
 function LatestNewsCard({ story }: { story: Story }) {
   return (
     <article className="group overflow-hidden border border-gray-200 rounded-[5px] bg-white hover:shadow-sm transition-shadow">
-      <div className="h-[155px] sm:h-[175px] md:h-[185px] overflow-hidden">
+      <div className="h-[155px] sm:h-[175px] md:h-[185px] overflow-hidden bg-gray-100">
         <ImageWithFallback
           src={story.image || ""}
           alt={story.title}
@@ -448,16 +449,18 @@ function LatestNewsCard({ story }: { story: Story }) {
           {story.title}
         </h3>
 
-        <p className="mt-1.5 text-[10px] md:text-[11px] leading-[1.45] text-gray-500 line-clamp-2">
-          {story.excerpt}
-        </p>
+        {story.excerpt && (
+          <p className="mt-1.5 text-[10px] md:text-[11px] leading-[1.45] text-gray-500 line-clamp-2">
+            {story.excerpt}
+          </p>
+        )}
 
-        <div className="flex items-center justify-between mt-2.5 pt-2 border-t border-gray-100">
-          <span className="text-[8px] text-gray-400">
+        <div className="flex items-center justify-between gap-2 mt-2.5 pt-2 border-t border-gray-100">
+          <span className="text-[8px] text-gray-400 truncate">
             By {story.author}
           </span>
 
-          <span className="flex items-center gap-1 text-[8px] text-gray-400">
+          <span className="flex items-center gap-1 text-[8px] text-gray-400 whitespace-nowrap">
             <Clock size={9} />
             {story.time}
           </span>
@@ -481,7 +484,7 @@ function RegionalStories({
   stories: Story[];
 }) {
   return (
-    <section>
+    <section className="min-w-0">
       <SectionHeader title={title} icon={icon} />
 
       <div>
@@ -519,8 +522,8 @@ function SponsorshipSection() {
 
   return (
     <section className="mt-5 rounded-[6px] bg-[#f7f7f7] border border-gray-100 p-4 md:p-5">
-      <div className="flex items-center gap-2 mb-4">
-        <span className="border border-gray-300 rounded px-2 py-1 text-[7px] font-semibold uppercase tracking-widest text-gray-400">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-4">
+        <span className="w-fit border border-gray-300 rounded px-2 py-1 text-[7px] font-semibold uppercase tracking-widest text-gray-400">
           Sponsorship
         </span>
 
@@ -533,7 +536,7 @@ function SponsorshipSection() {
         {events.map((event) => (
           <div
             key={event}
-            className="bg-white border border-gray-200 rounded-[4px] min-h-[90px] flex flex-col items-center justify-center text-center px-3"
+            className="bg-white border border-gray-200 rounded-[4px] min-h-[90px] flex flex-col items-center justify-center text-center px-3 hover:border-gray-400 transition-colors"
           >
             <div className="w-7 h-7 rounded-full bg-red-50 flex items-center justify-center mb-2">
               <span className="text-red-500 text-xs">◆</span>
@@ -568,20 +571,24 @@ function Newsletter() {
         Daily briefings on International Business delivered to your inbox.
       </p>
 
-      <div className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 max-w-md mx-auto">
+      <form
+        onSubmit={(event) => event.preventDefault()}
+        className="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 max-w-md mx-auto"
+      >
         <input
           type="email"
           placeholder="Enter your email"
-          className="h-9 flex-1 rounded-[3px] border border-gray-600 bg-[#172d43] px-3 text-[10px] text-white placeholder:text-gray-400 outline-none focus:border-red-500"
+          aria-label="Email address"
+          className="h-9 flex-1 min-w-0 rounded-[3px] border border-gray-600 bg-[#172d43] px-3 text-[10px] text-white placeholder:text-gray-400 outline-none focus:border-red-500"
         />
 
         <button
-          type="button"
+          type="submit"
           className="h-9 rounded-[3px] bg-red-600 hover:bg-red-700 px-5 text-[10px] font-semibold text-white transition-colors"
         >
           Subscribe Free
         </button>
-      </div>
+      </form>
     </section>
   );
 }
@@ -593,12 +600,8 @@ function Newsletter() {
 export function InternationalNewsPage() {
   return (
     <div className="w-full min-h-screen bg-white text-gray-900 antialiased">
-      {/* =====================================================
-          FULL WIDTH PAGE CONTAINER
-          No max-w-7xl restriction
-      ===================================================== */}
-
       <main className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14 py-5 md:py-6">
+
         {/* =================================================
             PAGE HEADER
         ================================================= */}
