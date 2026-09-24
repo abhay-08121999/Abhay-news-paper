@@ -31,6 +31,7 @@ import { MarketsPage } from "./components/pages/MarketsPage";
 import { CoverStoriesPage } from "./components/pages/CoverStoriesPage";
 import { WhiteHouseWatchPage } from "./components/pages/WhiteHouseWatchPage";
 import { BusinessNewsPage } from "./components/pages/BusinessNewsPage";
+import { ArticleDetailPage } from "./components/pages/ArticleDetailPage";
 import { LeadershipPage } from "./components/pages/LeadershipPage";
 import { InnovationPage } from "./components/pages/InnovationPage";
 import { MagazinePage } from "./components/pages/MagazinePage";
@@ -428,6 +429,19 @@ export default function App() {
                 topBanner={false}
               >
                 <BusinessNewsPage />
+              </MagazineLayout>
+            }
+          />
+
+          <Route
+            path="/article/:id"
+            element={
+              <MagazineLayout
+                showLeftSidebar={false}
+                showRightSidebar={false}
+                topBanner={false}
+              >
+                <ArticleDetailPage />
               </MagazineLayout>
             }
           />
