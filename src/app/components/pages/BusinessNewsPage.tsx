@@ -474,7 +474,7 @@ export function BusinessNewsPage() {
 
             <SponsoredAd />
 
-            <MoreStories stories={corporateNews} />
+            <MoreStories stories={corporateNews.slice(3, 6)} />
 
           </aside>
 
@@ -657,7 +657,7 @@ export function BusinessNewsPage() {
 
             <div className="space-y-3">
 
-              {corporateNews.map((n) => (
+              {corporateNews.slice(0, 3).map((n) => (
 
                 <article
                   key={n.id}
