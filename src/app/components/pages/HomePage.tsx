@@ -45,11 +45,11 @@ type MarketItem = {
 ========================================================= */
 
 const heroStory = {
-  category: "TOP STORY",
+  category: "MARKETS | INDIA",
   title:
-    "Derivatives Trading in India Sinks Most Since 2024 as Taxes Bite",
+    "India's Derivatives Trading Falls Most Since 2024 as Taxes Bite",
   excerpt:
-    "India's derivatives trading activity has fallen sharply as tax changes weigh on the market, according to Bloomberg News.",
+    "Tax changes are weighing on derivatives activity across India's market, with trading falling sharply from earlier levels. The shift highlights the growing effect of tax costs on market activity, according to Bloomberg News.",
   image: HeroImg,
   link: "/markets",
 };
@@ -63,9 +63,9 @@ const centerStories = [
     id: 1,
     tag: "MARKETS",
     title:
-      "Indian Small-Caps Rally 21% From March Lows to Enter Bull Market",
+      "Indian Small-Caps Enter Bull Market After 21% Rally From March Lows",
     excerpt:
-      "Indian small-cap stocks have climbed 21% from their March lows, pushing the segment into a bull market as domestic investor risk appetite improves.",
+      "Investor appetite is returning to smaller companies as domestic risk appetite improves and the segment recovers from its March lows.",
     publishedAt: "2026-09-22T06:00:00Z",
     image: LN4Img,
     link: "/markets",
@@ -74,9 +74,9 @@ const centerStories = [
     id: 2,
     tag: "BUSINESS",
     title:
-      "India's Prospects Bright but Tax Rules a Worry, JPMorgan CEO Dimon Says",
+      "JPMorgan CEO Dimon Says India's Outlook Is Strong but Tax Rules Worry Investors",
     excerpt:
-      "JPMorgan CEO Jamie Dimon said India's long-term prospects remain strong while pointing to tax rules, regulation and policy uncertainty as concerns for investors.",
+      "JPMorgan CEO Jamie Dimon said India's long-term prospects remain strong, while tax rules, regulation and policy uncertainty remain concerns for investors.",
     publishedAt: "2026-09-22T11:26:00Z",
     image: InsImg,
     link: "/business-news",
@@ -89,7 +89,7 @@ const centerStories = [
 
 const videoFeature = {
   title:
-    "Alibaba Unveils AI Chip to Drive Global Data Centre Buildout",
+    "Alibaba Unveils AI Chip as It Targets Global Data Centre Expansion",
   image: HeroImg,
   link: "/technology",
 };
@@ -118,7 +118,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 1,
       hot: true,
       title:
-        "Derivatives Trading in India Sinks Most Since 2024 as Taxes Bite",
+        "India's Derivatives Trading Falls Most Since 2024 as Taxes Bite",
       publishedAt: "2026-09-22T10:00:00Z",
       image: Ln1Img,
       link: "/markets",
@@ -127,7 +127,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 2,
       hot: true,
       title:
-        "Standstill in India Gold Imports Drags On, Threatens Supply",
+        "India's Gold Import Standstill Threatens Supply",
       publishedAt: "2026-09-22T08:00:00Z",
       image: HeroImg,
       link: "/markets",
@@ -136,7 +136,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 3,
       hot: false,
       title:
-        "Modi, Lam Meet as India and Vietnam Deepen AI, Defense Ties",
+        "India, Vietnam Deepen AI and Defense Ties After Modi-Lam Meeting",
       publishedAt: "2026-09-22T07:00:00Z",
       image: LN3Img,
       link: "/business-news",
@@ -145,7 +145,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 4,
       hot: false,
       title:
-        "Indian Small-Caps Rally 21% From March Lows to Enter Bull Market",
+        "Indian Small-Caps Enter Bull Market After 21% Rally From March Lows",
       publishedAt: "2026-09-22T06:00:00Z",
       image: LN4Img,
       link: "/markets",
@@ -154,7 +154,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 5,
       hot: true,
       title:
-        "Sebi Taps AI in Growing Fight Against Market Manipulation and Fraud",
+        "Sebi Expands AI Use to Combat Market Manipulation and Fraud",
       publishedAt: "2026-09-22T09:24:00Z",
       image: Ln1Img,
       link: "/markets",
@@ -166,7 +166,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 1,
       hot: true,
       title:
-        "Derivatives Trading in India Sinks Most Since 2024 as Taxes Bite",
+        "India's Derivatives Trading Falls Most Since 2024 as Taxes Bite",
       publishedAt: "2026-09-22T10:00:00Z",
       image: HeroImg,
       link: "/markets",
@@ -175,7 +175,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 2,
       hot: false,
       title:
-        "Indian Small-Caps Rally 21% From March Lows to Enter Bull Market",
+        "Indian Small-Caps Enter Bull Market After 21% Rally From March Lows",
       publishedAt: "2026-09-22T06:00:00Z",
       image: InsImg,
       link: "/markets",
@@ -184,7 +184,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 3,
       hot: false,
       title:
-        "Asia's Beaten-Up Currencies Gain Traction After Defensive Moves",
+        "Asian Currencies Gain Traction After Defensive Moves",
       publishedAt: "2026-09-22T04:00:00Z",
       image: LN3Img,
       link: "/markets",
@@ -193,7 +193,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 4,
       hot: false,
       title:
-        "Stocks Rally, Brent Below $100 as Iran Hopes Mount",
+        "Stocks Rally as Brent Holds Below $100 on Iran Hopes",
       publishedAt: "2026-09-22T02:00:00Z",
       image: LN4Img,
       link: "/markets",
@@ -205,7 +205,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 1,
       hot: true,
       title:
-        "India's Prospects Bright but Tax Rules a Worry, JPMorgan CEO Dimon Says",
+        "JPMorgan CEO Dimon Says India's Outlook Is Strong but Tax Rules Worry Investors",
       publishedAt: "2026-09-22T11:26:00Z",
       image: HeroImg,
       link: "/finance",
@@ -214,7 +214,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 2,
       hot: false,
       title:
-        "India Clears Loan Guarantee Plan as War Hurts Firms, Airlines",
+        "India Clears Loan Guarantee Plan as War Pressures Firms and Airlines",
       publishedAt: "2026-09-21T22:00:00Z",
       image: InsImg,
       link: "/finance",
@@ -223,7 +223,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 3,
       hot: false,
       title:
-        "JPMorgan's Dimon Backs Chandrasekaran, Warns Tata Rift Could Hit Investment",
+        "Dimon Backs Chandrasekaran as Tata Rift Raises Investment Concerns",
       publishedAt: "2026-09-22T08:36:00Z",
       image: LN3Img,
       link: "/finance",
@@ -232,7 +232,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 4,
       hot: false,
       title:
-        "Standstill in India Gold Imports Drags On, Threatens Supply",
+        "India's Gold Import Standstill Threatens Supply",
       publishedAt: "2026-09-22T08:00:00Z",
       image: LN4Img,
       link: "/finance",
@@ -244,7 +244,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 1,
       hot: true,
       title:
-        "India's Prospects Bright but Tax Rules a Worry, JPMorgan CEO Dimon Says",
+        "JPMorgan CEO Dimon Says India's Outlook Is Strong but Tax Rules Worry Investors",
       publishedAt: "2026-09-22T11:26:00Z",
       image: HeroImg,
       link: "/business-news",
@@ -253,7 +253,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 2,
       hot: false,
       title:
-        "Berger Paints Ramps Up Expansion to Fend Off Birla Opus, JSW Dulux",
+        "Berger Paints Steps Up Expansion Amid Competition From Birla Opus, JSW Dulux",
       publishedAt: "2026-09-22T09:23:00Z",
       image: InsImg,
       link: "/business-news",
@@ -262,7 +262,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 3,
       hot: false,
       title:
-        "JPMorgan's Dimon Backs Chandrasekaran, Warns Tata Rift Could Hit Investment",
+        "Dimon Backs Chandrasekaran as Tata Rift Raises Investment Concerns",
       publishedAt: "2026-09-22T08:36:00Z",
       image: LN3Img,
       link: "/business-news",
@@ -271,7 +271,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 4,
       hot: false,
       title:
-        "Factory Floor or Family Office? India's Rich Youngsters Alarm Elders",
+        "India's Wealthy Youngsters Navigate Factory Floors and Family Offices",
       publishedAt: "2026-09-22T09:10:00Z",
       image: LN4Img,
       link: "/business-news",
@@ -283,7 +283,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 1,
       hot: true,
       title:
-        "Alibaba Unveils AI Chip to Drive Global Data Centre Buildout",
+        "Alibaba Unveils AI Chip as It Targets Global Data Centre Expansion",
       publishedAt: "2026-09-22T09:08:00Z",
       image: Ln1Img,
       link: "/technology",
@@ -292,7 +292,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 2,
       hot: true,
       title:
-        "Microsoft's Satya Nadella to Join OpenAI, Nvidia Leaders at Trump-Xi Dinner",
+        "Satya Nadella to Join OpenAI and Nvidia Leaders at Trump-Xi Dinner",
       publishedAt: "2026-09-22T08:08:00Z",
       image: HeroImg,
       link: "/technology",
@@ -301,7 +301,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 3,
       hot: false,
       title:
-        "Sebi Taps AI in Growing Fight Against Market Manipulation and Fraud",
+        "Sebi Expands AI Use to Combat Market Manipulation and Fraud",
       publishedAt: "2026-09-22T09:24:00Z",
       image: InsImg,
       link: "/technology",
@@ -319,7 +319,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 5,
       hot: false,
       title:
-        "India and Vietnam Deepen AI and Defense Ties as Leaders Meet",
+        "India and Vietnam Deepen AI and Defense Cooperation as Leaders Meet",
       publishedAt: "2026-09-22T07:00:00Z",
       image: LN4Img,
       link: "/technology",
@@ -331,7 +331,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 1,
       hot: true,
       title:
-        "Stocks Rally, Brent Below $100 as Iran Hopes Mount",
+        "Stocks Rally as Brent Holds Below $100 on Iran Hopes",
       publishedAt: "2026-09-22T02:00:00Z",
       image: LN4Img,
       link: "/energy",
@@ -340,7 +340,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 2,
       hot: false,
       title:
-        "India Clears Loan Guarantee Plan as War Hurts Firms, Airlines",
+        "India Clears Loan Guarantee Plan as War Pressures Firms and Airlines",
       publishedAt: "2026-09-21T22:00:00Z",
       image: HeroImg,
       link: "/energy",
@@ -349,7 +349,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 3,
       hot: false,
       title:
-        "India's ReNew Energy Trims Solar Output Due to Grid Constraints",
+        "ReNew Energy Trims Solar Output in India as Grid Constraints Persist",
       publishedAt: "2026-09-22T00:00:00Z",
       image: InsImg,
       link: "/energy",
@@ -358,7 +358,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 4,
       hot: false,
       title:
-        "Gold and Silver Surge on Iran War Optimism, Weaker Dollar",
+        "Gold and Silver Rise on Iran Optimism and a Weaker Dollar",
       publishedAt: "2026-09-22T01:00:00Z",
       image: LN3Img,
       link: "/energy",
@@ -370,7 +370,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 1,
       hot: false,
       title:
-        "Modi, Lam Meet as India and Vietnam Deepen AI, Defense Ties",
+        "India, Vietnam Deepen AI and Defense Ties After Modi-Lam Meeting",
       publishedAt: "2026-09-22T07:00:00Z",
       image: LN3Img,
       link: "/business-news",
@@ -379,7 +379,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 2,
       hot: false,
       title:
-        "Factory Floor or Family Office? India's Rich Youngsters Alarm Elders",
+        "India's Wealthy Youngsters Navigate Factory Floors and Family Offices",
       publishedAt: "2026-09-22T09:10:00Z",
       image: HeroImg,
       link: "/business-news",
@@ -388,7 +388,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 3,
       hot: false,
       title:
-        "India's ReNew Energy Trims Solar Output Due to Grid Constraints",
+        "ReNew Energy Trims Solar Output in India as Grid Constraints Persist",
       publishedAt: "2026-09-22T00:00:00Z",
       image: InsImg,
       link: "/energy",
@@ -397,7 +397,7 @@ const latestNewsData: Record<string, NewsItem[]> = {
       id: 4,
       hot: false,
       title:
-        "Sebi Taps AI in Growing Fight Against Market Manipulation and Fraud",
+        "Sebi Expands AI Use to Combat Market Manipulation and Fraud",
       publishedAt: "2026-09-22T09:24:00Z",
       image: LN4Img,
       link: "/technology",
@@ -414,9 +414,9 @@ const editorsPicks = [
     id: 1,
     category: "MARKETS",
     title:
-      "Sebi Taps AI in Growing Fight Against Market Manipulation and Fraud",
+      "Sebi Expands AI Use to Combat Market Manipulation and Fraud",
     excerpt:
-      "India's markets regulator is expanding its use of artificial intelligence to detect manipulation and fraud as trading volumes and data complexity rise across exchanges.",
+      "India's markets regulator is expanding its use of artificial intelligence to detect manipulation and fraud as trading volumes and data complexity increase across exchanges.",
     publishedAt: "2026-09-22T09:24:00Z",
     image: EdipickImg,
     link: "/markets",
@@ -425,7 +425,7 @@ const editorsPicks = [
     id: 2,
     category: "WORLD",
     title:
-      "Modi, Lam Meet as India and Vietnam Deepen AI, Defense Ties",
+      "India, Vietnam Deepen AI and Defense Ties After Modi-Lam Meeting",
     excerpt:
       "Indian and Vietnamese leaders met to deepen cooperation on artificial intelligence and defense as the two countries expand their strategic partnership.",
     publishedAt: "2026-09-22T07:00:00Z",
@@ -436,7 +436,7 @@ const editorsPicks = [
     id: 3,
     category: "FINANCE",
     title:
-      "JPMorgan's Dimon Backs Chandrasekaran, Warns Tata Rift Could Hit Investment",
+      "Dimon Backs Chandrasekaran as Tata Rift Raises Investment Concerns",
     excerpt:
       "JPMorgan CEO Jamie Dimon voiced support for Tata Sons chairman N. Chandrasekaran while warning that boardroom tensions at the conglomerate could weigh on investor confidence.",
     publishedAt: "2026-09-22T08:36:00Z",
@@ -452,7 +452,7 @@ const editorsPicks = [
 const magazinePreview = {
   title: "The AI Revolution",
   subtitle:
-    "Reshaping business, economies, technology, and the future of work.",
+    "How artificial intelligence is reshaping business, economies, technology, and the future of work.",
   image: Pt30Img,
 };
 
@@ -466,70 +466,70 @@ const prideTimes30 = [
     name: "Jensen Huang",
     company: "Nvidia",
     sector:
-      "Defining the AI infrastructure era through accelerated computing and robotics.",
+      "AI infrastructure, accelerated computing and robotics — areas central to Nvidia's technology strategy.",
   },
   {
     rank: 2,
     name: "Satya Nadella",
     company: "Microsoft",
     sector:
-      "Leading enterprise AI adoption and large-scale digital transformation.",
+      "Enterprise AI adoption and large-scale digital transformation across Microsoft's business ecosystem.",
   },
   {
     rank: 3,
     name: "Sundar Pichai",
     company: "Alphabet / Google",
     sector:
-      "Driving AI integration across search, cloud, and emerging technologies.",
+      "AI integration across search, cloud and emerging technology businesses at Alphabet.",
   },
   {
     rank: 4,
     name: "Elon Musk",
     company: "Tesla / SpaceX / X",
     sector:
-      "Expanding technology initiatives across energy, space, transportation, and AI.",
+      "Technology initiatives spanning energy, space, transportation and AI across Musk's companies.",
   },
   {
     rank: 5,
     name: "Sam Altman",
     company: "OpenAI",
     sector:
-      "Shaping the development and deployment of frontier artificial intelligence.",
+      "Development and deployment of frontier artificial intelligence through OpenAI's research and products.",
   },
   {
     rank: 6,
     name: "Andy Jassy",
     company: "Amazon",
     sector:
-      "Scaling AWS and cloud infrastructure for the next generation of AI workloads.",
+      "AWS and cloud infrastructure supporting the next generation of AI workloads.",
   },
   {
     rank: 7,
     name: "Lisa Su",
     company: "AMD",
     sector:
-      "Expanding competitive AI computing capabilities across CPUs and GPUs.",
+      "Competitive AI computing across CPUs and GPUs as AMD expands its role in the market.",
   },
   {
     rank: 8,
     name: "C.C. Wei",
     company: "TSMC",
     sector:
-      "Leading advanced semiconductor manufacturing for the global technology industry.",
+      "Advanced semiconductor manufacturing serving the global technology industry through TSMC.",
   },
   {
     rank: 9,
     name: "Alex Karp",
     company: "Palantir",
     sector:
-      "Expanding enterprise AI and data platforms across commercial and government markets.",
+      "Enterprise AI and data platforms serving commercial and government markets through Palantir.",
   },
   {
     rank: 10,
     name: "Mary Barra",
     company: "General Motors",
     sector:
-      "Navigating the transformation of the automotive industry through electrification and technology.",
+      "Automotive transformation through electrification and technology at General Motors.",
   },
 ];
 
