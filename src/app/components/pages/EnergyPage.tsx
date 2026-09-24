@@ -1,11 +1,12 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock } from "lucide-react";
+
 import Ener1Img from "../../../imports/Energy1.png";
 import Ener2Img from "../../../imports/Energy2.png";
 import Ener3Img from "../../../imports/Energy3.png";
 
 /* =========================================================
-   HERO DATA — CONTENT UNCHANGED
+   HERO DATA
 ========================================================= */
 
 const hero = {
@@ -40,7 +41,7 @@ const hero2 = {
 };
 
 /* =========================================================
-   ENERGY PRICES — CONTENT UNCHANGED
+   ENERGY PRICES
 ========================================================= */
 
 const energyPrices = [
@@ -96,7 +97,7 @@ const energyPrices = [
 ];
 
 /* =========================================================
-   RENEWABLE STORIES — CONTENT + IMAGES UNCHANGED
+   RENEWABLE STORIES
 ========================================================= */
 
 const renewableStories = [
@@ -127,7 +128,7 @@ const renewableStories = [
 ];
 
 /* =========================================================
-   DISPATCH GROUPS — CONTENT UNCHANGED
+   DISPATCH GROUPS
 ========================================================= */
 
 const dispatchGroups = [
@@ -224,7 +225,7 @@ const dispatchGroups = [
 ];
 
 /* =========================================================
-   SNAPSHOT — CONTENT UNCHANGED
+   INDUSTRY SNAPSHOT
 ========================================================= */
 
 const snapshot = [
@@ -251,7 +252,7 @@ const snapshot = [
 ];
 
 /* =========================================================
-   ENERGY MARKET REPORT — CONTENT UNCHANGED
+   ENERGY MARKET REPORT
 ========================================================= */
 
 const energyReportGroups = [
@@ -297,7 +298,7 @@ const energyReportStats = [
 ];
 
 /* =========================================================
-   HELPERS
+   SECTION HEADER
 ========================================================= */
 
 function SectionHeader({
@@ -308,8 +309,8 @@ function SectionHeader({
   note?: string;
 }) {
   return (
-    <div className="flex items-center justify-between border-b-2 border-[#17140F] pb-2.5 mb-5">
-      <h2 className="font-bold text-[14px] md:text-[15px] text-[#17140F]">
+    <div className="mb-5 flex items-center justify-between border-b-2 border-[#17140F] pb-2.5">
+      <h2 className="font-bold text-[14px] text-[#17140F] md:text-[15px]">
         {title}
       </h2>
 
@@ -322,6 +323,10 @@ function SectionHeader({
   );
 }
 
+/* =========================================================
+   STORY META
+========================================================= */
+
 function StoryMeta({
   author = "Sagar Kumar",
   time,
@@ -330,14 +335,46 @@ function StoryMeta({
   time: string;
 }) {
   return (
-    <div className="flex items-center gap-3 mt-3 text-[10px] text-[#8A887F]">
+    <div className="mt-3 flex items-center gap-3 text-[10px] text-[#8A887F]">
       <span>By {author}</span>
 
-      <span className="w-1 h-1 rounded-full bg-[#C9C5BB]" />
+      <span className="h-1 w-1 rounded-full bg-[#C9C5BB]" />
 
       <span className="flex items-center gap-1">
         <Clock size={10} />
         {time}
+      </span>
+    </div>
+  );
+}
+
+/* =========================================================
+   ADVERTISEMENT BANNER
+========================================================= */
+
+function AdvertisementBanner({
+  children = "Advertisement Space",
+}: {
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="relative mb-5 flex h-[72px] w-full items-center justify-center overflow-hidden bg-gradient-to-r from-[#102B32] via-[#1D414A] to-[#315B69] sm:h-[82px]">
+      <div className="text-center text-white">
+        <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#55B5CE] sm:text-[9px]">
+          GOOGLE ADSENSE
+        </p>
+
+        <p className="mt-1 text-[12px] font-semibold sm:text-[14px]">
+          {children}
+        </p>
+
+        <p className="mt-0.5 text-[8px] text-[#8BBBC6]">
+          728 × 90 • Leaderboard
+        </p>
+      </div>
+
+      <span className="absolute right-1 top-1 bg-white/70 px-1 text-[7px] text-gray-500">
+        Advertisement
       </span>
     </div>
   );
@@ -349,78 +386,56 @@ function StoryMeta({
 
 export function EnergyPage() {
   return (
-    <main className="w-full min-h-screen bg-[#FAFAF7] text-[#17140F] overflow-x-hidden">
-      {/* =====================================================
-          FULL WIDTH PAGE CONTAINER
-      ===================================================== */}
-
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 py-5 md:py-7">
+    <main className="min-h-screen w-full overflow-x-hidden bg-[#FAFAF7] text-[#17140F]">
+      <div className="w-full px-4 py-5 sm:px-6 md:px-8 md:py-7 lg:px-10 xl:px-12 2xl:px-16">
 
         {/* ===================================================
             PAGE TITLE
         =================================================== */}
 
-        <header className="border-t-[3px] border-[#D92323] pt-4 pb-5 mb-8">
-          <h1 className="font-serif text-[32px] sm:text-[38px] md:text-[42px] lg:text-[46px] font-bold leading-none tracking-tight">
+        <header className="mb-8 border-t-[3px] border-[#D92323] pb-5 pt-4">
+          <h1 className="font-serif text-[32px] font-bold leading-none tracking-tight sm:text-[38px] md:text-[42px] lg:text-[46px]">
             Energy
           </h1>
 
-          <p className="mt-2 text-[12px] sm:text-[13px] text-[#77736B]">
+          <p className="mt-2 text-[12px] text-[#77736B] sm:text-[13px]">
             Oil &amp; gas, renewables, nuclear, and the global energy transition.
           </p>
         </header>
 
         {/* ===================================================
-            TOP ADVERTISEMENT BANNER
+            TOP ADVERTISEMENT
         =================================================== */}
 
-        <div className="w-full h-[72px] sm:h-[82px] mb-5 bg-gradient-to-r from-[#102B32] via-[#1D414A] to-[#315B69] flex items-center justify-center relative overflow-hidden">
-          <div className="text-center text-white">
-            <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#55B5CE] font-bold">
-              GOOGLE ADSENSE
-            </p>
-
-            <p className="text-[12px] sm:text-[14px] font-semibold mt-1">
-              Advertisement Space
-            </p>
-
-            <p className="text-[8px] text-[#8BBBC6] mt-0.5">
-              728 × 90 • Leaderboard
-            </p>
-          </div>
-
-          <span className="absolute right-1 top-1 text-[7px] bg-white/70 text-gray-500 px-1">
-            Advertisement
-          </span>
-        </div>
+        <AdvertisementBanner />
 
         {/* ===================================================
             HERO AREA
         =================================================== */}
 
-        <section className="grid grid-cols-1 xl:grid-cols-[minmax(0,3.3fr)_300px] gap-6 xl:gap-7 mb-12">
+        <section className="mb-12 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,3.3fr)_300px] xl:gap-7">
 
           {/* MAIN HERO */}
 
-          <article className="group cursor-pointer min-w-0">
+          <article className="group min-w-0 cursor-pointer">
             <div className="overflow-hidden rounded-lg bg-[#E8E5DD]">
               <ImageWithFallback
                 src={hero.image}
                 alt={hero.title}
-                className="w-full h-[260px] sm:h-[350px] md:h-[430px] lg:h-[500px] xl:h-[520px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
+                className="h-[260px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] sm:h-[350px] md:h-[430px] lg:h-[500px] xl:h-[520px]"
               />
             </div>
 
             <div className="mt-3">
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.14em] text-[#B8752E]">
+              <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-[#B8752E] sm:text-[10px]">
                 {hero.category}
               </span>
 
-              <h2 className="font-serif text-[24px] sm:text-[30px] md:text-[35px] lg:text-[38px] xl:text-[40px] font-bold leading-[1.05] mt-1.5 tracking-tight group-hover:text-[#B8752E] transition-colors duration-200">
+              <h2 className="mt-1.5 font-serif text-[24px] font-bold leading-[1.05] tracking-tight transition-colors duration-200 group-hover:text-[#B8752E] sm:text-[30px] md:text-[35px] lg:text-[38px] xl:text-[40px]">
                 {hero.title}
               </h2>
 
-              <p className="text-[12px] sm:text-[13px] md:text-[14px] text-[#66625A] leading-[1.6] mt-3 max-w-5xl">
+              <p className="mt-3 max-w-5xl text-[12px] leading-[1.6] text-[#66625A] sm:text-[13px] md:text-[14px]">
                 {hero.excerpt}
               </p>
 
@@ -434,22 +449,22 @@ export function EnergyPage() {
 
             {/* SPONSORED CONTENT */}
 
-            <div className="border border-[#E3DED1] bg-[#F8F4E8] rounded-md p-2 mb-4">
-              <div className="text-[7px] uppercase tracking-widest text-[#8A887F] mb-2">
+            <div className="mb-4 rounded-md border border-[#E3DED1] bg-[#F8F4E8] p-2">
+              <div className="mb-2 text-[7px] uppercase tracking-widest text-[#8A887F]">
                 Sponsored Content
               </div>
 
-              <div className="h-[145px] sm:h-[170px] xl:h-[185px] bg-[#111A3A] flex items-center justify-center text-center">
+              <div className="flex h-[145px] items-center justify-center bg-[#111A3A] text-center sm:h-[170px] xl:h-[185px]">
                 <div>
-                  <p className="text-[8px] text-[#E4C94C] uppercase font-bold tracking-widest">
+                  <p className="text-[8px] font-bold uppercase tracking-widest text-[#E4C94C]">
                     Featured Partner
                   </p>
 
-                  <p className="text-white font-semibold text-[12px] mt-2">
+                  <p className="mt-2 text-[12px] font-semibold text-white">
                     Your Ad Here
                   </p>
 
-                  <p className="text-[8px] text-gray-300 mt-1">
+                  <p className="mt-1 text-[8px] text-gray-300">
                     Reach 2M+ business readers
                   </p>
                 </div>
@@ -464,33 +479,32 @@ export function EnergyPage() {
               {renewableStories.map((story) => (
                 <article
                   key={story.id}
-                  className="py-3 first:pt-0 flex gap-3 group cursor-pointer"
+                  className="group flex cursor-pointer gap-3 py-3 first:pt-0"
                 >
-                  <div className="w-[82px] h-[60px] shrink-0 overflow-hidden rounded-md bg-gray-200">
+                  <div className="h-[60px] w-[82px] shrink-0 overflow-hidden rounded-md bg-gray-200">
                     <ImageWithFallback
                       src={story.image}
                       alt={story.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
 
                   <div className="min-w-0">
-                    <span className="text-[7px] uppercase font-bold text-[#B8752E]">
+                    <span className="text-[7px] font-bold uppercase text-[#B8752E]">
                       Energy
                     </span>
 
-                    <h3 className="text-[11px] sm:text-[12px] font-bold leading-[1.25] mt-0.5 group-hover:text-[#B8752E] transition-colors">
+                    <h3 className="mt-0.5 text-[11px] font-bold leading-[1.25] transition-colors group-hover:text-[#B8752E] sm:text-[12px]">
                       {story.title}
                     </h3>
 
-                    <span className="text-[8px] text-[#99958B] mt-1 block">
+                    <span className="mt-1 block text-[8px] text-[#99958B]">
                       {story.time}
                     </span>
                   </div>
                 </article>
               ))}
             </div>
-
           </aside>
         </section>
 
@@ -501,20 +515,18 @@ export function EnergyPage() {
         <section className="mb-10">
           <SectionHeader title="Latest Energy News" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-
-            {/* Existing renewable stories */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
 
             {renewableStories.map((story) => (
               <article
                 key={`renewable-${story.id}`}
-                className="group cursor-pointer border border-[#E2DED5] bg-white rounded-md overflow-hidden hover:shadow-md transition-shadow duration-300"
+                className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md"
               >
-                <div className="overflow-hidden h-[180px] sm:h-[190px] md:h-[205px] bg-gray-100">
+                <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
                   <ImageWithFallback
                     src={story.image}
                     alt={story.title}
-                    className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
                 </div>
 
@@ -523,11 +535,11 @@ export function EnergyPage() {
                     Renewable Energy
                   </span>
 
-                  <h3 className="font-serif text-[16px] sm:text-[17px] font-bold leading-[1.15] mt-1.5 group-hover:text-[#B8752E] transition-colors">
+                  <h3 className="mt-1.5 font-serif text-[16px] font-bold leading-[1.15] transition-colors group-hover:text-[#B8752E] sm:text-[17px]">
                     {story.title}
                   </h3>
 
-                  <div className="flex items-center gap-1.5 text-[9px] text-[#99958B] mt-2.5">
+                  <div className="mt-2.5 flex items-center gap-1.5 text-[9px] text-[#99958B]">
                     <Clock size={9} />
                     {story.time}
                   </div>
@@ -535,14 +547,14 @@ export function EnergyPage() {
               </article>
             ))}
 
-            {/* Existing hero 1 */}
+            {/* HERO 1 */}
 
-            <article className="group cursor-pointer border border-[#E2DED5] bg-white rounded-md overflow-hidden hover:shadow-md transition-shadow duration-300">
-              <div className="overflow-hidden h-[180px] sm:h-[190px] md:h-[205px] bg-gray-100">
+            <article className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
+              <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
                 <ImageWithFallback
                   src={hero1.image}
                   alt={hero1.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
               </div>
 
@@ -551,7 +563,7 @@ export function EnergyPage() {
                   {hero1.category}
                 </span>
 
-                <h3 className="font-serif text-[16px] sm:text-[17px] font-bold leading-[1.15] mt-1.5 group-hover:text-[#B8752E] transition-colors">
+                <h3 className="mt-1.5 font-serif text-[16px] font-bold leading-[1.15] transition-colors group-hover:text-[#B8752E] sm:text-[17px]">
                   {hero1.title}
                 </h3>
 
@@ -559,14 +571,14 @@ export function EnergyPage() {
               </div>
             </article>
 
-            {/* Existing hero 2 */}
+            {/* HERO 2 */}
 
-            <article className="group cursor-pointer border border-[#E2DED5] bg-white rounded-md overflow-hidden hover:shadow-md transition-shadow duration-300">
-              <div className="overflow-hidden h-[180px] sm:h-[190px] md:h-[205px] bg-gray-100">
+            <article className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
+              <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
                 <ImageWithFallback
                   src={hero2.image}
                   alt={hero2.title}
-                  className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
               </div>
 
@@ -575,49 +587,31 @@ export function EnergyPage() {
                   {hero2.category}
                 </span>
 
-                <h3 className="font-serif text-[16px] sm:text-[17px] font-bold leading-[1.15] mt-1.5 group-hover:text-[#B8752E] transition-colors">
+                <h3 className="mt-1.5 font-serif text-[16px] font-bold leading-[1.15] transition-colors group-hover:text-[#B8752E] sm:text-[17px]">
                   {hero2.title}
                 </h3>
 
                 <StoryMeta time={hero2.time} />
               </div>
             </article>
-
           </div>
         </section>
 
         {/* ===================================================
-            SECOND ADVERTISEMENT BANNER
+            SECOND ADVERTISEMENT
         =================================================== */}
 
-        <div className="w-full h-[72px] sm:h-[82px] mb-8 bg-gradient-to-r from-[#102B32] via-[#1D414A] to-[#315B69] flex items-center justify-center relative overflow-hidden">
-          <div className="text-center text-white">
-            <p className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-[#55B5CE] font-bold">
-              GOOGLE ADSENSE
-            </p>
-
-            <p className="text-[12px] sm:text-[14px] font-semibold mt-1">
-              Business Solutions | Powered by The Pride Times
-            </p>
-
-            <p className="text-[8px] text-[#8BBBC6] mt-0.5">
-              728 × 90 • Leaderboard
-            </p>
-          </div>
-
-          <span className="absolute right-1 top-1 text-[7px] bg-white/70 text-gray-500 px-1">
-            Advertisement
-          </span>
-        </div>
+        <AdvertisementBanner>
+          Business Solutions | Powered by The Pride Times
+        </AdvertisementBanner>
 
         {/* ===================================================
             SPONSORSHIP
         =================================================== */}
 
-        <section className="bg-[#F5F3EE] border border-[#E6E1D7] rounded-md p-4 sm:p-5 mb-8">
-
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-[8px] uppercase tracking-[0.14em] bg-white border border-[#DED9CE] px-2 py-1 text-[#8A887F]">
+        <section className="mb-8 rounded-md border border-[#E6E1D7] bg-[#F5F3EE] p-4 sm:p-5">
+          <div className="mb-4 flex items-center gap-2">
+            <span className="border border-[#DED9CE] bg-white px-2 py-1 text-[8px] uppercase tracking-[0.14em] text-[#8A887F]">
               Sponsorship
             </span>
 
@@ -626,8 +620,7 @@ export function EnergyPage() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               "Global Finance Summit 2026",
               "Tech Leaders Forum",
@@ -636,22 +629,21 @@ export function EnergyPage() {
             ].map((title) => (
               <div
                 key={title}
-                className="bg-white border border-[#E4DFD6] rounded-md h-[90px] flex flex-col items-center justify-center text-center"
+                className="flex h-[90px] flex-col items-center justify-center rounded-md border border-[#E4DFD6] bg-white text-center"
               >
-                <div className="w-7 h-7 rounded-full bg-red-50 flex items-center justify-center mb-2">
-                  <span className="text-[#D92323] text-[11px]">✦</span>
+                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-red-50">
+                  <span className="text-[11px] text-[#D92323]">✦</span>
                 </div>
 
                 <p className="text-[9px] font-bold text-[#17140F]">
                   {title}
                 </p>
 
-                <p className="text-[7px] text-[#99958B] mt-1">
+                <p className="mt-1 text-[7px] text-[#99958B]">
                   Sponsored Event
                 </p>
               </div>
             ))}
-
           </div>
         </section>
 
@@ -660,19 +652,18 @@ export function EnergyPage() {
         =================================================== */}
 
         <section className="mb-10">
-
           <SectionHeader
             title="Energy Market Report"
             note="July 2026 Wrap"
           />
 
-          <p className="text-[9px] uppercase tracking-[0.14em] text-[#8A887F] mb-4">
+          <p className="mb-4 text-[9px] uppercase tracking-[0.14em] text-[#8A887F]">
             2.2 &nbsp; Energy
           </p>
 
-          {/* Key figures */}
+          {/* KEY FIGURES */}
 
-          <div className="w-full overflow-x-auto border border-[#D9D4C7] bg-white mb-6">
+          <div className="mb-6 w-full overflow-x-auto border border-[#D9D4C7] bg-white">
             <div className="flex min-w-[850px]">
               {energyReportStats.map((stat, index) => (
                 <div
@@ -681,11 +672,11 @@ export function EnergyPage() {
                     index > 0 ? "border-l border-[#D9D4C7]" : ""
                   }`}
                 >
-                  <p className="text-xl md:text-2xl font-mono font-semibold text-[#B8752E]">
+                  <p className="font-mono text-xl font-semibold text-[#B8752E] md:text-2xl">
                     {stat.value}
                   </p>
 
-                  <p className="text-[8px] uppercase tracking-wide text-[#8A887F] mt-1 leading-tight">
+                  <p className="mt-1 text-[8px] uppercase leading-tight tracking-wide text-[#8A887F]">
                     {stat.label}
                   </p>
                 </div>
@@ -693,21 +684,20 @@ export function EnergyPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {energyReportGroups.map((group) => (
               <div
                 key={group.code}
-                className="bg-white border border-[#D9D4C7]"
+                className="border border-[#D9D4C7] bg-white"
               >
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-[#D9D4C7]">
+                <div className="flex items-center gap-2 border-b border-[#D9D4C7] px-4 py-3">
                   <span className="font-mono text-[10px] font-bold text-[#B8752E]">
                     {group.code}
                   </span>
 
                   <span className="text-[#AAA69D]">—</span>
 
-                  <h3 className="text-[10px] uppercase tracking-[0.1em] font-bold">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.1em]">
                     {group.title}
                   </h3>
                 </div>
@@ -716,9 +706,9 @@ export function EnergyPage() {
                   {group.points.map((point, index) => (
                     <div
                       key={index}
-                      className="flex gap-2 mb-3 last:mb-0"
+                      className="mb-3 flex gap-2 last:mb-0"
                     >
-                      <span className="text-[#B8752E] text-[9px] mt-1">
+                      <span className="mt-1 text-[9px] text-[#B8752E]">
                         ▪
                       </span>
 
@@ -729,21 +719,21 @@ export function EnergyPage() {
                   ))}
 
                   {group.growth && (
-                    <div className="pt-3 mt-3 border-t border-[#E5E1D8]">
-                      <p className="text-[8px] uppercase tracking-wide text-[#8A887F] mb-2">
+                    <div className="mt-3 border-t border-[#E5E1D8] pt-3">
+                      <p className="mb-2 text-[8px] uppercase tracking-wide text-[#8A887F]">
                         Generation growth, H1 2026 vs. H1 2025
                       </p>
 
                       {group.growth.map((growth) => (
                         <div
                           key={growth.label}
-                          className="flex items-center gap-2 mb-2"
+                          className="mb-2 flex items-center gap-2"
                         >
-                          <span className="text-[9px] w-[65px] text-[#66625A]">
+                          <span className="w-[65px] text-[9px] text-[#66625A]">
                             {growth.label}
                           </span>
 
-                          <div className="flex-1 h-1.5 bg-[#EEEAE1] overflow-hidden">
+                          <div className="h-1.5 flex-1 overflow-hidden bg-[#EEEAE1]">
                             <div
                               className="h-full bg-[#B8752E]"
                               style={{
@@ -752,7 +742,7 @@ export function EnergyPage() {
                             />
                           </div>
 
-                          <span className="text-[9px] font-mono text-[#B8752E] w-7 text-right">
+                          <span className="w-7 text-right font-mono text-[9px] text-[#B8752E]">
                             +{growth.value}%
                           </span>
                         </div>
@@ -762,7 +752,6 @@ export function EnergyPage() {
                 </div>
               </div>
             ))}
-
           </div>
         </section>
 
@@ -770,31 +759,35 @@ export function EnergyPage() {
             INDUSTRY SNAPSHOT + SECONDARY HERO
         =================================================== */}
 
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+        <section className="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
+
+          {/* SECONDARY HERO */}
 
           <article className="group cursor-pointer">
             <div className="overflow-hidden rounded-lg bg-gray-100">
               <ImageWithFallback
                 src={hero2.image}
                 alt={hero2.title}
-                className="w-full h-[270px] sm:h-[350px] lg:h-[400px] object-cover group-hover:scale-[1.025] transition-transform duration-700"
+                className="h-[270px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] sm:h-[350px] lg:h-[400px]"
               />
             </div>
 
-            <span className="block mt-3 text-[9px] font-bold uppercase tracking-[0.14em] text-[#B8752E]">
+            <span className="mt-3 block text-[9px] font-bold uppercase tracking-[0.14em] text-[#B8752E]">
               {hero2.category}
             </span>
 
-            <h2 className="font-serif text-[23px] sm:text-[28px] font-bold leading-[1.1] mt-1.5 group-hover:text-[#B8752E] transition-colors">
+            <h2 className="mt-1.5 font-serif text-[23px] font-bold leading-[1.1] transition-colors group-hover:text-[#B8752E] sm:text-[28px]">
               {hero2.title}
             </h2>
 
-            <p className="text-[12px] sm:text-[13px] text-[#66625A] leading-[1.6] mt-2.5">
+            <p className="mt-2.5 text-[12px] leading-[1.6] text-[#66625A] sm:text-[13px]">
               {hero2.excerpt}
             </p>
 
             <StoryMeta time={hero2.time} />
           </article>
+
+          {/* SNAPSHOT */}
 
           <div>
             <SectionHeader title="Industry Snapshot" />
@@ -803,7 +796,7 @@ export function EnergyPage() {
               {snapshot.map((row, index) => (
                 <div
                   key={row.label}
-                  className={`grid grid-cols-1 sm:grid-cols-[40%_1fr] gap-2 sm:gap-5 py-4 border-b border-[#D9D4C7] ${
+                  className={`grid grid-cols-1 gap-2 border-b border-[#D9D4C7] py-4 sm:grid-cols-[40%_1fr] sm:gap-5 ${
                     index === 0 ? "border-t border-[#D9D4C7]" : ""
                   }`}
                 >
@@ -811,14 +804,14 @@ export function EnergyPage() {
                     {row.label}
                   </span>
 
-                  <span className="text-[12px] sm:text-[13px] leading-snug text-[#17140F]">
+                  <span className="text-[12px] leading-snug text-[#17140F] sm:text-[13px]">
                     {row.value}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* Commodities */}
+            {/* ENERGY PRICES */}
 
             <div className="mt-8">
               <SectionHeader title="Energy Prices" />
@@ -827,14 +820,14 @@ export function EnergyPage() {
                 {energyPrices.map((energy) => (
                   <div
                     key={energy.commodity}
-                    className="flex items-center justify-between gap-3 px-3 py-2.5 border-b border-[#3A3934] last:border-b-0"
+                    className="flex items-center justify-between gap-3 border-b border-[#3A3934] px-3 py-2.5 last:border-b-0"
                   >
-                    <span className="text-[8px] sm:text-[9px] font-mono text-[#B8B4A8]">
+                    <span className="font-mono text-[8px] text-[#B8B4A8] sm:text-[9px]">
                       {energy.commodity}
                     </span>
 
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-[10px] font-mono">
+                    <div className="flex shrink-0 items-center gap-2">
+                      <span className="font-mono text-[10px]">
                         {energy.price}
                         <span className="text-[#8A887F]">
                           {energy.unit}
@@ -842,7 +835,7 @@ export function EnergyPage() {
                       </span>
 
                       <span
-                        className={`text-[8px] font-mono ${
+                        className={`font-mono text-[8px] ${
                           energy.up
                             ? "text-emerald-400"
                             : "text-red-400"
@@ -856,7 +849,6 @@ export function EnergyPage() {
               </div>
             </div>
           </div>
-
         </section>
 
         {/* ===================================================
@@ -864,24 +856,22 @@ export function EnergyPage() {
         =================================================== */}
 
         <section className="mb-10">
-
           <SectionHeader title="Sector Dispatches" />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#D9D4C7]">
-
+          <div className="grid grid-cols-1 divide-y divide-[#D9D4C7] md:grid-cols-3 md:divide-x md:divide-y-0">
             {dispatchGroups.map((group) => (
               <div
                 key={group.code}
-                className="py-5 md:py-0 md:px-6 first:pl-0 last:pr-0"
+                className="py-5 md:px-6 md:py-0 first:md:pl-0 last:md:pr-0"
               >
-                <div className="flex items-center gap-2 mb-4">
+                <div className="mb-4 flex items-center gap-2">
                   <span className="font-mono text-[10px] font-bold text-[#B8752E]">
                     {group.code}
                   </span>
 
                   <span className="text-[#AAA69D]">—</span>
 
-                  <h3 className="text-[10px] uppercase tracking-[0.1em] font-bold">
+                  <h3 className="text-[10px] font-bold uppercase tracking-[0.1em]">
                     {group.title}
                   </h3>
                 </div>
@@ -892,11 +882,11 @@ export function EnergyPage() {
                       key={story.id}
                       className="group cursor-pointer"
                     >
-                      <p className="text-[12px] sm:text-[13px] leading-[1.45] group-hover:text-[#B8752E] transition-colors">
+                      <p className="text-[12px] leading-[1.45] transition-colors group-hover:text-[#B8752E] sm:text-[13px]">
                         {story.title}
                       </p>
 
-                      <span className="flex items-center gap-1 text-[8px] uppercase tracking-wide text-[#8A887F] mt-1.5">
+                      <span className="mt-1.5 flex items-center gap-1 text-[8px] uppercase tracking-wide text-[#8A887F]">
                         <Clock size={9} />
                         {story.time}
                       </span>
@@ -905,34 +895,39 @@ export function EnergyPage() {
                 </div>
               </div>
             ))}
-
           </div>
         </section>
 
         {/* ===================================================
-            NEWSLETTER — LIKE SCREENSHOT
+            NEWSLETTER
         =================================================== */}
 
-        <section className="w-full bg-[#071C30] rounded-md px-5 sm:px-8 py-8 sm:py-9 mb-2 text-center">
-          <h2 className="font-serif text-white text-[22px] sm:text-[26px] font-bold">
+        <section className="mb-2 w-full rounded-md bg-[#071C30] px-5 py-8 text-center sm:px-8 sm:py-9">
+          <h2 className="font-serif text-[22px] font-bold text-white sm:text-[26px]">
             Stay Ahead with The Pride Times
           </h2>
 
-          <p className="text-[10px] sm:text-[11px] text-gray-300 mt-1">
+          <p className="mt-1 text-[10px] text-gray-300 sm:text-[11px]">
             Daily briefings on Energy delivered to your inbox.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-2 mt-5 max-w-[480px] mx-auto">
+          <form
+            onSubmit={(e) => e.preventDefault()}
+            className="mx-auto mt-5 flex max-w-[480px] flex-col justify-center gap-2 sm:flex-row"
+          >
             <input
               type="email"
               placeholder="Enter your email"
-              className="h-10 flex-1 bg-[#20374B] border border-[#385067] rounded-sm px-3 text-[11px] text-white placeholder:text-gray-400 outline-none focus:border-[#B8752E]"
+              className="h-10 flex-1 rounded-sm border border-[#385067] bg-[#20374B] px-3 text-[11px] text-white outline-none placeholder:text-gray-400 focus:border-[#B8752E]"
             />
 
-            <button className="h-10 px-5 bg-[#E31B23] hover:bg-[#C8171E] text-white rounded-sm text-[10px] font-bold transition-colors">
+            <button
+              type="submit"
+              className="h-10 rounded-sm bg-[#E31B23] px-5 text-[10px] font-bold text-white transition-colors hover:bg-[#C8171E]"
+            >
               Subscribe Free
             </button>
-          </div>
+          </form>
         </section>
 
       </div>
