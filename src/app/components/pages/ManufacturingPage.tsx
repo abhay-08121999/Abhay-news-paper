@@ -1,4 +1,6 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { Link } from "react-router";
+import { specialArticlePath } from "../../data/specialArticleData";
 import {
   Clock,
   Factory,
@@ -948,10 +950,11 @@ function IndustryStream({
       />
 
       <div>
-        {stories.map((story) => (
-          <article
+        {stories.map((story, index) => (
+          <Link
             key={story.id}
-            className="group py-2.5 border-b border-gray-200 last:border-0"
+            to={specialArticlePath(`manufacturing-industry-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-${index + 1}`)}
+            className="group block py-2.5 border-b border-gray-200 last:border-0"
           >
             <h3 className="text-[11px] md:text-[12px] leading-[1.4] font-medium text-gray-900 group-hover:text-[#e31b23] transition-colors">
               {story.title}
@@ -961,7 +964,7 @@ function IndustryStream({
               <Clock size={9} />
               {story.time}
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>
@@ -1106,7 +1109,7 @@ export function ManufacturingPage() {
 
           {/* LEAD STORY */}
           <div className="min-w-0">
-            <HeroStoryCard story={hero} />
+            <Link to={specialArticlePath("manufacturing-reshoring") } className="block"><HeroStoryCard story={hero} /></Link>
           </div>
 
           {/* MAJOR STORIES RAIL */}
@@ -1119,10 +1122,7 @@ export function ManufacturingPage() {
 
             <div className="mt-3 space-y-4">
               {majorStories.map((story) => (
-                <MajorStory
-                  key={story.id}
-                  story={story}
-                />
+                <Link key={story.id} to={specialArticlePath(`manufacturing-major-${story.id}`)} className="block"><MajorStory story={story} /></Link>
               ))}
             </div>
 
@@ -1145,10 +1145,7 @@ export function ManufacturingPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6">
             {manufacturingCoverage.map((story) => (
-              <CoverageStory
-                key={story.id}
-                story={story}
-              />
+              <Link key={story.id} to={specialArticlePath(`manufacturing-coverage-${story.id}`)} className="block"><CoverageStory story={story} /></Link>
             ))}
           </div>
         </section>
@@ -1169,10 +1166,7 @@ export function ManufacturingPage() {
             {/* NEWS GRID */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
               {latestStories.map((story) => (
-                <LatestNewsCard
-                  key={story.id}
-                  story={story}
-                />
+                <Link key={story.id} to={specialArticlePath(`manufacturing-latest-${story.id}`)} className="block"><LatestNewsCard story={story} /></Link>
               ))}
             </div>
 
@@ -1213,9 +1207,10 @@ export function ManufacturingPage() {
                 time: "8 hr ago",
                 image: Manu3Img,
               },
-            ].map((story) => (
-              <article
+            ].map((story, index) => (
+              <Link
                 key={story.title}
+                to={specialArticlePath(`manufacturing-more-${index + 1}`)}
                 className="group flex gap-3 py-3 border-b border-gray-200"
               >
                 <div className="w-[85px] h-[60px] shrink-0 overflow-hidden rounded-sm">
@@ -1239,7 +1234,7 @@ export function ManufacturingPage() {
                     {story.time}
                   </p>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
