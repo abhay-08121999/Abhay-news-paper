@@ -19,6 +19,7 @@ import Ln1Img from "../../../imports/Ln1.png";
 
 import { getQuotes } from "../../../services/marketApi";
 import { TimeAgo } from "../../utils/timeAgo";
+import { articlePath } from "../../data/homepageArticleData";
 
 /* =========================================================
    TYPES
@@ -731,7 +732,7 @@ export function HomePage() {
               {/* LEAD STORY */}
 
               <Link
-                to={heroStory.link}
+                to={articlePath(heroStory.title)}
                 className="
                   group
                   relative
@@ -859,7 +860,7 @@ export function HomePage() {
                   </span>
 
                   <Link
-                    to={centerStories[0].link}
+                    to={articlePath(centerStories[0].title)}
                     className="group block"
                   >
                     <div className="overflow-hidden rounded-lg">
@@ -912,7 +913,7 @@ export function HomePage() {
                 {/* SECOND MAJOR STORY */}
 
                 <Link
-                  to={centerStories[1].link}
+                  to={articlePath(centerStories[1].title)}
                   className="
                     group
                     flex
@@ -1123,7 +1124,7 @@ export function HomePage() {
                   </div>
 
                   <Link
-                    to={videoFeature.link}
+                    to={articlePath(videoFeature.title)}
                     className="group block"
                   >
                     <div className="relative overflow-hidden rounded-lg">
@@ -1232,7 +1233,7 @@ export function HomePage() {
                     {sidebarNews.map((item) => (
                       <Link
                         key={item.id}
-                        to={item.link}
+                        to={articlePath(item.title)}
                         className="
                           group
                           block
@@ -1328,7 +1329,7 @@ export function HomePage() {
               {latestStories.map((story, index) => (
                 <Link
                   key={story.id}
-                  to={story.link}
+                  to={articlePath(story.title)}
                   className="
                     group
                     grid
@@ -1457,7 +1458,7 @@ export function HomePage() {
                 {editorsPicks.map((pick) => (
                   <Link
                     key={pick.id}
-                    to={pick.link}
+                    to={articlePath(pick.title)}
                     className="
                       group
                       grid
