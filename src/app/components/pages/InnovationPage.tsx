@@ -1,5 +1,6 @@
 import { Clock } from "lucide-react";
 import { Link } from "react-router";
+import { specialArticlePath } from "../../data/specialArticleData";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 /* =========================================================
@@ -23,9 +24,13 @@ function AdSlot({
         Google AdSense
       </p>
 
-      <p className="font-semibold text-sm md:text-base">{title}</p>
+      <p className="font-semibold text-sm md:text-base">
+        {title}
+      </p>
 
-      <p className="text-xs text-sky-300/80 mt-1">{label}</p>
+      <p className="text-xs text-sky-300/80 mt-1">
+        {label}
+      </p>
     </div>
   );
 }
@@ -92,7 +97,8 @@ const latestNews = [
   {
     category: "Innovation Awards",
     hot: true,
-    title: "NVIDIA Blackwell Ultra GPU Delivers a 40x Leap in LLM Training Speed",
+    title:
+      "NVIDIA Blackwell Ultra GPU Delivers a 40x Leap in LLM Training Speed",
     excerpt:
       "NVIDIA takes the #2 spot in AI / Computing at the Pride Times Innovation Awards 2026 for the Blackwell Ultra GPU.",
     author: "Sagar Kumar",
@@ -115,7 +121,8 @@ const latestNews = [
   {
     category: "Space Tech",
     hot: false,
-    title: "Starship Full Reusability Cuts Launch Costs by 100x",
+    title:
+      "Starship Full Reusability Cuts Launch Costs by 100x",
     excerpt:
       "SpaceX's #4 Innovation Award pick — full reusability is reshaping the economics of getting to orbit.",
     author: "Sagar Kumar",
@@ -126,7 +133,8 @@ const latestNews = [
   {
     category: "Startup Watch",
     hot: false,
-    title: "Isomorphic Labs Raises $600M Series B for AI Drug Discovery",
+    title:
+      "Isomorphic Labs Raises $600M Series B for AI Drug Discovery",
     excerpt:
       "The UK-based startup enters our Growth-stage Startup Watch list, applying AI to accelerate drug discovery pipelines.",
     author: "Sagar Kumar",
@@ -172,12 +180,43 @@ const sponsoredEvents = [
 ];
 
 /* =========================================================
-   MAIN PAGE
+   ARTICLE IDS
+========================================================= */
+
+const innovationArticleIds: Record<string, string> = {
+  "Toyota's QuantumBattery Crosses the Commercialization Threshold":
+    "innovation-quantumbattery",
+
+  "NVIDIA Blackwell Ultra GPU Delivers a 40x Leap in LLM Training Speed":
+    "innovation-blackwell",
+
+  "mRNA Universal Cancer Vaccine Hits 94% Efficacy Across 6 Cancer Types":
+    "innovation-mrna",
+
+  "Starship Full Reusability Cuts Launch Costs by 100x":
+    "innovation-starship",
+
+  "Isomorphic Labs Raises $600M Series B for AI Drug Discovery":
+    "innovation-drug-discovery",
+
+  "Room-Temperature Superconductor Verified in Independent Tests at MIT":
+    "innovation-superconductor",
+};
+
+function innovationArticlePath(title: string) {
+  return specialArticlePath(
+    innovationArticleIds[title] || "innovation-quantumbattery"
+  );
+}
+
+/* =========================================================
+   PAGE
 ========================================================= */
 
 export function InnovationPage() {
   return (
     <div className="w-full bg-white text-gray-900 antialiased">
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
         {/* =================================================
@@ -185,6 +224,7 @@ export function InnovationPage() {
         ================================================== */}
 
         <header className="border-b-2 border-red-600 pb-5 mb-8">
+
           <h1 className="font-serif text-3xl sm:text-4xl md:text-[40px] leading-tight">
             Innovation
           </h1>
@@ -193,6 +233,7 @@ export function InnovationPage() {
             Breakthroughs in AI, biotech, space, and next-generation
             technologies.
           </p>
+
         </header>
 
         {/* =================================================
@@ -207,15 +248,23 @@ export function InnovationPage() {
 
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
 
-          {/* Main Hero */}
+          {/* =================================================
+              MAIN HERO
+          ================================================= */}
 
-          <Link to="/article/innovation-quantumbattery" className="lg:col-span-2 group cursor-pointer min-w-0 block">
+          <Link
+            to={specialArticlePath("innovation-quantumbattery")}
+            className="lg:col-span-2 group cursor-pointer min-w-0 block"
+          >
+
             <div className="overflow-hidden bg-gray-100">
+
               <ImageWithFallback
                 src={hero.image}
                 alt={hero.title}
                 className="w-full h-64 sm:h-80 md:h-[420px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
+
             </div>
 
             <p className="text-red-600 text-xs font-bold uppercase tracking-[0.14em] mt-4">
@@ -231,12 +280,25 @@ export function InnovationPage() {
             </p>
 
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-4 text-xs text-gray-500">
-              <span>By {hero.author}</span>
+
+              <span>
+                By {hero.author}
+              </span>
+
               <span>·</span>
-              <span>{hero.date}</span>
+
+              <span>
+                {hero.date}
+              </span>
+
               <span>·</span>
-              <span>{hero.time}</span>
+
+              <span>
+                {hero.time}
+              </span>
+
             </div>
+
           </Link>
 
           {/* =================================================
@@ -248,6 +310,7 @@ export function InnovationPage() {
             {/* Sponsored Advertisement */}
 
             <div className="relative bg-[#0b1a30] text-white p-6 mb-6 rounded-[2px] overflow-hidden">
+
               <span className="absolute top-2 right-3 text-[10px] text-gray-400 uppercase tracking-wide">
                 Ad
               </span>
@@ -267,6 +330,7 @@ export function InnovationPage() {
               <p className="text-xs text-gray-400 mt-1">
                 Reach 2M+ business readers
               </p>
+
             </div>
 
             {/* More Stories */}
@@ -276,21 +340,31 @@ export function InnovationPage() {
             </h3>
 
             <div className="flex flex-col gap-4">
+
               {moreStories.map((story) => (
+
                 <Link
-                  to={`/article/${story.id === 2 ? "innovation-climate-ai" : "innovation-quantum-protein"}`}
+                  to={specialArticlePath(
+                    story.id === 2
+                      ? "innovation-climate-ai"
+                      : "innovation-quantum-protein"
+                  )}
                   key={story.id}
                   className="flex gap-3 group cursor-pointer"
                 >
+
                   <div className="w-16 h-16 flex-shrink-0 overflow-hidden bg-gray-100">
+
                     <ImageWithFallback
                       src={story.image}
                       alt={story.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
+
                   </div>
 
                   <div className="min-w-0">
+
                     <p className="text-red-600 text-[10px] font-bold uppercase tracking-wide">
                       Innovation
                     </p>
@@ -302,11 +376,17 @@ export function InnovationPage() {
                     <p className="text-[11px] text-gray-400 mt-1">
                       {story.time}
                     </p>
+
                   </div>
+
                 </Link>
+
               ))}
+
             </div>
+
           </aside>
+
         </section>
 
         {/* =================================================
@@ -314,7 +394,9 @@ export function InnovationPage() {
         ================================================== */}
 
         <section className="mb-12">
+
           <div className="flex items-end justify-between border-b border-gray-200 pb-3 mb-5">
+
             <h2 className="text-lg md:text-xl font-bold">
               Latest Innovation News
             </h2>
@@ -322,24 +404,31 @@ export function InnovationPage() {
             <span className="hidden sm:block text-[10px] text-gray-400 uppercase tracking-[0.15em]">
               Latest Updates
             </span>
+
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
+
             {latestNews.map((news) => (
+
               <Link
-                to={`/article/${{"Toyota's QuantumBattery Crosses the Commercialization Threshold":"innovation-quantumbattery","NVIDIA Blackwell Ultra GPU Delivers a 40x Leap in LLM Training Speed":"innovation-blackwell","mRNA Universal Cancer Vaccine Hits 94% Efficacy Across 6 Cancer Types":"innovation-mrna","Starship Full Reusability Cuts Launch Costs by 100x":"innovation-starship","Isomorphic Labs Raises $600M Series B for AI Drug Discovery":"innovation-drug-discovery","Room-Temperature Superconductor Verified in Independent Tests at MIT":"innovation-superconductor"}[news.title] || "innovation-quantumbattery"}`}
+                to={innovationArticlePath(news.title)}
                 key={news.title}
                 className="group cursor-pointer min-w-0"
               >
+
                 <div className="overflow-hidden mb-3 bg-gray-100">
+
                   <ImageWithFallback
                     src={news.image}
                     alt={news.title}
                     className="w-full h-48 sm:h-40 object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
+
                 </div>
 
                 <div className="flex items-center gap-2 mb-1.5">
+
                   <span className="text-red-600 text-[10px] font-bold uppercase tracking-wide">
                     {news.category}
                   </span>
@@ -349,6 +438,7 @@ export function InnovationPage() {
                       Hot
                     </span>
                   )}
+
                 </div>
 
                 <h3 className="font-serif text-base leading-snug group-hover:text-red-600 transition-colors">
@@ -360,18 +450,30 @@ export function InnovationPage() {
                 </p>
 
                 <div className="flex items-center justify-between gap-3 text-[11px] text-gray-400 mt-2.5">
+
                   <span className="truncate">
                     By {news.author}
                   </span>
 
                   <span className="flex items-center gap-1 whitespace-nowrap">
-                    <Clock size={10} strokeWidth={2.25} />
+
+                    <Clock
+                      size={10}
+                      strokeWidth={2.25}
+                    />
+
                     {news.time}
+
                   </span>
+
                 </div>
+
               </Link>
+
             ))}
+
           </div>
+
         </section>
 
         {/* =================================================
@@ -388,7 +490,9 @@ export function InnovationPage() {
         ================================================== */}
 
         <section className="bg-gray-50 border border-gray-200 py-6 px-4 mb-12 rounded-[2px]">
+
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-5">
+
             <span className="w-fit text-[10px] font-bold uppercase tracking-wide bg-gray-200 text-gray-600 px-2 py-1 rounded-[2px]">
               Sponsorship
             </span>
@@ -396,14 +500,18 @@ export function InnovationPage() {
             <span className="text-xs text-gray-500">
               Presented by our partners
             </span>
+
           </div>
 
           <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
+
             {sponsoredEvents.map((event) => (
+
               <article
                 key={event.name}
                 className="bg-white border border-gray-200 py-6 px-4 text-center hover:border-black transition-colors cursor-pointer"
               >
+
                 <div className="w-9 h-9 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto mb-3 font-bold text-sm">
                   {event.tag[0]}
                 </div>
@@ -415,9 +523,13 @@ export function InnovationPage() {
                 <p className="text-[11px] text-gray-400 mt-1">
                   Sponsored Event
                 </p>
+
               </article>
+
             ))}
+
           </div>
+
         </section>
 
         {/* =================================================
@@ -425,6 +537,7 @@ export function InnovationPage() {
         ================================================== */}
 
         <section className="bg-[#0b1a30] text-white text-center p-8 md:p-10 rounded-[2px]">
+
           <h2 className="font-serif text-2xl md:text-[30px] mb-2">
             Stay Ahead with The Pride Times
           </h2>
@@ -437,6 +550,7 @@ export function InnovationPage() {
             onSubmit={(event) => event.preventDefault()}
             className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto"
           >
+
             <input
               type="email"
               placeholder="Enter your email"
@@ -450,9 +564,13 @@ export function InnovationPage() {
             >
               Subscribe Free
             </button>
+
           </form>
+
         </section>
+
       </div>
+
     </div>
   );
 }
