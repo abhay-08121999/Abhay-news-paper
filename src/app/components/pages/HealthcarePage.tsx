@@ -1,4 +1,6 @@
 import { Clock, ArrowRight } from "lucide-react";
+import { Link } from "react-router";
+import { specialArticlePath } from "../../data/specialArticleData";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 import HC1Img from "../../../imports/HC1.png";
@@ -322,6 +324,7 @@ function StoryMeta({
 
 function HeroStory() {
   return (
+    <Link to={specialArticlePath("healthcare-biotech-lives")} className="block">
     <article className="group min-w-0">
       <div className="relative overflow-hidden rounded-md h-[250px] sm:h-[330px] md:h-[390px] lg:h-[400px]">
         <ImageWithFallback
@@ -358,6 +361,7 @@ function HeroStory() {
         </div>
       </div>
     </article>
+    </Link>
   );
 }
 
@@ -805,10 +809,7 @@ export function HealthcarePage() {
 
             <div className="mt-3 space-y-4">
               {majorStories.map((story) => (
-                <MajorStory
-                  key={story.id}
-                  story={story}
-                />
+                <Link key={story.id} to={specialArticlePath(`healthcare-major-${story.id}`)} className="block"><MajorStory story={story} /></Link>
               ))}
             </div>
 
@@ -830,10 +831,7 @@ export function HealthcarePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6">
             {supportingStories.map((story) => (
-              <CoverageCard
-                key={story.id}
-                story={story}
-              />
+              <Link key={story.id} to={specialArticlePath(`healthcare-coverage-${story.id}`)} className="block"><CoverageCard story={story} /></Link>
             ))}
           </div>
         </section>
@@ -853,10 +851,7 @@ export function HealthcarePage() {
             {/* NEWS GRID */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
               {latestNews.map((story) => (
-                <NewsCard
-                  key={story.id}
-                  story={story}
-                />
+                <Link key={story.id} to={specialArticlePath(`healthcare-latest-${story.id}`)} className="block"><NewsCard story={story} /></Link>
               ))}
             </div>
 
@@ -882,8 +877,9 @@ export function HealthcarePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             {moreStories.map((story) => (
-              <article
+              <Link
                 key={`more-${story.id}`}
+                to={specialArticlePath(`healthcare-more-${story.id}`)}
                 className="group flex gap-3 border-b border-gray-200 pb-3 md:border md:rounded-md md:p-2.5"
               >
                 <div className="w-[80px] h-[58px] md:w-[90px] md:h-[64px] shrink-0 overflow-hidden rounded-sm">
@@ -907,7 +903,7 @@ export function HealthcarePage() {
                     {story.time}
                   </p>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
