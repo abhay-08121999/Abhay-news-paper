@@ -93,6 +93,20 @@ const storySeeds: StorySeed[] = [
     highlights: ["Import disruption is creating uncertainty for refiners and jewellers", "Premiums and inventories are becoming more important signals", "Demand may remain resilient despite higher prices"],
   },
   {
+    title: "India and Vietnam Deepen AI and Defense Cooperation as Leaders Meet",
+    category: "Technology | World",
+    dek: "India and Vietnam are expanding cooperation around artificial intelligence, digital infrastructure and defense as both governments deepen a broader strategic partnership.",
+    image: LN4Img,
+    author: "The Pride Times Desk",
+    publishedAt: "September 22, 2026",
+    angle: "the growing role of technology in India–Vietnam strategic cooperation",
+    highlights: [
+      "AI cooperation is becoming part of a wider strategic relationship",
+      "Defense and digital infrastructure are being discussed alongside economic ties",
+      "Supply-chain resilience is an important shared priority",
+    ],
+  },
+  {
     title: "India, Vietnam Deepen AI and Defense Ties After Modi-Lam Meeting",
     category: "World",
     dek: "India and Vietnam are widening their strategic partnership, with technology, defense and resilient supply chains at the centre of the relationship.",
