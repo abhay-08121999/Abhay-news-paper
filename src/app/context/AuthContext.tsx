@@ -89,15 +89,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const loadUser = async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
 
-      if (session?.user) {
-        setUser(await buildUser(session.user));
+        if (session?.user) {
+          setUser(await buildUser(session.user));
+        }
+      } catch (error) {
+        // Authentication is optional for the public newsroom. A missing or
+        // unavailable Supabase project must never blank the entire website.
+        console.warn("Auth session unavailable; continuing as a guest.", error);
+      } finally {
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     };
 
     loadUser();
@@ -105,12 +111,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session?.user) {
-        setUser(await buildUser(session.user));
-      } else {
+      try {
+        if (session?.user) {
+          setUser(await buildUser(session.user));
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.warn("Auth update unavailable; continuing as a guest.", error);
         setUser(null);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     });
 
     return () => subscription.unsubscribe();
