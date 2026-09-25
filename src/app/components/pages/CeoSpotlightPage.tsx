@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { Link } from "react-router";
 import CeospotImg from "../../../imports/Ceospot.png";
 
 /* ============================================================
@@ -411,7 +412,7 @@ function StoryRow({
   index?: number;
 }) {
   return (
-    <article className="group flex cursor-pointer gap-4 border-b border-gray-200 py-4 last:border-b-0">
+    <Link to={`/article/ceo-opinion-${index !== undefined ? index + 1 : 1}`} className="group flex cursor-pointer gap-4 border-b border-gray-200 py-4 last:border-b-0">
       {typeof index === "number" && (
         <span className="pt-0.5 font-serif text-xl text-gray-300 transition-colors group-hover:text-red-600">
           {String(index + 1).padStart(2, "0")}
@@ -428,7 +429,7 @@ function StoryRow({
           {time}
         </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -571,10 +572,10 @@ export function CeoSpotlightPage() {
                 </span>
               </div>
 
-              <button className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-black pb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-black transition-colors hover:border-red-600 hover:text-red-600">
+              <Link to="/article/ceo-jensen-huang" className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-black pb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-black transition-colors hover:border-red-600 hover:text-red-600">
                 Read Full Profile
                 <ArrowUpRight size={13} />
-              </button>
+              </Link>
             </div>
           </article>
         </section>
@@ -592,7 +593,8 @@ export function CeoSpotlightPage() {
 
           <div className="grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
             {leadersToWatch.map((leader) => (
-              <article
+              <Link
+                to={`/article/ceo-leader-${leader.rank}`}
                 key={leader.rank}
                 className="group flex cursor-pointer flex-col border-b border-gray-200 py-5 first:pt-0 sm:odd:border-r sm:sm:pr-5 lg:nth-[4n+1]:pr-5 lg:nth-[4n+2]:pr-5 lg:nth-[4n+3]:border-r lg:nth-[4n+3]:pr-5 lg:nth-[4n+4]:border-r-0 lg:nth-[4n+4]:pr-0"
               >
@@ -631,7 +633,7 @@ export function CeoSpotlightPage() {
                 <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.1em] text-red-600">
                   {leader.edition}
                 </p>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
@@ -656,7 +658,8 @@ export function CeoSpotlightPage() {
           <div className="grid grid-cols-1 gap-0 border-y border-black lg:grid-cols-[1.35fr_1fr_1fr]">
 
             {ceoInterviews.map((ceo, index) => (
-              <article
+              <Link
+                to={`/article/ceo-interview-${ceo.id}`}
                 key={ceo.id}
                 className={`group border-b border-gray-200 py-6 lg:border-b-0 lg:px-6 lg:py-6 ${
                   index !== 0 ? "lg:border-l lg:border-gray-200" : ""
@@ -711,7 +714,7 @@ export function CeoSpotlightPage() {
                     <ChevronRight size={11} />
                   </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
@@ -733,7 +736,8 @@ export function CeoSpotlightPage() {
 
             <div>
               {womenLeaders.map((leader) => (
-                <article
+                <Link
+                  to={`/article/ceo-women-${leader.rank}`}
                   key={leader.rank}
                   className="group flex cursor-pointer gap-4 border-b border-gray-200 py-5 first:pt-0"
                 >
@@ -754,7 +758,7 @@ export function CeoSpotlightPage() {
                       {leader.achievement}
                     </p>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </div>
@@ -796,7 +800,8 @@ export function CeoSpotlightPage() {
 
             <div>
               {executiveMoves.map((move) => (
-                <article
+                <Link
+                  to={`/article/ceo-move-${move.id}`}
                   key={move.id}
                   className="group cursor-pointer border-b border-gray-200 py-4 last:border-b-0"
                 >
@@ -818,7 +823,7 @@ export function CeoSpotlightPage() {
                   <p className="mt-1.5 text-[11px] leading-5 text-gray-600">
                     {move.move}
                   </p>
-                </article>
+                </Link>
               ))}
             </div>
           </div>
