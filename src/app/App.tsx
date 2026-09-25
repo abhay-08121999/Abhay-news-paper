@@ -433,6 +433,17 @@ export default function App() {
             }
           />
 
+          {/* ==================================================
+              ARTICLE DETAIL PAGES
+
+              Homepage article cards should navigate to:
+              /article/<article-slug>
+
+              ArticleDetailPage checks homepageArticleData first,
+              then falls back to the existing business articles.
+              This route is intentionally separate from /markets.
+              ================================================== */}
+
           <Route
             path="/article/:id"
             element={
