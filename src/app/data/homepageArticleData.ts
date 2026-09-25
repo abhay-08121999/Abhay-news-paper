@@ -247,4 +247,4 @@ export const homepageArticles: HomepageArticle[] = storySeeds.map((story) => ({
 export function getHomepageArticleBySlug(slug?: string) {
   return homepageArticles.find((article) => article.slug === slug);
 }
-EOF
+
