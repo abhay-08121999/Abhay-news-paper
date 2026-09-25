@@ -1,6 +1,8 @@
 import { TimeAgo } from "../../utils/timeAgo";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock, ChevronRight } from "lucide-react";
+import { Link } from "react-router";
+import { technologyArticlePath } from "../../data/technologyNewsData";
 
 /* =========================================================
    SECTION HEADER
@@ -39,7 +41,7 @@ const hero = {
   title: "Pagaya Closes $460 Million Revolving Personal Loan Facility",
   excerpt:
     "Pagaya has closed a $460 million revolving personal loan facility, highlighting continued activity in technology-driven financial services and alternative lending markets.",
-  author: "Bloomberg News",
+  author: "Sagar Kumar",
   publishedAt: "2026-09-22T10:00:00Z",
   image:
     "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=80",
@@ -50,7 +52,7 @@ const hero1 = {
   title: "AI Startup Heidi Doubles Valuation to $900 Million in New Round",
   excerpt:
     "AI startup Heidi has raised new funding that doubles its valuation to $900 million, highlighting continued investor interest in artificial intelligence startups.",
-  author: "Bloomberg News",
+  author: "Sagar Kumar",
   publishedAt: "2026-09-22T09:30:00Z",
   image:
     "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80",
@@ -61,7 +63,7 @@ const hero2 = {
   title: "Anthropic CEO Dario Amodei to Brief UN Security Council on AI",
   excerpt:
     "Anthropic CEO Dario Amodei is set to brief the United Nations Security Council on artificial intelligence as governments continue examining the opportunities and risks surrounding advanced AI systems.",
-  author: "Bloomberg News",
+  author: "Sagar Kumar",
   publishedAt: "2026-09-22T08:30:00Z",
   image:
     "https://images.unsplash.com/photo-1633412802994-5c058f151b66?auto=format&fit=crop&w=1000&q=80",
@@ -380,8 +382,10 @@ function SecondaryArticle({
 }: {
   data: typeof hero1;
 }) {
+  const articleId = data.title === hero1.title ? "tech-heidi" : "tech-anthropic";
+
   return (
-    <article className="group cursor-pointer">
+    <Link to={technologyArticlePath(articleId)} className="group block">
       <div className="overflow-hidden rounded-md bg-gray-100 mb-3">
         <ImageWithFallback
           src={data.image}
@@ -414,7 +418,7 @@ function SecondaryArticle({
           <TimeAgo iso={data.publishedAt} />
         </span>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -489,7 +493,7 @@ export function TechnologyPage() {
               MAIN HERO
           ================================================= */}
 
-          <article className="group cursor-pointer">
+          <Link to={technologyArticlePath("tech-pagaya")} className="group block">
 
             <div className="overflow-hidden rounded-lg bg-gray-100">
 
@@ -532,7 +536,7 @@ export function TechnologyPage() {
 
             </div>
 
-          </article>
+          </Link>
 
           {/* =================================================
               RIGHT SIDEBAR
@@ -588,9 +592,10 @@ export function TechnologyPage() {
 
               {threatAlerts.slice(0, 4).map((story) => (
 
-                <article
+                <Link
                   key={story.id}
-                  className="py-3 group cursor-pointer"
+                  to={technologyArticlePath(["tech-datacenter","tech-doordash","tech-peloton","tech-softbank"][story.id - 1] || "tech-pagaya")}
+                  className="block py-3 group"
                 >
 
                   <span
@@ -616,7 +621,7 @@ export function TechnologyPage() {
                     <TimeAgo iso={story.publishedAt} />
                   </span>
 
-                </article>
+                </Link>
 
               ))}
 
@@ -638,9 +643,10 @@ export function TechnologyPage() {
 
             {stories.map((story) => (
 
-              <article
+              <Link
                 key={story.id}
-                className="group cursor-pointer"
+                to={technologyArticlePath(["tech-pagaya","tech-heidi","tech-anthropic","tech-datacenter","tech-doordash","tech-peloton","tech-softbank","tech-founder","tech-verda"][story.id - 1] || "tech-pagaya")}
+                className="group block"
               >
 
                 <div className="overflow-hidden rounded-md bg-gray-100">
@@ -673,7 +679,7 @@ export function TechnologyPage() {
 
                 </div>
 
-              </article>
+              </Link>
 
             ))}
 
@@ -774,9 +780,10 @@ export function TechnologyPage() {
 
               {aiInfraStories.map((story) => (
 
-                <article
+                <Link
                   key={story.id}
-                  className="py-4 first:pt-0 group cursor-pointer"
+                  to={technologyArticlePath(["tech-founder","tech-verda","tech-anthropic","tech-softbank","tech-peloton"][story.id - 1] || "tech-pagaya")}
+                  className="block py-4 first:pt-0 group"
                 >
 
                   <p className="text-[13px] md:text-[14px] font-semibold leading-[1.5] text-gray-900 group-hover:text-red-600 transition-colors">
@@ -791,7 +798,7 @@ export function TechnologyPage() {
 
                   </span>
 
-                </article>
+                </Link>
 
               ))}
 
@@ -920,9 +927,16 @@ export function TechnologyPage() {
 
               {defenseNews.map((item) => (
 
-                <article
+                <Link
                   key={item.id}
-                  className="py-4 first:pt-0 group cursor-pointer"
+                  to={technologyArticlePath([
+                    "tech-pagaya",
+                    "tech-heidi",
+                    "tech-anthropic",
+                    "tech-datacenter",
+                    "tech-anthropic",
+                  ][item.id - 1] || "tech-pagaya")}
+                  className="block py-4 first:pt-0 group"
                 >
 
                   <h3 className="text-[13px] md:text-[14px] font-semibold leading-[1.45] group-hover:text-red-600 transition-colors">
@@ -937,7 +951,7 @@ export function TechnologyPage() {
 
                   </span>
 
-                </article>
+                </Link>
 
               ))}
 
