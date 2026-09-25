@@ -18,7 +18,7 @@ import {
   type TechnologyArticle,
   technologyArticlePath,
 } from "../../data/technologyNewsData";
-import { getSpecialArticleById, specialArticlePath, type SpecialArticle } from "../../data/specialArticleData";
+import { getSpecialArticleById, specialArticlePath, specialArticles, type SpecialArticle } from "../../data/specialArticleData";
 
 type EditorialArticle = BusinessArticle | TechnologyArticle;
 
@@ -60,8 +60,8 @@ function SpecialArticleEditorial({ article }: { article: SpecialArticle }) {
     <article className="bg-[#f8f7f3] text-[#171717]">
       <div className="border-b border-black/10 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
-          <Link to={article.section === "Innovation" ? "/innovation" : "/ceospotlight"} className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500 hover:text-red-600">
-            <ArrowLeft size={13} /> Back to {article.section === "Innovation" ? "Innovation" : "CEO Spotlight"}
+          <Link to={article.section === "Innovation" ? "/innovation" : article.section === "Healthcare" ? "/healthcare" : article.section === "Manufacturing" ? "/manufacturing" : "/ceospotlight"} className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500 hover:text-red-600">
+            <ArrowLeft size={13} /> Back to {article.section === "Innovation" ? "Innovation" : article.section === "Healthcare" ? "Healthcare" : article.section === "Manufacturing" ? "Manufacturing" : "CEO Spotlight"}
           </Link>
         </div>
       </div>
@@ -94,7 +94,7 @@ function SpecialArticleEditorial({ article }: { article: SpecialArticle }) {
               <section className="mt-11 border-t-2 border-black pt-7"><p className="font-sans text-[10px] font-bold uppercase tracking-[0.22em] text-red-600">The takeaway</p><h2 className="mt-2 font-serif text-3xl font-bold leading-tight text-gray-950 sm:text-4xl">What readers should watch next</h2><p className="mt-4">The next stage of this story will be defined by measurable developments rather than headlines alone. Product launches, customer adoption, investment decisions, independent testing, partnerships and operating results will provide the clearest evidence of how the story evolves.</p><ul className="mt-5 space-y-4 font-sans text-sm leading-6 text-gray-700">{article.highlights.map(point => <li key={point} className="flex gap-3"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-600" /><span>{point}</span></li>)}</ul></section>
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-y border-gray-300 py-5"><Link to={article.section === "Innovation" ? "/innovation" : "/ceospotlight"} className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-gray-600 hover:text-red-600"><ArrowLeft size={13}/>Back to section</Link><button type="button" aria-label="Share article" className="text-gray-500 hover:text-red-600" onClick={()=>{if(navigator.share) navigator.share({title:article.title,text:article.dek,url:window.location.href}); else navigator.clipboard?.writeText(window.location.href);}}><Share2 size={17}/></button></div>
+            <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-y border-gray-300 py-5"><Link to={article.section === "Innovation" ? "/innovation" : article.section === "Healthcare" ? "/healthcare" : article.section === "Manufacturing" ? "/manufacturing" : "/ceospotlight"} className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-gray-600 hover:text-red-600"><ArrowLeft size={13}/>Back to section</Link><button type="button" aria-label="Share article" className="text-gray-500 hover:text-red-600" onClick={()=>{if(navigator.share) navigator.share({title:article.title,text:article.dek,url:window.location.href}); else navigator.clipboard?.writeText(window.location.href);}}><Share2 size={17}/></button></div>
 
             {related.length > 0 && <section className="mt-16 border-t-2 border-black pt-6"><p className="text-[10px] font-bold uppercase tracking-[0.22em] text-red-600">Continue reading</p><h2 className="mt-1 font-serif text-3xl font-bold tracking-tight">More from {article.section}</h2><div className="mt-6 grid gap-5 md:grid-cols-3">{related.map(story => <Link key={story.id} to={specialArticlePath(story.id)} className="group overflow-hidden border border-gray-200 bg-white"><>{story.image && <ImageWithFallback src={story.image} alt={story.title} className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />}</><div className="p-4"><p className="text-[9px] font-bold uppercase tracking-[0.18em] text-red-600">{story.category}</p><h3 className="mt-2 font-serif text-lg font-bold leading-tight group-hover:text-red-600">{story.title}</h3><p className="mt-2 line-clamp-3 text-xs leading-5 text-gray-500">{story.dek}</p></div></Link>)}</div></section>}
           </main>
@@ -107,15 +107,7 @@ function SpecialArticleEditorial({ article }: { article: SpecialArticle }) {
 }
 
 function specialArticlesForSection(section: string, currentId: string) {
-  return [
-    getSpecialArticleById("ceo-jensen-huang"),
-    getSpecialArticleById("ceo-leader-2"),
-    getSpecialArticleById("ceo-leader-4"),
-    getSpecialArticleById("ceo-interview-1"),
-    getSpecialArticleById("innovation-quantumbattery"),
-    getSpecialArticleById("innovation-climate-ai"),
-    getSpecialArticleById("innovation-blackwell"),
-  ].filter((item): item is SpecialArticle => Boolean(item && item.section === section && item.id !== currentId));
+  return specialArticles.filter((item) => item.section === section && item.id !== currentId).slice(0, 6);
 }
 
 function MagazineEditorial({ article, backTo }: { article: EditorialArticle; backTo: string }) {
