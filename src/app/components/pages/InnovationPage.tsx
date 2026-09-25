@@ -1,4 +1,5 @@
 import { Clock } from "lucide-react";
+import { Link } from "react-router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 /* =========================================================
@@ -208,7 +209,7 @@ export function InnovationPage() {
 
           {/* Main Hero */}
 
-          <article className="lg:col-span-2 group cursor-pointer min-w-0">
+          <Link to="/article/innovation-quantumbattery" className="lg:col-span-2 group cursor-pointer min-w-0 block">
             <div className="overflow-hidden bg-gray-100">
               <ImageWithFallback
                 src={hero.image}
@@ -236,7 +237,7 @@ export function InnovationPage() {
               <span>·</span>
               <span>{hero.time}</span>
             </div>
-          </article>
+          </Link>
 
           {/* =================================================
               RIGHT RAIL
@@ -276,7 +277,8 @@ export function InnovationPage() {
 
             <div className="flex flex-col gap-4">
               {moreStories.map((story) => (
-                <article
+                <Link
+                  to={`/article/${story.id === 2 ? "innovation-climate-ai" : "innovation-quantum-protein"}`}
                   key={story.id}
                   className="flex gap-3 group cursor-pointer"
                 >
@@ -301,7 +303,7 @@ export function InnovationPage() {
                       {story.time}
                     </p>
                   </div>
-                </article>
+                </Link>
               ))}
             </div>
           </aside>
@@ -324,7 +326,8 @@ export function InnovationPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8">
             {latestNews.map((news) => (
-              <article
+              <Link
+                to={`/article/${{"Toyota's QuantumBattery Crosses the Commercialization Threshold":"innovation-quantumbattery","NVIDIA Blackwell Ultra GPU Delivers a 40x Leap in LLM Training Speed":"innovation-blackwell","mRNA Universal Cancer Vaccine Hits 94% Efficacy Across 6 Cancer Types":"innovation-mrna","Starship Full Reusability Cuts Launch Costs by 100x":"innovation-starship","Isomorphic Labs Raises $600M Series B for AI Drug Discovery":"innovation-drug-discovery","Room-Temperature Superconductor Verified in Independent Tests at MIT":"innovation-superconductor"}[news.title] || "innovation-quantumbattery"}`}
                 key={news.title}
                 className="group cursor-pointer min-w-0"
               >
@@ -366,7 +369,7 @@ export function InnovationPage() {
                     {news.time}
                   </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
