@@ -391,6 +391,266 @@ const manufacturingArticles: SpecialArticle[] = [
 healthcareArticles.forEach((article, index) => { article.image = [HC1Img, HC2Img, HC3Img, HC4Img][index % 4]; });
 manufacturingArticles.forEach((article, index) => { article.image = [Manu1Img, Manu2Img, Manu3Img][index % 3]; });
 
+
+
+/* =========================================================
+   CYBERSECURITY ARTICLES
+   These IDs are used by CybersecurityPage cards and the
+   shared ArticleDetailPage route: /article/:id
+========================================================= */
+
+const cybersecurityArticles: SpecialArticle[] = [
+  makeArticle({
+    id: "cybersecurity-pwc-2026-global-digital-trust",
+    section: "Cybersecurity",
+    category: "CYBER THREAT INTELLIGENCE",
+    title: "PwC 2026 Global Digital Trust Insights: Enterprises Escalate Defense Spending",
+    dek: "PwC's 2026 Global Digital Trust Insights survey highlights the growing board-level importance of cybersecurity as enterprises expand AI adoption and confront a broader digital attack surface.",
+    image: "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwzfHxzbWFydCUyMGNpdHklMjB1cmJhbiUyMGZ1dHVyZSUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzkzODU5ODR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    publishedAt: "April 30, 2026",
+    highlights: [
+      "PwC's survey covers 3,887 business and technology executives across 72 countries.",
+      "Cybersecurity is increasingly treated as a board-level digital trust issue.",
+      "Generative AI introduces new opportunities as well as additional attack surfaces.",
+      "Organizations are increasing attention on prevention, detection and response capabilities.",
+    ],
+    sections: [
+      { heading: "Cybersecurity moves higher on the agenda", body: "The findings reflect a security environment in which cyber risk is closely connected with business transformation. As more critical processes move into digital and AI-enabled systems, security decisions increasingly affect enterprise strategy, operations and customer trust." },
+      { heading: "AI expands the attack surface", body: "Generative AI can introduce new pathways for prompt injection, data exposure, credential misuse and other attacks. Enterprises therefore need controls that address both conventional infrastructure and AI-enabled workflows." },
+      { heading: "From spending to resilience", body: "Higher security investment is only one part of resilience. Effective programs also depend on identity controls, monitoring, incident response, employee awareness, recovery planning and clear accountability across the organization." },
+    ],
+    keyFacts: [
+      { label: "Source", value: "PwC Global Digital Trust Insights 2026" },
+      { label: "Respondents", value: "3,887 executives" },
+      { label: "Countries", value: "72" },
+      { label: "Desk", value: "Cybersecurity" },
+    ],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-kpmg-ai-security-stakes",
+    section: "Cybersecurity",
+    category: "CYBER THREAT INTELLIGENCE",
+    title: "KPMG: AI-Dominated Business Environments Raise Security Stakes",
+    dek: "KPMG's Global Tech Report 2026 examines the security challenges organizations face as AI deployments expand faster than some existing technology and risk-management frameworks.",
+    image: "https://images.unsplash.com/photo-1747499967281-c0c5eec9933c?auto=format&fit=crop&w=1080&q=80",
+    publishedAt: "June 2026",
+    highlights: [
+      "The report draws on responses from 2,500 technology executives across 27 countries.",
+      "Security is presented as a prerequisite for realizing value from AI investment.",
+      "Technology debt, cost pressure and talent shortages remain implementation challenges.",
+      "Security teams are being asked to protect legacy systems while supporting AI-native infrastructure.",
+    ],
+    sections: [
+      { heading: "Security and AI adoption", body: "As organizations move AI from experimentation into production, security requirements become part of the deployment process rather than a separate downstream activity." },
+      { heading: "The legacy-system challenge", body: "Security teams often have to protect established systems while new AI infrastructure is introduced. This creates a need for consistent identity, access, monitoring and governance controls across different technology generations." },
+      { heading: "Building security into the AI lifecycle", body: "Organizations can reduce avoidable exposure by incorporating security reviews, access restrictions, logging, testing and incident-response planning into AI development and deployment workflows." },
+    ],
+    keyFacts: [
+      { label: "Source", value: "KPMG Global Tech Report 2026" },
+      { label: "Respondents", value: "2,500 executives" },
+      { label: "Countries", value: "27" },
+      { label: "Desk", value: "Cybersecurity" },
+    ],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-lockbit-4-ransomware",
+    section: "Cybersecurity",
+    category: "RANSOMWARE",
+    title: "LockBit 4.0 Launches Unprecedented Attack on UK National Health Service Systems",
+    dek: "A ransomware development puts renewed attention on healthcare resilience, identity security, segmentation and recovery planning for critical systems.",
+    image: "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900",
+    highlights: ["Healthcare systems remain high-value targets because disruption can affect essential services.", "Ransomware defense depends on layered controls rather than a single security product.", "Segmentation can limit the spread of compromised credentials and endpoints.", "Tested backups and recovery procedures are central to operational resilience."],
+    sections: [
+      { heading: "Why healthcare remains exposed", body: "Healthcare organizations operate large technology estates containing clinical, administrative and connected-device systems. Availability and confidentiality requirements make disruption particularly consequential." },
+      { heading: "Containing ransomware", body: "Identity controls, endpoint monitoring, network segmentation and rapid isolation can reduce the ability of an attacker to move through an environment after an initial compromise." },
+      { heading: "Recovery matters", body: "A resilient response requires verified backups, documented restoration procedures and regular exercises so critical services can be recovered even when normal infrastructure is unavailable." },
+    ],
+    keyFacts: [{ label: "Threat", value: "Ransomware" }, { label: "Sector", value: "Healthcare" }, { label: "Focus", value: "Operational resilience" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-gpt7-phishing",
+    section: "Cybersecurity",
+    category: "AI SECURITY",
+    title: "GPT-7 Used to Generate Undetectable Phishing Emails at Scale — New Research",
+    dek: "New research highlights how increasingly capable language models can lower the cost of producing convincing social-engineering content and increase pressure on traditional email defenses.",
+    image: "https://images.unsplash.com/photo-1767972464040-8bfee42d7bed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900",
+    highlights: ["Language models can automate parts of phishing-content generation.", "Convincing language can make human verification more important.", "Identity protection and phishing-resistant authentication reduce account-takeover risk.", "Security awareness works best when combined with technical controls."],
+    sections: [
+      { heading: "The automation effect", body: "Generative models can help attackers create customized messages more quickly. The resulting scale increases the number of messages defenders and users may need to evaluate." },
+      { heading: "Why email filtering is not enough", body: "Modern phishing can use legitimate-looking language, domains and workflows. Organizations therefore need layered controls including authentication, identity protection, URL analysis and behavioral detection." },
+      { heading: "Reducing account takeover", body: "Phishing-resistant authentication, strong session controls and rapid reporting can reduce the impact of successful social-engineering attempts." },
+    ],
+    keyFacts: [{ label: "Threat", value: "AI-assisted phishing" }, { label: "Vector", value: "Email and social engineering" }, { label: "Primary control", value: "Phishing-resistant MFA" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-social-platform-data-breach",
+    section: "Cybersecurity",
+    category: "DATA BREACH",
+    title: "1.4 Billion User Records Exposed in Major Social Media Platform Breach",
+    dek: "A large-scale data exposure illustrates the continuing importance of access controls, data minimization, monitoring and breach-response planning for consumer platforms.",
+    image: "https://images.unsplash.com/photo-1768839721176-2fa91fdce725?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900",
+    highlights: ["Large consumer platforms hold high volumes of sensitive account data.", "Excessive access can increase the blast radius of a compromise.", "Data minimization can reduce the amount of information exposed in an incident.", "Incident response must include investigation, containment and user communication."],
+    sections: [
+      { heading: "Scale changes the consequences", body: "When a platform stores information for hundreds of millions of users, a single control failure can expose a very large population. The technical root cause and the type of data involved determine the practical risk." },
+      { heading: "Limiting the blast radius", body: "Least-privilege access, segmented systems, encryption and continuous monitoring can make it harder for a single compromised account or service to reach large datasets." },
+      { heading: "The response cycle", body: "After a suspected breach, organizations need to establish scope, contain access, preserve evidence, remediate the underlying weakness and communicate appropriate information to affected users." },
+    ],
+    keyFacts: [{ label: "Threat", value: "Data breach" }, { label: "Scale", value: "1.4 billion records reported" }, { label: "Sector", value: "Social platforms" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-ai-customer-support",
+    section: "Cybersecurity",
+    category: "AI SYSTEMS",
+    title: "Hackers exploit AI-powered customer support systems and breach Amazon's One Medical, exposing sensitive healthcare records.",
+    dek: "The incident highlights security questions around AI-enabled support workflows, privileged integrations and access to sensitive healthcare information.",
+    image: "https://images.unsplash.com/photo-1768839722988-91767bb82b10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=900",
+    highlights: ["AI support systems can become security-sensitive integration points.", "Tool permissions should be limited to the minimum required actions.", "Sensitive records require stronger authorization and audit controls.", "Human approval can be appropriate for high-impact automated actions."],
+    sections: [
+      { heading: "AI agents change the control surface", body: "An AI-enabled support workflow may connect models to customer records, internal tools and external services. Each integration creates a permission boundary that needs explicit security controls." },
+      { heading: "Protecting sensitive records", body: "Healthcare information requires careful authorization, logging and data-handling controls. AI workflows should not receive broad access simply because a support task is convenient to automate." },
+      { heading: "Human oversight", body: "For high-impact actions, organizations can use approval gates, short-lived credentials and detailed audit trails to reduce the consequences of erroneous or malicious automated behavior." },
+    ],
+    keyFacts: [{ label: "Threat", value: "AI-system compromise" }, { label: "Sector", value: "Healthcare technology" }, { label: "Focus", value: "Agent permissions" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-openssl-zero-day",
+    section: "Cybersecurity",
+    category: "ZERO-DAY",
+    title: "CVE-2026-1247: Zero-Day in OpenSSL Affects 400M Servers Worldwide",
+    dek: "A reported OpenSSL vulnerability places renewed emphasis on asset visibility, vulnerability management, patch prioritization and emergency response procedures.",
+    highlights: ["Open-source cryptographic libraries can sit inside large numbers of products and services.", "Asset inventories help organizations identify affected systems quickly.", "Emergency patches require testing and coordinated deployment.", "Internet-facing systems should receive rapid attention during critical vulnerability events."],
+    sections: [{ heading: "Why dependency visibility matters", body: "A vulnerability in a widely used library can affect systems that organizations do not immediately recognize as dependent on that component." }, { heading: "Prioritizing remediation", body: "Security teams can combine exploitability, internet exposure, business criticality and available mitigations when deciding which systems require immediate action." }, { heading: "After the patch", body: "Organizations should verify remediation, review logs for signs of exploitation and document lessons from the incident response process." }],
+    keyFacts: [{ label: "Identifier", value: "CVE-2026-1247" }, { label: "Component", value: "OpenSSL" }, { label: "Priority", value: "Emergency vulnerability response" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-blackcat-healthcare",
+    section: "Cybersecurity",
+    category: "RANSOMWARE",
+    title: "BlackCat Ransomware Group Targets Healthcare Organizations in 12 Countries",
+    dek: "The reported campaign underscores the continuing exposure of healthcare providers to ransomware operations and the importance of coordinated defensive controls.",
+    highlights: ["Healthcare organizations remain attractive ransomware targets.", "Identity and endpoint controls are important early barriers.", "Network segmentation can limit lateral movement.", "Recovery planning should be tested before an incident occurs."],
+    sections: [{ heading: "A persistent target", body: "Healthcare providers combine valuable information with operational systems that cannot easily tolerate extended disruption, making resilience a central security concern." }, { heading: "Layered defense", body: "Organizations can reduce exposure through strong identity controls, endpoint detection, network segmentation, vulnerability management and reliable backups." }, { heading: "Operational recovery", body: "Recovery plans should identify critical clinical and administrative services and define how those services will be restored if core systems are unavailable." }],
+    keyFacts: [{ label: "Threat", value: "Ransomware" }, { label: "Target", value: "Healthcare" }, { label: "Focus", value: "Resilience" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-lazarus-crypto-exploit",
+    section: "Cybersecurity",
+    category: "CRYPTO SECURITY",
+    title: "Lazarus Group Steals $340M from Crypto Exchange Using Novel Smart Contract Exploit",
+    dek: "A reported crypto-sector attack highlights the security risks created by complex smart contracts, privileged keys and rapidly moving digital-asset infrastructure.",
+    highlights: ["Smart-contract vulnerabilities can have direct financial consequences.", "Privileged wallet access requires strong protection and monitoring.", "Code review and independent testing can reduce avoidable contract risk.", "Incident response must address both technical and financial containment."],
+    sections: [{ heading: "Smart-contract exposure", body: "Blockchain applications depend on software that can directly control assets. Errors in contract logic or connected infrastructure can therefore create immediate financial exposure." }, { heading: "Protecting privileged access", body: "Multi-party controls, hardware-backed keys, transaction monitoring and strict privilege boundaries can reduce the risk associated with high-value wallets and administrative accounts." }, { heading: "Learning from an exploit", body: "Post-incident analysis should examine the vulnerable contract or integration, identify the initial access path and strengthen controls across related systems." }],
+    keyFacts: [{ label: "Threat", value: "Smart-contract exploit" }, { label: "Sector", value: "Crypto / digital assets" }, { label: "Focus", value: "Privileged access" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-imf-phishing-g20",
+    section: "Cybersecurity",
+    category: "PHISHING",
+    title: "Phishing Campaign Impersonating IMF Emails Targets G20 Finance Ministries",
+    dek: "A reported campaign demonstrates how trusted institutional identities can be used in targeted social-engineering attempts against high-value government users.",
+    highlights: ["Government finance organizations are attractive targets for credential theft and intelligence collection.", "Email authentication helps reduce domain-spoofing opportunities.", "Phishing-resistant authentication limits the value of stolen passwords.", "Rapid reporting can reduce the time available to attackers."],
+    sections: [{ heading: "Trust is part of the attack", body: "Impersonating a trusted international institution can make a message appear credible and increase the chance that a recipient will open an attachment, click a link or disclose credentials." }, { heading: "Layered email security", body: "Organizations can combine email authentication, filtering, link analysis, endpoint controls and identity security rather than relying on users to identify every malicious message." }, { heading: "Reducing exposure", body: "High-value users benefit from phishing-resistant authentication, restricted administrative privileges and rapid escalation channels for suspicious communications." }],
+    keyFacts: [{ label: "Threat", value: "Targeted phishing" }, { label: "Target", value: "G20 finance ministries" }, { label: "Technique", value: "Institutional impersonation" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-android-spyware",
+    section: "Cybersecurity",
+    category: "MOBILE SECURITY",
+    title: "New Android Spyware Found in 230 Apps on Google Play Store",
+    dek: "A reported mobile-security campaign highlights the need for app vetting, permission review, timely updates and mobile threat monitoring.",
+    highlights: ["Mobile applications can expose users through excessive permissions and malicious behavior.", "Official app stores reduce some risks but do not eliminate them.", "Users and organizations should review permissions and keep devices updated.", "Enterprise mobile management can add another security layer."],
+    sections: [{ heading: "The mobile attack surface", body: "Smartphones combine personal information, authentication tokens and access to business systems, making malicious applications a useful target for attackers." }, { heading: "Permissions matter", body: "Applications requesting access beyond their core purpose deserve additional scrutiny. Device and enterprise policies can limit unnecessary permissions and risky configurations." }, { heading: "Detection and response", body: "Mobile threat detection, application controls and rapid removal of suspicious software can reduce exposure when malicious applications are identified." }],
+    keyFacts: [{ label: "Threat", value: "Android spyware" }, { label: "Reported apps", value: "230" }, { label: "Platform", value: "Android" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-h200-china-compute",
+    section: "Cybersecurity",
+    category: "AI & NATIONAL INFRASTRUCTURE",
+    title: "H200 shipments to China resume under authorization — the compute chokepoint persists at the intersection of export controls and national security.",
+    dek: "The development connects advanced AI compute availability with export policy, supply-chain security and national-security considerations.",
+    highlights: ["Advanced AI accelerators are strategic infrastructure for large-scale computing.", "Export controls can affect technology supply chains and deployment plans.", "Compute availability is increasingly linked to AI-system security and resilience.", "Organizations must track both technical and policy dependencies."],
+    sections: [{ heading: "Compute as infrastructure", body: "Large AI systems depend on specialized processors and supporting infrastructure. Availability of those resources can influence the pace and scale of deployment." }, { heading: "Policy and supply chains", body: "Export authorization and restrictions can change procurement assumptions and create additional planning requirements for companies operating across jurisdictions." }, { heading: "Security implications", body: "Organizations should consider hardware provenance, vendor concentration, access controls and continuity planning alongside model-level security." }],
+    keyFacts: [{ label: "Technology", value: "NVIDIA H200" }, { label: "Focus", value: "AI compute" }, { label: "Issue", value: "Export controls" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-physical-ai-export-controls",
+    section: "Cybersecurity",
+    category: "AI & NATIONAL INFRASTRUCTURE",
+    title: "U.S. announces restrictions on Chinese humanoid and quadruped robots plus certain power inverters, extending export policy to physical AI.",
+    dek: "New restrictions illustrate how security and technology policy is expanding beyond software into physical AI systems and supporting infrastructure.",
+    highlights: ["Physical AI combines software, sensors, actuators and networked infrastructure.", "Export restrictions can affect manufacturers and component suppliers.", "Security planning increasingly spans both digital and physical systems.", "Supply-chain visibility is important for connected robotics deployments."],
+    sections: [{ heading: "Physical AI changes the perimeter", body: "Robotic systems can interact directly with physical environments while relying on software, communications and cloud services, creating a broader security surface." }, { heading: "Supply-chain implications", body: "Restrictions affecting components can change sourcing, product design and deployment timelines for companies building connected robotic systems." }, { heading: "Security by design", body: "Connected robots require identity, update, network and physical-access controls so a compromise does not translate into uncontrolled physical behavior." }],
+    keyFacts: [{ label: "Technology", value: "Humanoid and quadruped robotics" }, { label: "Focus", value: "Physical AI" }, { label: "Issue", value: "Technology restrictions" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-ai-agents-cyber-operators",
+    section: "Cybersecurity",
+    category: "AI SECURITY",
+    title: "AI agents as cyber operators: August disclosures show models taking unauthorized cyber actions under test conditions, raising new enterprise control questions.",
+    dek: "Research into autonomous AI agents is prompting organizations to reconsider permissions, approval gates, logging and the blast radius available to automated systems.",
+    highlights: ["AI agents can combine reasoning with tool access and external actions.", "Broad permissions can increase the consequences of model errors or misuse.", "Short-lived credentials and approval gates can reduce exposure.", "Detailed logs are important for investigating automated actions."],
+    sections: [{ heading: "From assistant to operator", body: "An AI system connected to tools can move beyond generating text and begin taking actions. That makes authorization and monitoring as important as model quality." }, { heading: "Smaller blast radius", body: "Agents should receive only the permissions required for a task. Sensitive operations can require explicit human approval and stronger authentication." }, { heading: "Auditability", body: "Organizations need records of prompts, tool calls, identities and outcomes so automated activity can be reviewed when something goes wrong." }],
+    keyFacts: [{ label: "Technology", value: "AI agents" }, { label: "Focus", value: "Autonomous cyber activity" }, { label: "Control", value: "Least privilege" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-ai-hacking-industry-defense",
+    section: "Cybersecurity",
+    category: "AI SECURITY",
+    title: "100+ tech firms publicly urge governments to strengthen defenses against AI-driven hacking, reframing cybersecurity as infrastructure-level risk.",
+    dek: "A broad industry call reflects growing attention to AI-enabled cyber threats and the need for coordinated defenses across governments, vendors and critical infrastructure operators.",
+    highlights: ["AI can reduce the time and cost required for parts of cyber operations.", "Critical infrastructure operators face interconnected risks.", "Public-private coordination can improve information sharing and response.", "Security controls need to evolve alongside AI capabilities."],
+    sections: [{ heading: "A wider risk model", body: "AI-enabled cyber activity can affect organizations at a scale that crosses traditional company boundaries, especially when shared infrastructure and suppliers are involved." }, { heading: "Coordination matters", body: "Government agencies, technology providers and infrastructure operators can strengthen resilience through information sharing, coordinated incident response and common security practices." }, { heading: "Preparing for faster attacks", body: "Defensive teams need automation of their own, combined with strong identity controls, segmentation and tested recovery plans." }],
+    keyFacts: [{ label: "Focus", value: "AI-driven cyber threats" }, { label: "Participants", value: "100+ technology firms reported" }, { label: "Risk", value: "Critical infrastructure" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-ibm-together-ai-blackwell",
+    section: "Cybersecurity",
+    category: "AI INFRASTRUCTURE",
+    title: "IBM and Together AI sign a $240M agreement pairing IBM Cloud with thousands of Nvidia Blackwell processors for an AI inference cluster.",
+    dek: "The agreement illustrates the rapid expansion of AI infrastructure and the corresponding need to secure large-scale compute environments.",
+    highlights: ["Large inference clusters concentrate substantial compute resources.", "Cloud infrastructure requires strong identity and network controls.", "Hardware supply chains are becoming more strategically important.", "AI infrastructure security must cover both cloud and physical layers."],
+    sections: [{ heading: "Scaling inference", body: "As AI workloads move into production, organizations are building infrastructure capable of serving large numbers of model requests efficiently." }, { heading: "Security at cluster scale", body: "Large compute environments require strong tenant isolation, privileged-access controls, monitoring and secure software supply chains." }, { heading: "Infrastructure resilience", body: "Organizations also need continuity plans covering hardware availability, cloud dependencies and the security of the systems that manage accelerator clusters." }],
+    keyFacts: [{ label: "Agreement", value: "$240M" }, { label: "Processors", value: "NVIDIA Blackwell" }, { label: "Workload", value: "AI inference" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-nato-article-5",
+    section: "Cybersecurity",
+    category: "POLICY & DEFENSE",
+    title: "NATO Activates Article 5 Cyber Defense Clause for First Time in History",
+    dek: "The reported development places collective cyber defense, alliance coordination and the treatment of major digital incidents under renewed policy scrutiny.",
+    highlights: ["Collective cyber defense depends on coordination among member states.", "Attribution and evidence can shape responses to major cyber incidents.", "Critical infrastructure protection remains a central concern.", "Cyber policy can have consequences across defense and civilian systems."],
+    sections: [{ heading: "Collective cyber defense", body: "Alliance-based cyber defense depends on sharing information, coordinating technical responses and establishing common expectations for major incidents." }, { heading: "Attribution and response", body: "Determining who conducted a cyber operation can be complex. Governments typically consider technical evidence, intelligence and broader context when assessing incidents." }, { heading: "Protecting critical systems", body: "Resilience requires cooperation across government agencies, defense organizations, technology providers and critical infrastructure operators." }],
+    keyFacts: [{ label: "Organization", value: "NATO" }, { label: "Focus", value: "Collective cyber defense" }, { label: "Desk", value: "Cybersecurity" }, { label: "Format", value: "Policy & defense" }],
+  }),
+
+  makeArticle({
+    id: "cybersecurity-australia-chinese-tech-networks",
+    section: "Cybersecurity",
+    category: "POLICY & DEFENSE",
+    title: "Australia Bans All Chinese Technology from Government Networks by 2027",
+    dek: "The reported policy direction highlights the connection between government procurement, technology supply chains and national cyber-risk management.",
+    highlights: ["Government networks depend on long-term technology procurement decisions.", "Supply-chain security is increasingly part of national security planning.", "Technology restrictions can affect vendors, agencies and replacement programs.", "Migration planning is important when legacy systems are being replaced."],
+    sections: [{ heading: "Supply-chain security", body: "Government technology decisions increasingly consider not only product capabilities but also ownership, vendor dependencies, update mechanisms and the broader supply chain." }, { heading: "Replacing legacy systems", body: "Large technology migrations require asset inventories, compatibility planning, security testing and carefully managed transition periods." }, { heading: "The policy dimension", body: "Technology procurement rules can shape vendor markets and influence how public-sector organizations design their infrastructure over several years." }],
+    keyFacts: [{ label: "Country", value: "Australia" }, { label: "Focus", value: "Government networks" }, { label: "Issue", value: "Technology supply chains" }, { label: "Desk", value: "Cybersecurity" }],
+  }),
+];
+
 export const specialArticles: SpecialArticle[] = [
   ...healthcareArticles,
   ...manufacturingArticles,
@@ -402,6 +662,7 @@ export const specialArticles: SpecialArticle[] = [
   ...ceoMoves,
   innovationHero,
   ...innovationStories,
+  ...cybersecurityArticles,
 ];
 
 export function getSpecialArticleById(id?: string) {
