@@ -1,7 +1,24 @@
+import { Link } from "react-router";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Clock, ChevronRight } from "lucide-react";
 import CS2Img from "../../../imports/CS2.png";
 import CS3Img from "../../../imports/CS3.png";
+
+/* =========================================================
+   ARTICLE ROUTING
+========================================================= */
+
+function cyberArticleId(title: string) {
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function cyberArticlePath(title: string) {
+  return `/article/${cyberArticleId(title)}`;
+}
 
 /* =========================================================
    SECTION HEADER
@@ -252,26 +269,20 @@ const defenseNews = [
   {
     id: 2,
     title:
-      "EU's Cyber Solidarity Act Creates €1.1B Emergency Cyber Response Fund",
+      "NATO Expands Joint Cyber Defense Initiative Across Member States",
     time: "4 hrs ago",
   },
   {
     id: 3,
     title:
-      "India's CERT-In Mandates 6-Hour Breach Notification for All Critical Infrastructure",
+      "CISA Issues Emergency Directive on Critical Infrastructure Security",
     time: "6 hrs ago",
   },
   {
     id: 4,
     title:
-      "NATO Activates Article 5 Cyber Defense Clause for First Time in History",
+      "European Union Approves New Cybersecurity Framework for AI Systems",
     time: "8 hrs ago",
-  },
-  {
-    id: 5,
-    title:
-      "Australia Bans All Chinese Technology from Government Networks by 2027",
-    time: "10 hrs ago",
   },
 ];
 
@@ -281,98 +292,44 @@ const defenseNews = [
 
 const marketData = [
   {
-    company: "CrowdStrike",
-    ticker: "CRWD",
-    price: "$342.50",
-    change: "+4.2%",
+    company: "Palo Alto Networks",
+    ticker: "PANW",
+    price: "$186.42",
+    change: "+2.41%",
     up: true,
   },
   {
-    company: "Palo Alto Networks",
-    ticker: "PANW",
-    price: "$287.30",
-    change: "+2.8%",
+    company: "CrowdStrike",
+    ticker: "CRWD",
+    price: "$421.16",
+    change: "+1.83%",
     up: true,
   },
   {
     company: "Fortinet",
     ticker: "FTNT",
-    price: "$76.90",
-    change: "+1.9%",
-    up: true,
-  },
-  {
-    company: "Zscaler",
-    ticker: "ZS",
-    price: "$198.40",
-    change: "+3.5%",
-    up: true,
-  },
-  {
-    company: "SentinelOne",
-    ticker: "S",
-    price: "$29.80",
-    change: "-0.8%",
+    price: "$78.34",
+    change: "-0.72%",
     up: false,
+  },
+  {
+    company: "Cloudflare",
+    ticker: "NET",
+    price: "$212.80",
+    change: "+3.14%",
+    up: true,
   },
 ];
 
 /* =========================================================
-   SECONDARY ARTICLE
-========================================================= */
-
-function SecondaryArticle({
-  data,
-}: {
-  data: typeof hero1;
-}) {
-  return (
-    <article className="group cursor-pointer">
-      <div className="overflow-hidden rounded-md bg-gray-100 mb-3">
-        <ImageWithFallback
-          src={data.image}
-          alt={data.title}
-          className="w-full h-[220px] md:h-[260px] lg:h-[300px] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-        />
-      </div>
-
-      <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-red-600">
-        {data.category}
-      </span>
-
-      <h2 className="mt-1.5 font-serif text-[20px] md:text-[24px] lg:text-[26px] font-bold leading-[1.12] text-[#17140F] group-hover:text-red-600 transition-colors">
-        {data.title}
-      </h2>
-
-      <p className="mt-2.5 text-[12px] md:text-[13px] leading-[1.6] text-[#55534C]">
-        {data.excerpt}
-      </p>
-
-      <div className="flex items-center gap-3 mt-3 text-[10px] text-gray-400">
-        <span className="font-medium text-gray-500">
-          By {data.author}
-        </span>
-
-        <span className="h-3 w-px bg-gray-300" />
-
-        <span className="flex items-center gap-1.5">
-          <Clock size={9} />
-          {data.time}
-        </span>
-      </div>
-    </article>
-  );
-}
-
-/* =========================================================
-   SPONSORSHIP CARDS
+   SPONSORSHIPS
 ========================================================= */
 
 const sponsorships = [
-  "Global Finance Summit 2026",
-  "Tech Leaders Forum",
-  "Energy Transition Conference",
-  "AI & Business World",
+  "Cybersecurity Leadership Summit",
+  "AI Security Forum",
+  "Global Digital Trust Conference",
+  "Enterprise Risk Roundtable",
 ];
 
 /* =========================================================
@@ -381,39 +338,64 @@ const sponsorships = [
 
 export function CybersecurityPage() {
   return (
-    <main className="w-full bg-white text-[#17140F] antialiased">
+    <main className="min-h-screen bg-[#FAF9F7] text-[#17140F]">
 
-      {/* =====================================================
-          MAIN FULL WIDTH CONTAINER
-      ===================================================== */}
+      {/* =================================================
+          PAGE HEADER
+      ================================================= */}
 
-      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-14">
+      <div className="border-b border-gray-200 bg-white">
 
-        {/* =================================================
-            PAGE TITLE
-        ================================================= */}
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
 
-        <header className="pt-5 md:pt-7 pb-4">
-          <div className="border-t-[3px] border-red-600 pt-4">
+          <div className="flex flex-col gap-3 py-5 md:flex-row md:items-end md:justify-between">
 
-            <h1 className="font-serif text-[32px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-bold leading-none">
-              Cybersecurity
-            </h1>
+            <div>
 
-            <p className="mt-2 text-[12px] md:text-[13px] text-[#77736D]">
-              Digital threats, enterprise security, nation-state actors, and data protection.
-            </p>
+              <p className="text-[8px] font-bold uppercase tracking-[0.25em] text-red-600">
+                THE PRIDE TIMES
+              </p>
+
+              <h1 className="mt-1 font-serif text-[32px] md:text-[42px] font-bold leading-none tracking-tight">
+                Cybersecurity
+              </h1>
+
+              <p className="mt-2 max-w-2xl text-[11px] md:text-[12px] leading-[1.6] text-gray-500">
+                Cyber threat intelligence, digital defense, AI security,
+                infrastructure protection and the evolving cybersecurity
+                landscape.
+              </p>
+
+            </div>
+
+            <div className="text-left md:text-right">
+
+              <p className="text-[8px] font-bold uppercase tracking-[0.18em] text-gray-400">
+                Cybersecurity Desk
+              </p>
+
+              <p className="mt-1 text-[11px] font-semibold text-gray-700">
+                Edited by Sagar Kumar
+              </p>
+
+            </div>
 
           </div>
-        </header>
+
+        </div>
+
+      </div>
+
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
 
         {/* =================================================
             TOP ADVERTISEMENT
         ================================================= */}
 
-        <div className="w-full h-[70px] md:h-[78px] bg-[#17313A] flex items-center justify-center my-4 md:my-5 relative overflow-hidden">
+        <div className="w-full h-[68px] md:h-[76px] bg-[#17313A] flex items-center justify-center my-5 md:my-7 relative">
 
           <div className="text-center text-white">
+
             <p className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.22em] text-cyan-300">
               GOOGLE ADSENSE
             </p>
@@ -425,6 +407,7 @@ export function CybersecurityPage() {
             <p className="mt-0.5 text-[8px] text-cyan-200">
               728 × 90 • Leaderboard
             </p>
+
           </div>
 
           <span className="absolute top-1 right-1 text-[7px] bg-white/80 text-gray-500 px-1.5 py-0.5">
@@ -443,14 +426,19 @@ export function CybersecurityPage() {
               MAIN HERO
           ================================================= */}
 
-          <article className="group cursor-pointer">
+          <Link
+            to={cyberArticlePath(hero.title)}
+            className="group block cursor-pointer"
+          >
 
             <div className="overflow-hidden rounded-lg bg-gray-100">
+
               <ImageWithFallback
                 src={hero.image}
                 alt={hero.title}
                 className="w-full h-[260px] sm:h-[350px] md:h-[440px] lg:h-[500px] xl:h-[520px] object-cover transition-transform duration-700 group-hover:scale-[1.025]"
               />
+
             </div>
 
             <div className="pt-3">
@@ -468,6 +456,7 @@ export function CybersecurityPage() {
               </p>
 
               <div className="flex flex-wrap items-center gap-3 mt-3 text-[10px] text-gray-400">
+
                 <span className="font-medium text-gray-500">
                   By {hero.author}
                 </span>
@@ -478,10 +467,12 @@ export function CybersecurityPage() {
                   <Clock size={9} />
                   {hero.time}
                 </span>
+
               </div>
 
             </div>
-          </article>
+
+          </Link>
 
           {/* =================================================
               RIGHT SIDEBAR
@@ -494,14 +485,17 @@ export function CybersecurityPage() {
             <div className="border border-gray-200 rounded-md overflow-hidden mb-5">
 
               <div className="px-3 py-2 bg-[#F7F4EC]">
+
                 <span className="text-[8px] font-bold uppercase tracking-[0.14em] text-gray-500">
                   Sponsored Content
                 </span>
+
               </div>
 
               <div className="h-[150px] md:h-[170px] bg-[#101731] flex items-center justify-center text-center px-4">
 
                 <div>
+
                   <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-yellow-400">
                     Featured Partner
                   </p>
@@ -513,6 +507,7 @@ export function CybersecurityPage() {
                   <p className="text-gray-300 text-[9px] mt-1">
                     Reach 2M+ business readers
                   </p>
+
                 </div>
 
               </div>
@@ -522,17 +517,21 @@ export function CybersecurityPage() {
             {/* MORE STORIES */}
 
             <div className="border-b-2 border-[#17140F] pb-2 mb-1">
+
               <h3 className="font-bold text-[14px] uppercase tracking-wide">
                 More Stories
               </h3>
+
             </div>
 
             <div className="divide-y divide-gray-200">
 
               {threatAlerts.slice(0, 4).map((story) => (
-                <article
+
+                <Link
                   key={story.id}
-                  className="py-3 group cursor-pointer"
+                  to={cyberArticlePath(story.title)}
+                  className="block py-3 group cursor-pointer"
                 >
 
                   <span
@@ -556,7 +555,8 @@ export function CybersecurityPage() {
                     {story.time}
                   </span>
 
-                </article>
+                </Link>
+
               ))}
 
             </div>
@@ -576,17 +576,21 @@ export function CybersecurityPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 lg:gap-x-7 gap-y-8">
 
             {stories.map((story) => (
-              <article
+
+              <Link
                 key={story.id}
-                className="group cursor-pointer"
+                to={cyberArticlePath(story.title)}
+                className="block group cursor-pointer"
               >
 
                 <div className="overflow-hidden rounded-md bg-gray-100">
+
                   <ImageWithFallback
                     src={story.image}
                     alt={story.title}
                     className="w-full h-[180px] sm:h-[190px] md:h-[205px] lg:h-[215px] object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   />
+
                 </div>
 
                 <div className="pt-2.5">
@@ -600,13 +604,17 @@ export function CybersecurityPage() {
                   </h3>
 
                   <div className="flex items-center gap-1.5 mt-2 text-[9px] text-gray-400">
+
                     <Clock size={8} />
+
                     {story.time}
+
                   </div>
 
                 </div>
 
-              </article>
+              </Link>
+
             ))}
 
           </div>
@@ -662,15 +670,18 @@ export function CybersecurityPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
 
             {sponsorships.map((item) => (
+
               <div
                 key={item}
                 className="bg-white border border-gray-200 rounded-md min-h-[90px] flex flex-col items-center justify-center text-center px-3"
               >
 
                 <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center mb-2">
+
                   <span className="text-red-500 text-sm font-bold">
                     ✦
                   </span>
+
                 </div>
 
                 <p className="text-[10px] md:text-[11px] font-bold text-gray-900">
@@ -682,6 +693,7 @@ export function CybersecurityPage() {
                 </p>
 
               </div>
+
             ))}
 
           </div>
@@ -701,9 +713,11 @@ export function CybersecurityPage() {
             <div className="divide-y divide-gray-200">
 
               {aiInfraStories.map((story) => (
-                <article
+
+                <Link
                   key={story.id}
-                  className="py-4 first:pt-0 group cursor-pointer"
+                  to={cyberArticlePath(story.title)}
+                  className="block py-4 first:pt-0 group cursor-pointer"
                 >
 
                   <p className="text-[13px] md:text-[14px] font-semibold leading-[1.5] text-gray-900 group-hover:text-red-600 transition-colors">
@@ -715,7 +729,8 @@ export function CybersecurityPage() {
                     {story.time}
                   </span>
 
-                </article>
+                </Link>
+
               ))}
 
             </div>
@@ -789,6 +804,7 @@ export function CybersecurityPage() {
               <tbody className="divide-y divide-gray-100">
 
                 {responseMatrix.map((item) => (
+
                   <tr
                     key={item.threat}
                     className="hover:bg-gray-50 transition-colors"
@@ -815,6 +831,7 @@ export function CybersecurityPage() {
                     </td>
 
                   </tr>
+
                 ))}
 
               </tbody>
@@ -840,9 +857,11 @@ export function CybersecurityPage() {
             <div className="divide-y divide-gray-200">
 
               {defenseNews.map((item) => (
-                <article
+
+                <Link
                   key={item.id}
-                  className="py-4 first:pt-0 group cursor-pointer"
+                  to={cyberArticlePath(item.title)}
+                  className="block py-4 first:pt-0 group cursor-pointer"
                 >
 
                   <h3 className="text-[13px] md:text-[14px] font-semibold leading-[1.45] group-hover:text-red-600 transition-colors">
@@ -854,7 +873,8 @@ export function CybersecurityPage() {
                     {item.time}
                   </span>
 
-                </article>
+                </Link>
+
               ))}
 
             </div>
@@ -870,6 +890,7 @@ export function CybersecurityPage() {
             <div className="divide-y divide-gray-200">
 
               {marketData.map((stock) => (
+
                 <div
                   key={stock.ticker}
                   className="py-4 first:pt-0 flex items-center justify-between"
@@ -906,6 +927,7 @@ export function CybersecurityPage() {
                   </div>
 
                 </div>
+
               ))}
 
             </div>
@@ -945,6 +967,7 @@ export function CybersecurityPage() {
         </section>
 
       </div>
+
     </main>
   );
 }
