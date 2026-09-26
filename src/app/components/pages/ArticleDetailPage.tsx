@@ -61,6 +61,12 @@ function getSectionPath(section: string) {
     case "Business":
       return "/business-news";
 
+    case "International Business":
+      return "/international-news";
+
+    case "Startup Success":
+      return "/startup-success";
+
     case "Technology":
       return "/technology";
 
@@ -89,6 +95,12 @@ function getSectionName(section: string) {
 
     case "Business":
       return "Business";
+
+    case "International Business":
+      return "International Business";
+
+    case "Startup Success":
+      return "Startup Success";
 
     case "Technology":
       return "Technology";
