@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useParams } from "react-router";
 import {
   ArrowLeft,
@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { PrideTimesAd } from "../AdSenseSlots";
 
 import {
   getHomepageArticleBySlug,
@@ -40,50 +41,6 @@ import {
 
 type EditorialArticle = BusinessArticle | TechnologyArticle;
 
-type AdSenseWindow = Window & { adsbygoogle?: unknown[] };
-
-function AdSenseUnit({
-  slot,
-  inArticle = false,
-}: {
-  slot: "5373718974" | "8042854193" | "6033028012";
-  inArticle?: boolean;
-}) {
-  useEffect(() => {
-    try {
-      const adsWindow = window as AdSenseWindow;
-      adsWindow.adsbygoogle = adsWindow.adsbygoogle || [];
-      adsWindow.adsbygoogle.push({});
-    } catch (error) {
-      console.warn("AdSense could not initialize:", error);
-    }
-  }, []);
-
-  return (
-    <div className="my-10 w-full border-y border-gray-200 bg-white py-5">
-      <div className="mx-auto max-w-4xl px-2 sm:px-4">
-        <p className="mb-2 text-center text-[9px] font-medium uppercase tracking-[0.2em] text-gray-400">
-          Advertisement
-        </p>
-        <ins
-          className="adsbygoogle"
-          style={{ display: inArticle ? "block" : "block", minHeight: "90px" }}
-          data-ad-client="ca-pub-2331501617441941"
-          data-ad-slot={slot}
-          {...(inArticle
-            ? { "data-ad-layout": "in-article", "data-ad-format": "fluid" }
-            : { "data-ad-format": "auto", "data-full-width-responsive": "true" })}
-        />
-      </div>
-    </div>
-  );
-}
-
-function HomepageArticleAd() {
-  return <AdSenseUnit slot="6033028012" />;
-}
-
-
 /* =========================================================
    SPECIAL ARTICLE SECTION PATH
 ========================================================= */
@@ -107,12 +64,6 @@ function getSectionPath(section: string) {
 
     case "International Business":
       return "/international-news";
-
-    case "International News":
-      return "/international-news";
-
-    case "Energy":
-      return "/energy";
 
     case "Startup Success":
       return "/startup-success";
@@ -191,6 +142,7 @@ function SpecialArticleEditorial({
 
   const sectionPath = getSectionPath(article.section);
   const sectionName = getSectionName(article.section);
+  const showSectionAds = ["Innovation", "CEO Spotlight", "Healthcare"].includes(article.section);
 
   return (
     <article className="bg-[#f8f7f3] text-[#171717]">
@@ -343,6 +295,10 @@ function SpecialArticleEditorial({
             {/* =================================================
                 ARTICLE SECTIONS
             ================================================= */}
+
+            {showSectionAds && (
+              <PrideTimesAd variant="fifth" className="mt-10" />
+            )}
 
             <div className="mt-10 font-serif text-[17px] leading-[1.9] text-gray-800 sm:text-[18px]">
 
@@ -617,6 +573,10 @@ function SpecialArticleEditorial({
 
               </section>
 
+              {showSectionAds && (
+                <PrideTimesAd variant="fourth" />
+              )}
+
               <section className="border border-gray-200 bg-[#171717] p-5 text-white">
 
                 <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-red-400">
@@ -727,6 +687,37 @@ function relatedHomepageArticles(
   );
 
   return [...sameCategory, ...fallback].slice(0, limit);
+}
+
+/* =========================================================
+   HOMEPAGE ARTICLE AD
+========================================================= */
+
+function HomepageArticleAd() {
+  useEffect(() => {
+    try {
+      const ads = (window as any).adsbygoogle || [];
+      ads.push({});
+    } catch (error) {
+      console.warn("AdSense initialization skipped:", error);
+    }
+  }, []);
+
+  return (
+    <div className="my-10 w-full overflow-hidden border-y border-gray-200 bg-white py-4">
+      <p className="mb-3 text-center text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-400">
+        Advertisement
+      </p>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", minHeight: "120px" }}
+        data-ad-client="ca-pub-2331501617441941"
+        data-ad-slot="6033028012"
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    </div>
+  );
 }
 
 function HomepageArticle({
@@ -856,8 +847,7 @@ function HomepageArticle({
             <div className="mt-10 font-serif text-[17px] leading-[1.9] text-gray-800 sm:text-[18px]">
 
               {article.sections.map((section, index) => (
-                <Fragment key={section.heading}>
-                <section className="mb-11">
+                <section key={section.heading} className="mb-11">
 
                   <p className="mb-2 font-sans text-[10px] font-bold uppercase tracking-[0.22em] text-red-600">
                     {String(index + 1).padStart(2, "0")} · The story
@@ -877,9 +867,6 @@ function HomepageArticle({
                   )}
 
                 </section>
-                {index === 0 && <AdSenseUnit slot="5373718974" />}
-                {index === 1 && <AdSenseUnit slot="8042854193" inArticle />}
-                </Fragment>
               ))}
 
             </div>
@@ -1199,7 +1186,6 @@ function MagazineEditorial({
             <div className="mt-10 font-serif text-[17px] leading-[1.9] text-gray-800 sm:text-[18px]">
 
               {article.sections.map((section, index) => (
-                <Fragment key={section.heading}>
                 <section key={section.heading} className="mb-11">
 
                   <p className="mb-2 font-sans text-[10px] font-bold uppercase tracking-[0.22em] text-red-600">
@@ -1220,9 +1206,6 @@ function MagazineEditorial({
                   )}
 
                 </section>
-                {index === 0 && <AdSenseUnit slot="5373718974" />}
-                {index === 1 && <AdSenseUnit slot="8042854193" inArticle />}
-                </Fragment>
               ))}
 
             </div>
