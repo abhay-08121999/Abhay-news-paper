@@ -389,15 +389,15 @@ function HeroStoryCard({ story }: { story: HeroStory }) {
   return (
     <article className="group">
       <Link to={internationalArticlePathByTitle(story.title)} className="block">
-      <div className="overflow-hidden rounded-[6px] bg-gray-100">
+        <div className="overflow-hidden rounded-[6px] bg-gray-100">
         <ImageWithFallback
           src={story.image}
           alt={story.title}
           className="w-full h-[300px] sm:h-[370px] md:h-[440px] lg:h-[455px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
         />
-      </div>
+        </div>
 
-      <div className="pt-3 md:pt-4">
+        <div className="pt-3 md:pt-4">
         <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.12em] text-red-600">
           {story.category}
         </span>
@@ -417,6 +417,7 @@ function HeroStoryCard({ story }: { story: HeroStory }) {
             <Clock size={10} />
             {story.time}
           </span>
+        </div>
         </div>
       </Link>
     </article>
