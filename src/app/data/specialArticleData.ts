@@ -5,6 +5,13 @@ import HC4Img from "../../imports/HC4.png";
 import Manu1Img from "../../imports/Manu1.png";
 import Manu2Img from "../../imports/Manu2.png";
 import Manu3Img from "../../imports/Manu3.png";
+import Smartc1Img from "../../imports/Smartc1.png";
+import Smartc2Img from "../../imports/Smartc2.png";
+import Smartc3Img from "../../imports/Smartc3.png";
+import Smartc4Img from "../../imports/Smartc4.png";
+import SC1Img from "../../imports/SC1.png";
+import SC2Img from "../../imports/SC2.png";
+import SC3Img from "../../imports/SC3.png";
 
 export type SpecialArticle = {
   id: string;
@@ -929,6 +936,221 @@ const startupSeeds: SectionArticleSeed[] = [
 const internationalBusinessArticles = internationalSeeds.map(buildSectionArticle);
 const startupSuccessArticles = startupSeeds.map(buildSectionArticle);
 
+
+
+/* =========================================================
+   SMART CITIES + SUPPLY CHAIN
+   Centralized article records for all cards on these pages.
+========================================================= */
+
+const smartCitiesArticles: SpecialArticle[] = [
+  makeArticle({
+    id: "smart-cities-tomorrow-urban-ecosystems",
+    section: "Smart Cities",
+    category: "SMART CITIES",
+    title: "Cities of Tomorrow: Building Smarter & Greener Urban Ecosystems",
+    dek: "From Singapore's data-driven governance to Copenhagen's carbon-neutral neighborhoods, the blueprint for the 21st century city is taking shape.",
+    image: Smartc1Img,
+    highlights: [
+      "Urban technology is increasingly being connected with sustainability, mobility and public-service delivery.",
+      "Cities are using sensors, data platforms and digital infrastructure to understand demand in real time.",
+      "Energy efficiency and resilient infrastructure are becoming central to long-term urban planning.",
+      "The success of smart-city programs depends on implementation, affordability and public trust.",
+    ],
+    sections: [
+      { heading: "From connected infrastructure to connected cities", body: "The smart-city concept is moving beyond isolated technology pilots. Transport systems, utilities, public safety, buildings and municipal services increasingly depend on shared digital infrastructure. The goal is to make urban systems more responsive while reducing waste and improving the experience of residents." },
+      { heading: "Data is becoming an urban utility", body: "Sensors and connected systems can provide information about traffic, energy consumption, water use and public-space demand. When that information is combined responsibly, city authorities can make decisions using current conditions rather than relying only on historical averages." },
+      { heading: "Greener growth requires physical infrastructure", body: "Digital tools cannot replace investment in transit, power networks, water systems, housing and resilient public spaces. The strongest smart-city strategies combine technology with physical infrastructure and measurable sustainability targets." },
+      { heading: "What to watch next", body: "The next phase will be defined by deployments that move beyond demonstrations: integrated mobility systems, smart grids, efficient buildings, digital public services and climate-resilience projects. Procurement, cybersecurity, privacy and equitable access will be just as important as the underlying technology." },
+    ],
+    keyFacts: [
+      { label: "Desk", value: "Smart Cities" },
+      { label: "Focus", value: "Urban technology" },
+      { label: "Priority", value: "Sustainability & resilience" },
+      { label: "Publication", value: "The Pride Times" },
+    ],
+  }),
+  makeArticle({
+    id: "smart-cities-neom-the-line-phase-one",
+    section: "Smart Cities",
+    category: "SMART CITIES",
+    title: "NEOM's The Line: 170km Linear City Begins First Phase Occupancy",
+    dek: "The planned linear-city project is entering an important implementation phase as its developers work through construction, infrastructure and urban-design challenges.",
+    image: Smartc2Img,
+    highlights: [
+      "The Line is designed around a highly compact linear urban form.",
+      "Transport, utilities and public services must be coordinated from the outset.",
+      "Large-scale construction creates substantial engineering and financing requirements.",
+      "Actual occupancy will provide a practical test of the project's urban assumptions.",
+    ],
+    sections: [
+      { heading: "A different urban model", body: "The Line proposes a city organized along a narrow linear footprint rather than the conventional spread of roads, suburbs and separate districts. Its design places major emphasis on proximity, walkability and integrated infrastructure." },
+      { heading: "The infrastructure challenge", body: "Building a new city requires simultaneous planning for power, water, transport, communications, waste management and housing. Coordinating those systems at large scale is one of the project's defining engineering challenges." },
+      { heading: "Why occupancy matters", body: "Early occupancy will provide evidence about how residents actually use the city's spaces and services. That feedback can influence later construction phases and show which parts of the original design translate effectively into daily life." },
+    ],
+    keyFacts: [
+      { label: "Project", value: "The Line" },
+      { label: "Desk", value: "Smart Cities" },
+      { label: "Focus", value: "Urban development" },
+      { label: "Format", value: "Project report" },
+    ],
+  }),
+  makeArticle({
+    id: "smart-cities-digital-infrastructure-investment",
+    section: "Smart Cities",
+    category: "URBAN FUTURES",
+    title: "Cities Accelerate Digital Infrastructure Investment",
+    dek: "Municipalities are increasing investment in connectivity, cloud platforms, sensors and digital public services as urban systems become more data-driven.",
+    image: Smartc3Img,
+    highlights: [
+      "Digital infrastructure is becoming a core part of municipal service delivery.",
+      "Connected systems can improve planning when data is timely and interoperable.",
+      "Cybersecurity and privacy need to be built into urban platforms from the beginning.",
+      "Long-term value depends on maintenance and integration rather than isolated pilots.",
+    ],
+    sections: [
+      { heading: "The digital layer of the city", body: "Connectivity, cloud systems and sensors increasingly sit beneath everyday urban services. They allow authorities to collect information and coordinate systems that were previously managed independently." },
+      { heading: "From pilots to platforms", body: "The challenge is moving from one-off technology demonstrations to infrastructure that can support multiple departments. Open standards and interoperability can help cities avoid fragmented systems that cannot share information." },
+      { heading: "Trust and resilience", body: "As more municipal services become digitally dependent, cybersecurity, privacy, backup systems and operational resilience become essential parts of infrastructure planning." },
+    ],
+    keyFacts: [
+      { label: "Trend", value: "Digital infrastructure" },
+      { label: "Sector", value: "Urban technology" },
+      { label: "Priority", value: "Interoperability" },
+      { label: "Desk", value: "Smart Cities" },
+    ],
+  }),
+  makeArticle({
+    id: "smart-cities-urban-technology-planning",
+    section: "Smart Cities",
+    category: "SMART CITIES",
+    title: "Urban Technology Reshapes the Future of City Planning",
+    dek: "Planning departments are combining digital twins, mobility data and infrastructure analytics to model how cities may evolve before major projects are built.",
+    image: Smartc4Img,
+    highlights: [
+      "Digital models can help planners test infrastructure scenarios before construction.",
+      "Mobility data is increasingly useful for understanding changing travel patterns.",
+      "Climate and demographic projections can be incorporated into long-term planning.",
+      "Human-centered planning remains necessary alongside technical modeling.",
+    ],
+    sections: [
+      { heading: "Planning before construction", body: "Digital planning tools allow authorities and developers to simulate traffic, energy demand, land use and infrastructure capacity. This can reveal constraints earlier in the development process." },
+      { heading: "Mobility is changing", body: "Remote work, electric vehicles, public transit and new delivery patterns are changing how people and goods move through cities. Planning systems increasingly need to account for these shifts rather than assume historical travel behavior will remain constant." },
+      { heading: "Technology needs a public purpose", body: "A technically advanced city is not automatically a better city. Projects need clear outcomes for affordability, access, safety, sustainability and quality of life, with residents involved in decisions that affect public space and services." },
+    ],
+    keyFacts: [
+      { label: "Focus", value: "Urban planning" },
+      { label: "Tools", value: "Digital twins & analytics" },
+      { label: "Sector", value: "Smart cities" },
+      { label: "Desk", value: "Urban Futures" },
+    ],
+  }),
+];
+
+const supplyChainArticles: SpecialArticle[] = [
+  makeArticle({
+    id: "supply-chain-red-sea-rerouting-2026",
+    section: "Supply Chain",
+    category: "SUPPLY CHAIN",
+    title: "Red Sea Rerouting Adds $22B to Global Shipping Costs in H1 2026",
+    dek: "Continued security threats are forcing a large share of Asia-Europe shipping around the Cape of Good Hope, adding days to transit times and increasing fuel and vessel costs.",
+    image: SC1Img,
+    highlights: [
+      "Longer routes increase fuel consumption, vessel utilization and delivery times.",
+      "Shipping companies are balancing security, insurance and schedule reliability.",
+      "Higher freight costs can feed into inventory and consumer prices.",
+      "Companies are responding with route diversification and additional supply-chain buffers.",
+    ],
+    sections: [
+      { heading: "Why the route change matters", body: "Rerouting around the Cape of Good Hope adds substantial sailing distance between Asia and Europe. The effect is not limited to fuel: ships remain occupied longer, reducing effective capacity and complicating schedules across connected services." },
+      { heading: "The cost moves through the network", body: "Higher freight, insurance and inventory costs can affect importers, manufacturers and retailers. Companies may absorb some costs, renegotiate contracts or change sourcing and inventory strategies depending on the duration of the disruption." },
+      { heading: "Resilience over pure efficiency", body: "Recent disruptions have encouraged supply-chain leaders to place more value on alternative routes, diversified suppliers and visibility. The trade-off is that resilience often costs more than a highly optimized single-source network during normal conditions." },
+      { heading: "What to watch next", body: "Shipping schedules, freight indexes, insurance premiums, port congestion and carrier capacity will show whether pressure is easing. A sustained normalization of routes would reduce costs, while renewed disruption could extend the adjustment." },
+    ],
+    keyFacts: [
+      { label: "Desk", value: "Supply Chain" },
+      { label: "Focus", value: "Global shipping" },
+      { label: "Issue", value: "Route disruption" },
+      { label: "Author", value: "Sagar Kumar" },
+    ],
+  }),
+  makeArticle({
+    id: "supply-chain-apple-india-production",
+    section: "Supply Chain",
+    category: "SUPPLY CHAIN",
+    title: "Apple Moves 25% of iPhone Production to India Ahead of Schedule",
+    dek: "The shift reflects the broader diversification of electronics manufacturing and the effort by global companies to build additional production capacity outside a single dominant geography.",
+    image: SC2Img,
+    highlights: [
+      "Electronics manufacturers are diversifying production footprints to reduce concentration risk.",
+      "India is expanding its role in global electronics manufacturing.",
+      "Moving production requires supplier, labor, logistics and quality-control ecosystems.",
+      "The long-term impact depends on scale, yields and the competitiveness of the manufacturing base.",
+    ],
+    sections: [
+      { heading: "Why production is moving", body: "Companies are reassessing manufacturing footprints as tariffs, geopolitical risk and resilience considerations become more important. Diversification can reduce dependence on a single production hub, although it also introduces new setup and coordination costs." },
+      { heading: "Building an ecosystem", body: "Large-scale electronics manufacturing requires much more than final assembly. Component suppliers, logistics providers, skilled workers, testing facilities and reliable utilities all need to develop alongside production capacity." },
+      { heading: "The strategic test", body: "The durability of the shift will depend on whether production in India can achieve consistent quality, competitive cost and sufficient scale. Those factors will influence whether additional product lines follow." },
+    ],
+    keyFacts: [
+      { label: "Company", value: "Apple" },
+      { label: "Market", value: "India" },
+      { label: "Focus", value: "Manufacturing diversification" },
+      { label: "Desk", value: "Supply Chain" },
+    ],
+  }),
+  makeArticle({
+    id: "supply-chain-network-redesign-trade-uncertainty",
+    section: "Supply Chain",
+    category: "GLOBAL TRADE",
+    title: "Global Manufacturers Redesign Supply Networks Amid Trade Uncertainty",
+    dek: "Manufacturers are reassessing sourcing, production and inventory decisions as trade policy uncertainty makes single-route supply chains harder to manage.",
+    image: SC3Img,
+    highlights: [
+      "Scenario planning is becoming a standard part of supply-chain strategy.",
+      "Companies are considering multiple sourcing and production locations.",
+      "Inventory buffers can improve resilience but increase working-capital requirements.",
+      "Trade policy is increasingly being treated as an operating variable rather than a distant risk.",
+    ],
+    sections: [
+      { heading: "From cost optimization to optionality", body: "For years, many supply chains prioritized the lowest landed cost. Trade disruptions have encouraged companies to value optionality: the ability to switch suppliers, routes or production locations when conditions change." },
+      { heading: "Scenario modeling", body: "Digital planning systems allow teams to model tariff changes, demand shifts, transport disruptions and supplier failures before they occur. The purpose is not to predict every event but to identify decisions that can be made quickly under different conditions." },
+      { heading: "The balance-sheet trade-off", body: "Resilience is not free. Additional inventory, duplicate suppliers and regional capacity can raise costs. Executives therefore need to compare the cost of resilience with the potential cost of disruption and lost sales." },
+    ],
+    keyFacts: [
+      { label: "Sector", value: "Manufacturing" },
+      { label: "Issue", value: "Trade uncertainty" },
+      { label: "Strategy", value: "Network diversification" },
+      { label: "Desk", value: "Supply Chain" },
+    ],
+  }),
+  makeArticle({
+    id: "supply-chain-digital-transformation-logistics",
+    section: "Supply Chain",
+    category: "LOGISTICS",
+    title: "Shipping Companies Accelerate Digital Transformation Across Global Routes",
+    dek: "Carriers and logistics providers are investing in visibility, automation and predictive analytics to make complex transport networks easier to manage.",
+    image: SC1Img,
+    highlights: [
+      "Digital visibility can improve ETA accuracy and exception management.",
+      "Automation is being applied to routing, documentation and warehouse operations.",
+      "Data quality and interoperability remain major implementation challenges.",
+      "The strongest value comes when digital tools are connected to operational decisions.",
+    ],
+    sections: [
+      { heading: "Visibility as a competitive capability", body: "Shippers want more than a tracking page. They need reliable information about delays, inventory, capacity and exceptions so teams can change plans before disruptions become expensive." },
+      { heading: "Automation across the chain", body: "Logistics companies are applying automation to scheduling, documentation, warehouse handling and route optimization. These systems can reduce manual work while improving consistency when the underlying data is reliable." },
+      { heading: "The implementation challenge", body: "Different carriers, ports, warehouses and customers often use incompatible systems. Connecting those systems and maintaining clean data can be as difficult as selecting the software itself." },
+    ],
+    keyFacts: [
+      { label: "Sector", value: "Logistics" },
+      { label: "Technology", value: "Automation & analytics" },
+      { label: "Focus", value: "Visibility" },
+      { label: "Desk", value: "Supply Chain" },
+    ],
+  }),
+];
+
 export const specialArticles: SpecialArticle[] = [
   ...healthcareArticles,
   ...manufacturingArticles,
@@ -945,6 +1167,8 @@ export const specialArticles: SpecialArticle[] = [
   ...startupSuccessArticles,
   ...whiteHouseWatchArticles,
   ...worldWatchArticles,
+  ...smartCitiesArticles,
+  ...supplyChainArticles,
 ];
 
 export function getSpecialArticleById(id?: string) {
