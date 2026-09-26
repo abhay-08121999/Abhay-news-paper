@@ -1,6 +1,5 @@
 import { Clock, Globe, Landmark, Plane, Users } from "lucide-react";
-import { Link } from "react-router";
-import { specialArticlePathByTitle } from "../../data/specialArticleData";
+import { useEffect } from "react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 /* =========================================================
@@ -278,31 +277,18 @@ function SectionHeader({
 ========================================================= */
 
 function AdBanner({ bottom = false }: { bottom?: boolean }) {
+  useEffect(() => {
+    try {
+      const w = window as Window & { adsbygoogle?: unknown[] };
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
+    } catch {}
+  }, []);
+  const slot = bottom ? "8042854193" : "5373718974";
   return (
-    <div
-      className={`relative w-full overflow-hidden ${
-        bottom ? "mt-8 mb-8" : "mb-5 md:mb-6"
-      }`}
-    >
-      <div className="h-[88px] md:h-[90px] w-full bg-[#102a32] flex flex-col items-center justify-center text-center px-4">
-        <span className="text-[8px] md:text-[9px] font-bold tracking-[0.18em] text-cyan-400 uppercase">
-          GOOGLE ADSENSE
-        </span>
-
-        <span className="mt-1 text-[12px] md:text-sm font-semibold text-white">
-          {bottom
-            ? "Business Solutions | Powered by The Pride Times"
-            : "Advertisement Space"}
-        </span>
-
-        <span className="mt-1 text-[8px] md:text-[9px] text-cyan-300">
-          728 × 90 • Leaderboard
-        </span>
-      </div>
-
-      <span className="absolute right-1 top-1 text-[7px] text-gray-500 bg-white/70 px-1">
-        Advertisement
-      </span>
+    <div className={`${bottom ? "mt-8 mb-8" : "mb-5 md:mb-6"} relative w-full overflow-hidden border-y border-gray-200 bg-white py-4`}>
+      <p className="mb-2 text-center text-[8px] font-bold uppercase tracking-[0.2em] text-gray-400">Advertisement</p>
+      <ins className="adsbygoogle" style={{ display: "block", minHeight: "90px" }} data-ad-client="ca-pub-2331501617441941" data-ad-slot={slot} {...(bottom ? {"data-ad-layout":"in-article","data-ad-format":"fluid"} : {"data-ad-format":"auto","data-full-width-responsive":"true"})} />
     </div>
   );
 }
@@ -347,10 +333,9 @@ function SponsoredContent() {
 
         <div>
           {moreStories.map((story) => (
-            <Link
+            <article
               key={story.id}
-              to={specialArticlePathByTitle(story.title)}
-              className="flex gap-3 py-3 border-b border-gray-200 group"
+              className="flex gap-3 py-3 border-b border-gray-200 group cursor-pointer"
             >
               <div className="w-[72px] h-[48px] shrink-0 overflow-hidden rounded-sm bg-gray-100">
                 <ImageWithFallback
@@ -373,7 +358,7 @@ function SponsoredContent() {
                   {story.time}
                 </span>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </div>
@@ -388,16 +373,15 @@ function SponsoredContent() {
 function HeroStoryCard({ story }: { story: HeroStory }) {
   return (
     <article className="group">
-      <Link to={specialArticlePathByTitle(story.title)} className="block">
-        <div className="overflow-hidden rounded-[6px] bg-gray-100">
+      <div className="overflow-hidden rounded-[6px] bg-gray-100">
         <ImageWithFallback
           src={story.image}
           alt={story.title}
           className="w-full h-[300px] sm:h-[370px] md:h-[440px] lg:h-[455px] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
         />
-        </div>
+      </div>
 
-        <div className="pt-3 md:pt-4">
+      <div className="pt-3 md:pt-4">
         <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.12em] text-red-600">
           {story.category}
         </span>
@@ -418,8 +402,7 @@ function HeroStoryCard({ story }: { story: HeroStory }) {
             {story.time}
           </span>
         </div>
-        </div>
-      </Link>
+      </div>
     </article>
   );
 }
@@ -430,7 +413,7 @@ function HeroStoryCard({ story }: { story: HeroStory }) {
 
 function LatestNewsCard({ story }: { story: Story }) {
   return (
-    <Link to={specialArticlePathByTitle(story.title)} className="group block overflow-hidden border border-gray-200 rounded-[5px] bg-white hover:shadow-sm transition-shadow">
+    <article className="group overflow-hidden border border-gray-200 rounded-[5px] bg-white hover:shadow-sm transition-shadow">
       <div className="h-[155px] sm:h-[175px] md:h-[185px] overflow-hidden bg-gray-100">
         <ImageWithFallback
           src={story.image || ""}
@@ -471,7 +454,7 @@ function LatestNewsCard({ story }: { story: Story }) {
           </span>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -494,10 +477,9 @@ function RegionalStories({
 
       <div>
         {stories.map((story) => (
-          <Link
+          <article
             key={story.id}
-            to={specialArticlePathByTitle(story.title)}
-            className="group block py-3 border-b border-gray-200 last:border-b-0"
+            className="group py-3 border-b border-gray-200 last:border-b-0 cursor-pointer"
           >
             <h3 className="text-[12px] md:text-[13px] font-medium leading-[1.45] text-gray-900 group-hover:text-red-600 transition-colors">
               {story.title}
@@ -507,7 +489,7 @@ function RegionalStories({
               <Clock size={9} />
               <span>{story.time}</span>
             </div>
-          </Link>
+          </article>
         ))}
       </div>
     </section>
