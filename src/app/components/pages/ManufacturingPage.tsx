@@ -1,6 +1,7 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Link } from "react-router";
 import { specialArticlePath } from "../../data/specialArticleData";
+import { PrideTimesAd } from "../AdSenseSlots";
 import {
   Clock,
   Factory,
@@ -434,25 +435,23 @@ function AdvertisementBar({
   bottom?: boolean;
 }) {
   return (
-    <div className="relative w-full h-[58px] md:h-[72px] bg-[#102d35] overflow-hidden flex flex-col items-center justify-center text-center">
-      <span className="absolute top-1 right-1 text-[7px] text-gray-400 border border-gray-500 px-1">
-        Advertisement
-      </span>
+    <PrideTimesAd
+      variant={bottom ? "fifth" : "fourth"}
+      className="my-0"
+    />
+  );
+}
 
-      <span className="text-[7px] md:text-[8px] uppercase tracking-[0.2em] text-[#64c7e6] font-bold">
-        Google Adsense
-      </span>
+/* =========================================================
+   ADSENSE SIDE + CONTENT BREAK
+========================================================= */
 
-      <span className="text-[10px] md:text-[12px] font-semibold mt-0.5 text-white">
-        {bottom
-          ? "Business Solutions | Powered by The Pride Times"
-          : "Advertisement Space"}
-      </span>
-
-      <span className="text-[7px] md:text-[8px] text-[#83b8c8]">
-        728 × 90 · Leaderboard
-      </span>
-    </div>
+function ManufacturingAdBreak() {
+  return (
+    <section className="mt-6 md:mt-7 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-5 items-start">
+      <PrideTimesAd variant="fifth" />
+      <PrideTimesAd variant="fourth" />
+    </section>
   );
 }
 
@@ -1135,6 +1134,8 @@ export function ManufacturingPage() {
         {/* =================================================
             MANUFACTURING COVERAGE
         ================================================= */}
+
+        <ManufacturingAdBreak />
 
         <section className="mt-7 md:mt-9">
           <SectionHeader
