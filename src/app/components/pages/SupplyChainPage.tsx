@@ -2,6 +2,7 @@ import { Clock } from "lucide-react";
 import { Link } from "react-router";
 import { specialArticlePathByTitle } from "../../data/specialArticleData";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { PrideTimesAd } from "../AdSenseSlots";
 
 import SC1Img from "../../../imports/SC1.png";
 import SC2Img from "../../../imports/SC2.png";
@@ -226,6 +227,19 @@ function SponsoredContent() {
           Reach 2M+ business readers
         </p>
       </div>
+    </div>
+  );
+}
+
+/* =========================================================
+   ADSENSE
+========================================================= */
+
+function SectionAds() {
+  return (
+    <div className="mt-5 md:mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-5 items-start">
+      <PrideTimesAd variant="fifth" />
+      <PrideTimesAd variant="fourth" />
     </div>
   );
 }
@@ -673,6 +687,8 @@ export function SupplyChainPage() {
         {/* =================================================
             SPONSORED EVENTS
         ================================================= */}
+
+        <SectionAds />
 
         <SponsorshipSection />
 
