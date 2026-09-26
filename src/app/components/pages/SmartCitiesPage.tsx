@@ -1,4 +1,6 @@
 import { Clock } from "lucide-react";
+import { Link } from "react-router";
+import { specialArticlePathByTitle } from "../../data/specialArticleData";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 import Smartc1Img from "../../../imports/Smartc1.png";
@@ -216,8 +218,9 @@ function SponsoredContent() {
 
         <div className="space-y-3">
           {moreStories.map((story) => (
-            <article
+            <Link
               key={story.title}
+              to={specialArticlePathByTitle(story.title)}
               className="flex gap-2.5 group cursor-pointer"
             >
               <div className="w-[60px] h-[45px] sm:w-[64px] sm:h-[48px] shrink-0 overflow-hidden rounded-sm bg-gray-100">
@@ -241,7 +244,7 @@ function SponsoredContent() {
                   {story.time}
                 </p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
@@ -255,7 +258,7 @@ function SponsoredContent() {
 
 function HeroStory() {
   return (
-    <article className="group min-w-0">
+    <Link to={specialArticlePathByTitle(hero.title)} className="group min-w-0 block">
       <div className="relative overflow-hidden rounded-md bg-gray-100 h-[250px] sm:h-[330px] md:h-[400px] lg:h-[390px]">
         <ImageWithFallback
           src={hero.image}
@@ -289,7 +292,7 @@ function HeroStory() {
           <span>2 hr ago</span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -299,7 +302,10 @@ function HeroStory() {
 
 function LatestNewsCard({ news }: { news: LatestStory }) {
   return (
-    <article className="group border border-[#dedede] rounded-md overflow-hidden bg-white hover:shadow-md transition-shadow duration-300">
+    <Link
+      to={specialArticlePathByTitle(news.title)}
+      className="group block border border-[#dedede] rounded-md overflow-hidden bg-white hover:shadow-md transition-shadow duration-300"
+    >
       {/* IMAGE */}
 
       <div className="relative h-[145px] sm:h-[150px] md:h-[160px] overflow-hidden bg-gray-100">
@@ -344,7 +350,7 @@ function LatestNewsCard({ news }: { news: LatestStory }) {
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
