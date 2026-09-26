@@ -1,5 +1,22 @@
+import { useNavigate } from "react-router";
 import { Clock, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+
+const articleIds: Record<string, string> = {
+  "President Signs Historic AI Accountability Act into Law": "whitehouse-president-signs-ai-accountability-act",
+  "White House Announces $500B Infrastructure Investment in AI": "whitehouse-500b-ai-infrastructure",
+  "Administration Begins New Round of Federal Technology Reviews": "whitehouse-federal-technology-reviews",
+  "Congress Debates New Framework for Artificial Intelligence": "whitehouse-congress-ai-framework",
+  "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push": "whitehouse-nvidia-humanoid-robot-push",
+  "Alphabet Plans $80B Stock Offering to Fund AI Data-Center Expansion": "whitehouse-alphabet-ai-data-center",
+  "Quantum Computing Reaches Commercial Milestone: 1,000-Qubit Processor Achieved": "whitehouse-quantum-1000-qubit",
+  "Apple Intelligence: iOS 21 Introduces Real-Time AI Translation Across 87 Languages": "whitehouse-apple-ai-translation",
+  "Meta's LLaMA 4 Surpasses GPT-5 in Enterprise Benchmark Tests": "whitehouse-meta-llama4-enterprise",
+  "SpaceX Starlink Gen 3 Delivers 1 Gbps to 50 Million New Users Globally": "whitehouse-starlink-gen3-global"
+};
+
+const articlePath = (title: string) =>
+  `/article/${articleIds[title] || "whitehouse-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+$/g, "")}`;
 
 /* =========================================================
    TYPES
@@ -278,6 +295,7 @@ function SponsoredSidebar() {
 ========================================================= */
 
 function MoreStories() {
+  const navigate = useNavigate();
   return (
     <div className="mt-5">
       <SectionHeader title="More White House Watch" compact />
@@ -285,6 +303,7 @@ function MoreStories() {
       {moreStories.map((story) => (
         <article
           key={story.id}
+          onClick={() => navigate(articlePath(story.title))}
           className="flex gap-2.5 py-3 border-b border-gray-200 group cursor-pointer"
         >
           <ImageWithFallback
@@ -315,8 +334,10 @@ function MoreStories() {
 ========================================================= */
 
 function MajorStoryCard({ story }: { story: Story }) {
+  const navigate = useNavigate();
   return (
-    <article className="group cursor-pointer border-b border-gray-200 pb-4">
+    <article onClick={() => navigate(articlePath(story.title))}
+                className="group cursor-pointer border-b border-gray-200 pb-4">
       <div className="relative overflow-hidden h-[150px] md:h-[175px] bg-gray-100 rounded-sm">
         <ImageWithFallback
           src={story.image}
@@ -349,8 +370,10 @@ function MajorStoryCard({ story }: { story: Story }) {
 ========================================================= */
 
 function SupportingStoryCard({ story }: { story: Story }) {
+  const navigate = useNavigate();
   return (
-    <article className="group cursor-pointer">
+    <article onClick={() => navigate(articlePath(story.title))}
+    className="group cursor-pointer">
       <div className="flex gap-3">
         <ImageWithFallback
           src={story.image}
@@ -386,6 +409,7 @@ function SupportingStoryCard({ story }: { story: Story }) {
 ========================================================= */
 
 function NewsroomStream() {
+  const navigate = useNavigate();
   const newsroomStories = [
     {
       category: "WHITE HOUSE WATCH",
@@ -453,6 +477,7 @@ function NewsroomStream() {
         {newsroomStories.map((story, index) => (
           <article
             key={`${story.title}-${index}`}
+            onClick={() => navigate(articlePath(story.title))}
             className="py-3 border-b border-gray-200 group cursor-pointer"
           >
             <div className="flex items-start gap-2">
@@ -487,8 +512,12 @@ function NewsroomStream() {
 ========================================================= */
 
 function LatestNewsCard({ story }: { story: Story }) {
+  const navigate = useNavigate();
   return (
-    <article className="border border-gray-200 rounded-md overflow-hidden bg-white group cursor-pointer">
+    <article
+      onClick={() => navigate(articlePath(story.title))}
+      className="border border-gray-200 rounded-md overflow-hidden bg-white group cursor-pointer"
+    >
       <div className="h-[145px] md:h-[155px] overflow-hidden bg-gray-100">
         <ImageWithFallback
           src={story.image}
@@ -609,6 +638,7 @@ function Newsletter() {
 ========================================================= */
 
 export function WhiteHouseWatchPage() {
+  const navigate = useNavigate();
   return (
     <main className="w-full bg-white text-gray-900 antialiased">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-11 xl:px-14 py-5 md:py-7">
@@ -660,7 +690,7 @@ export function WhiteHouseWatchPage() {
         <section className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-6 lg:gap-7 mb-9">
           {/* LEAD STORY */}
 
-          <article className="min-w-0 group cursor-pointer">
+          <article onClick={() => navigate(articlePath(hero.title))} className="min-w-0 group cursor-pointer">
             <div className="relative overflow-hidden rounded-md bg-gray-100">
               <ImageWithFallback
                 src={hero.image}
@@ -777,6 +807,7 @@ export function WhiteHouseWatchPage() {
             {moreStories.map((story) => (
               <article
                 key={story.id}
+                onClick={() => navigate(articlePath(story.title))}
                 className="group cursor-pointer border-b border-gray-200 pb-4"
               >
                 <div className="h-[145px] overflow-hidden rounded-sm bg-gray-100">
