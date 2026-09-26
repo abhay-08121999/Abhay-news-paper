@@ -1,9 +1,15 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { useEffect, type ReactNode } from "react";
+import { useNavigate } from "react-router";
 import { Clock } from "lucide-react";
 
 import Ener1Img from "../../../imports/Energy1.png";
 import Ener2Img from "../../../imports/Energy2.png";
 import Ener3Img from "../../../imports/Energy3.png";
+
+function energyArticleId(title: string) {
+  return `energy-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
+}
 
 /* =========================================================
    HERO DATA
@@ -354,28 +360,35 @@ function StoryMeta({
 
 function AdvertisementBanner({
   children = "Advertisement Space",
+  slot = "5373718974",
+  inArticle = false,
 }: {
-  children?: React.ReactNode;
+  children?: ReactNode;
+  slot?: string;
+  inArticle?: boolean;
 }) {
+  useEffect(() => {
+    try {
+      const w = window as Window & { adsbygoogle?: unknown[] };
+      w.adsbygoogle = w.adsbygoogle || [];
+      w.adsbygoogle.push({});
+    } catch {}
+  }, []);
+
   return (
-    <div className="relative mb-5 flex h-[72px] w-full items-center justify-center overflow-hidden bg-gradient-to-r from-[#102B32] via-[#1D414A] to-[#315B69] sm:h-[82px]">
-      <div className="text-center text-white">
-        <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#55B5CE] sm:text-[9px]">
-          GOOGLE ADSENSE
-        </p>
-
-        <p className="mt-1 text-[12px] font-semibold sm:text-[14px]">
-          {children}
-        </p>
-
-        <p className="mt-0.5 text-[8px] text-[#8BBBC6]">
-          728 × 90 • Leaderboard
-        </p>
-      </div>
-
-      <span className="absolute right-1 top-1 bg-white/70 px-1 text-[7px] text-gray-500">
+    <div className="relative mb-5 w-full overflow-hidden border-y border-gray-200 bg-white py-4">
+      <p className="mb-2 text-center text-[8px] font-bold uppercase tracking-[0.2em] text-gray-400">
         Advertisement
-      </span>
+      </p>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", minHeight: "90px" }}
+        data-ad-client="ca-pub-2331501617441941"
+        data-ad-slot={slot}
+        {...(inArticle
+          ? { "data-ad-layout": "in-article", "data-ad-format": "fluid" }
+          : { "data-ad-format": "auto", "data-full-width-responsive": "true" })}
+      />
     </div>
   );
 }
@@ -385,6 +398,7 @@ function AdvertisementBanner({
 ========================================================= */
 
 export function EnergyPage() {
+  const navigate = useNavigate();
   return (
     <main className="min-h-screen w-full overflow-x-hidden bg-[#FAFAF7] text-[#17140F]">
       <div className="w-full px-4 py-5 sm:px-6 md:px-8 md:py-7 lg:px-10 xl:px-12 2xl:px-16">
@@ -407,7 +421,7 @@ export function EnergyPage() {
             TOP ADVERTISEMENT
         =================================================== */}
 
-        <AdvertisementBanner />
+        <AdvertisementBanner slot="5373718974" />
 
         {/* ===================================================
             HERO AREA
@@ -417,7 +431,7 @@ export function EnergyPage() {
 
           {/* MAIN HERO */}
 
-          <article className="group min-w-0 cursor-pointer">
+          <article onClick={() => navigate(`/article/${energyArticleId(hero.title)}`)} className="group min-w-0 cursor-pointer">
             <div className="overflow-hidden rounded-lg bg-[#E8E5DD]">
               <ImageWithFallback
                 src={hero.image}
@@ -479,6 +493,7 @@ export function EnergyPage() {
               {renewableStories.map((story) => (
                 <article
                   key={story.id}
+                  onClick={() => navigate(`/article/${energyArticleId(story.title)}`)}
                   className="group flex cursor-pointer gap-3 py-3 first:pt-0"
                 >
                   <div className="h-[60px] w-[82px] shrink-0 overflow-hidden rounded-md bg-gray-200">
@@ -520,6 +535,7 @@ export function EnergyPage() {
             {renewableStories.map((story) => (
               <article
                 key={`renewable-${story.id}`}
+                onClick={() => navigate(`/article/${energyArticleId(story.title)}`)}
                 className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md"
               >
                 <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
@@ -549,7 +565,7 @@ export function EnergyPage() {
 
             {/* HERO 1 */}
 
-            <article className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
+            <article onClick={() => navigate(`/article/${energyArticleId(story.title)}`)} className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
               <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
                 <ImageWithFallback
                   src={hero1.image}
@@ -573,7 +589,7 @@ export function EnergyPage() {
 
             {/* HERO 2 */}
 
-            <article className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
+            <article onClick={() => navigate(`/article/${energyArticleId(hero1.title)}`)} className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
               <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
                 <ImageWithFallback
                   src={hero2.image}
@@ -601,8 +617,8 @@ export function EnergyPage() {
             SECOND ADVERTISEMENT
         =================================================== */}
 
-        <AdvertisementBanner>
-          Business Solutions | Powered by The Pride Times
+        <AdvertisementBanner slot="8042854193" inArticle>
+          The Pride Times ADS
         </AdvertisementBanner>
 
         {/* ===================================================
@@ -763,7 +779,7 @@ export function EnergyPage() {
 
           {/* SECONDARY HERO */}
 
-          <article className="group cursor-pointer">
+          <article onClick={() => navigate(`/article/${energyArticleId(hero2.title)}`)} className="group cursor-pointer">
             <div className="overflow-hidden rounded-lg bg-gray-100">
               <ImageWithFallback
                 src={hero2.image}
@@ -880,6 +896,7 @@ export function EnergyPage() {
                   {group.stories.map((story) => (
                     <article
                       key={story.id}
+                      onClick={() => navigate(`/article/${energyArticleId(story.title)}`)}
                       className="group cursor-pointer"
                     >
                       <p className="text-[12px] leading-[1.45] transition-colors group-hover:text-[#B8752E] sm:text-[13px]">
