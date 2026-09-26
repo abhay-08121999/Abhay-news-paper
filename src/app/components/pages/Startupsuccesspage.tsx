@@ -1,7 +1,7 @@
 import { Clock, Rocket } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { Link } from "react-router";
-import { startupArticlePathByTitle } from "../../data/sectionArticleData";
+import { specialArticlePathByTitle } from "../../data/specialArticleData";
 
 /* =========================================================
    TYPES
@@ -233,7 +233,7 @@ function SponsoredContent() {
           {moreStories.map((story) => (
             <Link
               key={story.title}
-              to={startupArticlePathByTitle(story.title)}
+              to={specialArticlePathByTitle(story.title)}
               className="group flex gap-3 py-3 border-b border-gray-200"
             >
               <div className="w-[82px] h-[58px] shrink-0 overflow-hidden">
@@ -272,7 +272,7 @@ function SponsoredContent() {
 function HeroStory() {
   return (
     <article className="group">
-      <Link to={startupArticlePathByTitle(hero.title)} className="block">
+      <Link to={specialArticlePathByTitle(hero.title)} className="block">
         <div className="w-full overflow-hidden">
           <ImageWithFallback
             src={hero.image}
@@ -325,7 +325,7 @@ function MajorStory({
 }) {
   return (
     <Link
-      to={startupArticlePathByTitle(story.title)}
+      to={specialArticlePathByTitle(story.title)}
       className="group grid grid-cols-[110px_minmax(0,1fr)] sm:grid-cols-[145px_minmax(0,1fr)] gap-3 py-3 border-b border-gray-200"
     >
       <div className="w-full h-[78px] sm:h-[92px] overflow-hidden">
@@ -369,7 +369,7 @@ function NewsCard({
 }) {
   return (
     <Link
-      to={startupArticlePathByTitle(story.title)}
+      to={specialArticlePathByTitle(story.title)}
       className="group block border-t border-gray-200 pt-3"
     >
       <div className="w-full h-[155px] sm:h-[170px] overflow-hidden mb-3">
@@ -417,7 +417,7 @@ function LatestNewsStream() {
         {latestNews.map((story) => (
           <Link
             key={`stream-${story.id}`}
-            to={startupArticlePathByTitle(story.title)}
+            to={specialArticlePathByTitle(story.title)}
             className="group grid grid-cols-[72px_minmax(0,1fr)] sm:grid-cols-[95px_minmax(0,1fr)] gap-3 py-3 border-b border-gray-200"
           >
             <div className="text-[9px] md:text-[10px] text-gray-400 font-medium">
@@ -666,7 +666,7 @@ export function StartupSuccessPage() {
             {moreStories.map((story) => (
               <Link
                 key={`coverage-${story.title}`}
-                to={startupArticlePathByTitle(story.title)}
+                to={specialArticlePathByTitle(story.title)}
                 className="group flex gap-4 py-4 border-b border-gray-200"
               >
                 <div className="w-[120px] sm:w-[150px] h-[82px] sm:h-[96px] shrink-0 overflow-hidden">
