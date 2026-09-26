@@ -979,3 +979,8 @@ export function getSpecialArticleById(id?: string) {
 export function specialArticlePath(id: string) {
   return `/article/${id}`;
 }
+
+export function specialArticlePathByTitle(title: string) {
+  const article = specialArticles.find((item) => item.title === title);
+  return article ? specialArticlePath(article.id) : "/";
+}
