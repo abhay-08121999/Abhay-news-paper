@@ -1,4 +1,6 @@
 import { Clock } from "lucide-react";
+import { Link } from "react-router";
+import { specialArticlePathByTitle } from "../../data/specialArticleData";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 import SC1Img from "../../../imports/SC1.png";
@@ -234,7 +236,7 @@ function SponsoredContent() {
 
 function HeroStory() {
   return (
-    <article className="min-w-0">
+    <Link to={specialArticlePathByTitle(hero.title)} className="min-w-0 block">
       <div className="relative overflow-hidden rounded-md h-[250px] sm:h-[330px] md:h-[400px] lg:h-[405px]">
         <ImageWithFallback
           src={hero.image}
@@ -266,7 +268,7 @@ function HeroStory() {
           <span>{hero.time}</span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -276,7 +278,10 @@ function HeroStory() {
 
 function MajorStory({ story }: { story: Story }) {
   return (
-    <article className="group grid grid-cols-[82px_minmax(0,1fr)] sm:grid-cols-[105px_minmax(0,1fr)] gap-3 py-3 border-b border-[#dedede]">
+    <Link
+      to={specialArticlePathByTitle(story.title)}
+      className="group grid grid-cols-[82px_minmax(0,1fr)] sm:grid-cols-[105px_minmax(0,1fr)] gap-3 py-3 border-b border-[#dedede]"
+    >
       <div className="w-full h-[64px] sm:h-[76px] overflow-hidden rounded-sm bg-gray-100">
         <ImageWithFallback
           src={story.image}
@@ -299,7 +304,7 @@ function MajorStory({ story }: { story: Story }) {
           {story.time}
         </p>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -309,7 +314,10 @@ function MajorStory({ story }: { story: Story }) {
 
 function SupportingStory({ story }: { story: Story }) {
   return (
-    <article className="group flex gap-3 py-3 border-b border-[#dedede]">
+    <Link
+      to={specialArticlePathByTitle(story.title)}
+      className="group flex gap-3 py-3 border-b border-[#dedede]"
+    >
       <div className="w-[95px] sm:w-[120px] h-[68px] sm:h-[78px] shrink-0 overflow-hidden rounded-sm">
         <ImageWithFallback
           src={story.image}
@@ -332,7 +340,7 @@ function SupportingStory({ story }: { story: Story }) {
           {story.time}
         </p>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -342,7 +350,10 @@ function SupportingStory({ story }: { story: Story }) {
 
 function NewsCard({ story }: { story: Story }) {
   return (
-    <article className="group min-w-0 border-t border-[#dedede] pt-3">
+    <Link
+      to={specialArticlePathByTitle(story.title)}
+      className="group block min-w-0 border-t border-[#dedede] pt-3"
+    >
       <div className="relative h-[145px] sm:h-[155px] md:h-[160px] overflow-hidden bg-gray-100">
         <ImageWithFallback
           src={story.image}
@@ -383,7 +394,7 @@ function NewsCard({ story }: { story: Story }) {
           </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -398,8 +409,9 @@ function NewsroomStream() {
 
       <div className="border-t border-[#dedede]">
         {latestNews.map((news) => (
-          <article
+          <Link
             key={`stream-${news.title}`}
+            to={specialArticlePathByTitle(news.title)}
             className="grid grid-cols-[70px_minmax(0,1fr)] sm:grid-cols-[82px_minmax(0,1fr)] gap-3 py-3 border-b border-[#dedede] group"
           >
             <div className="text-[8px] text-[#999] pt-0.5">
@@ -418,7 +430,7 @@ function NewsroomStream() {
                 {news.title}
               </h3>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </section>
