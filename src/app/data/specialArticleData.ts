@@ -651,6 +651,284 @@ const cybersecurityArticles: SpecialArticle[] = [
   }),
 ];
 
+
+
+const whiteHouseWatchSeeds = [
+  { id: "whitehouse-president-signs-ai-accountability-act", category: "WHITE HOUSE WATCH", title: "President Signs Historic AI Accountability Act into Law", dek: "The new federal framework introduces transparency requirements, safety reviews and liability rules for high-risk artificial intelligence systems.", image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1400&q=85" },
+  { id: "whitehouse-500b-ai-infrastructure", category: "WHITE HOUSE WATCH", title: "White House Announces $500B Infrastructure Investment in AI", dek: "The proposed investment package focuses on computing capacity, energy infrastructure, research facilities and the supporting systems needed for large-scale AI deployment.", image: "https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-federal-technology-reviews", category: "WHITE HOUSE WATCH", title: "Administration Begins New Round of Federal Technology Reviews", dek: "Federal agencies are beginning a broad review of technology programs, procurement priorities and the systems supporting public services.", image: "https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-congress-ai-framework", category: "WHITE HOUSE WATCH", title: "Congress Debates New Framework for Artificial Intelligence", dek: "Lawmakers are examining a federal approach to AI oversight covering transparency, safety testing, accountability and sector-specific obligations.", image: "https://images.unsplash.com/photo-1580130379624-3a069adbffc5?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-nvidia-humanoid-robot-push", category: "TECHNOLOGY", title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push", dek: "Nvidia is expanding its role in the robotics ecosystem as manufacturers look to combine advanced AI models with increasingly capable machines.", image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-alphabet-ai-data-center", category: "TECHNOLOGY", title: "Alphabet Plans $80B Stock Offering to Fund AI Data-Center Expansion", dek: "The proposed financing comes as hyperscalers increase spending on data centers, power capacity and the infrastructure required for AI workloads.", image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-quantum-1000-qubit", category: "TECHNOLOGY", title: "Quantum Computing Reaches Commercial Milestone: 1,000-Qubit Processor Achieved", dek: "A reported 1,000-qubit milestone highlights the rapid development of quantum hardware and the continuing challenge of making systems commercially useful.", image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-apple-ai-translation", category: "TECHNOLOGY", title: "Apple Intelligence: iOS 21 Introduces Real-Time AI Translation Across 87 Languages", dek: "Apple's latest software strategy puts real-time translation and on-device intelligence closer to everyday consumer workflows.", image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-meta-llama4-enterprise", category: "TECHNOLOGY", title: "Meta's LLaMA 4 Surpasses GPT-5 in Enterprise Benchmark Tests", dek: "The latest enterprise model comparisons put renewed attention on open and proprietary AI systems and how benchmarks translate into business use.", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=85" },
+  { id: "whitehouse-starlink-gen3-global", category: "TECHNOLOGY", title: "SpaceX Starlink Gen 3 Delivers 1 Gbps to 50 Million New Users Globally", dek: "The latest satellite expansion is aimed at increasing high-speed connectivity across regions where conventional broadband remains difficult to deploy.", image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=85" },
+];
+
+const worldWatchSeeds = [
+  { id: "world-saudi-crown-prince-paris", category: "WORLD & GEOPOLITICS", title: "Saudi Crown Prince to Meet French Premier in Paris on Monday", dek: "The talks are expected to cover energy cooperation, defense contracts and investment links connected to Saudi Arabia's Vision 2030 agenda.", image: "https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=1400&auto=format&fit=crop&q=85" },
+  { id: "world-nato-eastern-flank", category: "WORLD & GEOPOLITICS", title: "NATO Deploys 50,000 Additional Troops Along Eastern Flank", dek: "The reported deployment reflects continuing changes in European security planning and the alliance's approach to its eastern members.", image: "https://images.unsplash.com/photo-1521292270410-a8c4d716d518?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-south-china-sea-patrols", category: "WORLD & GEOPOLITICS", title: "South China Sea: Philippines and US Begin Joint Naval Patrols", dek: "The patrols add another layer to the security relationship between Manila and Washington amid continuing maritime tensions in the region.", image: "https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-un-ai-governance-resolution", category: "WORLD & GEOPOLITICS", title: "UN Security Council Passes Historic AI Governance Resolution", dek: "The resolution places artificial intelligence governance within a wider international discussion about security, accountability and responsible technology development.", image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-iran-nuclear-talks-vienna", category: "WORLD & GEOPOLITICS", title: "Iran Nuclear Talks Resume in Vienna: Deal Framework Emerging", dek: "Diplomatic discussions in Vienna are focused on the parameters of a possible framework and the verification mechanisms that could support it.", image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-nvidia-humanoid-robots", category: "TECHNOLOGY", title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push", dek: "Nvidia is expanding its role in the robotics ecosystem as manufacturers look to combine advanced AI models with increasingly capable machines.", image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-alphabet-ai-data-centers", category: "TECHNOLOGY", title: "Alphabet Plans $80B Stock Offering to Fund AI Data-Center Expansion", dek: "The proposed financing comes as hyperscalers increase spending on data centers, power capacity and the infrastructure required for AI workloads.", image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-quantum-1000-qubit", category: "TECHNOLOGY", title: "Quantum Computing Reaches Commercial Milestone: 1,000-Qubit Processor Achieved", dek: "A reported 1,000-qubit milestone highlights the rapid development of quantum hardware and the continuing challenge of making systems commercially useful.", image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-apple-ai-translation", category: "TECHNOLOGY", title: "Apple Intelligence: iOS 21 Introduces Real-Time AI Translation Across 87 Languages", dek: "Apple's latest software strategy puts real-time translation and on-device intelligence closer to everyday consumer workflows.", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-meta-llama4-enterprise", category: "TECHNOLOGY", title: "Meta's LLaMA 4 Surpasses GPT-5 in Enterprise Benchmark Tests", dek: "The latest enterprise model comparisons put renewed attention on open and proprietary AI systems and how benchmarks translate into business use.", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&auto=format&fit=crop&q=85" },
+  { id: "world-starlink-gen3-global", category: "TECHNOLOGY", title: "SpaceX Starlink Gen 3 Delivers 1 Gbps to 50 Million New Users Globally", dek: "The latest satellite expansion is aimed at increasing high-speed connectivity across regions where conventional broadband remains difficult to deploy.", image: "https://images.unsplash.com/photo-1517976547714-720226b864c1?w=900&auto=format&fit=crop&q=85" },
+];
+
+const buildStandaloneArticle = (seed: typeof whiteHouseWatchSeeds[number], section: string): SpecialArticle => ({
+  id: seed.id, section, category: seed.category, title: seed.title, dek: seed.dek, image: seed.image,
+  author: "Sagar Kumar", publishedAt: "September 26, 2026", readTime: "7 MIN READ",
+  highlights: [
+    seed.dek,
+    "The development has implications beyond the immediate announcement and is being watched for its wider institutional, economic and strategic effects.",
+    "The response from governments, companies, investors and other stakeholders will shape the next phase of the story.",
+    "The key question is how the announced development moves from policy, diplomacy or investment plans into measurable outcomes."
+  ],
+  sections: [
+    { heading: "What happened", body: `${seed.dek} The immediate development provides the basis for a broader examination of the institutions involved, the decisions behind the move and the practical steps that follow. This report places the headline in its wider context rather than treating the announcement as an isolated event.` },
+    { heading: "Why it matters", body: `The significance of ${seed.title.toLowerCase()} extends beyond the headline. It can affect policy choices, business planning, international relationships, technology adoption, security calculations or investment priorities depending on how the situation develops. Stakeholders will therefore be watching both the immediate response and the longer-term consequences.` },
+    { heading: "Wider context", body: "Developments of this scale are shaped by existing institutions, economic conditions, regulation, diplomatic relationships, technology trends and the interests of multiple stakeholders. Understanding those factors helps explain why the announcement matters and why its eventual impact may differ from its initial presentation." },
+    { heading: "What to watch next", body: "The next milestones will provide the clearest evidence of how the story develops. Readers should watch for official decisions, implementation timelines, follow-up negotiations, financial or operational commitments, measurable results and responses from other governments, companies or institutions involved in the issue." }
+  ],
+  keyFacts: [
+    { label: "Section", value: section }, { label: "Category", value: seed.category }, { label: "Coverage", value: "Detailed editorial report" }, { label: "Author", value: "Sagar Kumar" }
+  ]
+});
+
+const whiteHouseWatchArticles = whiteHouseWatchSeeds.map((seed) => buildStandaloneArticle(seed, "White House Watch"));
+const worldWatchArticles = worldWatchSeeds.map((seed) => buildStandaloneArticle(seed, "World & Geopolitics"));
+
+export type SectionArticleSeed = {
+  id: string;
+  section: "International Business" | "Startup Success";
+  category: string;
+  title: string;
+  dek: string;
+  image?: string;
+  publishedAt?: string;
+  readTime?: string;
+};
+
+function buildSectionArticle(seed: SectionArticleSeed): SpecialArticle {
+  const subject = seed.title.replace(/[.!?]+$/, "");
+
+  return {
+    id: seed.id,
+    section: seed.section,
+    category: seed.category,
+    title: seed.title,
+    dek: seed.dek,
+    image: seed.image,
+    author: "Sagar Kumar",
+    publishedAt: seed.publishedAt ?? "September 25, 2026",
+    readTime: seed.readTime ?? "6 MIN READ",
+    highlights: [
+      `${subject} is the central development covered in this report.`,
+      "The story has implications for companies, investors, customers and the wider market.",
+      "The next phase will depend on execution, market conditions and how stakeholders respond.",
+      "This report separates the immediate development from the broader business context.",
+    ],
+    sections: [
+      {
+        heading: "What happened",
+        body: `${seed.dek} This development is important because it connects the headline event with wider changes in the market. The immediate details provide the starting point, while the business consequences depend on how the organizations involved execute their plans and respond to changing conditions.`,
+      },
+      {
+        heading: "Why it matters",
+        body: `The significance of ${subject.toLowerCase()} extends beyond the headline. Companies in related sectors may need to adjust strategy, investment priorities, partnerships or operating plans. Customers and other market participants can also be affected as the development moves from announcement to implementation.`,
+      },
+      {
+        heading: "Business and market context",
+        body: "The broader environment is shaped by competition, capital availability, regulation, technology adoption and changing customer demand. Those factors determine whether an announced initiative becomes a durable business advantage or remains a short-term development. Tracking execution and measurable outcomes is therefore essential.",
+      },
+      {
+        heading: "What to watch next",
+        body: "The next milestones will provide a clearer picture of the development's impact. Readers should watch for implementation updates, financial or operational results, new partnerships, customer adoption, regulatory decisions and any changes in the strategy described in the initial announcement.",
+      },
+    ],
+    keyFacts: [
+      { label: "Section", value: seed.section },
+      { label: "Category", value: seed.category },
+      { label: "Coverage", value: "Detailed editorial report" },
+      { label: "Author", value: "Sagar Kumar" },
+    ],
+  };
+}
+
+const internationalSeeds: SectionArticleSeed[] = [
+  {
+    id: "international-china-manufacturing-pmi-542",
+    section: "International Business",
+    category: "INTERNATIONAL BUSINESS",
+    title: "China's Manufacturing Sector Rebounds: PMI Hits 4-Year High of 54.2",
+    dek: "Factory activity surges as domestic consumption recovers and export orders from Global South nations accelerate, defying Western trade barriers.",
+    image: "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?w=1600&h=900&fit=crop",
+  },
+  {
+    id: "international-india-third-largest-economy",
+    section: "International Business",
+    category: "INTERNATIONAL BUSINESS",
+    title: "India Overtakes Germany as World's 3rd Largest Economy",
+    dek: "India's expanding domestic market, services economy and investment cycle are reshaping its position in the global economic landscape.",
+    image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&h=600&fit=crop",
+  },
+  {
+    id: "international-eu-us-digital-trade",
+    section: "International Business",
+    category: "INTERNATIONAL BUSINESS",
+    title: "EU-US Digital Trade Agreement Unlocks $800B in Annual Commerce",
+    dek: "A new digital-trade framework is expected to reduce friction for cross-border technology, services and data-driven commerce.",
+    image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&h=600&fit=crop",
+  },
+  {
+    id: "international-nvidia-humanoid-robot-push",
+    section: "TECHNOLOGY",
+    title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
+    category: "TECHNOLOGY",
+    dek: "Nvidia announces an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and Southeast Asia.",
+    image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1000&h=650&fit=crop",
+  },
+  {
+    id: "international-alphabet-ai-data-centers",
+    section: "International Business",
+    category: "TECHNOLOGY",
+    title: "Alphabet Plans $80B Stock Offering to Fund AI Data-Center Expansion",
+    dek: "Hyperscaler capital expenditure continues to rise while grid, water and community constraints intensify across key markets.",
+    image: "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=1000&h=650&fit=crop",
+  },
+  {
+    id: "international-quantum-1000-qubit",
+    section: "International Business",
+    category: "TECHNOLOGY",
+    title: "Quantum Computing Reaches Commercial Milestone: 1,000-Qubit Processor Achieved",
+    dek: "A reported advance in stable high-qubit computing highlights the race to make quantum systems useful for enterprise workloads.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1000&h=650&fit=crop",
+  },
+  {
+    id: "international-apple-intelligence-ios21",
+    section: "International Business",
+    category: "TECHNOLOGY",
+    title: "Apple Intelligence: iOS 21 Introduces Real-Time AI Translation Across 87 Languages",
+    dek: "Apple's latest software push combines on-device intelligence, translation and generative features in a broader personal-AI strategy.",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1000&h=650&fit=crop",
+  },
+  {
+    id: "international-meta-llama4-enterprise",
+    section: "International Business",
+    category: "TECHNOLOGY",
+    title: "Meta's LLaMA 4 Surpasses GPT-5 in Enterprise Benchmark Tests",
+    dek: "Open-source AI takes center stage as Meta's latest model is reported to perform strongly in enterprise reasoning benchmarks.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1000&h=650&fit=crop",
+  },
+  {
+    id: "international-starlink-gen3-global-users",
+    section: "International Business",
+    category: "TECHNOLOGY",
+    title: "SpaceX Starlink Gen 3 Delivers 1Gbps to 50 Million New Users Globally",
+    dek: "The latest satellite expansion is aimed at bringing higher-speed connectivity to remote regions across Africa, South Asia and Latin America.",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1000&h=650&fit=crop",
+  },
+  { id: "international-europe-fiscal-buffer", section: "International Business", category: "EUROPE", title: "EU finance ministers agree on joint fiscal buffer to shield eurozone from future energy-price shocks.", dek: "European finance ministers are working on a joint fiscal mechanism intended to reduce the impact of future energy-price volatility." },
+  { id: "international-france-germany-industrial-policy", section: "International Business", category: "EUROPE", title: "France and Germany unveil joint industrial policy to counter Chinese overcapacity in green technology.", dek: "France and Germany are outlining industrial measures focused on competitiveness, clean technology and strategic manufacturing capacity." },
+  { id: "international-uk-eu-youth-mobility", section: "International Business", category: "EUROPE", title: "UK-EU youth mobility scheme enters final negotiation stage after years of post-Brexit deadlock.", dek: "Negotiators are discussing a youth mobility framework intended to shape travel, study and work opportunities between the UK and EU." },
+  { id: "international-italy-no-confidence", section: "International Business", category: "EUROPE", title: "Italy's coalition government survives no-confidence vote tied to pension reform dispute.", dek: "A parliamentary vote over pension reform has highlighted the political and fiscal pressures surrounding Italy's social-security policy." },
+  { id: "international-asean-supply-chain-pact", section: "International Business", category: "ASIA-PACIFIC", title: "ASEAN bloc finalizes regional supply-chain resilience pact covering semiconductors and critical minerals.", dek: "ASEAN members are strengthening regional coordination around critical supply chains, semiconductors and minerals." },
+  { id: "international-japan-korea-trade-talks", section: "International Business", category: "ASIA-PACIFIC", title: "Japan and South Korea restart high-level trade talks after three-year diplomatic freeze.", dek: "The renewed talks focus on trade relations and the economic links connecting two major Asian economies." },
+  { id: "international-china-stimulus-property", section: "International Business", category: "ASIA-PACIFIC", title: "China's central bank signals further stimulus as property-sector deleveraging drags on growth.", dek: "Chinese policymakers are balancing growth support with the long process of reducing leverage in the property sector." },
+  { id: "international-india-fourth-gdp", section: "International Business", category: "ASIA-PACIFIC", title: "India overtakes Japan to become world's fourth-largest economy by nominal GDP.", dek: "India's expanding economic output is changing the relative size of major economies in Asia and the global economy." },
+  { id: "international-mercosur-eu-trade", section: "International Business", category: "AMERICAS", title: "Mercosur-EU trade deal clears final ratification hurdle after 25 years of negotiation.", dek: "The long-running trade process between Mercosur and the European Union is moving through a decisive ratification stage." },
+  { id: "international-mexico-nearshoring", section: "International Business", category: "AMERICAS", title: "Mexico's peso strengthens on record nearshoring investment inflows from US manufacturers.", dek: "Manufacturing investment linked to nearshoring is increasing Mexico's role in North American supply chains." },
+  { id: "international-brazil-brics-expansion", section: "International Business", category: "AMERICAS", title: "Brazil hosts first-ever BRICS+ summit expansion talks, weighing new membership bids.", dek: "Brazil is hosting discussions around the future membership and economic agenda of the expanded BRICS grouping." },
+  { id: "international-canada-us-lumber", section: "International Business", category: "AMERICAS", title: "Canada and US resolve softwood lumber dispute after a decade of intermittent tariffs.", dek: "The two North American economies are addressing a long-running dispute affecting lumber trade and producers." },
+  { id: "international-afcfta-trade-h1-2026", section: "International Business", category: "MIDDLE EAST & AFRICA", title: "African Continental Free Trade Area reports record intra-African trade volumes for H1 2026.", dek: "The continental trade framework is reporting stronger internal trade flows as African markets deepen regional commercial links." },
+  { id: "international-gulf-africa-renewables", section: "International Business", category: "MIDDLE EAST & AFRICA", title: "Gulf sovereign wealth funds pledge $40B toward African renewable-energy infrastructure.", dek: "Gulf investors are directing capital toward African renewable-energy projects, linking infrastructure needs with international investment." },
+  { id: "international-egypt-ethiopia-nile", section: "International Business", category: "MIDDLE EAST & AFRICA", title: "Egypt and Ethiopia reach preliminary agreement on Nile water-sharing after decade-long dispute.", dek: "The preliminary understanding addresses one of the region's most closely watched water and development issues." },
+  { id: "international-uae-india-investment", section: "International Business", category: "MIDDLE EAST & AFRICA", title: "UAE and India expand investment corridor across logistics, technology and clean energy.", dek: "The two economies are broadening commercial cooperation across infrastructure, technology and energy." },
+];
+
+const startupSeeds: SectionArticleSeed[] = [
+  {
+    id: "startup-perplexity-ai-1-2b-series-d",
+    section: "Startup Success",
+    category: "STARTUP SUCCESS",
+    title: "Perplexity AI Raises $1.2B Series D, Valued at $15B",
+    dek: "The AI search startup secures major backing from SoftBank, Bessemer, and Nvidia as it targets 100M daily active users by Q4 2026.",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1400",
+  },
+  {
+    id: "startup-nvidia-humanoid-robot-push",
+    section: "Startup Success",
+    category: "TECHNOLOGY",
+    title: "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push",
+    dek: "Nvidia has announced an ambitious collaboration with humanoid robot manufacturers across the United States, Europe, and Southeast Asia.",
+    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&h=520&fit=crop",
+  },
+  {
+    id: "startup-alphabet-ai-data-center",
+    section: "Startup Success",
+    category: "TECHNOLOGY",
+    title: "Alphabet Plans $80B Stock Offering to Fund AI Data-Center Expansion",
+    dek: "Hyperscaler capex tops $700B while grid, water and community pushback intensifies across key markets.",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&h=520&fit=crop",
+  },
+  {
+    id: "startup-quantum-commercial-milestone",
+    section: "Startup Success",
+    category: "TECHNOLOGY",
+    title: "Quantum Computing Reaches Commercial Milestone: 1,000-Qubit Processor Achieved",
+    dek: "IBM and Google jointly announce stable 1,000-qubit processors, marking a watershed moment for enterprise quantum computing.",
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=900&h=520&fit=crop",
+  },
+  {
+    id: "startup-apple-intelligence-ios21",
+    section: "Startup Success",
+    category: "TECHNOLOGY",
+    title: "Apple Intelligence: iOS 21 Introduces Real-Time AI Translation Across 8 Languages",
+    dek: "Apple's most ambitious software update rewrites the rules of personal AI, integrating on-device translation and generative features.",
+    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=900&h=520&fit=crop",
+  },
+  {
+    id: "startup-meta-llama4-enterprise",
+    section: "Startup Success",
+    category: "TECHNOLOGY",
+    title: "Meta's Llama 4 Surpasses GPT-5 in Enterprise Benchmark Tests",
+    dek: "Open-source AI takes center stage as Meta's latest model outperforms proprietary systems in enterprise reasoning.",
+    image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=900&h=520&fit=crop",
+  },
+  {
+    id: "startup-starlink-gen3-global",
+    section: "Startup Success",
+    category: "TECHNOLOGY",
+    title: "SpaceX Starlink Gen 3 Delivers 1 Gbps to 50 Million New Users Globally",
+    dek: "The latest satellite constellation expansion brings high-speed internet to more regions across Africa, South Asia, and Latin America.",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=900&h=520&fit=crop",
+  },
+  {
+    id: "startup-zepto-10b-valuation",
+    section: "Startup Success",
+    category: "STARTUP SUCCESS",
+    title: "Indian Unicorn Zepto Hits $10B Valuation, Eyes Global Expansion",
+    dek: "Zepto's next phase focuses on scale, market expansion and the economics of high-frequency commerce.",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&h=600&fit=crop",
+  },
+  {
+    id: "startup-y-combinator-w2026-ai",
+    section: "Startup Success",
+    category: "STARTUP SUCCESS",
+    title: "Y Combinator W2026 Cohort: 40% of Startups Are Pure AI Companies",
+    dek: "The latest startup cohort highlights the continued concentration of founders and venture activity around artificial intelligence.",
+    image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=900&h=600&fit=crop",
+  },
+];
+
+const internationalBusinessArticles = internationalSeeds.map(buildSectionArticle);
+const startupSuccessArticles = startupSeeds.map(buildSectionArticle);
+
 export const specialArticles: SpecialArticle[] = [
   ...healthcareArticles,
   ...manufacturingArticles,
@@ -663,6 +941,10 @@ export const specialArticles: SpecialArticle[] = [
   innovationHero,
   ...innovationStories,
   ...cybersecurityArticles,
+  ...internationalBusinessArticles,
+  ...startupSuccessArticles,
+  ...whiteHouseWatchArticles,
+  ...worldWatchArticles,
 ];
 
 export function getSpecialArticleById(id?: string) {
