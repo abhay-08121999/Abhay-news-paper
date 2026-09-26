@@ -1,6 +1,7 @@
 import { Clock, ArrowRight } from "lucide-react";
 import { Link } from "react-router";
 import { specialArticlePath } from "../../data/specialArticleData";
+import { PrideTimesAd } from "../AdSenseSlots";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 import HC1Img from "../../../imports/HC1.png";
@@ -230,33 +231,7 @@ const sponsoredEvents = [
    AD BANNER
 ========================================================= */
 
-function AdBanner({
-  secondary = false,
-}: {
-  secondary?: boolean;
-}) {
-  return (
-    <div className="relative w-full h-[58px] md:h-[72px] bg-[#102d35] overflow-hidden flex flex-col items-center justify-center text-center">
-      <span className="absolute top-1 right-1 text-[7px] text-gray-400 border border-gray-500 px-1">
-        Advertisement
-      </span>
 
-      <span className="text-[7px] md:text-[8px] font-bold tracking-[0.2em] text-cyan-400 uppercase">
-        GOOGLE ADSENSE
-      </span>
-
-      <strong className="mt-0.5 text-[10px] md:text-[12px] font-semibold text-white">
-        {secondary
-          ? "Business Solutions | Powered by The Pride Times"
-          : "Advertisement Space"}
-      </strong>
-
-      <span className="text-[7px] md:text-[8px] text-cyan-300">
-        728 × 90 • Leaderboard
-      </span>
-    </div>
-  );
-}
 
 /* =========================================================
    SECTION HEADER
@@ -785,7 +760,7 @@ export function HealthcarePage() {
         ================================================= */}
 
         <section className="mt-4 md:mt-5">
-          <AdBanner />
+          <PrideTimesAd variant="fifth" />
         </section>
 
         {/* =================================================
@@ -816,6 +791,8 @@ export function HealthcarePage() {
             <div className="mt-4">
               <SponsoredContent />
             </div>
+
+            <PrideTimesAd variant="fourth" className="mt-6" />
           </aside>
         </section>
 
@@ -865,7 +842,7 @@ export function HealthcarePage() {
         ================================================= */}
 
         <section className="mt-6 md:mt-7">
-          <AdBanner secondary />
+          <PrideTimesAd variant="fifth" />
         </section>
 
         {/* =================================================
