@@ -1,6 +1,6 @@
 import { Clock, Globe, Landmark, Plane, Users } from "lucide-react";
 import { Link } from "react-router";
-import { internationalArticlePathByTitle } from "../../data/sectionArticleData";
+import { specialArticlePathByTitle } from "../../data/specialArticleData";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
 /* =========================================================
@@ -349,7 +349,7 @@ function SponsoredContent() {
           {moreStories.map((story) => (
             <Link
               key={story.id}
-              to={internationalArticlePathByTitle(story.title)}
+              to={specialArticlePathByTitle(story.title)}
               className="flex gap-3 py-3 border-b border-gray-200 group"
             >
               <div className="w-[72px] h-[48px] shrink-0 overflow-hidden rounded-sm bg-gray-100">
@@ -388,7 +388,7 @@ function SponsoredContent() {
 function HeroStoryCard({ story }: { story: HeroStory }) {
   return (
     <article className="group">
-      <Link to={internationalArticlePathByTitle(story.title)} className="block">
+      <Link to={specialArticlePathByTitle(story.title)} className="block">
         <div className="overflow-hidden rounded-[6px] bg-gray-100">
         <ImageWithFallback
           src={story.image}
@@ -430,7 +430,7 @@ function HeroStoryCard({ story }: { story: HeroStory }) {
 
 function LatestNewsCard({ story }: { story: Story }) {
   return (
-    <Link to={internationalArticlePathByTitle(story.title)} className="group block overflow-hidden border border-gray-200 rounded-[5px] bg-white hover:shadow-sm transition-shadow">
+    <Link to={specialArticlePathByTitle(story.title)} className="group block overflow-hidden border border-gray-200 rounded-[5px] bg-white hover:shadow-sm transition-shadow">
       <div className="h-[155px] sm:h-[175px] md:h-[185px] overflow-hidden bg-gray-100">
         <ImageWithFallback
           src={story.image || ""}
@@ -496,7 +496,7 @@ function RegionalStories({
         {stories.map((story) => (
           <Link
             key={story.id}
-            to={internationalArticlePathByTitle(story.title)}
+            to={specialArticlePathByTitle(story.title)}
             className="group block py-3 border-b border-gray-200 last:border-b-0"
           >
             <h3 className="text-[12px] md:text-[13px] font-medium leading-[1.45] text-gray-900 group-hover:text-red-600 transition-colors">
