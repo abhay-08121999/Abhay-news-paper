@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { Clock, Globe, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 
@@ -12,6 +13,23 @@ import { ImageWithFallback } from "../figma/ImageWithFallback";
    → Sponsored Events
    → Newsletter
 ========================================================= */
+
+const articleIds: Record<string, string> = {
+  "Saudi Crown Prince to Meet French Premier in Paris on Monday": "world-saudi-crown-prince-paris",
+  "NATO Deploys 50,000 Additional Troops Along Eastern Flank": "world-nato-eastern-flank",
+  "South China Sea: Philippines and US Begin Joint Naval Patrols": "world-south-china-sea-patrols",
+  "UN Security Council Passes Historic AI Governance Resolution": "world-un-ai-governance-resolution",
+  "Iran Nuclear Talks Resume in Vienna: Deal Framework Emerging": "world-iran-nuclear-talks-vienna",
+  "Nvidia Leads AI Infrastructure Revolution with Humanoid Robot Push": "world-nvidia-humanoid-robots",
+  "Alphabet Plans $80B Stock Offering to Fund AI Data-Center Expansion": "world-alphabet-ai-data-centers",
+  "Quantum Computing Reaches Commercial Milestone: 1,000-Qubit Processor Achieved": "world-quantum-1000-qubit",
+  "Apple Intelligence: iOS 21 Introduces Real-Time AI Translation Across 87 Languages": "world-apple-ai-translation",
+  "Meta's LLaMA 4 Surpasses GPT-5 in Enterprise Benchmark Tests": "world-meta-llama4-enterprise",
+  "SpaceX Starlink Gen 3 Delivers 1 Gbps to 50 Million New Users Globally": "world-starlink-gen3-global"
+};
+
+const articlePath = (title: string) =>
+  `/article/${articleIds[title] || "world-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+$/g, "")}`;
 
 /* =========================================================
    TYPES
@@ -301,6 +319,7 @@ function SponsoredCard() {
 ========================================================= */
 
 function MoreStories() {
+  const navigate = useNavigate();
   return (
     <div className="mt-5">
       <SectionHeader title="More World Coverage" compact />
@@ -308,6 +327,7 @@ function MoreStories() {
       {moreStories.map((story) => (
         <article
           key={story.id}
+          onClick={() => navigate(articlePath(story.title))}
           className="flex gap-3 py-2.5 border-b border-gray-200 group cursor-pointer"
         >
           <div className="w-[62px] h-[50px] shrink-0 overflow-hidden rounded-[3px] bg-gray-100">
@@ -342,8 +362,10 @@ function MoreStories() {
 ========================================================= */
 
 function MajorStoryCard({ story }: { story: Story }) {
+  const navigate = useNavigate();
   return (
-    <article className="group cursor-pointer">
+    <article onClick={() => navigate(articlePath(story.title))}
+    className="group cursor-pointer">
       <div className="relative h-[185px] md:h-[220px] overflow-hidden rounded-[4px] bg-gray-100">
         <ImageWithFallback
           src={story.image}
@@ -372,8 +394,10 @@ function MajorStoryCard({ story }: { story: Story }) {
 ========================================================= */
 
 function SupportingStory({ story }: { story: Story }) {
+  const navigate = useNavigate();
   return (
-    <article className="group cursor-pointer border-b border-gray-200 pb-4">
+    <article onClick={() => navigate(articlePath(story.title))}
+    className="group cursor-pointer border-b border-gray-200 pb-4">
       <div className="flex gap-3">
         <div className="w-[105px] h-[78px] md:w-[125px] md:h-[88px] shrink-0 overflow-hidden rounded-[3px] bg-gray-100">
           <ImageWithFallback
@@ -413,6 +437,7 @@ function SupportingStory({ story }: { story: Story }) {
 ========================================================= */
 
 function NewsroomStream() {
+  const navigate = useNavigate();
   const newsroom = [
     ...moreStories.map((story) => ({
       category: story.category,
@@ -441,6 +466,7 @@ function NewsroomStream() {
       {newsroom.map((story, index) => (
         <article
           key={`${story.title}-${index}`}
+          onClick={() => navigate(articlePath(story.title))}
           className="py-3 border-b border-gray-200 group cursor-pointer"
         >
           <div className="flex items-start gap-2">
@@ -474,8 +500,10 @@ function NewsroomStream() {
 ========================================================= */
 
 function NewsCard({ story }: { story: Story }) {
+  const navigate = useNavigate();
   return (
-    <article className="group border border-gray-200 rounded-[5px] overflow-hidden bg-white cursor-pointer hover:shadow-md transition-shadow duration-300">
+    <article onClick={() => navigate(articlePath(story.title))}
+    className="group border border-gray-200 rounded-[5px] overflow-hidden bg-white cursor-pointer hover:shadow-md transition-shadow duration-300">
       <div className="relative h-[150px] sm:h-[165px] overflow-hidden bg-gray-100">
         <ImageWithFallback
           src={story.image || ""}
@@ -606,6 +634,7 @@ function Newsletter() {
 ========================================================= */
 
 export function WorldPage() {
+  const navigate = useNavigate();
   return (
     <main className="w-full bg-white text-[#17140F] antialiased">
       <div className="w-full px-4 sm:px-6 md:px-8 lg:px-11 xl:px-14 py-5 md:py-7">
@@ -657,7 +686,7 @@ export function WorldPage() {
 
           {/* LEAD STORY */}
 
-          <article className="group cursor-pointer min-w-0">
+          <article onClick={() => navigate(articlePath(worldHero.title))} className="group cursor-pointer min-w-0">
             <div className="relative overflow-hidden rounded-[5px] bg-gray-100 h-[255px] sm:h-[340px] md:h-[400px] lg:h-[410px]">
               <ImageWithFallback
                 src={worldHero.image}
