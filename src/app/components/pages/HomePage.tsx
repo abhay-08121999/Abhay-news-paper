@@ -42,49 +42,6 @@ type MarketItem = {
 };
 
 /* =========================================================
-   GOOGLE ADSENSE
-========================================================= */
-
-declare global {
-  interface Window {
-    adsbygoogle?: unknown[];
-  }
-}
-
-function PrideTimesAd() {
-  useEffect(() => {
-    try {
-      window.adsbygoogle = window.adsbygoogle || [];
-      window.adsbygoogle.push({});
-    } catch (error) {
-      console.error("AdSense Error:", error);
-    }
-  }, []);
-
-  return (
-    <section
-      aria-label="Advertisement"
-      className="my-8 overflow-hidden border-y border-gray-100 bg-white py-4"
-    >
-      <div className="mb-2 text-center text-[8px] font-medium uppercase tracking-[0.2em] text-gray-400">
-        Advertisement
-      </div>
-
-      <div className="mx-auto w-full max-w-5xl overflow-hidden">
-        <ins
-          className="adsbygoogle"
-          style={{ display: "block" }}
-          data-ad-client="ca-pub-2331501617441941"
-          data-ad-slot="6033028012"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-      </div>
-    </section>
-  );
-}
-
-/* =========================================================
    HERO / LEAD STORY
 ========================================================= */
 
@@ -1317,8 +1274,6 @@ export function HomePage() {
             </div>
           </section>
 
-          <PrideTimesAd />
-
           {/* =================================================
               LATEST BUSINESS NEWS
           ================================================= */}
@@ -1477,8 +1432,6 @@ export function HomePage() {
               ))}
             </div>
           </section>
-
-          <PrideTimesAd />
 
           {/* =================================================
               EDITORIAL PICKS + MAGAZINE
