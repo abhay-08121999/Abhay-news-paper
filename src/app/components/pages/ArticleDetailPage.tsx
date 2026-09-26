@@ -801,6 +801,8 @@ function HomepageArticle({
 
             </section>
 
+            <HomepageArticleAd />
+
             <div className="mt-10 font-serif text-[17px] leading-[1.9] text-gray-800 sm:text-[18px]">
 
               {article.sections.map((section, index) => (
