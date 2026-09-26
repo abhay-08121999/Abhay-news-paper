@@ -2,6 +2,7 @@ import { Clock } from "lucide-react";
 import { Link } from "react-router";
 import { specialArticlePathByTitle } from "../../data/specialArticleData";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { PrideTimesAd } from "../AdSenseSlots";
 
 import Smartc1Img from "../../../imports/Smartc1.png";
 import Smartc2Img from "../../../imports/Smartc2.png";
@@ -249,6 +250,19 @@ function SponsoredContent() {
         </div>
       </div>
     </aside>
+  );
+}
+
+/* =========================================================
+   ADSENSE
+========================================================= */
+
+function SectionAds() {
+  return (
+    <div className="mt-5 md:mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-5 items-start">
+      <PrideTimesAd variant="fifth" />
+      <PrideTimesAd variant="fourth" />
+    </div>
   );
 }
 
@@ -526,6 +540,8 @@ export function SmartCitiesPage() {
         {/* =================================================
             SPONSORED EVENTS
         ================================================= */}
+
+        <SectionAds />
 
         <SponsorshipSection />
 
