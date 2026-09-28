@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 import { Clock, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { PrideTimesAd } from "../AdSenseSlots";
 
 const articleIds: Record<string, string> = {
   "President Signs Historic AI Accountability Act into Law": "whitehouse-president-signs-ai-accountability-act",
@@ -681,7 +682,7 @@ export function WhiteHouseWatchPage() {
             TOP AD
         ================================================= */}
 
-        <Advertisement />
+        <PrideTimesAd variant="first" className="mb-7" />
 
         {/* =================================================
             LEAD EDITORIAL PACKAGE
@@ -786,7 +787,7 @@ export function WhiteHouseWatchPage() {
             SECOND AD
         ================================================= */}
 
-        <Advertisement />
+        <PrideTimesAd variant="fifth" className="mb-7" />
 
         {/* =================================================
             SPONSORED EVENTS
