@@ -1,6 +1,5 @@
-
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import {
   TrendingUp,
   TrendingDown,
@@ -20,18 +19,24 @@ function parseChange(value: unknown): number | null {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+/* Builds /markets?tab=<Tab> so MarketsPage opens the matching tab. */
+const marketTab = (tab: string) => `/markets?tab=${encodeURIComponent(tab)}`;
+
 /* Bloomberg-style mega-menu columns for "Top Securities".
    All paths point at routes that already exist in App.tsx. */
 const megaMenuColumns = [
   {
     title: "Markets",
     links: [
-      { label: "Stocks", path: "/markets?tab=Stocks" },
-      { label: "Commodities", path: "/markets?tab=Commodities" },
-      { label: "Forex", path: "/markets?tab=Forex" },
-      { label: "ETFs", path: "/markets?tab=ETFs" },
-      { label: "Government Bonds", path: "/markets?tab=Government Bonds" },
-      { label: "Global Markets", path: "/markets?tab=Global Markets" },
+      { label: "Stocks", path: marketTab("Stocks") },
+      { label: "Indices", path: marketTab("Indices") },
+      { label: "Commodities", path: marketTab("Commodities") },
+      { label: "Forex", path: marketTab("Forex") },
+      { label: "Crypto", path: marketTab("Crypto") },
+      { label: "Mutual Funds", path: marketTab("Mutual Funds") },
+      { label: "ETFs", path: marketTab("ETFs") },
+      { label: "Government Bonds", path: marketTab("Government Bonds") },
+      { label: "Global Markets", path: marketTab("Global Markets") },
     ],
   },
   {
@@ -408,17 +413,36 @@ export function MarketsTicker() {
   );
 }
 
-export function MarketsPage() {
-  type MarketTab =
-    | "Overview"
-    | "Stocks"
-    | "Indices"
-    | "Crypto"
-    | "Forex"
-    | "Commodities"
-    | "Mutual Funds"
-    | "ETFs";
+/* =========================================================
+   MARKETS PAGE
+========================================================= */
 
+type MarketTab =
+  | "Overview"
+  | "Stocks"
+  | "Indices"
+  | "Crypto"
+  | "Forex"
+  | "Commodities"
+  | "Mutual Funds"
+  | "ETFs"
+  | "Government Bonds"
+  | "Global Markets";
+
+const tabs: MarketTab[] = [
+  "Overview",
+  "Stocks",
+  "Indices",
+  "Crypto",
+  "Forex",
+  "Commodities",
+  "Mutual Funds",
+  "ETFs",
+  "Government Bonds",
+  "Global Markets",
+];
+
+export function MarketsPage() {
   interface IndexRow {
     name: string;
     value: string;
@@ -443,7 +467,16 @@ export function MarketsPage() {
     marketCap: string;
   }
 
-  const [activeTab, setActiveTab] = useState<MarketTab>("Overview");
+  // Active tab lives in the URL (?tab=Commodities) so menu links,
+  // the tab bar, the back button and shared links all stay in sync.
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabParam = searchParams.get("tab") as MarketTab | null;
+  const activeTab: MarketTab =
+    tabParam && tabs.includes(tabParam) ? tabParam : "Overview";
+
+  const selectTab = (tab: MarketTab) =>
+    setSearchParams(tab === "Overview" ? {} : { tab });
+
   const [loading, setLoading] = useState(false);
 
   const [indices, setIndices] = useState<IndexRow[]>([
@@ -546,17 +579,6 @@ export function MarketsPage() {
     return `${parsed >= 0 ? "+" : ""}${parsed.toFixed(2)}%`;
   }
 
-  const tabs: MarketTab[] = [
-    "Overview",
-    "Stocks",
-    "Indices",
-    "Crypto",
-    "Forex",
-    "Commodities",
-    "Mutual Funds",
-    "ETFs",
-  ];
-
   const isPositive = (value: string) => !value.trim().startsWith("-");
 
   const Change = ({ value }: { value: string }) => (
@@ -595,7 +617,7 @@ export function MarketsPage() {
               <button
                 key={tab}
                 type="button"
-                onClick={() => setActiveTab(tab)}
+                onClick={() => selectTab(tab)}
                 className={`relative whitespace-nowrap pb-3 pt-1 text-[12px] font-semibold transition ${
                   activeTab === tab
                     ? "text-[#d71920]"
@@ -782,7 +804,7 @@ export function MarketsPage() {
             </section>
           )}
 
-          {/* Non-overview tabs use the same clean editorial treatment. */}
+          {/* Tabs without data yet use the same clean editorial treatment. */}
           {!["Overview", "Stocks", "Indices", "Crypto"].includes(activeTab) && (
             <section className="py-10 text-center">
               <h2 className="font-serif text-2xl font-bold">{activeTab}</h2>
