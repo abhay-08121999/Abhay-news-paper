@@ -15,43 +15,6 @@ import CeospotImg from "../../../imports/Ceospot.png";
 import { PrideTimesAd } from "../AdSenseSlots";
 
 /* ============================================================
-   AD SLOT
-   Existing advertising presentation retained
-============================================================ */
-
-
-
-/* ============================================================
-   SPONSORED BANNER
-============================================================ */
-
-function SponsoredBanner() {
-  return (
-    <div className="relative mb-10 rounded-[2px] border border-white/10 bg-[#0b1220] px-4 py-7 text-center text-white sm:py-8">
-      <span className="absolute left-3 top-2 text-[9px] uppercase tracking-[0.15em] text-gray-500">
-        Sponsored Content
-      </span>
-
-      <span className="absolute right-3 top-2 text-[9px] uppercase tracking-wide text-gray-500">
-        Ad
-      </span>
-
-      <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.22em] text-yellow-400">
-        Executive Leadership Program — Partner Content
-      </p>
-
-      <p className="font-serif text-xl font-bold sm:text-2xl">
-        Your Ad Here
-      </p>
-
-      <p className="mt-1 text-xs text-gray-400">
-        Reach 2M+ business readers
-      </p>
-    </div>
-  );
-}
-
-/* ============================================================
    NEWSLETTER CTA
 ============================================================ */
 
@@ -391,7 +354,12 @@ function StoryRow({
   index?: number;
 }) {
   return (
-    <Link to={`/article/ceo-opinion-${index !== undefined ? index + 1 : 1}`} className="group flex cursor-pointer gap-4 border-b border-gray-200 py-4 last:border-b-0">
+    <Link
+      to={`/article/ceo-opinion-${
+        index !== undefined ? index + 1 : 1
+      }`}
+      className="group flex cursor-pointer gap-4 border-b border-gray-200 py-4 last:border-b-0"
+    >
       {typeof index === "number" && (
         <span className="pt-0.5 font-serif text-xl text-gray-300 transition-colors group-hover:text-red-600">
           {String(index + 1).padStart(2, "0")}
@@ -490,10 +458,12 @@ export function CeoSpotlightPage() {
         </header>
 
         {/* ====================================================
-            ADVERTISEMENT
+            GOOGLE ADSENSE — TOP
         ==================================================== */}
 
-        <PrideTimesAd variant="fifth" />
+        <div className="mb-10">
+          <PrideTimesAd variant="fifth" />
+        </div>
 
         {/* ====================================================
             TOP STORIES / LEAD PROFILE
@@ -507,7 +477,6 @@ export function CeoSpotlightPage() {
           />
 
           <article className="group grid grid-cols-1 overflow-hidden border-y border-black md:grid-cols-[1.15fr_0.85fr]">
-
             <div className="relative overflow-hidden bg-gray-100">
               <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-2 rounded-sm bg-red-600 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.18em] text-white">
                 {featuredLeader.rank}
@@ -551,13 +520,24 @@ export function CeoSpotlightPage() {
                 </span>
               </div>
 
-              <Link to="/article/ceo-jensen-huang" className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-black pb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-black transition-colors hover:border-red-600 hover:text-red-600">
+              <Link
+                to="/article/ceo-jensen-huang"
+                className="mt-6 inline-flex w-fit items-center gap-2 border-b-2 border-black pb-2 text-[11px] font-bold uppercase tracking-[0.12em] text-black transition-colors hover:border-red-600 hover:text-red-600"
+              >
                 Read Full Profile
                 <ArrowUpRight size={13} />
               </Link>
             </div>
           </article>
         </section>
+
+        {/* ====================================================
+            GOOGLE ADSENSE — BETWEEN MAJOR SECTIONS
+        ==================================================== */}
+
+        <div className="mb-14">
+          <PrideTimesAd variant="second" />
+        </div>
 
         {/* ====================================================
             MAJOR STORIES
@@ -618,10 +598,12 @@ export function CeoSpotlightPage() {
         </section>
 
         {/* ====================================================
-            SPONSORED CONTENT
+            GOOGLE ADSENSE — AFTER LEADERS
         ==================================================== */}
 
-        <SponsoredBanner />
+        <div className="mb-14">
+          <PrideTimesAd variant="third" />
+        </div>
 
         {/* ====================================================
             INTERVIEW DESK
@@ -635,7 +617,6 @@ export function CeoSpotlightPage() {
           />
 
           <div className="grid grid-cols-1 gap-0 border-y border-black lg:grid-cols-[1.35fr_1fr_1fr]">
-
             {ceoInterviews.map((ceo, index) => (
               <Link
                 to={`/article/ceo-interview-${ceo.id}`}
@@ -697,6 +678,14 @@ export function CeoSpotlightPage() {
             ))}
           </div>
         </section>
+
+        {/* ====================================================
+            GOOGLE ADSENSE — INTERVIEW SECTION
+        ==================================================== */}
+
+        <div className="mb-14">
+          <PrideTimesAd variant="fourth" />
+        </div>
 
         {/* ====================================================
             EDITORIAL DESK
@@ -782,7 +771,7 @@ export function CeoSpotlightPage() {
                 <Link
                   to={`/article/ceo-move-${move.id}`}
                   key={move.id}
-                  className="group cursor-pointer border-b border-gray-200 py-4 last:border-b-0"
+                  className="group block cursor-pointer border-b border-gray-200 py-4 last:border-b-0"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-red-600">
@@ -914,6 +903,14 @@ export function CeoSpotlightPage() {
         </section>
 
         {/* ====================================================
+            GOOGLE ADSENSE — BEFORE LEADERSHIP PLAYBOOK
+        ==================================================== */}
+
+        <div className="mb-14">
+          <PrideTimesAd variant="second" />
+        </div>
+
+        {/* ====================================================
             LEADERSHIP PLAYBOOK
         ==================================================== */}
 
@@ -925,7 +922,6 @@ export function CeoSpotlightPage() {
           />
 
           <div className="grid grid-cols-1 gap-px bg-gray-200 md:grid-cols-3">
-
             <article className="bg-white p-6 md:p-7">
               <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-red-600">
                 01 · Strategy
@@ -970,9 +966,16 @@ export function CeoSpotlightPage() {
                 technological and organizational change.
               </p>
             </article>
-
           </div>
         </section>
+
+        {/* ====================================================
+            GOOGLE ADSENSE — BEFORE NEWSLETTER
+        ==================================================== */}
+
+        <div className="mt-14">
+          <PrideTimesAd variant="third" />
+        </div>
 
         {/* ====================================================
             NEWSLETTER
@@ -992,8 +995,9 @@ export function CeoSpotlightPage() {
             <span>Executive Intelligence Desk</span>
           </div>
         </footer>
-
       </div>
     </main>
   );
 }
+
+export default CeoSpotlightPage;
