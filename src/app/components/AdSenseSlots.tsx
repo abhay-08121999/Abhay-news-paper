@@ -18,6 +18,23 @@ type AdSlotConfig = {
 type AdSlotProps = {
   variant: AdVariant;
   className?: string;
+  /**
+   * "inline" (default): renders the <ins> tag directly in React.
+   * "html": loads the static file /public/ads/slot-<variant>.html in an iframe.
+   */
+  mode?: "inline" | "html";
+};
+
+const IS_LOCAL =
+  typeof window !== "undefined" &&
+  /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+
+const HTML_AD_HEIGHT: Record<AdVariant, number> = {
+  first: 120,
+  second: 120,
+  third: 280,
+  fourth: 250,
+  fifth: 120,
 };
 
 /* =========================================================
@@ -88,6 +105,7 @@ function pushAd() {
 export function PrideTimesAd({
   variant,
   className = "",
+  mode = "inline",
 }: AdSlotProps) {
   const adRef =
     useRef<HTMLModElement | null>(null);
@@ -99,7 +117,8 @@ export function PrideTimesAd({
   useEffect(() => {
     const element = adRef.current;
 
-    if (!element) {
+    // In "html" mode the iframe page pushes its own ad
+    if (mode === "html" || !element) {
       return;
     }
 
@@ -164,7 +183,7 @@ export function PrideTimesAd({
     return () => {
       window.cancelAnimationFrame(frame);
     };
-  }, []);
+  }, [mode]);
 
   /* =======================================================
      COMMON AD STYLE
@@ -174,6 +193,35 @@ export function PrideTimesAd({
     display: "block",
     width: "100%",
   };
+
+  const testAttr = IS_LOCAL ? "on" : undefined;
+
+  /* =======================================================
+     STATIC HTML MODE (iframe -> /ads/slot-<variant>.html)
+  ======================================================= */
+
+  if (mode === "html") {
+    return (
+      <div
+        className={`w-full overflow-hidden bg-white ${className}`}
+        aria-label="Advertisement"
+      >
+        <div className="mb-2 text-center">
+          <span className="text-[8px] font-semibold uppercase tracking-[0.2em] text-gray-400">
+            Advertisement
+          </span>
+        </div>
+        <iframe
+          src={`/ads/slot-${variant}.html`}
+          title={`Advertisement ${variant}`}
+          width="100%"
+          height={HTML_AD_HEIGHT[variant]}
+          style={{ border: 0, display: "block" }}
+          loading="lazy"
+        />
+      </div>
+    );
+  }
 
   /* =======================================================
      IN-ARTICLE FLUID AD
@@ -203,6 +251,7 @@ export function PrideTimesAd({
           data-ad-format="fluid"
           data-ad-client={ADSENSE_CLIENT}
           data-ad-slot={config.slot}
+          data-adtest={testAttr}
         />
       </div>
     );
@@ -237,6 +286,7 @@ export function PrideTimesAd({
           }
           data-ad-client={ADSENSE_CLIENT}
           data-ad-slot={config.slot}
+          data-adtest={testAttr}
         />
       </aside>
     );
@@ -266,6 +316,7 @@ export function PrideTimesAd({
         }}
         data-ad-client={ADSENSE_CLIENT}
         data-ad-slot={config.slot}
+          data-adtest={testAttr}
         data-ad-format="auto"
         data-full-width-responsive="true"
       />
