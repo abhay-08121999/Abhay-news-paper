@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 type AdSlotProps = {
-  variant: "fourth" | "fifth";
+  variant: "first" | "fourth" | "fifth";
   className?: string;
 };
 
@@ -26,6 +26,28 @@ export function PrideTimesAd({ variant, className = "" }: AdSlotProps) {
       console.warn("AdSense initialization skipped:", error);
     }
   }, []);
+
+  if (variant === "first") {
+    return (
+      <div
+        className={`w-full overflow-hidden border-y border-gray-200 bg-white py-4 ${className}`}
+        aria-label="Advertisement"
+      >
+        <p className="mb-3 text-center text-[9px] font-semibold uppercase tracking-[0.18em] text-gray-400">
+          Advertisement
+        </p>
+        <ins
+          ref={adRef}
+          className="adsbygoogle"
+          style={{ display: "block", minHeight: "120px" }}
+          data-ad-client="ca-pub-2331501617441941"
+          data-ad-slot="6033028012"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      </div>
+    );
+  }
 
   if (variant === "fourth") {
     return (
