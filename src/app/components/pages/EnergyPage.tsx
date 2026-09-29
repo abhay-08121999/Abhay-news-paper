@@ -1,953 +1,203 @@
 import { ImageWithFallback } from "../figma/ImageWithFallback";
-import { useEffect, type ReactNode } from "react";
-import { useNavigate } from "react-router";
-import { Clock } from "lucide-react";
+import { Clock, ChevronRight, Zap, TrendingDown, TrendingUp } from "lucide-react";
+import { Link } from "react-router";
+import { PrideTimesAd } from "../AdSenseSlots";
+import { specialArticlePath } from "../../data/specialArticleData";
 
-import Ener1Img from "../../../imports/Energy1.png";
-import Ener2Img from "../../../imports/Energy2.png";
-import Ener3Img from "../../../imports/Energy3.png";
-
-function energyArticleId(title: string) {
-  return `energy-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
+function SH({ title }: { title: string }) {
+  return (
+    <div className="mb-5 flex items-center justify-between border-b-2 border-black pb-2">
+      <h2 className="font-serif text-[21px] font-bold uppercase tracking-wide md:text-[24px]">
+        {title}
+      </h2>
+      <ChevronRight size={14} />
+    </div>
+  );
 }
 
-/* =========================================================
-   HERO DATA
-========================================================= */
-
 const hero = {
-  category: "CLEAN ENERGY TRANSITION",
-  title: "Data Centers and AI Workloads Force Energy Policy Reversals Globally",
+  id: "energy-global-disruption-2026",
+  category: "ENERGY & GEOPOLITICS",
+  title: "Energy Sector Faces a Three-Way Disruption From Geopolitics, AI Power Demand and the Clean Energy Transition",
   excerpt:
-    "The insatiable power appetite of AI data centers is generating a policy crisis that is reverberating from Ireland to Indiana. Multiple governments that had committed to rapid renewable energy transitions are finding themselves reversing or delaying coal and gas plant retirements to ensure grid stability in the face of surging demand. In the United States, the Department of Energy has authorized emergency grid reliability protocols in five states where data center construction is outpacing transmission infrastructure deployment. Technology companies — led by Microsoft, Google, Amazon, and a growing cohort of AI infrastructure firms — have publicly committed to 100% clean energy procurement. However, the sheer scale of new compute capacity being built is stretching the practical limits of current renewable energy availability, forcing uncomfortable compromises between decarbonization targets and operational reliability.",
-  author: "Sagar Kumar",
-  time: "1 June 2026",
-  briefing: "BRIEFING 041",
-  image: Ener1Img,
+    "The global energy sector is navigating simultaneous disruption from geopolitical conflict, the AI power demand surge, and the clean energy transition. CERAWeek 2026 framed the moment as ‘Convergence and Competition: Energy, Technology and Geopolitics,’ highlighting the increasingly connected forces reshaping oil, gas, power and renewables.",
+  author: "The Pride Times Editorial Desk",
+  time: "September 2026",
+  image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=80",
 };
 
 const hero1 = {
-  category: "CLEAN ENERGY TRANSITION",
-  title: "JP Morgan: Energy Resiliency Now a National Security Imperative",
+  id: "energy-oil-gas-supply-disruption",
+  category: "OIL & GAS",
+  title: "Global Oil Supply Disruption Puts Gulf Flows, Negotiations and Non-OPEC+ Growth in Focus",
   excerpt:
-    "A joint assessment by JP Morgan's Climate Advisory and Security and Resiliency teams concludes that energy resiliency and diversified energy mix have become essential components of national security strategy. The report, featuring contributions from Dr. Sarah Kapnick and security lead Michael Johnson, argues that the convergence of AI-driven demand growth with geopolitical supply chain risks has elevated grid security from a utility management issue to a strategic priority for heads of state. The analysis identifies dealmaking in power generation, storage, and transmission as the most active M&A subsector within energy in 2026, as utilities, industrial companies, and sovereign wealth funds compete for assets that provide reliable, resilient power generation capacity.",
-  author: "Sagar Kumar",
-  time: "May 2026",
-  image: Ener2Img,
+    "Global oil supply fell 5.7 mb/d in 2026 as Gulf output was disrupted amid heightened security risks. The reported impasse in U.S.-Iran negotiations is delaying flow normalization into 2027, while the Americas are driving non-OPEC+ growth.",
+  image: "https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&w=1200&q=80",
 };
 
 const hero2 = {
-  category: "CLEAN ENERGY TRANSITION",
-  title: "China's Dominant Position in Clean Tech Supply Chains Creates New Risk Calculus",
+  id: "energy-ai-grid-bottlenecks",
+  category: "RENEWABLES & POWER",
+  title: "AI Data Centers Turn Grid Capacity Into a Strategic Constraint for New Power Demand",
   excerpt:
-    "China's commanding position across clean technology supply chains — spanning solar panels, battery storage, green hydrogen production equipment, and electric vehicle components — continues to shape global deployment trajectories while generating strategic risk for Western economies. S&P Global's Energy Horizons 2026 report identifies this dynamic as a key variable in the outcome of the US-China AI and clean energy race. Western governments are responding through the combination of tariffs, domestic manufacturing incentives, and allied reshoring initiatives. The U.S. Inflation Reduction Act has catalyzed over $300 billion in clean energy commitments, while the European Union's Net-Zero Industry Act is accelerating its own manufacturing base for critical clean technologies. However, analysts note that China's cost advantages in key components are likely to persist for the remainder of this decade.",
-  author: "Sagar Kumar",
-  time: "May 2026",
-  image: Ener3Img,
+    "Solar, wind and advanced geothermal investment is expanding, but grid bottlenecks are increasingly constraining new AI data-center capacity. Developers are being pushed to secure generation and storage before data-center construction to reduce the risk of power delays.",
+  image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80",
 };
 
-/* =========================================================
-   ENERGY PRICES
-========================================================= */
-
 const energyPrices = [
-  {
-    commodity: "CRUDE OIL (WTI)",
-    price: "$78.45",
-    unit: "/bbl",
-    change: "-1.23%",
-    up: false,
-  },
-  {
-    commodity: "BRENT CRUDE",
-    price: "$82.31",
-    unit: "/bbl",
-    change: "-1.05%",
-    up: false,
-  },
-  {
-    commodity: "NATURAL GAS (HH)",
-    price: "$2.87",
-    unit: "/MMBtu",
-    change: "+0.78%",
-    up: true,
-  },
-  {
-    commodity: "EUROPEAN TTF GAS",
-    price: "€28.40",
-    unit: "/MWh",
-    change: "+1.23%",
-    up: true,
-  },
-  {
-    commodity: "COAL (NEWCASTLE)",
-    price: "$124.50",
-    unit: "/t",
-    change: "-2.10%",
-    up: false,
-  },
-  {
-    commodity: "EU CARBON CREDITS",
-    price: "€68.20",
-    unit: "/t",
-    change: "+3.40%",
-    up: true,
-  },
-  {
-    commodity: "URANIUM",
-    price: "$92.75",
-    unit: "/lb",
-    change: "+0.50%",
-    up: true,
-  },
+  { commodity: "Global Oil Supply", price: "-5.7 mb/d", change: "2026", up: false },
+  { commodity: "Americas Non-OPEC+ Growth", price: "+1.4 mb/d", change: "2026", up: true },
+  { commodity: "Gulf Output", price: "Disrupted", change: "Security risk", up: false },
+  { commodity: "Flow Normalization", price: "Into 2027", change: "Negotiation impasse", up: false },
+  { commodity: "Atlantic Basin Refining", price: "Record margins", change: "August 2026", up: true },
 ];
 
-/* =========================================================
-   RENEWABLE STORIES
-========================================================= */
+const oilGasNews = [
+  { id: "energy-oil-gas-supply-disruption", title: "Global oil supply fell 5.7 mb/d in 2026 as Gulf output was disrupted amid heightened security risks." },
+  { id: "energy-us-iran-negotiations", title: "U.S.-Iran negotiations impasse delays flow normalization into 2027." },
+  { id: "energy-americas-nonopec-growth", title: "The U.S., Canada, Brazil, Guyana and Argentina are dominating non-OPEC+ growth, adding 1.4 mb/d in 2026." },
+  { id: "energy-refining-margins-august-2026", title: "Atlantic Basin refining margins reached record levels in August 2026." },
+];
 
 const renewableStories = [
-  {
-    id: 1,
-    title:
-      "India's Adani Green Commissions World's Largest Single Solar Plant at 10 GW",
-    time: "1 hr ago",
-    image:
-      "https://images.unsplash.com/photo-1760433116983-76021bd32307?w=400&h=250&fit=crop",
-  },
-  {
-    id: 2,
-    title:
-      "Offshore Wind Auction in UK Draws $45B in Investment — Record for Any Energy Sector",
-    time: "3 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1760629863094-5b1e8d1aae74?w=400&h=250&fit=crop",
-  },
-  {
-    id: 3,
-    title:
-      "China Completes First Commercial Fusion Power Reactor — 50-Year Dream Becomes Reality",
-    time: "6 hrs ago",
-    image:
-      "https://images.unsplash.com/photo-1760553120312-2821bf54e767?w=400&h=250&fit=crop",
-  },
+  { id: "energy-solar-wind-geothermal-investment", title: "Solar, wind and advanced geothermal investment reaches record levels", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80" },
+  { id: "energy-grid-ai-data-centers", title: "Grid bottlenecks increasingly constrain new AI data-center capacity", image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" },
+  { id: "energy-generation-storage-first", title: "Developers are being pushed to secure generation and storage before data-center construction", image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80" },
 ];
 
-/* =========================================================
-   DISPATCH GROUPS
-========================================================= */
-
-const dispatchGroups = [
-  {
-    code: "CRUDE",
-    title: "Oil & Gas",
-    stories: [
-      {
-        id: 1,
-        title:
-          "Saudi Aramco cuts capex by $12B as peak oil demand moves closer",
-        time: "2 hrs ago",
-      },
-      {
-        id: 2,
-        title:
-          "Chevron and ExxonMobil join forces in $50B Permian Basin megadeal",
-        time: "4 hrs ago",
-      },
-      {
-        id: 3,
-        title:
-          "Russia's Arctic LNG 2 project faces new equipment shortfall after sanctions tighten",
-        time: "6 hrs ago",
-      },
-      {
-        id: 4,
-        title:
-          "OPEC+ compliance rate falls to 87% as Nigeria and Iraq exceed quotas",
-        time: "8 hrs ago",
-      },
-    ],
-  },
-  {
-    code: "ATOM",
-    title: "Nuclear Power",
-    stories: [
-      {
-        id: 1,
-        title:
-          "Three new SMR (small modular reactor) designs win NRC approval in the US",
-        time: "3 hrs ago",
-      },
-      {
-        id: 2,
-        title:
-          "UK government approves Wylfa nuclear plant restart with £20B guarantee",
-        time: "5 hrs ago",
-      },
-      {
-        id: 3,
-        title:
-          "India signs agreement with France to build 6 pressurized water reactors",
-        time: "7 hrs ago",
-      },
-    ],
-  },
-  {
-    code: "REG",
-    title: "Policy & Regulation",
-    stories: [
-      {
-        id: 1,
-        title:
-          "Ohio suspends a major data-center tax incentive after AI infrastructure costs surge",
-        time: "Just now",
-      },
-      {
-        id: 2,
-        title:
-          "US IRA clean energy tax credits spur $850B in new investment since 2022",
-        time: "1 hr ago",
-      },
-      {
-        id: 3,
-        title:
-          "EU carbon border tax takes full effect — imports now priced on emissions",
-        time: "3 hrs ago",
-      },
-      {
-        id: 4,
-        title:
-          "G7 energy ministers agree to phase out coal by 2035 in landmark accord",
-        time: "5 hrs ago",
-      },
-      {
-        id: 5,
-        title:
-          "India sets world record: 500 GW renewable capacity target 3 years ahead of schedule",
-        time: "7 hrs ago",
-      },
-    ],
-  },
+const powerWatch = [
+  { id: "energy-geopolitical-price-pressure", title: "Geopolitical pressure is forcing upward energy-price movement in multiple regions." },
+  { id: "energy-power-before-construction", title: "Generation and storage availability is becoming a prerequisite for new AI infrastructure." },
+  { id: "energy-convergence-competition", title: "Energy, technology and geopolitics are increasingly converging in infrastructure decisions." },
 ];
-
-/* =========================================================
-   INDUSTRY SNAPSHOT
-========================================================= */
-
-const snapshot = [
-  {
-    label: "Cleantech Investment Needed (5 Yrs)",
-    value: "USD 5–8 Trillion (AI infrastructure + enabling systems)",
-  },
-  {
-    label: "US IRA Clean Energy Commitments",
-    value: "Over USD 300 Billion catalyzed since 2022",
-  },
-  {
-    label: "EU Net-Zero Industry Act",
-    value: "Accelerating European clean tech manufacturing",
-  },
-  {
-    label: "Power Demand Driver",
-    value: "AI data centers forcing grid policy reversals globally",
-  },
-  {
-    label: "Top Energy Deal Type (2026)",
-    value: "Power generation, storage, and transmission assets",
-  },
-];
-
-/* =========================================================
-   ENERGY MARKET REPORT
-========================================================= */
-
-const energyReportGroups = [
-  {
-    code: "OIL",
-    title: "Oil Market Volatility",
-    points: [
-      "July 2026 was one of the most volatile months for crude oil in recent memory, driven by the U.S.–Iran conflict, Strait of Hormuz shipping attacks, and Houthi strikes on Saudi tankers.",
-      "U.S. crude oil production is forecast at a record 13.83 million barrels per day in 2026.",
-    ],
-  },
-  {
-    code: "GAS",
-    title: "Natural Gas",
-    points: [
-      "U.S. marketed natural gas production is projected to hit a record 122.5 Bcf/d in 2026 (+3.4% YoY), driven by the Permian and Haynesville regions.",
-      "Henry Hub spot prices are forecast to average $2.87/MMBtu in Q3 2026, down 50 cents from the July STEO, due to reduced LNG feedgas demand and robust production.",
-    ],
-  },
-  {
-    code: "PWR",
-    title: "Power & Renewables",
-    points: [
-      "Solar, hydropower, and wind generation grew by 21%, 9%, and 6% respectively in H1 2026 vs. H1 2025.",
-      "Natural gas-fired electricity generation increased 2% in H1 2026 and is forecast to rise further in 2027 as gas prices remain relatively low.",
-    ],
-    growth: [
-      { label: "Solar", value: 21 },
-      { label: "Hydropower", value: 9 },
-      { label: "Wind", value: 6 },
-      { label: "Gas-fired", value: 2 },
-    ],
-  },
-];
-
-const energyReportStats = [
-  { value: "13.83M", label: "US crude output, bbl/d (2026F)" },
-  { value: "122.5", label: "US gas output, Bcf/d (2026F)" },
-  { value: "$2.87", label: "Henry Hub, /MMBtu (Q3 2026F)" },
-  { value: "+21%", label: "Solar generation growth, H1 YoY" },
-  { value: "+9%", label: "Hydropower growth, H1 YoY" },
-  { value: "+6%", label: "Wind growth, H1 YoY" },
-];
-
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
-function SectionHeader({
-  title,
-  note,
-}: {
-  title: string;
-  note?: string;
-}) {
-  return (
-    <div className="mb-5 flex items-center justify-between border-b-2 border-[#17140F] pb-2.5">
-      <h2 className="font-bold text-[14px] text-[#17140F] md:text-[15px]">
-        {title}
-      </h2>
-
-      {note && (
-        <span className="text-[9px] uppercase tracking-[0.15em] text-[#8A887F]">
-          {note}
-        </span>
-      )}
-    </div>
-  );
-}
-
-/* =========================================================
-   STORY META
-========================================================= */
-
-function StoryMeta({
-  author = "Sagar Kumar",
-  time,
-}: {
-  author?: string;
-  time: string;
-}) {
-  return (
-    <div className="mt-3 flex items-center gap-3 text-[10px] text-[#8A887F]">
-      <span>By {author}</span>
-
-      <span className="h-1 w-1 rounded-full bg-[#C9C5BB]" />
-
-      <span className="flex items-center gap-1">
-        <Clock size={10} />
-        {time}
-      </span>
-    </div>
-  );
-}
-
-/* =========================================================
-   ADVERTISEMENT BANNER
-========================================================= */
-
-function AdvertisementBanner({
-  children = "Advertisement Space",
-  slot = "5373718974",
-  inArticle = false,
-}: {
-  children?: ReactNode;
-  slot?: string;
-  inArticle?: boolean;
-}) {
-  useEffect(() => {
-    try {
-      const w = window as Window & { adsbygoogle?: unknown[] };
-      w.adsbygoogle = w.adsbygoogle || [];
-      w.adsbygoogle.push({});
-    } catch {}
-  }, []);
-
-  return (
-    <div className="relative mb-5 w-full overflow-hidden border-y border-gray-200 bg-white py-4">
-      <p className="mb-2 text-center text-[8px] font-bold uppercase tracking-[0.2em] text-gray-400">
-        Advertisement
-      </p>
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block", minHeight: "90px" }}
-        data-ad-client="ca-pub-2331501617441941"
-        data-ad-slot={slot}
-        {...(inArticle
-          ? { "data-ad-layout": "in-article", "data-ad-format": "fluid" }
-          : { "data-ad-format": "auto", "data-full-width-responsive": "true" })}
-      />
-    </div>
-  );
-}
-
-/* =========================================================
-   PAGE
-========================================================= */
 
 export function EnergyPage() {
-  const navigate = useNavigate();
   return (
-    <main className="min-h-screen w-full overflow-x-hidden bg-[#FAFAF7] text-[#17140F]">
-      <div className="w-full px-4 py-5 sm:px-6 md:px-8 md:py-7 lg:px-10 xl:px-12 2xl:px-16">
-
-        {/* ===================================================
-            PAGE TITLE
-        =================================================== */}
-
-        <header className="mb-8 border-t-[3px] border-[#D92323] pb-5 pt-4">
-          <h1 className="font-serif text-[32px] font-bold leading-none tracking-tight sm:text-[38px] md:text-[42px] lg:text-[46px]">
-            Energy
-          </h1>
-
-          <p className="mt-2 text-[12px] text-[#77736B] sm:text-[13px]">
-            Oil &amp; gas, renewables, nuclear, and the global energy transition.
-          </p>
+    <main className="min-h-screen bg-white text-[#17140F] antialiased">
+      <div className="mx-auto max-w-[1500px] px-4 py-6 sm:px-6 lg:px-8">
+        <header className="border-b-4 border-black pb-4">
+          <div className="flex items-center gap-3">
+            <Zap size={24} />
+            <div>
+              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-red-600">THE PRIDE TIMES</p>
+              <h1 className="mt-1 font-serif text-[32px] font-bold leading-none md:text-[46px]">Energy</h1>
+              <p className="mt-2 max-w-3xl text-xs leading-6 text-gray-500 md:text-sm">
+                Oil, gas, power, renewables, grids and the geopolitical forces reshaping the global energy system in 2026.
+              </p>
+            </div>
+          </div>
         </header>
 
-        {/* ===================================================
-            TOP ADVERTISEMENT
-        =================================================== */}
+        <PrideTimesAd variant="first" />
 
-        <AdvertisementBanner slot="5373718974" />
-
-        {/* ===================================================
-            HERO AREA
-        =================================================== */}
-
-        <section className="mb-12 grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,3.3fr)_300px] xl:gap-7">
-
-          {/* MAIN HERO */}
-
-          <article onClick={() => navigate(`/article/${energyArticleId(hero.title)}`)} className="group min-w-0 cursor-pointer">
-            <div className="overflow-hidden rounded-lg bg-[#E8E5DD]">
-              <ImageWithFallback
-                src={hero.image}
-                alt={hero.title}
-                className="h-[260px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] sm:h-[350px] md:h-[430px] lg:h-[500px] xl:h-[520px]"
-              />
+        <section className="mt-7 grid grid-cols-1 gap-7 lg:grid-cols-[minmax(0,2.2fr)_minmax(280px,1fr)]">
+          <Link to={specialArticlePath(hero.id)} className="group block">
+            <div className="overflow-hidden rounded bg-gray-100">
+              <ImageWithFallback src={hero.image} alt={hero.title} className="h-[280px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] sm:h-[380px] md:h-[500px]" />
             </div>
-
-            <div className="mt-3">
-              <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-[#B8752E] sm:text-[10px]">
-                {hero.category}
-              </span>
-
-              <h2 className="mt-1.5 font-serif text-[24px] font-bold leading-[1.05] tracking-tight transition-colors duration-200 group-hover:text-[#B8752E] sm:text-[30px] md:text-[35px] lg:text-[38px] xl:text-[40px]">
-                {hero.title}
-              </h2>
-
-              <p className="mt-3 max-w-5xl text-[12px] leading-[1.6] text-[#66625A] sm:text-[13px] md:text-[14px]">
-                {hero.excerpt}
-              </p>
-
-              <StoryMeta time={hero.time} />
-            </div>
-          </article>
-
-          {/* RIGHT SIDEBAR */}
-
-          <aside className="min-w-0">
-
-            {/* SPONSORED CONTENT */}
-
-            <div className="mb-4 rounded-md border border-[#E3DED1] bg-[#F8F4E8] p-2">
-              <div className="mb-2 text-[7px] uppercase tracking-widest text-[#8A887F]">
-                Sponsored Content
+            <div className="pt-4">
+              <span className="text-[9px] font-bold uppercase tracking-[0.18em] text-red-600">{hero.category}</span>
+              <h2 className="mt-2 font-serif text-3xl font-bold leading-tight group-hover:text-red-600 md:text-5xl">{hero.title}</h2>
+              <p className="mt-3 max-w-5xl text-sm leading-7 text-gray-600 md:text-base">{hero.excerpt}</p>
+              <div className="mt-3 flex items-center gap-3 text-[10px] text-gray-400">
+                <span>By {hero.author}</span><span>•</span><span>{hero.time}</span>
               </div>
+            </div>
+          </Link>
 
-              <div className="flex h-[145px] items-center justify-center bg-[#111A3A] text-center sm:h-[170px] xl:h-[185px]">
-                <div>
-                  <p className="text-[8px] font-bold uppercase tracking-widest text-[#E4C94C]">
-                    Featured Partner
-                  </p>
-
-                  <p className="mt-2 text-[12px] font-semibold text-white">
-                    Your Ad Here
-                  </p>
-
-                  <p className="mt-1 text-[8px] text-gray-300">
-                    Reach 2M+ business readers
-                  </p>
+          <aside className="border-l border-gray-200 pl-0 lg:pl-6">
+            <SH title="Energy Market Watch" />
+            <div className="divide-y divide-gray-200">
+              {energyPrices.map((item) => (
+                <div key={item.commodity} className="flex items-center justify-between py-4">
+                  <span className="max-w-[55%] text-xs text-gray-700">{item.commodity}</span>
+                  <div className="text-right">
+                    <p className="text-sm font-semibold">{item.price}</p>
+                    <p className={`mt-1 flex items-center justify-end gap-1 text-[9px] font-bold uppercase ${item.up ? "text-green-700" : "text-red-600"}`}>
+                      {item.up ? <TrendingUp size={10} /> : <TrendingDown size={10} />}{item.change}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* MORE STORIES */}
-
-            <SectionHeader title="More Stories" />
-
-            <div className="divide-y divide-[#DED9CE]">
-              {renewableStories.map((story) => (
-                <article
-                  key={story.id}
-                  onClick={() => navigate(`/article/${energyArticleId(story.title)}`)}
-                  className="group flex cursor-pointer gap-3 py-3 first:pt-0"
-                >
-                  <div className="h-[60px] w-[82px] shrink-0 overflow-hidden rounded-md bg-gray-200">
-                    <ImageWithFallback
-                      src={story.image}
-                      alt={story.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-
-                  <div className="min-w-0">
-                    <span className="text-[7px] font-bold uppercase text-[#B8752E]">
-                      Energy
-                    </span>
-
-                    <h3 className="mt-0.5 text-[11px] font-bold leading-[1.25] transition-colors group-hover:text-[#B8752E] sm:text-[12px]">
-                      {story.title}
-                    </h3>
-
-                    <span className="mt-1 block text-[8px] text-[#99958B]">
-                      {story.time}
-                    </span>
-                  </div>
-                </article>
               ))}
             </div>
           </aside>
         </section>
 
-        {/* ===================================================
-            LATEST ENERGY NEWS
-        =================================================== */}
-
-        <section className="mb-10">
-          <SectionHeader title="Latest Energy News" />
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
-
-            {renewableStories.map((story) => (
-              <article
-                key={`renewable-${story.id}`}
-                onClick={() => navigate(`/article/${energyArticleId(story.title)}`)}
-                className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md"
-              >
-                <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
-                  <ImageWithFallback
-                    src={story.image}
-                    alt={story.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                  />
-                </div>
-
-                <div className="p-3.5">
-                  <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#B8752E]">
-                    Renewable Energy
-                  </span>
-
-                  <h3 className="mt-1.5 font-serif text-[16px] font-bold leading-[1.15] transition-colors group-hover:text-[#B8752E] sm:text-[17px]">
-                    {story.title}
-                  </h3>
-
-                  <div className="mt-2.5 flex items-center gap-1.5 text-[9px] text-[#99958B]">
-                    <Clock size={9} />
-                    {story.time}
-                  </div>
-                </div>
-              </article>
-            ))}
-
-            {/* HERO 1 */}
-
-            <article onClick={() => navigate(`/article/${energyArticleId(story.title)}`)} className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
-              <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
-                <ImageWithFallback
-                  src={hero1.image}
-                  alt={hero1.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                />
+        <section className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {[hero1, hero2].map((item) => (
+            <Link key={item.id} to={specialArticlePath(item.id)} className="group block border-t-2 border-black pt-4">
+              <div className="overflow-hidden rounded bg-gray-100">
+                <ImageWithFallback src={item.image} alt={item.title} className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] md:h-80" />
               </div>
-
-              <div className="p-3.5">
-                <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#B8752E]">
-                  {hero1.category}
-                </span>
-
-                <h3 className="mt-1.5 font-serif text-[16px] font-bold leading-[1.15] transition-colors group-hover:text-[#B8752E] sm:text-[17px]">
-                  {hero1.title}
-                </h3>
-
-                <StoryMeta time={hero1.time} />
-              </div>
-            </article>
-
-            {/* HERO 2 */}
-
-            <article onClick={() => navigate(`/article/${energyArticleId(hero1.title)}`)} className="group cursor-pointer overflow-hidden rounded-md border border-[#E2DED5] bg-white transition-shadow duration-300 hover:shadow-md">
-              <div className="h-[180px] overflow-hidden bg-gray-100 sm:h-[190px] md:h-[205px]">
-                <ImageWithFallback
-                  src={hero2.image}
-                  alt={hero2.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                />
-              </div>
-
-              <div className="p-3.5">
-                <span className="text-[8px] font-bold uppercase tracking-[0.13em] text-[#B8752E]">
-                  {hero2.category}
-                </span>
-
-                <h3 className="mt-1.5 font-serif text-[16px] font-bold leading-[1.15] transition-colors group-hover:text-[#B8752E] sm:text-[17px]">
-                  {hero2.title}
-                </h3>
-
-                <StoryMeta time={hero2.time} />
-              </div>
-            </article>
-          </div>
+              <span className="mt-3 inline-block text-[9px] font-bold uppercase tracking-[0.18em] text-red-600">{item.category}</span>
+              <h2 className="mt-1 font-serif text-2xl font-bold leading-tight group-hover:text-red-600 md:text-3xl">{item.title}</h2>
+              <p className="mt-2 text-sm leading-6 text-gray-600">{item.excerpt}</p>
+            </Link>
+          ))}
         </section>
 
-        {/* ===================================================
-            SECOND ADVERTISEMENT
-        =================================================== */}
+        <PrideTimesAd variant="second" />
 
-        <AdvertisementBanner slot="8042854193" inArticle>
-          The Pride Times ADS
-        </AdvertisementBanner>
-
-        {/* ===================================================
-            SPONSORSHIP
-        =================================================== */}
-
-        <section className="mb-8 rounded-md border border-[#E6E1D7] bg-[#F5F3EE] p-4 sm:p-5">
-          <div className="mb-4 flex items-center gap-2">
-            <span className="border border-[#DED9CE] bg-white px-2 py-1 text-[8px] uppercase tracking-[0.14em] text-[#8A887F]">
-              Sponsorship
-            </span>
-
-            <span className="text-[9px] text-[#9A968D]">
-              Presented by our partners
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              "Global Finance Summit 2026",
-              "Tech Leaders Forum",
-              "Energy Transition Conference",
-              "AI & Business World",
-            ].map((title) => (
-              <div
-                key={title}
-                className="flex h-[90px] flex-col items-center justify-center rounded-md border border-[#E4DFD6] bg-white text-center"
-              >
-                <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-red-50">
-                  <span className="text-[11px] text-[#D92323]">✦</span>
-                </div>
-
-                <p className="text-[9px] font-bold text-[#17140F]">
-                  {title}
-                </p>
-
-                <p className="mt-1 text-[7px] text-[#99958B]">
-                  Sponsored Event
-                </p>
-              </div>
+        <section className="mt-10 border-t-2 border-black pt-7">
+          <SH title="Oil & Gas" />
+          <div className="grid grid-cols-1 divide-y divide-gray-200 md:grid-cols-2 md:divide-y-0 md:gap-x-8">
+            {oilGasNews.map((item) => (
+              <Link key={item.id} to={specialArticlePath(item.id)} className="group border-b border-gray-200 py-4">
+                <h3 className="text-sm font-semibold leading-6 group-hover:text-red-600 md:text-base">{item.title}</h3>
+                <span className="mt-2 flex items-center gap-1 text-[9px] uppercase tracking-wider text-gray-400"><Clock size={9} /> Energy Desk</span>
+              </Link>
             ))}
           </div>
         </section>
 
-        {/* ===================================================
-            ENERGY MARKET REPORT
-        =================================================== */}
-
-        <section className="mb-10">
-          <SectionHeader
-            title="Energy Market Report"
-            note="July 2026 Wrap"
-          />
-
-          <p className="mb-4 text-[9px] uppercase tracking-[0.14em] text-[#8A887F]">
-            2.2 &nbsp; Energy
-          </p>
-
-          {/* KEY FIGURES */}
-
-          <div className="mb-6 w-full overflow-x-auto border border-[#D9D4C7] bg-white">
-            <div className="flex min-w-[850px]">
-              {energyReportStats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className={`flex-1 px-4 py-4 ${
-                    index > 0 ? "border-l border-[#D9D4C7]" : ""
-                  }`}
-                >
-                  <p className="font-mono text-xl font-semibold text-[#B8752E] md:text-2xl">
-                    {stat.value}
-                  </p>
-
-                  <p className="mt-1 text-[8px] uppercase leading-tight tracking-wide text-[#8A887F]">
-                    {stat.label}
-                  </p>
+        <section className="mt-10">
+          <SH title="Renewables & Power" />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {renewableStories.map((item) => (
+              <Link key={item.id} to={specialArticlePath(item.id)} className="group block">
+                <div className="overflow-hidden rounded bg-gray-100">
+                  <ImageWithFallback src={item.image} alt={item.title} className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                 </div>
+                <h3 className="mt-3 font-serif text-xl font-bold leading-tight group-hover:text-red-600">{item.title}</h3>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <PrideTimesAd variant="third" />
+
+        <section className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div>
+            <SH title="Power & Infrastructure" />
+            <div className="divide-y divide-gray-200">
+              {powerWatch.map((item) => (
+                <Link key={item.id} to={specialArticlePath(item.id)} className="group block py-4">
+                  <h3 className="text-sm font-semibold leading-6 group-hover:text-red-600 md:text-base">{item.title}</h3>
+                </Link>
               ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {energyReportGroups.map((group) => (
-              <div
-                key={group.code}
-                className="border border-[#D9D4C7] bg-white"
-              >
-                <div className="flex items-center gap-2 border-b border-[#D9D4C7] px-4 py-3">
-                  <span className="font-mono text-[10px] font-bold text-[#B8752E]">
-                    {group.code}
-                  </span>
-
-                  <span className="text-[#AAA69D]">—</span>
-
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.1em]">
-                    {group.title}
-                  </h3>
-                </div>
-
-                <div className="p-4">
-                  {group.points.map((point, index) => (
-                    <div
-                      key={index}
-                      className="mb-3 flex gap-2 last:mb-0"
-                    >
-                      <span className="mt-1 text-[9px] text-[#B8752E]">
-                        ▪
-                      </span>
-
-                      <p className="text-[12px] leading-[1.55] text-[#55534C]">
-                        {point}
-                      </p>
-                    </div>
-                  ))}
-
-                  {group.growth && (
-                    <div className="mt-3 border-t border-[#E5E1D8] pt-3">
-                      <p className="mb-2 text-[8px] uppercase tracking-wide text-[#8A887F]">
-                        Generation growth, H1 2026 vs. H1 2025
-                      </p>
-
-                      {group.growth.map((growth) => (
-                        <div
-                          key={growth.label}
-                          className="mb-2 flex items-center gap-2"
-                        >
-                          <span className="w-[65px] text-[9px] text-[#66625A]">
-                            {growth.label}
-                          </span>
-
-                          <div className="h-1.5 flex-1 overflow-hidden bg-[#EEEAE1]">
-                            <div
-                              className="h-full bg-[#B8752E]"
-                              style={{
-                                width: `${(growth.value / 21) * 100}%`,
-                              }}
-                            />
-                          </div>
-
-                          <span className="w-7 text-right font-mono text-[9px] text-[#B8752E]">
-                            +{growth.value}%
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ===================================================
-            INDUSTRY SNAPSHOT + SECONDARY HERO
-        =================================================== */}
-
-        <section className="mb-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
-
-          {/* SECONDARY HERO */}
-
-          <article onClick={() => navigate(`/article/${energyArticleId(hero2.title)}`)} className="group cursor-pointer">
-            <div className="overflow-hidden rounded-lg bg-gray-100">
-              <ImageWithFallback
-                src={hero2.image}
-                alt={hero2.title}
-                className="h-[270px] w-full object-cover transition-transform duration-700 group-hover:scale-[1.025] sm:h-[350px] lg:h-[400px]"
-              />
-            </div>
-
-            <span className="mt-3 block text-[9px] font-bold uppercase tracking-[0.14em] text-[#B8752E]">
-              {hero2.category}
-            </span>
-
-            <h2 className="mt-1.5 font-serif text-[23px] font-bold leading-[1.1] transition-colors group-hover:text-[#B8752E] sm:text-[28px]">
-              {hero2.title}
-            </h2>
-
-            <p className="mt-2.5 text-[12px] leading-[1.6] text-[#66625A] sm:text-[13px]">
-              {hero2.excerpt}
-            </p>
-
-            <StoryMeta time={hero2.time} />
-          </article>
-
-          {/* SNAPSHOT */}
 
           <div>
-            <SectionHeader title="Industry Snapshot" />
-
-            <div>
-              {snapshot.map((row, index) => (
-                <div
-                  key={row.label}
-                  className={`grid grid-cols-1 gap-2 border-b border-[#D9D4C7] py-4 sm:grid-cols-[40%_1fr] sm:gap-5 ${
-                    index === 0 ? "border-t border-[#D9D4C7]" : ""
-                  }`}
-                >
-                  <span className="text-[9px] font-bold uppercase tracking-wide text-[#B8752E]">
-                    {row.label}
-                  </span>
-
-                  <span className="text-[12px] leading-snug text-[#17140F] sm:text-[13px]">
-                    {row.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* ENERGY PRICES */}
-
-            <div className="mt-8">
-              <SectionHeader title="Energy Prices" />
-
-              <div className="border border-[#D9D4C7] bg-[#17140F] text-[#EDE9DD]">
-                {energyPrices.map((energy) => (
-                  <div
-                    key={energy.commodity}
-                    className="flex items-center justify-between gap-3 border-b border-[#3A3934] px-3 py-2.5 last:border-b-0"
-                  >
-                    <span className="font-mono text-[8px] text-[#B8B4A8] sm:text-[9px]">
-                      {energy.commodity}
-                    </span>
-
-                    <div className="flex shrink-0 items-center gap-2">
-                      <span className="font-mono text-[10px]">
-                        {energy.price}
-                        <span className="text-[#8A887F]">
-                          {energy.unit}
-                        </span>
-                      </span>
-
-                      <span
-                        className={`font-mono text-[8px] ${
-                          energy.up
-                            ? "text-emerald-400"
-                            : "text-red-400"
-                        }`}
-                      >
-                        {energy.up ? "▲" : "▼"} {energy.change}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+            <SH title="2026 Energy Outlook" />
+            <div className="border border-gray-200 bg-[#f7f7f5] p-5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-600">CERAWeek 2026</p>
+              <h3 className="mt-2 font-serif text-2xl font-bold">“Convergence and Competition: Energy, Technology and Geopolitics”</h3>
+              <p className="mt-3 text-sm leading-7 text-gray-600">
+                The supplied briefing frames the energy sector around three simultaneous pressures: geopolitical disruption, rapidly increasing electricity demand from AI infrastructure, and continued investment in the clean-energy transition.
+              </p>
+              <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="bg-white p-4"><p className="text-[9px] uppercase tracking-wider text-gray-400">Oil & Gas</p><p className="mt-1 text-sm font-semibold">Supply disruption and flow-normalization risk</p></div>
+                <div className="bg-white p-4"><p className="text-[9px] uppercase tracking-wider text-gray-400">Power</p><p className="mt-1 text-sm font-semibold">Grid capacity becoming a constraint on AI growth</p></div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ===================================================
-            SECTOR DISPATCHES
-        =================================================== */}
-
-        <section className="mb-10">
-          <SectionHeader title="Sector Dispatches" />
-
-          <div className="grid grid-cols-1 divide-y divide-[#D9D4C7] md:grid-cols-3 md:divide-x md:divide-y-0">
-            {dispatchGroups.map((group) => (
-              <div
-                key={group.code}
-                className="py-5 md:px-6 md:py-0 first:md:pl-0 last:md:pr-0"
-              >
-                <div className="mb-4 flex items-center gap-2">
-                  <span className="font-mono text-[10px] font-bold text-[#B8752E]">
-                    {group.code}
-                  </span>
-
-                  <span className="text-[#AAA69D]">—</span>
-
-                  <h3 className="text-[10px] font-bold uppercase tracking-[0.1em]">
-                    {group.title}
-                  </h3>
-                </div>
-
-                <div className="space-y-4">
-                  {group.stories.map((story) => (
-                    <article
-                      key={story.id}
-                      onClick={() => navigate(`/article/${energyArticleId(story.title)}`)}
-                      className="group cursor-pointer"
-                    >
-                      <p className="text-[12px] leading-[1.45] transition-colors group-hover:text-[#B8752E] sm:text-[13px]">
-                        {story.title}
-                      </p>
-
-                      <span className="mt-1.5 flex items-center gap-1 text-[8px] uppercase tracking-wide text-[#8A887F]">
-                        <Clock size={9} />
-                        {story.time}
-                      </span>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ===================================================
-            NEWSLETTER
-        =================================================== */}
-
-        <section className="mb-2 w-full rounded-md bg-[#071C30] px-5 py-8 text-center sm:px-8 sm:py-9">
-          <h2 className="font-serif text-[22px] font-bold text-white sm:text-[26px]">
-            Stay Ahead with The Pride Times
-          </h2>
-
-          <p className="mt-1 text-[10px] text-gray-300 sm:text-[11px]">
-            Daily briefings on Energy delivered to your inbox.
-          </p>
-
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="mx-auto mt-5 flex max-w-[480px] flex-col justify-center gap-2 sm:flex-row"
-          >
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="h-10 flex-1 rounded-sm border border-[#385067] bg-[#20374B] px-3 text-[11px] text-white outline-none placeholder:text-gray-400 focus:border-[#B8752E]"
-            />
-
-            <button
-              type="submit"
-              className="h-10 rounded-sm bg-[#E31B23] px-5 text-[10px] font-bold text-white transition-colors hover:bg-[#C8171E]"
-            >
-              Subscribe Free
-            </button>
-          </form>
-        </section>
-
+        <PrideTimesAd variant="fourth" />
       </div>
     </main>
   );
 }
+
+export default EnergyPage;
