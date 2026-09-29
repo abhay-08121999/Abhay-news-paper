@@ -175,6 +175,7 @@ function SpecialArticleEditorial({
     "Manufacturing",
     "Smart Cities",
     "Supply Chain",
+    "Energy",
     "White House Watch",
     "World & Geopolitics",
   ].includes(article.section);
